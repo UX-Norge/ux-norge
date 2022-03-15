@@ -1,0 +1,37 @@
+{
+  "name": "uxnorge",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "package.json",
+  "author": "Tobias Wulvik <tobias.wulvik@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "build": "sanity build",
+    "graphql": "sanity graphql deploy && npx sanity-codegen"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "^2.28.2",
+    "@sanity/core": "^2.28.1",
+    "@sanity/default-layout": "^2.28.2",
+    "@sanity/default-login": "^2.28.2",
+    "@sanity/desk-tool": "^2.28.2",
+    "@sanity/vision": "^2.28.2",
+    "prop-types": "^15.7",
+    "react": "^17.0",
+    "react-dom": "^17.0",
+    "styled-components": "^5.2.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1",
+    "sanity-codegen": "^0.9.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UX-Norge/ux-norge.git"
+  }
+}

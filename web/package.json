@@ -1,0 +1,46 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "web",
+  "author": "Tobias Wulvik",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "gatsby": "^4.9.3",
+    "gatsby-plugin-image": "^2.9.1",
+    "gatsby-plugin-manifest": "^4.9.1",
+    "gatsby-plugin-react-helmet": "^5.9.0",
+    "gatsby-plugin-sanity-image": "^0.11.0",
+    "gatsby-plugin-sharp": "^4.9.1",
+    "gatsby-plugin-sitemap": "^5.9.0",
+    "gatsby-source-filesystem": "^4.9.1",
+    "gatsby-source-sanity": "^7.3.2",
+    "gatsby-transformer-sharp": "^4.9.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "react-portable-text": "^0.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.2",
+    "@types/node": "^17.0.21",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.13",
+    "autoprefixer": "^10.4.3",
+    "gatsby-plugin-postcss": "^5.9.0",
+    "postcss": "^8.4.11",
+    "tailwindcss": "^3.0.23",
+    "typescript": "^4.6.2"
+  }
+}
