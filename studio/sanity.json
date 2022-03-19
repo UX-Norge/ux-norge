@@ -11,7 +11,9 @@
     "@sanity/base",
     "@sanity/default-layout",
     "@sanity/default-login",
-    "@sanity/desk-tool"
+    "@sanity/desk-tool",
+    "content-calendar",
+    "autocomplete-input"
   ],
   "env": {
     "development": {
@@ -23,7 +25,23 @@
   "parts": [
     {
       "name": "part:@sanity/base/schema",
-      "path": "./schemas/schema"
+      "path": "app/schemas/schema"
+    },
+    {
+      "implements": "part:@sanity/base/theme/variables/override-style",
+      "path": "app/variableOverrides.css"
+    },
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "app/documentActions"
+    },
+    {
+      "implements": "part:@sanity/base/document-badges/resolver",
+      "path": "app/documentBadges"
+    },
+    {
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "app/structure"
     }
   ]
 }

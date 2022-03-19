@@ -6,7 +6,7 @@ export default {
     {
       name: "image",
       type: "image",
-      title: "Image",
+      title: "Bilde",
       options: {
         hotspot: true,
       },
@@ -14,11 +14,11 @@ export default {
     {
       name: "alt",
       type: "string",
-      title: "Alt text",
+      title: "Alt-tekst",
     },
     {
       name: "caption",
-      title: "Caption",
+      title: "Bildetekst",
       type: "string",
     },
   ],
