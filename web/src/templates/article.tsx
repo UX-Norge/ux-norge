@@ -2,6 +2,8 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import { Article } from "../types/sanity-types";
 import BlockContent from "../components/BlockContent";
+import Layout from "../components/Layout";
+import Image from "../components/Image";
 
 interface IProps {
   data: { sanityArticle: Article };
@@ -9,17 +11,21 @@ interface IProps {
 
 const ArticlePage: React.FC<IProps> = ({
   data: {
-    sanityArticle: { title, body },
+    sanityArticle: { title, body, mainImage },
   },
 }) => {
   return (
     <article>
-      <header>
-        <h1>{title}</h1>
-      </header>
-      <main className="prose mx-auto">
-        <BlockContent blocks={body} />
-      </main>
+      <Layout>
+        <header className="max-w-prose mx-auto">
+          <Image image={mainImage} alt={title} width={1000} className="" />
+          <h1 className="heading-1">{title}</h1>
+          <p>{}</p>
+        </header>
+        <main className="prose mx-auto">
+          <BlockContent blocks={body} />
+        </main>
+      </Layout>
     </article>
   );
 };
@@ -31,7 +37,7 @@ export const query = graphql`
       mainImage {
         ...ImageWithPreview
       }
-      body: _rawBody
+      body: _rawBody(resolveReferences: { maxDepth: 3 })
     }
   }
 `;

@@ -1,5 +1,6 @@
 import { graphql, Link } from "gatsby";
 import * as React from "react";
+import Layout from "../components/Layout";
 import { Article } from "../types/sanity-types";
 
 interface IProps {
@@ -8,16 +9,18 @@ interface IProps {
 
 const IndexPage: React.FC<IProps> = ({ data: { allSanityArticle } }) => {
   return (
-    <ul>
-      {allSanityArticle.edges.map(({ node: { title, slug } }) => {
-        if (!slug?.current) return null;
-        return (
-          <li>
-            <Link to={slug.current}>{title}</Link>
-          </li>
-        );
-      })}
-    </ul>
+    <Layout>
+      <ul>
+        {allSanityArticle.edges.map(({ node: { title, slug } }) => {
+          if (!slug?.current) return null;
+          return (
+            <li>
+              <Link to={slug.current}>{title}</Link>
+            </li>
+          );
+        })}
+      </ul>
+    </Layout>
   );
 };
 

@@ -1,6 +1,6 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
-import { Article, Author } from "./src/types/sanity-types";
+import { Article } from "./src/types/sanity-types";
 
 type SanityData = {
   allSanityArticle: { edges: { node: Article }[] };
@@ -42,15 +42,17 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   printDivider();
 
-  data.articles.forEach(({ node }) => {
-    createPage("Article", {
-      path: node.slug.current,
-      component: templates.article,
-      context: {
-        slug: node.slug.current,
-      },
+  data.articles
+    .filter(({ node }) => node.slug?.current)
+    .forEach(({ node }) => {
+      createPage("Article", {
+        path: node.slug.current,
+        component: templates.article,
+        context: {
+          slug: node.slug.current,
+        },
+      });
     });
-  });
 
   console.log(`Created ${pageCount} pages `);
   printDivider();

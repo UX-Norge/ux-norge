@@ -9,8 +9,9 @@ type HotspotAndCrop = {
 };
 
 interface IProps {
-  image: { asset: object };
-  alt: string;
+  image: { asset: object } | undefined;
+  alt: string | undefined;
+  className?: string;
   width: number;
   height?: number;
   crop?: HotspotAndCrop;
@@ -24,10 +25,13 @@ const Image: React.FC<IProps> = ({
   height,
   crop,
   hotspot,
+  className,
 }) => {
+  if (!!!image) return null;
   return (
     <SanityImage
       asset={image.asset}
+      className={className}
       hotspot={hotspot}
       crop={crop}
       alt={alt}

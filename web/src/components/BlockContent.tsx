@@ -1,7 +1,8 @@
 import * as React from "react";
 import PortableText from "react-portable-text";
 import { BlockContent as BlockContentType } from "../types/sanity-types";
-import ArticleImage from "./ArticleImage";
+import ArticleImage from "./ArticleContent/ArticleImage";
+import RelatedArticleInline from "./ArticleContent/RelatedArticleInline";
 
 interface IProps {
   blocks: BlockContentType | undefined | object[];
@@ -14,6 +15,7 @@ const BlockContent: React.FC<IProps> = ({ blocks }) => {
       content={blocks}
       serializers={{
         articleImage: ArticleImage,
+        relatedArticle: RelatedArticleInline,
       }}
     />
   );
