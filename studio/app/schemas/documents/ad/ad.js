@@ -72,7 +72,7 @@ export default {
       name: "packageType",
       title: "Pakketype",
       type: "reference",
-      to: [{ type: "ad.packageType" }],
+      to: [{ type: "adPackageType" }],
       group: "settings",
     },
     {

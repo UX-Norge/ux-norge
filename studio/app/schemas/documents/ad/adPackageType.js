@@ -1,16 +1,16 @@
 export default {
-  name: "ad.packageType",
+  name: "adPackageType",
   title: "Package type",
   type: "document",
   fields: [
     {
       name: "name",
-      title: "name",
+      title: "Navn",
       type: "string",
     },
     {
       name: "price",
-      title: "price",
+      title: "Pris",
       type: "number",
       description: "Pris oppgitt i NOK ekskl. MVA",
     },

@@ -16,7 +16,7 @@ export default S.listItem()
           .title("Annonsepakketyper")
           .icon(FiSettings)
           .child(
-            S.documentTypeList("ad.packageType").title("Annonsepakketyper")
+            S.documentTypeList("adPackageType").title("Annonsepakketyper")
           ),
       ])
   );

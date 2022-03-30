@@ -1,5 +1,5 @@
 import ad from "./ad/ad";
-import adPackageType from "./ad/ad.packageType";
+import adPackageType from "./ad/adPackageType";
 import article from "./article";
 import author from "./author";
 import category from "./category";

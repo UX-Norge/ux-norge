@@ -57,5 +57,6 @@ export default {
     {
       type: "articleImage",
     },
+    { type: "relatedArticle" },
   ],
 };
