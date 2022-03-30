@@ -5,6 +5,7 @@ node_modules
 
 .cache/
 public
+dist
 
 # Logs
 /logs
