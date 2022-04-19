@@ -14,5 +14,51 @@ export default {
       type: "number",
       description: "Pris oppgitt i NOK ekskl. MVA",
     },
+    {
+      name: "duration",
+      title: "Varighet",
+      type: "number",
+      description: "Antall dager",
+    },
+    {
+      name: "onCoverPage",
+      title: "På forsiden",
+      type: "boolean",
+    },
+    {
+      name: "onArticles",
+      title: "På artikler",
+      type: "boolean",
+    },
+    {
+      name: "onAdsPage",
+      title: "På jobbsiden",
+      description: "uxnorge.no/jobb",
+      type: "boolean",
+    },
+    {
+      name: "onSlack",
+      title: "På Slack",
+      type: "boolean",
+    },
+    {
+      name: "onNewsletter",
+      title: "På nyhetsbrev",
+      type: "boolean",
+    },
   ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "price",
+      duration: "duration",
+    },
+    prepare(selection) {
+      const { title, subtitle, duration } = selection;
+      return {
+        title,
+        subtitle: `Varer i ${duration} dager. ${subtitle} NOK`,
+      };
+    },
+  },
 };

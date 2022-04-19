@@ -1,3 +1,5 @@
+import showAdDuration from "../../../inputComponents/showAdDuration";
+
 export default {
   name: "ad",
   title: "Ad",
@@ -63,10 +65,10 @@ export default {
     },
     {
       name: "endDate",
-      type: "date",
+      type: "string",
       title: "Sluttdato",
-      validation: (Rule) => Rule.required(),
       group: "settings",
+      inputComponent: showAdDuration,
     },
     {
       name: "packageType",

@@ -77,7 +77,7 @@ export default {
       of: [{ type: "reference", to: [{ type: "ad" }] }],
     },
     {
-      name: "categories",
+      name: "category",
       title: "Kategori",
       type: "reference",
       to: { type: "category" },
