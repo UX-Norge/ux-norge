@@ -1,5 +1,5 @@
 import * as React from "react";
-import Image from "../Image";
+import { Image } from "@Ui/Image";
 
 interface IProps {
   image: { asset: object };
@@ -7,11 +7,9 @@ interface IProps {
   caption: string;
 }
 
-const ArticleImage: React.FC<IProps> = ({ image, alt, caption }) => (
+export const ArticleImage: React.FC<IProps> = ({ image, alt, caption }) => (
   <div>
     <Image image={image} alt={alt} width={1200} />
     {caption && <figcaption>{caption}</figcaption>}
   </div>
 );
-
-export default ArticleImage;

@@ -1,38 +1,33 @@
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import * as React from "react";
-import Layout from "../components/Layout";
-import { Article } from "../types/sanity-types";
+import { CoverPage } from "@Features/coverPage";
 
-interface IProps {
-  data: { allSanityArticle: { edges: { node: Article }[] } };
-}
-
-const IndexPage: React.FC<IProps> = ({ data: { allSanityArticle } }) => {
-  return (
-    <Layout>
-      <ul>
-        {allSanityArticle.edges.map(({ node: { title, slug } }) => {
-          if (!slug?.current) return null;
-          return (
-            <li>
-              <Link to={slug.current}>{title}</Link>
-            </li>
-          );
-        })}
-      </ul>
-    </Layout>
-  );
+const IndexPage = ({ data: { sanityCoverPage } }) => {
+  return <CoverPage blocks={sanityCoverPage.blocks} />;
 };
 
 export const query = graphql`
-  query allArticles {
-    allSanityArticle {
-      edges {
-        node {
+  query CoverPageQuery {
+    sanityCoverPage(_id: { eq: "coverPage" }) {
+      blocks {
+        ... on SanityCoverCollections {
+          _key
+          _type
           title
-          slug {
-            current
+          list {
+            ...ArticleFragmentThumbnail
           }
+        }
+        ... on SanityCoverArticles {
+          _key
+          _type
+          list {
+            ...ArticleFragmentThumbnail
+          }
+          layout
+        }
+        ... on SanityCoverAds {
+          _type
         }
       }
     }

@@ -1,5 +1,6 @@
 import * as React from "react";
-import SanityImage from "gatsby-plugin-sanity-image";
+import Img from "gatsby-plugin-sanity-image";
+import { SanityImage } from "@Types";
 
 type HotspotAndCrop = {
   height: number;
@@ -9,7 +10,7 @@ type HotspotAndCrop = {
 };
 
 interface IProps {
-  image: { asset: object } | undefined;
+  image: SanityImage | undefined;
   alt: string | undefined;
   className?: string;
   width: number;
@@ -18,7 +19,7 @@ interface IProps {
   hotspot?: HotspotAndCrop;
 }
 
-const Image: React.FC<IProps> = ({
+export const Image: React.FC<IProps> = ({
   image,
   alt,
   width,
@@ -29,7 +30,7 @@ const Image: React.FC<IProps> = ({
 }) => {
   if (!!!image) return null;
   return (
-    <SanityImage
+    <Img
       asset={image.asset}
       className={className}
       hotspot={hotspot}
@@ -44,5 +45,3 @@ const Image: React.FC<IProps> = ({
     />
   );
 };
-
-export default Image;

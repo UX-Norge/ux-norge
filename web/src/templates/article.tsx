@@ -1,9 +1,9 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import { Article } from "../types/sanity-types";
-import BlockContent from "../components/BlockContent";
-import Layout from "../components/Layout";
-import Image from "../components/Image";
+import { Article } from "@Types";
+import { ArticleBody } from "@Features/article";
+import { Image } from "@Ui/Image";
+import { PageWrapper } from "@Ui/Layout";
 
 interface IProps {
   data: { sanityArticle: Article };
@@ -16,16 +16,16 @@ const ArticlePage: React.FC<IProps> = ({
 }) => {
   return (
     <article>
-      <Layout>
-        <header className="max-w-prose mx-auto">
+      <PageWrapper>
+        <header className="mx-auto max-w-prose">
           <Image image={mainImage} alt={title} width={1000} className="" />
           <h1 className="heading-1">{title}</h1>
           <p>{}</p>
         </header>
         <main className="prose mx-auto">
-          <BlockContent blocks={body} />
+          <ArticleBody body={body} />
         </main>
-      </Layout>
+      </PageWrapper>
     </article>
   );
 };

@@ -1,13 +1,13 @@
 import { Link } from "gatsby";
 import * as React from "react";
-import { Article } from "../../types/sanity-types";
-import Image from "../Image";
+import { Article } from "@Types";
+import { Image } from "@Ui/Image";
 
 interface IProps {
   article: Article;
 }
 
-const RelatedArticleInline: React.FC<IProps> = ({
+export const RelatedArticleInline: React.FC<IProps> = ({
   article: { mainImage, title, description, slug },
 }) => {
   if (!slug) return null;
@@ -20,7 +20,7 @@ const RelatedArticleInline: React.FC<IProps> = ({
         image={mainImage}
         alt={title}
         width={400}
-        className="h-full block m-0 object-cover"
+        className="m-0 block h-full object-cover"
       />
       <div>
         <h3>{title}</h3>
@@ -29,5 +29,3 @@ const RelatedArticleInline: React.FC<IProps> = ({
     </Link>
   );
 };
-
-export default RelatedArticleInline;

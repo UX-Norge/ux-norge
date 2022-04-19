@@ -1,3 +1,5 @@
+const path = require("path");
+
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
@@ -37,6 +39,16 @@ module.exports = {
       resolve: "gatsby-plugin-manifest",
       options: {
         icon: "src/images/icon.png",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        "@Types": path.join(__dirname, "src", "types"),
+        "@Ui": path.join(__dirname, "src", "ui"),
+        "@Features": path.join(__dirname, "src", "features"),
+        "@Pages": path.join(__dirname, "src", "pages"),
+        "@Images": path.join(__dirname, "src", "images"),
       },
     },
   ],
