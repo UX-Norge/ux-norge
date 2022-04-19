@@ -4,6 +4,11 @@
       "type": "article",
       "field": "publishedAt",
       "titleField": "title"
+    },
+    {
+      "type": "newsletter",
+      "field": "publishedAt",
+      "titleField": "subject"
     }
   ],
   "calendar": {

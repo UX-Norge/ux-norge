@@ -1,3 +1,5 @@
+import { required } from "../../lib/helpers";
+
 export default {
   name: "article",
   title: "Article",
@@ -16,33 +18,39 @@ export default {
       options: {
         hotspot: true,
       },
+      ...required,
     },
     {
       name: "title",
       title: "Tittel",
       type: "string",
+      ...required,
     },
     {
       name: "description",
       title: "Ingress",
       type: "text",
+      ...required,
     },
     {
       name: "author",
       title: "Forfatter",
       type: "reference",
       to: { type: "author" },
+      ...required,
     },
     {
       name: "publishedAt",
       title: "Publiseringstidspunkt",
       type: "datetime",
       group: "metadata",
+      ...required,
     },
     {
       name: "body",
       title: "Brødtekst",
       type: "articleContent",
+      ...required,
     },
     {
       name: "slug",
@@ -53,6 +61,7 @@ export default {
         maxLength: 96,
       },
       group: "metadata",
+      ...required,
     },
     {
       name: "relatedArticles",
@@ -73,6 +82,7 @@ export default {
       type: "reference",
       to: { type: "category" },
       group: "metadata",
+      ...required,
     },
   ],
 

@@ -11,7 +11,12 @@ export default S.listItem()
         S.listItem()
           .title("Sideinnstillinger")
           .icon(FiSettings)
-          .child(S.documentTypeList("siteSettings").title("Sideinnstillinger")),
+          .child(
+            S.document()
+              .schemaType("siteSettings")
+              .documentId("siteSettings")
+              .title("Sideinnstillinger")
+          ),
         S.listItem()
           .title("Forfattere")
           .icon(FiUsers)
