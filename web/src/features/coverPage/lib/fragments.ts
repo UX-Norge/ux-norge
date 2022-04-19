@@ -11,7 +11,7 @@ export const query = graphql`
       mainImage {
         ...ImageWithPreview
       }
-      categories {
+      category {
         name
       }
     }

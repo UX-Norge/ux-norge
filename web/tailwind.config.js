@@ -15,7 +15,24 @@ module.exports = {
       64: "4rem",
       128: "8rem",
     },
-    extend: {},
+    borderRadius: {
+      DEFAULT: "1rem", // 16px
+      lg: "1.5rem", // 24px,
+      full: "9999px",
+    },
+    fontSize: {
+      h1: ["3.5625rem", "1.4em"],
+      h2: ["2.6875rem", "1.4em"],
+      h3: ["2rem", "1.4em"],
+      h4: ["1.5rem", "1.4em"],
+      base: ["1rem", "1.6em"],
+      sm: "0.875rem",
+      xs: "0.75rem",
+    },
+    fontFamily: {
+      sans: ["Inter", "sans-serif"],
+      display: ["Bitter", "serif"],
+    },
   },
   plugins: [
     require("@tailwindcss/typography"),

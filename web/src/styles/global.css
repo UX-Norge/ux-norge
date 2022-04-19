@@ -1,18 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@700&family=Inter&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-  .heading-1 {
-    @apply text-4xl;
-  }
-}
 
 :root {
 }
 
 html {
   height: 100%;
+}
+@layer base {
+  body {
+    @apply font-sans;
+  }
 }
 
 #gatsby-focus-wrapper {

@@ -4,6 +4,7 @@ import { Article } from "@Types";
 import { ArticleBody } from "@Features/article";
 import { Image } from "@Ui/Image";
 import { PageWrapper } from "@Ui/Layout";
+import { Heading1 } from "@Ui/Typography";
 
 interface IProps {
   data: { sanityArticle: Article };
@@ -19,7 +20,7 @@ const ArticlePage: React.FC<IProps> = ({
       <PageWrapper>
         <header className="mx-auto max-w-prose">
           <Image image={mainImage} alt={title} width={1000} className="" />
-          <h1 className="heading-1">{title}</h1>
+          <Heading1 className="heading-1">{title}</Heading1>
           <p>{}</p>
         </header>
         <main className="prose mx-auto">

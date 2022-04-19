@@ -11,7 +11,10 @@ export const Heading1: React.FC<IProps> = ({
   ...props
 }) => {
   return (
-    <h1 className={"" + className} {...props}>
+    <h1
+      className={"font-display text-h1 font-bold" + " " + className}
+      {...props}
+    >
       {children}
     </h1>
   );
@@ -23,7 +26,10 @@ export const Heading2: React.FC<IProps> = ({
   ...props
 }) => {
   return (
-    <h2 className={"" + className} {...props}>
+    <h2
+      className={"font-display text-h2 font-bold" + " " + className}
+      {...props}
+    >
       {children}
     </h2>
   );
@@ -35,7 +41,10 @@ export const Heading3: React.FC<IProps> = ({
   ...props
 }) => {
   return (
-    <h3 className={"" + className} {...props}>
+    <h3
+      className={"font-display text-h3 font-bold" + " " + className}
+      {...props}
+    >
       {children}
     </h3>
   );
@@ -46,33 +55,24 @@ export const Heading4: React.FC<IProps> = ({
   ...props
 }) => {
   return (
-    <h4 className={"" + className} {...props}>
+    <h4
+      className={"font-display text-h4 font-bold" + " " + className}
+      {...props}
+    >
       {children}
     </h4>
   );
 };
 export const Body1: React.FC<IProps> = ({ children, className, ...props }) => {
   return (
-    <p className={"" + className} {...props}>
+    <p className={"text-base" + " " + className} {...props}>
       {children}
     </p>
   );
 };
 export const Body2: React.FC<IProps> = ({ children, className, ...props }) => {
   return (
-    <p className={"" + className} {...props}>
-      {children}
-    </p>
-  );
-};
-
-export const Caption: React.FC<IProps> = ({
-  children,
-  className,
-  ...props
-}) => {
-  return (
-    <p className={"" + className} {...props}>
+    <p className={"text-sm" + " " + className} {...props}>
       {children}
     </p>
   );
@@ -84,7 +84,7 @@ export const Overline: React.FC<IProps> = ({
   ...props
 }) => {
   return (
-    <p className={"" + className} {...props}>
+    <p className={"text-sm uppercase" + " " + className} {...props}>
       {children}
     </p>
   );

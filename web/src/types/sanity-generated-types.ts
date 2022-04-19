@@ -147,7 +147,7 @@ export interface Article extends SanityDocument {
    *
    *
    */
-  categories: SanityReference<Category>;
+  category: SanityReference<Category>;
 }
 
 /**

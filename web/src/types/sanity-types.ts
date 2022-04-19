@@ -23,10 +23,13 @@ export type SanitySlug = {
   current: string;
 };
 
-export type ArticleThumbnail = Pick<
-  Article,
-  "title" | "description" | "slug" | "mainImage"
->;
+// export type ArticleThumbnail = {
+//   _type: "articleThumbnail";
+//   article: Pick<
+//     Article,
+//     "title" | "description" | "slug" | "mainImage" | "category"
+//   >;
+// };
 
 export type Block = CoverAds | CoverArticles | CoverCollections;
 

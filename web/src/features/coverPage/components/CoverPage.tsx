@@ -1,55 +1,35 @@
 import * as React from "react";
 import { Block } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
-import { FullWidthArticleThumbnail } from "./FullWidthArticleThumbnail";
-import { title } from "process";
-import { HalfWidthArticleThumbnail } from "./HalfWidthArticleThumbnail";
-import { ListArticleThumbnail } from "./ListArticleThumbnail";
+import { CoverArticleThumbnails } from "./CoverArticleThumbnails";
 
 interface IProps {
   blocks: Block[];
 }
 
 export const CoverPage: React.FC<IProps> = ({ blocks }) => {
-  const coverSerializer = (block: Block) => {
-    if (block._type === "coverArticles") {
-      //
-      if (block.layout === "fullWidth") {
-        return block.list?.map(({ article }) => (
-          <FullWidthArticleThumbnail {...article} />
-        ));
-      }
-      if (block.layout === "halfWidth") {
-        return (
-          <div className="grid grid-cols-2">
-            {block.list?.map(({ article }) => (
-              <HalfWidthArticleThumbnail {...article} />
-            ))}
-          </div>
-        );
-      }
-      if (block.layout === "list") {
-        return (
-          <div className="mb-24">
-            {block.list?.map(({ article }) => (
-              <ListArticleThumbnail {...article} />
-            ))}
-          </div>
-        );
-      }
-    }
-
-    if (block._type === "coverCollections") {
-    }
-
-    if (block._type === "coverAds") {
-    }
-    return null;
-  };
   return (
     <PageWrapper>
-      <div className="mx-auto max-w-xl">
-        {blocks.map((block) => coverSerializer(block))}
+      <div className="mx-auto max-w-screen-xl">
+        {blocks.map((block: Block, index) => {
+          const key = `block-${index}`;
+          switch (block._type) {
+            case "coverAds":
+              return null;
+            case "coverCollections":
+              return null;
+            case "coverArticles":
+              return (
+                <CoverArticleThumbnails
+                  list={block.list}
+                  type={block.layout}
+                  key={key}
+                />
+              );
+            default:
+              return null;
+          }
+        })}
       </div>
     </PageWrapper>
   );
