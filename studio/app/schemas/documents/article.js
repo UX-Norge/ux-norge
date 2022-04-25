@@ -30,6 +30,7 @@ export default {
       name: "description",
       title: "Ingress",
       type: "text",
+      description: "Vises i thumbnails på forsiden og i toppen av artikler",
       ...required,
     },
     {
@@ -99,4 +100,11 @@ export default {
       });
     },
   },
+  orderings: [
+    {
+      title: "Published at, Newest first",
+      name: "publishedAtDesc",
+      by: [{ field: "publishedAt", direction: "desc" }],
+    },
+  ],
 };

@@ -10,4 +10,17 @@ export default {
       to: [{ type: "article" }],
     },
   ],
+  preview: {
+    select: {
+      title: "article.title",
+      media: "article.mainImage",
+    },
+    prepare(selection) {
+      const { title, media } = selection;
+      return {
+        title,
+        media,
+      };
+    },
+  },
 };

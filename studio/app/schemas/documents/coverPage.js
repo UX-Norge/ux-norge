@@ -12,6 +12,9 @@ export default {
         { type: "coverAds" },
         { type: "coverCollections" },
       ],
+      options: {
+        editModal: "popover",
+      },
     },
   ],
 };

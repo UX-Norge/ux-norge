@@ -22,6 +22,9 @@ export const coverArticles = {
       name: "list",
       title: "Liste",
       of: [{ type: "articleThumbnail" }],
+      options: {
+        layout: "grid",
+      },
     },
   ],
 };
@@ -41,6 +44,9 @@ export const coverCollections = {
       name: "list",
       title: "Liste",
       of: [{ type: "articleThumbnail" }],
+      options: {
+        layout: "grid",
+      },
     },
   ],
 };
