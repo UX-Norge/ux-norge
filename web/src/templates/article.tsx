@@ -1,25 +1,38 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import { Article } from "@Types";
+import { Ads, Article } from "@Types";
 import { ArticleBody } from "@Features/article";
 import { Image } from "@Ui/Image";
 import { PageWrapper } from "@Ui/Layout";
 import { Heading1 } from "@Ui/Typography";
-
 interface IProps {
-  data: { sanityArticle: Article };
+  data: {
+    sanityArticle: Article;
+    articleListAds: { edges: Ads };
+    articleBannerAds: { edges: Ads };
+  };
 }
 
 const ArticlePage: React.FC<IProps> = ({
   data: {
     sanityArticle: { title, body, mainImage },
+    articleListAds,
+    articleBannerAds,
   },
 }) => {
+  console.log(articleListAds);
+
   return (
     <article>
       <PageWrapper>
         <header className="mx-auto max-w-prose">
-          <Image image={mainImage} alt={title} width={1000} className="" />
+          <Image
+            image={mainImage.image}
+            alt={mainImage.alt || title}
+            width={1000}
+            className=""
+            title={mainImage.caption}
+          />
           <Heading1 className="heading-1">{title}</Heading1>
           <p>{}</p>
         </header>
@@ -32,13 +45,36 @@ const ArticlePage: React.FC<IProps> = ({
 };
 
 export const query = graphql`
-  query article($slug: String) {
+  query ArticleQuery(
+    $slug: String
+    $articleListAds: [String]
+    $articleBannerAds: [String]
+  ) {
     sanityArticle(slug: { current: { eq: $slug } }) {
       title
       mainImage {
-        ...ImageWithPreview
+        image {
+          ...ImageWithPreview
+        }
+        alt
+        caption
       }
       body: _rawBody(resolveReferences: { maxDepth: 3 })
+    }
+    articleListAds: allSanityAd(filter: { _id: { in: $articleListAds } }) {
+      edges {
+        node {
+          title
+        }
+      }
+    }
+    articleBannerAds: allSanityAd(filter: { _id: { in: $articleBannerAds } }) {
+      edges {
+        node {
+          title
+          text: _rawText
+        }
+      }
     }
   }
 `;

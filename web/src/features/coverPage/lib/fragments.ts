@@ -9,7 +9,11 @@ export const query = graphql`
         current
       }
       mainImage {
-        ...ImageWithPreview
+        image {
+          ...ImageWithPreview
+        }
+        alt
+        caption
       }
       category {
         name

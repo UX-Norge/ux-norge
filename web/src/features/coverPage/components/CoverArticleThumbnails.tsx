@@ -54,8 +54,8 @@ export const CoverArticleThumbnails: React.FC<IProps> = ({ list, type }) => {
             <Link to={slug.current} className={options.thumbnailClass}>
               <div className={options.imageClass + " aspect-w-16 aspect-h-9"}>
                 <Image
-                  image={mainImage}
-                  alt={title}
+                  image={mainImage.image}
+                  alt={mainImage.alt}
                   width={options.imageSize}
                   className={"w-full object-cover"}
                 />

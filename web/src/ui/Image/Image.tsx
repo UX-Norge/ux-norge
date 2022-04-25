@@ -12,6 +12,7 @@ type HotspotAndCrop = {
 interface IProps {
   image: SanityImage | undefined;
   alt: string | undefined;
+  title: string | undefined;
   className?: string;
   width: number;
   height?: number;
@@ -27,6 +28,7 @@ export const Image: React.FC<IProps> = ({
   crop,
   hotspot,
   className,
+  title,
 }) => {
   if (!!!image) return null;
   return (
@@ -36,6 +38,7 @@ export const Image: React.FC<IProps> = ({
       hotspot={hotspot}
       crop={crop}
       alt={alt}
+      title={title}
       width={width}
       height={height}
       __typename={undefined}

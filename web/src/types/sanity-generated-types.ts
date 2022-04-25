@@ -75,16 +75,11 @@ export interface Article extends SanityDocument {
   _type: "article";
 
   /**
-   * Hovedbilde — `image`
+   * Hovedbilde — `articleImage`
    *
    *
    */
-  mainImage: {
-    _type: "image";
-    asset: SanityReference<SanityImageAsset>;
-    crop?: SanityImageCrop;
-    hotspot?: SanityImageHotspot;
-  };
+  mainImage: ArticleImage;
 
   /**
    * Tittel — `string`
@@ -96,7 +91,7 @@ export interface Article extends SanityDocument {
   /**
    * Ingress — `text`
    *
-   *
+   * Vises i thumbnails på forsiden og i toppen av artikler
    */
   description: string;
 
@@ -148,6 +143,13 @@ export interface Article extends SanityDocument {
    *
    */
   category: SanityReference<Category>;
+
+  /**
+   * Leserinnlegg — `boolean`
+   *
+   *
+   */
+  isReadersLetter?: boolean;
 }
 
 /**
@@ -278,7 +280,7 @@ export interface Ad extends SanityDocument {
   startDate?: string;
 
   /**
-   * Sluttdato — `date`
+   * Sluttdato — `string`
    *
    *
    */
@@ -289,7 +291,7 @@ export interface Ad extends SanityDocument {
    *
    *
    */
-  packageType?: SanityReference<AdPackageType>;
+  packageType?: AdPackageType;
 
   /**
    * Annonsør — `reference`
@@ -320,6 +322,48 @@ export interface AdPackageType extends SanityDocument {
    * Pris oppgitt i NOK ekskl. MVA
    */
   price?: number;
+
+  /**
+   * Varighet — `number`
+   *
+   * Antall dager
+   */
+  duration?: number;
+
+  /**
+   * På forsiden — `boolean`
+   *
+   *
+   */
+  onCoverPage?: boolean;
+
+  /**
+   * På artikler — `boolean`
+   *
+   *
+   */
+  onArticles?: boolean;
+
+  /**
+   * På jobbsiden — `boolean`
+   *
+   * uxnorge.no/jobb
+   */
+  onAdsPage?: boolean;
+
+  /**
+   * På Slack — `boolean`
+   *
+   *
+   */
+  onSlack?: boolean;
+
+  /**
+   * På nyhetsbrev — `boolean`
+   *
+   *
+   */
+  onNewsletter?: boolean;
 }
 
 /**

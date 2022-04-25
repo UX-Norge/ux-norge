@@ -31,6 +31,6 @@ export type SanitySlug = {
 //   >;
 // };
 
-export type Block = CoverAds | CoverArticles | CoverCollections;
+export type CoverBlock = CoverAds | CoverArticles | CoverCollections;
 
 export { BlockContent as BlockContentType } from "./sanity-generated-types";

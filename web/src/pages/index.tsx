@@ -1,8 +1,23 @@
 import { graphql } from "gatsby";
 import * as React from "react";
 import { CoverPage } from "@Features/coverPage";
+import { ErrorPage } from "@Ui/ErrorPage/ErrorPage";
+import { CoverBlock } from "@Types";
 
-const IndexPage = ({ data: { sanityCoverPage } }) => {
+const IndexPage: React.FC<{
+  data: { sanityCoverPage: { blocks: CoverBlock[] } };
+}> = ({ data: { sanityCoverPage } }) => {
+  console.log(sanityCoverPage);
+  if (!sanityCoverPage) {
+    return (
+      <ErrorPage
+        title="Aiaiai!"
+        message="Her har noe gått galt med hentingen av data til forsiden 😱"
+        type={500}
+      />
+    );
+  }
+
   return <CoverPage blocks={sanityCoverPage.blocks} />;
 };
 

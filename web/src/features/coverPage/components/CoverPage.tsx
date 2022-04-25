@@ -1,17 +1,17 @@
 import * as React from "react";
-import { Block } from "@Types";
+import { CoverBlock } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
 import { CoverArticleThumbnails } from "./CoverArticleThumbnails";
 
 interface IProps {
-  blocks: Block[];
+  blocks: CoverBlock[];
 }
 
 export const CoverPage: React.FC<IProps> = ({ blocks }) => {
   return (
     <PageWrapper>
       <div className="mx-auto max-w-screen-xl">
-        {blocks.map((block: Block, index) => {
+        {blocks.map((block: CoverBlock, index) => {
           const key = `block-${index}`;
           switch (block._type) {
             case "coverAds":
