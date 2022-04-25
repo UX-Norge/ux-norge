@@ -56,6 +56,5 @@ export default {
       type: "articleImage",
     },
     { type: "relatedArticle" },
-    { type: "divider" },
   ],
 };
