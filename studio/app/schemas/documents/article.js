@@ -14,10 +14,7 @@ export default {
     {
       name: "mainImage",
       title: "Hovedbilde",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
+      type: "articleImage",
       ...required,
     },
     {
@@ -85,19 +82,26 @@ export default {
       group: "metadata",
       ...required,
     },
+    {
+      name: "isReadersLetter",
+      title: "Leserinnlegg",
+      type: "boolean",
+    },
   ],
 
   preview: {
     select: {
       title: "title",
       author: "author.name",
-      media: "mainImage",
+      media: "mainImage.image",
+      category: "category.name",
     },
-    prepare(selection) {
-      const { author } = selection;
-      return Object.assign({}, selection, {
-        subtitle: author && `by ${author}`,
-      });
+    prepare({ title, media, author, category }) {
+      return {
+        title,
+        subtitle: `${category} | ${author}`,
+        media,
+      };
     },
   },
   orderings: [

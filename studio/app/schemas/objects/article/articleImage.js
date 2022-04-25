@@ -1,3 +1,5 @@
+import ArticleImageRenderer from "../../../renderComponents/ArticleImageRenderer";
+
 export default {
   name: "articleImage",
   type: "object",
@@ -22,4 +24,7 @@ export default {
       type: "string",
     },
   ],
+  preview: {
+    component: ArticleImageRenderer,
+  },
 };
