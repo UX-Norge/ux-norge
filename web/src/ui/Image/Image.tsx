@@ -12,7 +12,7 @@ type HotspotAndCrop = {
 interface IProps {
   image: SanityImage | undefined;
   alt: string | undefined;
-  title: string | undefined;
+  title?: string | undefined;
   className?: string;
   width: number;
   height?: number;

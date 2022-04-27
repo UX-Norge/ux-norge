@@ -1,5 +1,3 @@
-import editorMessage from "../../inputComponents/editorMessage";
-
 export const coverArticles = {
   title: "Artikler",
   name: "coverArticles",

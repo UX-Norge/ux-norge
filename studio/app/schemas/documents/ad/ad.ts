@@ -1,4 +1,24 @@
-import showAdDuration from "../../../inputComponents/showAdDuration";
+import {
+  AdPackageType,
+  Company,
+  PortableText,
+  SanityDocument,
+  SanityImage,
+} from "@Types";
+
+import showAdDuration from "../../../components/input/showAdDuration";
+
+export interface Ad extends SanityDocument {
+  title: string;
+  text: PortableText;
+  image: SanityImage;
+  jobType: "fulltid" | "deltid" | "sommerjobb";
+  location: "string";
+  link: string;
+  startDate: string;
+  packageType: AdPackageType;
+  advertiser: Company;
+}
 
 export default {
   name: "ad",
@@ -29,9 +49,12 @@ export default {
       group: "content",
     },
     {
-      name: "fulltime",
-      title: "fulltime",
-      type: "boolean",
+      name: "jobType",
+      title: "Jobbtype",
+      type: "string",
+      options: {
+        list: ["fulltid", "deltid", "sommerjobb"],
+      },
       group: "content",
     },
     {
@@ -46,7 +69,7 @@ export default {
           params: {
             type: "ad",
           },
-          transform: (values) => values,
+          transform: (values: any) => values,
         },
       },
     },
@@ -60,7 +83,7 @@ export default {
       name: "startDate",
       title: "Startdato",
       type: "date",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: any) => Rule.required(),
       group: "settings",
     },
     {
@@ -68,6 +91,7 @@ export default {
       type: "string",
       title: "Sluttdato",
       group: "settings",
+      readonly: true,
       inputComponent: showAdDuration,
     },
     {
@@ -92,7 +116,7 @@ export default {
       endDate: "endDate",
       advertiser: "advertiser.name",
     },
-    prepare(selection) {
+    prepare(selection: any) {
       const { title, startDate, endDate, advertiser } = selection;
       let media = "";
       if (!!startDate && !!endDate) {

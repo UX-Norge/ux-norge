@@ -2,13 +2,21 @@ import { graphql } from "gatsby";
 import * as React from "react";
 import { CoverPage } from "@Features/coverPage";
 import { ErrorPage } from "@Ui/ErrorPage/ErrorPage";
-import { CoverBlock } from "@Types";
+import { GraphqlEdges, Article } from "@Types";
+import { cleanGraphqlArray } from "../lib/helperts";
 
-const IndexPage: React.FC<{
-  data: { sanityCoverPage: { blocks: CoverBlock[] } };
-}> = ({ data: { sanityCoverPage } }) => {
-  console.log(sanityCoverPage);
-  if (!sanityCoverPage) {
+interface IProps {
+  data: { allSanityArticle: GraphqlEdges };
+}
+
+const IndexPage: React.FC<IProps> = ({ data }) => {
+  let articles = cleanGraphqlArray(data.allSanityArticle?.edges) as Article[];
+
+  articles = articles.filter(
+    (article) => article.title && article.description && article.slug.current
+  );
+
+  if (!articles) {
     return (
       <ErrorPage
         title="Aiaiai!"
@@ -18,31 +26,22 @@ const IndexPage: React.FC<{
     );
   }
 
-  return <CoverPage blocks={sanityCoverPage.blocks} />;
+  return <CoverPage articles={articles} />;
 };
 
 export const query = graphql`
   query CoverPageQuery {
-    sanityCoverPage(_id: { eq: "coverPage" }) {
-      blocks {
-        ... on SanityCoverCollections {
-          _key
-          _type
+    allSanityArticle {
+      edges {
+        node {
           title
-          list {
-            ...ArticleFragmentThumbnail
+          mainImage {
+            ...ArticleImage
           }
-        }
-        ... on SanityCoverArticles {
-          _key
-          _type
-          list {
-            ...ArticleFragmentThumbnail
+          description
+          slug {
+            current
           }
-          layout
-        }
-        ... on SanityCoverAds {
-          _type
         }
       }
     }

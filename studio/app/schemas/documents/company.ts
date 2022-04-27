@@ -1,3 +1,10 @@
+import { SanityDocument, SanityImage } from "@Types";
+
+export interface Company extends SanityDocument {
+  name: string;
+  logo?: SanityImage;
+  isPartner?: boolean;
+}
 export default {
   name: "company",
   title: "Company",
@@ -7,6 +14,7 @@ export default {
       name: "name",
       title: "Navn",
       type: "string",
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "logo",

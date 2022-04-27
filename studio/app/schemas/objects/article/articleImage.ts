@@ -1,4 +1,11 @@
-import ArticleImageRenderer from "../../../renderComponents/ArticleImageRenderer";
+import { SanityImage } from "@Types";
+import { ArticleImageRenderer } from "../../../components/render/ArticleImageRenderer";
+
+export interface ArticleImage {
+  image: SanityImage;
+  alt: string;
+  caption?: string;
+}
 
 export default {
   name: "articleImage",
@@ -12,11 +19,13 @@ export default {
       options: {
         hotspot: true,
       },
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "alt",
       type: "string",
       title: "Alt-tekst",
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "caption",
@@ -24,7 +33,7 @@ export default {
       type: "string",
     },
   ],
-  preview: {
-    component: ArticleImageRenderer,
-  },
+  // preview: {
+  //   component: ArticleImageRenderer,
+  // },
 };

@@ -1,3 +1,16 @@
+import { SanityDocument } from "@Types";
+
+export interface AdPackageType extends SanityDocument {
+  name: string;
+  price: number;
+  duration: number;
+  onCoverPage: boolean;
+  onArticles: boolean;
+  onAdsPage: boolean;
+  onSlack: boolean;
+  onNewsletter: boolean;
+}
+
 export default {
   name: "adPackageType",
   title: "Package type",
@@ -53,7 +66,7 @@ export default {
       subtitle: "price",
       duration: "duration",
     },
-    prepare(selection) {
+    prepare(selection: any) {
       const { title, subtitle, duration } = selection;
       return {
         title,

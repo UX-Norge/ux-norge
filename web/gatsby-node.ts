@@ -16,7 +16,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 }) => {
   let pageCount = 0;
 
-  const createPage = (type, options) => {
+  const createPage = (type: string, options: any) => {
     console.log(`${type}: ${options.path}`);
     pageCount++;
     actions.createPage(options);
@@ -63,8 +63,8 @@ export const createPages: GatsbyNode["createPages"] = async ({
     articles: { node: Article }[];
     ads: { node: Ad }[];
   } = {
-    articles: result.data.allSanityArticle.edges || [],
-    ads: result.data.allSanityAd.edges || [],
+    articles: result.data?.allSanityArticle.edges || [],
+    ads: result.data?.allSanityAd.edges || [],
   };
 
   const templates = {

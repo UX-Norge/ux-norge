@@ -1,4 +1,24 @@
-import { required } from "../../lib/helpers";
+import {
+  ArticleImage,
+  Category,
+  PortableText,
+  SanityDocument,
+  SanitySlug,
+  Author,
+} from "@Types";
+
+export interface Article extends SanityDocument {
+  mainImage?: ArticleImage;
+  title: string;
+  description: string;
+  author: Author[];
+  publishedAt: string;
+  body: PortableText;
+  slug: SanitySlug;
+  relatedArticles?: Article[];
+  category: Category;
+  isReadersLetter?: boolean;
+}
 
 export default {
   name: "article",
@@ -15,40 +35,39 @@ export default {
       name: "mainImage",
       title: "Hovedbilde",
       type: "articleImage",
-      ...required,
     },
     {
       name: "title",
       title: "Tittel",
       type: "string",
-      ...required,
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "description",
       title: "Ingress",
       type: "text",
       description: "Vises i thumbnails på forsiden og i toppen av artikler",
-      ...required,
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "author",
       title: "Forfatter",
-      type: "reference",
-      to: { type: "author" },
-      ...required,
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "author" }] }],
+      validation: (Rule: any) => Rule.required().min(1),
     },
     {
       name: "publishedAt",
       title: "Publiseringstidspunkt",
       type: "datetime",
       group: "metadata",
-      ...required,
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "body",
       title: "Brødtekst",
       type: "articleContent",
-      ...required,
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "slug",
@@ -59,7 +78,7 @@ export default {
         maxLength: 96,
       },
       group: "metadata",
-      ...required,
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "relatedArticles",
@@ -68,19 +87,12 @@ export default {
       of: [{ type: "reference", to: [{ type: "article" }] }],
     },
     {
-      name: "ads",
-      title: "Stillingsannonser",
-      description: "Hvis dere ønsker å overskrive annonser, kan det gjøres her",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "ad" }] }],
-    },
-    {
       name: "category",
       title: "Kategori",
       type: "reference",
       to: { type: "category" },
       group: "metadata",
-      ...required,
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "isReadersLetter",
@@ -88,18 +100,16 @@ export default {
       type: "boolean",
     },
   ],
-
   preview: {
     select: {
       title: "title",
-      author: "author.name",
       media: "mainImage.image",
       category: "category.name",
     },
-    prepare({ title, media, author, category }) {
+    prepare({ title, media, category }: any) {
       return {
         title,
-        subtitle: `${category} | ${author}`,
+        subtitle: `${category}`,
         media,
       };
     },
@@ -111,4 +121,7 @@ export default {
       by: [{ field: "publishedAt", direction: "desc" }],
     },
   ],
+  initialValue: {
+    isReadersLetter: false,
+  },
 };

@@ -1,38 +1,39 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import { Ads, Article } from "@Types";
+import { Ad, Article, GraphqlEdges } from "@Types";
 import { ArticleBody } from "@Features/article";
 import { Image } from "@Ui/Image";
 import { PageWrapper } from "@Ui/Layout";
 import { Heading1 } from "@Ui/Typography";
+import { cleanGraphqlArray } from "../lib/helperts";
 interface IProps {
   data: {
     sanityArticle: Article;
-    articleListAds: { edges: Ads };
-    articleBannerAds: { edges: Ads };
+    articleListAds: GraphqlEdges;
+    articleBannerAds: GraphqlEdges;
   };
 }
 
-const ArticlePage: React.FC<IProps> = ({
-  data: {
-    sanityArticle: { title, body, mainImage },
-    articleListAds,
-    articleBannerAds,
-  },
-}) => {
-  console.log(articleListAds);
+const ArticlePage: React.FC<IProps> = ({ data }) => {
+  const { title, mainImage, body } = data.sanityArticle;
+  const articleListAds = cleanGraphqlArray(data.articleListAds.edges) as Ad[];
+  const articleBannerAds = cleanGraphqlArray(
+    data.articleBannerAds.edges
+  ) as Ad[];
 
   return (
     <article>
       <PageWrapper>
         <header className="mx-auto max-w-prose">
-          <Image
-            image={mainImage.image}
-            alt={mainImage.alt || title}
-            width={1000}
-            className=""
-            title={mainImage.caption}
-          />
+          {mainImage && (
+            <Image
+              image={mainImage.image}
+              alt={mainImage.alt || title}
+              width={1000}
+              className=""
+              title={mainImage.caption}
+            />
+          )}
           <Heading1 className="heading-1">{title}</Heading1>
           <p>{}</p>
         </header>
@@ -53,11 +54,7 @@ export const query = graphql`
     sanityArticle(slug: { current: { eq: $slug } }) {
       title
       mainImage {
-        image {
-          ...ImageWithPreview
-        }
-        alt
-        caption
+        ...ArticleImage
       }
       body: _rawBody(resolveReferences: { maxDepth: 3 })
     }
