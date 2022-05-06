@@ -6,5 +6,6 @@
   "@sanity/data-aspects": "d199e2c199b3e26cd28b68dc84d7fc01c9186bf5089580f2e2446994d36b3cb6",
   "@sanity/vision": "da5b6ed712703ecd04bf4df560570c668aa95252c6bc1c41d6df1bda9b8b8f60",
   "sanity-plugin-content-calendar": "38b27aff30a6a791a8ee58125992093fcacbff5abba4aea3e77478ba531c7a3c",
-  "content-calendar": "38b27aff30a6a791a8ee58125992093fcacbff5abba4aea3e77478ba531c7a3c"
+  "content-calendar": "38b27aff30a6a791a8ee58125992093fcacbff5abba4aea3e77478ba531c7a3c",
+  "@sanity/cross-dataset-duplicator": "bf0e921dd41a0596e13e135fe367e154552002de5a6d5c3b348ccfd670ff4b92"
 }

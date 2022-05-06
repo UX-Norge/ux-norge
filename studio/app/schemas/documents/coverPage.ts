@@ -4,17 +4,9 @@ export default {
   type: "document",
   fields: [
     {
-      name: "blocks",
-      title: "Blokker",
-      type: "array",
-      of: [
-        { type: "coverArticles" },
-        { type: "coverAds" },
-        { type: "coverCollections" },
-      ],
-      options: {
-        editModal: "popover",
-      },
+      name: "title",
+      title: "title",
+      type: "string",
     },
   ],
 };

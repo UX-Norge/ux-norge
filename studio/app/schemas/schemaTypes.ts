@@ -6,3 +6,4 @@ export { Author } from "./documents/author";
 export { AdPackageType } from "./documents/ad/adPackageType";
 export { Ad } from "./documents/ad/ad";
 export { Document } from "./documents/doc";
+export { SiteSettings } from "./documents/siteSettings";

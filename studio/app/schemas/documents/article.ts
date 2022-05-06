@@ -11,12 +11,13 @@ export interface Article extends SanityDocument {
   mainImage?: ArticleImage;
   title: string;
   description: string;
-  author: Author[];
+  authors: Author[];
   publishedAt: string;
   body: PortableText;
   slug: SanitySlug;
   relatedArticles?: Article[];
   category: Category;
+  isFeature?: boolean;
   isReadersLetter?: boolean;
 }
 
@@ -50,7 +51,7 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "author",
+      name: "authors",
       title: "Forfatter",
       type: "array",
       of: [{ type: "reference", to: [{ type: "author" }] }],
@@ -93,6 +94,11 @@ export default {
       to: { type: "category" },
       group: "metadata",
       validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "isFeature",
+      title: "isFeature",
+      type: "boolean",
     },
     {
       name: "isReadersLetter",

@@ -1,7 +1,6 @@
 import articleContent from "./article/articleContent";
 import articleImage from "./article/articleImage";
 import blockContent from "./blockContent";
-import { coverAds, coverArticles, coverCollections } from "./coverBlocks";
 import simpleBlockContent from "./simpleBlockContent";
 import inlineRelatedArticle from "./article/inlineRelatedArticle";
 
@@ -10,8 +9,5 @@ export default [
   simpleBlockContent,
   articleContent,
   articleImage,
-  coverArticles,
-  coverAds,
-  coverCollections,
   inlineRelatedArticle,
 ];
