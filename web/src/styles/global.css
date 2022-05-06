@@ -1,19 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@700&family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --color-neutral-0: #ffffff;
+	--color-neutral-100: #f2f2f2;
+	--color-neutral-200: #d2d2d2;
+	--color-neutral-300: #b4b3b3;
+	--color-neutral-400: #969595;
+	--color-neutral-500: #797979;
+	--color-neutral-600: #5e5d5d;
+	--color-neutral-700: #434343;
+	--color-neutral-800: #2b2a2a;
+	--color-neutral-900: #141313;
+
+	--color-primary-100: #e5e1fd;
+	--color-primary-400: #9786ff;
+	--color-primary-500: #7061ea;
+  
+	--color-accent-2-600: #107349;
+	--color-accent-2-300: #5bc49a;
+	--color-accent-2-100: #daf9d5;
+
+	--color-accent-3-400: #f66f33;
+	--color-accent-3-500: #d94f0d;
+ 
+	--color-accent-4-500: #a36100;
+	--color-accent-4-200: #f1c048;
+	--color-accent-4-100: #ffe0a8;
+	--color-accent-4-50: #fff7ea;
+
+	--color-accent-5-600: #0066b8;
+	--color-accent-5-500: #3080d7;
+	--color-accent-5-200: #b2cfff;
+	--color-accent-5-100: #d4e3ff;
+	--color-accent-5-50: #f2f7ff;
 }
 
 html {
   height: 100%;
+  font-size: 100%
 }
+@media screen and (min-width: 768px) {
+  html {
+	font-size: 112.5%
+  }
+}
+	
 @layer base {
   body {
     @apply font-sans;
   }
+}
+
+@layer utilities {
+	.door-open {
+		transform: perspective(100px) rotateY(3deg);
+	}
 }
 
 #gatsby-focus-wrapper {
@@ -21,3 +66,24 @@ html {
   flex-direction: column;
   min-height: 100vh;
 }
+
+:root {
+    --cover-page-desktop-layout: "";
+    --cover-page-mobile-layout: "";
+    --cover-page-table-layout: "";
+
+    --cover-page-layout: var(--cover-page-mobile-layout);
+}
+
+@media screen and (min-width: 700px) {
+	:root {
+		--cover-page-layout: var(--cover-page-tablet-layout);
+	}
+}
+
+@media screen and (min-width: 1200px) {
+    :root {
+        --cover-page-layout: var(--cover-page-desktop-layout);
+    }
+}
+

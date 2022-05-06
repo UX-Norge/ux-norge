@@ -8,4 +8,16 @@ export const query = graphql`
     alt
     caption
   }
+
+  fragment ArticleThumbnail on SanityArticle {
+    title
+    mainImage {
+      ...ArticleImage
+    }
+    description
+    isFeature
+    slug {
+      current
+    }
+  }
 `;

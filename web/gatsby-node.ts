@@ -1,11 +1,15 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
-import { Ad, Article } from "./src/types/sanity-generated-types";
-import { getAds } from "./src/features/ad/lib/getAds";
+import { Ad, Article, Author, Category, GraphqlEdges } from "@Types";
+import { getActiveAdIds } from "./src/features/ad/lib/getAds";
+import { cleanGraphqlArray } from "./src/lib/helpers";
+import { getRoute } from "./src/components/Link";
 
 type SanityData = {
-  allSanityArticle: { edges: { node: Article }[] };
-  allSanityAd: { edges: { node: Ad }[] };
+  allSanityArticle: GraphqlEdges;
+  allSanityAd: GraphqlEdges;
+  allSanityAuthor: GraphqlEdges;
+  allSanityCategory: GraphqlEdges;
 };
 
 const printDivider = () => console.log("\n------------\n");
@@ -27,8 +31,14 @@ export const createPages: GatsbyNode["createPages"] = async ({
       allSanityArticle {
         edges {
           node {
+            authors {
+              _id
+            }
             slug {
               current
+            }
+            category {
+              _id
             }
           }
         }
@@ -37,15 +47,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
         edges {
           node {
             _id
-            title
             startDate
-            link
-            location
-            fulltime
-            advertiser {
-              name
-              isPartner
-            }
             packageType {
               onCoverPage
               onArticles
@@ -55,40 +57,102 @@ export const createPages: GatsbyNode["createPages"] = async ({
           }
         }
       }
+      allSanityAuthor {
+        edges {
+          node {
+            _id
+            slug {
+              current
+            }
+          }
+        }
+      }
+      allSanityCategory {
+        edges {
+          node {
+            _id
+            name
+            slug {
+              current
+            }
+          }
+        }
+      }
     }
   `);
-  console.log(result);
 
   const data: {
-    articles: { node: Article }[];
-    ads: { node: Ad }[];
+    articles: Article[];
+    ads: Ad[];
+    authors: Author[];
+    categories: Category[];
   } = {
-    articles: result.data?.allSanityArticle.edges || [],
-    ads: result.data?.allSanityAd.edges || [],
+    articles: cleanGraphqlArray(result.data?.allSanityArticle) as Article[],
+    ads: cleanGraphqlArray(result.data?.allSanityAd) as Ad[],
+    authors: cleanGraphqlArray(result.data?.allSanityAuthor) as Author[],
+    categories: cleanGraphqlArray(result.data?.allSanityCategory) as Category[],
   };
 
   const templates = {
     article: path.resolve(`src/templates/article.tsx`),
+    author: path.resolve(`src/templates/author.tsx`),
+    category: path.resolve(`src/templates/category.tsx`),
   };
 
-  const allAds = getAds(data.ads);
-  console.log(allAds);
+  const allAds = getActiveAdIds(data.ads);
 
   printDivider();
 
   data.articles
-    .filter(({ node }) => node.slug?.current)
-    .forEach(({ node }) => {
+    .filter((article) => article.slug?.current)
+    .forEach((article) => {
       createPage("Article", {
-        path: node.slug.current,
+        path: getRoute("article", article.slug.current),
         component: templates.article,
         context: {
-          slug: node.slug.current,
-          articleListAds: allAds.articleListAds,
+          slug: article.slug.current,
+          articleListAds: allAds?.articleListAds,
+          categoryId: article.category?._id,
+        },
+        defer: true,
+      });
+    });
+
+  data.authors
+    .filter((author) => author.slug?.current)
+    .forEach((author) => {
+      createPage("Author", {
+        path: getRoute("author", author.slug.current),
+        component: templates.author,
+        context: {
+          authorSlug: author.slug.current,
+          // Filter all the articles that have this author as an author
+          articleSlugs: data.articles
+            .filter((article) =>
+              article.authors.some(
+                ({ _id: authorId }) => authorId === author._id
+              )
+            )
+            .map((article) => article.slug.current),
         },
       });
     });
 
-  console.log(`Created ${pageCount} pages `);
+  data.categories
+    .filter((category) => category.slug?.current)
+    .forEach((category) => {
+      createPage("Category", {
+        path: getRoute("category", category.slug.current),
+        component: templates.category,
+        context: {
+          categorySlug: category.slug.current,
+          // Filter all the articles that have this category as a category
+          articleSlugs: data.articles
+            .filter((article) => article.category?._id === category._id)
+            .map((article) => article.slug.current),
+        },
+      });
+    });
+  console.log(`\nCreated ${pageCount} pages `);
   printDivider();
 };

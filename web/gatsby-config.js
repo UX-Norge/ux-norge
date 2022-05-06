@@ -38,17 +38,17 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        icon: "src/images/icon.png",
+        icon: "src/images/logo.svg",
       },
     },
     {
       resolve: "gatsby-plugin-root-import",
       options: {
-        "@Types": path.join(__dirname, "src", "types"),
+        "@Types": path.join(__dirname, "..", "types"),
         "@Ui": path.join(__dirname, "src", "ui"),
         "@Features": path.join(__dirname, "src", "features"),
-        "@Pages": path.join(__dirname, "src", "pages"),
-        "@Images": path.join(__dirname, "src", "images"),
+        "@Lib": path.join(__dirname, "src", "lib"),
+        "@Components": path.join(__dirname, "src", "components"),
       },
     },
   ],

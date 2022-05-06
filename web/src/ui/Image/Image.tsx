@@ -16,8 +16,6 @@ interface IProps {
   className?: string;
   width: number;
   height?: number;
-  crop?: HotspotAndCrop;
-  hotspot?: HotspotAndCrop;
 }
 
 export const Image: React.FC<IProps> = ({
@@ -25,18 +23,16 @@ export const Image: React.FC<IProps> = ({
   alt,
   width,
   height,
-  crop,
-  hotspot,
   className,
   title,
 }) => {
-  if (!!!image) return null;
+  if (!(image && image.asset)) return null;
   return (
     <Img
       asset={image.asset}
       className={className}
-      hotspot={hotspot}
-      crop={crop}
+      hotspot={image.hotspot}
+      crop={image.crop}
       alt={alt}
       title={title}
       width={width}

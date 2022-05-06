@@ -2,19 +2,23 @@ import { graphql } from "gatsby";
 import * as React from "react";
 import { CoverPage } from "@Features/coverPage";
 import { ErrorPage } from "@Ui/ErrorPage/ErrorPage";
-import { GraphqlEdges, Article } from "@Types";
-import { cleanGraphqlArray } from "../lib/helperts";
+import { GraphqlEdges, Ad, Article } from "@Types";
+import { cleanGraphqlArray } from "../lib/helpers";
+import { getCoverPageAds } from "@Features/ad/lib/getAds";
 
 interface IProps {
-  data: { allSanityArticle: GraphqlEdges };
+  data: { allSanityArticle: GraphqlEdges; allSanityAd: GraphqlEdges };
 }
 
 const IndexPage: React.FC<IProps> = ({ data }) => {
-  let articles = cleanGraphqlArray(data.allSanityArticle?.edges) as Article[];
+  let articles = cleanGraphqlArray(data.allSanityArticle) as Article[];
+  let ads = cleanGraphqlArray(data.allSanityAd) as Ad[];
 
   articles = articles.filter(
     (article) => article.title && article.description && article.slug.current
   );
+
+  const { listAds, bannerAds } = getCoverPageAds(ads);
 
   if (!articles) {
     return (
@@ -26,22 +30,37 @@ const IndexPage: React.FC<IProps> = ({ data }) => {
     );
   }
 
-  return <CoverPage articles={articles} />;
+  return (
+    <CoverPage articles={articles} listAds={listAds} bannerAds={bannerAds} />
+  );
 };
 
 export const query = graphql`
   query CoverPageQuery {
-    allSanityArticle {
+    allSanityArticle(sort: { order: DESC, fields: publishedAt }) {
+      edges {
+        node {
+          ...ArticleThumbnail
+        }
+      }
+    }
+    allSanityAd {
       edges {
         node {
           title
-          mainImage {
-            ...ArticleImage
+          location
+          advertiser {
+            name
+            logo {
+              ...Image
+            }
           }
-          description
-          slug {
-            current
+          startDate
+          packageType {
+            duration
+            onCoverPage
           }
+          link
         }
       }
     }
