@@ -15,13 +15,13 @@ export const Nav: React.FC<IProps> = () => {
         <img src={logo} className="h-48 w-auto" />
       </Link>
       <div className="lg:flex lg:space-x-48">
-        <Link type="page" path="jobb" className="">
+        <Link type="page" path="jobber" className="">
           Jobb
         </Link>
-        <Link type="page" path="jobb" className="">
+        <Link type="page" path="butikk" className="">
           Butikk
         </Link>
-        <Link type="page" path="jobb" className="">
+        <Link type="page" path="om" className="">
           Om oss
         </Link>
       </div>

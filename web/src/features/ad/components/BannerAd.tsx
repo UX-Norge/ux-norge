@@ -1,6 +1,7 @@
 import { Ad } from "@Types";
-import { Body1, Heading3 } from "@Ui/Typography";
+import { BlockContent, Body1, Heading3 } from "@Ui/Typography";
 import * as React from "react";
+import PortableText from "react-portable-text";
 
 export const BannerAd: React.FC<
   Pick<Ad, "title" | "text" | "link" | "location" | "advertiser">
@@ -8,7 +9,7 @@ export const BannerAd: React.FC<
   return (
     <a href={link} className="my-48 block rounded bg-accent-2-300 p-48">
       <Heading3>{title}</Heading3>
-      <Body1>{text}</Body1>
+      <BlockContent blocks={text} />
     </a>
   );
 };

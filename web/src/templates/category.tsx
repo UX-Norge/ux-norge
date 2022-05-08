@@ -1,4 +1,4 @@
-import { CoverArticleThumbnail } from "@Features/coverPage/components/CoverArticleThumbnail";
+import { CoverArticleThumbnail } from "@Components/ArticleThumbnail";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Article, Category, GraphqlEdges } from "@Types";
 import { graphql } from "gatsby";

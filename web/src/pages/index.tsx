@@ -19,6 +19,7 @@ const IndexPage: React.FC<IProps> = ({ data }) => {
   );
 
   const { listAds, bannerAds } = getCoverPageAds(ads);
+  console.log(listAds, bannerAds);
 
   if (!articles) {
     return (
@@ -44,27 +45,13 @@ export const query = graphql`
         }
       }
     }
-    allSanityAd {
+    allSanityAd(sort: { fields: startDate, order: DESC }) {
       edges {
         node {
-          title
-          slug {
-            current
-          }
-          location
-          jobType
-          advertiser {
-            name
-            logo {
-              ...Image
-            }
-          }
-          startDate
+          ...AdThumbnail
           packageType {
-            duration
             onCoverPage
           }
-          link
         }
       }
     }

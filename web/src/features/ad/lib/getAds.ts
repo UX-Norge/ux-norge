@@ -1,4 +1,3 @@
-import adPackageType from "@Schemas";
 import { Ad, AdPackageType } from "@Types";
 import { shuffle } from "../../../lib/helpers";
 
@@ -10,7 +9,8 @@ const addDays = (date: Date, days: number) => {
 };
 
 // Has data passed
-const hasExpired = (startDate: string, duration: number) => {
+export const hasExpired = (startDate: string, duration: number) => {
+  if (!startDate || !duration) return false;
   const now = new Date();
   const start = new Date(startDate);
   const expiry = addDays(start, duration);
@@ -19,12 +19,7 @@ const hasExpired = (startDate: string, duration: number) => {
 
 const getActiveAds = (ads: Ad[]) =>
   shuffle(
-    ads.filter(
-      (ad) =>
-        ad.startDate &&
-        ad.packageType?.duration &&
-        !hasExpired(ad.startDate, ad.packageType.duration)
-    )
+    ads.filter((ad) => !hasExpired(ad.startDate, ad.packageType.duration))
   );
 
 export const getActiveAdIds = (ads: Ad[]) => {
@@ -43,10 +38,19 @@ export const getActiveAdIds = (ads: Ad[]) => {
 export const getCoverPageAds = (ads: Ad[]) => {
   if (!ads) return { listAds: [], bannerAds: [] };
 
+  console.log(ads);
+
   const activeAds = getActiveAds(ads);
+  console.log(activeAds);
 
   return {
     listAds: activeAds.filter((ad) => ad.packageType.onCoverPage),
     bannerAds: activeAds.filter((ad) => ad.packageType.onCoverPage),
   };
+};
+
+export const getJobPageAds = (ads: Ad[]): Ad[] => {
+  if (!ads) return [];
+  const activeAds = getActiveAds(ads);
+  return activeAds;
 };

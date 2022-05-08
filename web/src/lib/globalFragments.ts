@@ -23,4 +23,23 @@ export const query = graphql`
       current
     }
   }
+
+  fragment AdThumbnail on SanityAd {
+    title
+    slug {
+      current
+    }
+    description
+    location {
+      name
+    }
+    link
+    startDate
+    packageType {
+      duration
+    }
+    advertiser {
+      name
+    }
+  }
 `;

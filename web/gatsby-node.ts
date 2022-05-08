@@ -1,7 +1,7 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
 import { Ad, Article, Author, Category, GraphqlEdges } from "@Types";
-import { getActiveAdIds } from "./src/features/ad/lib/getAds";
+import { getActiveAdIds, hasExpired } from "./src/features/ad/lib/getAds";
 import { cleanGraphqlArray } from "./src/lib/helpers";
 import { getRoute } from "./src/components/Link";
 
@@ -47,11 +47,13 @@ export const createPages: GatsbyNode["createPages"] = async ({
         edges {
           node {
             _id
+            slug {
+              current
+            }
             startDate
             packageType {
               onCoverPage
               onArticles
-              onAdsPage
               duration
             }
           }
@@ -97,6 +99,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     article: path.resolve(`src/templates/article.tsx`),
     author: path.resolve(`src/templates/author.tsx`),
     category: path.resolve(`src/templates/category.tsx`),
+    ad: path.resolve(`src/templates/ad.tsx`),
   };
 
   const allAds = getActiveAdIds(data.ads);
@@ -150,6 +153,21 @@ export const createPages: GatsbyNode["createPages"] = async ({
           articleSlugs: data.articles
             .filter((article) => article.category?._id === category._id)
             .map((article) => article.slug.current),
+        },
+      });
+    });
+
+  data.ads
+    .filter(
+      (ad) =>
+        ad.slug?.current && !hasExpired(ad.startDate, ad.packageType?.duration)
+    )
+    .forEach((ad) => {
+      createPage("Ad", {
+        path: getRoute("ad", ad.slug.current),
+        component: templates.ad,
+        context: {
+          adSlug: ad.slug.current,
         },
       });
     });

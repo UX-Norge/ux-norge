@@ -1,4 +1,4 @@
-import { CoverArticleThumbnail } from "@Features/coverPage/components/CoverArticleThumbnail";
+import { CoverArticleThumbnail } from "@Components/ArticleThumbnail";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Article, Author, GraphqlEdges } from "@Types";
 import { PageWrapper } from "@Ui/Layout";

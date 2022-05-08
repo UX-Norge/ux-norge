@@ -41,6 +41,8 @@ const ArticlePage: React.FC<IProps> = ({ data, location }) => {
         <ArticleBody
           body={data.sanityArticle.body}
           publishedAt={data.sanityArticle.publishedAt}
+          articleListAds={articleListAds}
+          articleBannerAds={articleBannerAds}
           readTime={10}
         />
         <ArticleFooter
@@ -124,15 +126,14 @@ export const query = graphql`
     articleListAds: allSanityAd(filter: { _id: { in: $articleListAds } }) {
       edges {
         node {
-          title
+          ...AdThumbnail
         }
       }
     }
     articleBannerAds: allSanityAd(filter: { _id: { in: $articleBannerAds } }) {
       edges {
         node {
-          title
-          text: _rawText
+          ...AdThumbnail
         }
       }
     }

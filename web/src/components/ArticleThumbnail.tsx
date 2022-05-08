@@ -33,16 +33,24 @@ export const CoverArticleThumbnail: React.FC<IProps> = ({
           rounded="large"
         />
       )}
-      <Overline className="mt-8">{category.name}</Overline>
-      <Heading2
-        className={classNames({
-          "text-h2": type === "feature",
-          "text-h3": type === "small" || type === "list",
-        })}
-      >
-        {title}
-      </Heading2>
-      <Body1>{description}</Body1>
+      <div className={classNames({ "p-24": type === "feature" })}>
+        <Overline className="mt-8">{category.name}</Overline>
+        <h2
+          className={classNames("font-bold", {
+            "text-h2": type === "feature",
+            "text-h4": type === "small" || type === "list",
+          })}
+        >
+          {title}
+        </h2>
+        <Body1
+          className={classNames({
+            "text-sm": type === "small" || type === "list",
+          })}
+        >
+          {description}
+        </Body1>
+      </div>
     </Link>
   );
 };

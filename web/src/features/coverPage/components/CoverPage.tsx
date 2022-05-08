@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Article, Ad } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
-import { CoverArticleThumbnail } from "./CoverArticleThumbnail";
+import { CoverArticleThumbnail } from "../../../components/ArticleThumbnail";
 import { ListAd } from "@Features/ad/components/ListAd";
 import { BannerAd } from "@Features/ad/components/BannerAd";
 import { classNames } from "@Lib/helpers";
@@ -39,13 +39,13 @@ export const CoverPage: React.FC<IProps> = ({
               type="feature"
             />
           </div>
-          <div className="col-start-1">
+          <div className="col-start-1 space-y-48">
             {get(2, remainingArticles).map((article: Article) => (
               <CoverArticleThumbnail article={article} type="small" />
             ))}
           </div>
 
-          <div>
+          <div className="space-y-24">
             {get(4, remainingListAds).map((ad: Ad) => (
               <ListAd {...ad} />
             ))}

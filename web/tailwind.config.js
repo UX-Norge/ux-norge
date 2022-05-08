@@ -70,7 +70,7 @@ module.exports = {
       h1: ["3rem", "1.4em"], //48px
       h2: ["2rem", "1.4em"], // 32px
       h3: ["1.5rem", "1.4em"], //24px
-      h4: ["1.125", "1.4em"], // 18px
+      h4: ["1.125rem", "1.4em"], // 18px
       base: "1rem",
       sm: "0.875rem",
       xs: "0.75rem",

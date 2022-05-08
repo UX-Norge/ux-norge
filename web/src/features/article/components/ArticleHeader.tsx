@@ -42,7 +42,7 @@ export const ArticleHeader: React.FC<
         <div className="relative flex h-full items-center">
           <div>
             {category && <Overline>{category.name}</Overline>}
-            <Heading2>{title}</Heading2>
+            <Heading1>{title}</Heading1>
             <Body1>{description}</Body1>
             <div className="mt-16 flex space-x-16">
               {authorNames && <Overline>{authorNames}</Overline>}
