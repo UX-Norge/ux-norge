@@ -47,6 +47,7 @@ module.exports = {
         "@Types": path.join(__dirname, "..", "types"),
         "@Ui": path.join(__dirname, "src", "ui"),
         "@Features": path.join(__dirname, "src", "features"),
+        "@Images": path.join(__dirname, "src", "images"),
         "@Lib": path.join(__dirname, "src", "lib"),
         "@Components": path.join(__dirname, "src", "components"),
       },

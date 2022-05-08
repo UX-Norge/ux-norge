@@ -12,7 +12,6 @@ interface IProps {
 const AuthorPage: React.FC<IProps> = ({ data }) => {
   const articles = cleanGraphqlArray(data.allSanityArticle) as Article[];
   const { name, email } = data.sanityAuthor;
-  console.log(articles);
 
   return (
     <PageWrapper>

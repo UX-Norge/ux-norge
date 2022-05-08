@@ -38,7 +38,11 @@ const ArticlePage: React.FC<IProps> = ({ data, location }) => {
       />
       <PageWrapper>
         <ArticleHeader {...data.sanityArticle} />
-        <ArticleBody body={data.sanityArticle.body} />
+        <ArticleBody
+          body={data.sanityArticle.body}
+          publishedAt={data.sanityArticle.publishedAt}
+          readTime={10}
+        />
         <ArticleFooter
           relatedArticles={relatedArticles}
           authors={data.sanityArticle.authors}
@@ -58,6 +62,7 @@ export const query = graphql`
     sanityArticle(slug: { current: { eq: $slug } }) {
       title
       description
+      publishedAt
       mainImage {
         alt
         caption

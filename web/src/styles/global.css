@@ -57,7 +57,7 @@ html {
 
 @layer utilities {
 	.door-open {
-		transform: perspective(100px) rotateY(3deg);
+		transform: perspective(2000px) rotateY(10deg);
 	}
 }
 

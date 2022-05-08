@@ -16,6 +16,9 @@ export const query = graphql`
     }
     description
     isFeature
+    category {
+      name
+    }
     slug {
       current
     }

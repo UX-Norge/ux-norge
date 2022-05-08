@@ -67,11 +67,11 @@ module.exports = {
       full: "9999px",
     },
     fontSize: {
-      h1: ["3.5625rem", "1.4em"],
-      h2: ["2.6875rem", "1.4em"],
-      h3: ["2rem", "1.4em"],
-      h4: ["1.5rem", "1.4em"],
-      base: ["1rem", "1.7em"],
+      h1: ["3rem", "1.4em"], //48px
+      h2: ["2rem", "1.4em"], // 32px
+      h3: ["1.5rem", "1.4em"], //24px
+      h4: ["1.125", "1.4em"], // 18px
+      base: "1rem",
       sm: "0.875rem",
       xs: "0.75rem",
     },
@@ -88,10 +88,15 @@ module.exports = {
         aboveFold: "80vh",
       },
       maxWidth: {
-        page: 900,
+        "page-sm": 900,
+        page: 1400,
+        prose: 700,
+      },
+      lineHeight: {
+        relaxed: 1.8,
       },
       transitionTimingFunction: {
-        "ease-door": "cubic-bezier(.74,0,.39,1.31)",
+        door: "cubic-bezier(.74,0,.39,1.31)",
       },
     },
   },

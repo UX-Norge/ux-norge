@@ -2,7 +2,9 @@ import * as React from "react";
 import { Article, Ad } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
 import { CoverArticleThumbnail } from "./CoverArticleThumbnail";
-import { useEffect } from "react";
+import { ListAd } from "@Features/ad/components/ListAd";
+import { BannerAd } from "@Features/ad/components/BannerAd";
+import { classNames } from "@Lib/helpers";
 
 interface IProps {
   articles: Article[];
@@ -15,67 +17,58 @@ export const CoverPage: React.FC<IProps> = ({
   listAds,
   bannerAds,
 }) => {
-  const scoreLayout = (layout: string[]): number => {
-    return 100;
-  };
+  const remainingBannerAds = bannerAds;
+  const remainingListAds = listAds;
+  const remainingArticles = articles;
 
-  const toGridAreas = (layout: string[][]): string => {
-    return layout.map((row) => '"' + row.join(" ") + '"').join(" ");
-  };
-  // 20 empty items
-  const coverPageGrid = [
-    ["article", "feature", "feature", "adList"],
-    [".", "feature", "feature", "adList"],
-    [".", "feature", "feature", "adList"],
-    [".", "feature", "feature", "adList"],
-    [".", "feature", "feature", "adList"],
-    [".", "feature", "feature", "adList"],
-  ];
-
-  const setLayout = () => {
-    let root = document.documentElement;
-    root.style.setProperty(
-      "--cover-page-desktop-layout",
-      toGridAreas(coverPageGrid)
-    );
-  };
-
-  useEffect(() => {
-    setLayout();
-  }, []);
+  const get = (
+    count: number,
+    source:
+      | typeof remainingBannerAds
+      | typeof remainingListAds
+      | typeof remainingArticles
+  ): any => source.splice(0, count) as any;
 
   return (
     <PageWrapper>
-      <div
-        className="mx-auto grid max-w-screen-2xl space-y-8"
-        style={{ gridTemplateAreas: "var(--cover-page-layout)" }}
-      >
-        {articles.map((article) => (
-          <div
-            className="h-128 w-full bg-gray-200"
-            style={{
-              gridArea: article.isFeature ? "feature" : "article",
-              backgroundColor: article.isFeature
-                ? "var(--color-primary-400)"
-                : "var(--color-neutral-200)",
-            }}
-          ></div>
-        ))}
-        <div
-          className="h-128 w-full bg-accent-3-400"
-          style={{ gridArea: "adList" }}
-        ></div>
-      </div>
-      <div className="mx-auto grid max-w-screen-xl grid-cols-[repeat(auto-fit,minmax(300px,_1fr))] gap-16">
-        {articles.map((article, index) => (
-          <CoverArticleThumbnail {...article} />
-        ))}
-      </div>
-      <ul>
-        {listAds.map((ad, index) => (
-          <li key={index}>{ad.title}</li>
-        ))}
-      </ul>
+      <main className="mx-auto max-w-page">
+        <div className="mt-64 grid grid-flow-col gap-48 lg:grid-cols-4">
+          <div className="col-span-2">
+            <CoverArticleThumbnail
+              article={get(1, remainingArticles)[0]}
+              type="feature"
+            />
+          </div>
+          <div className="col-start-1">
+            {get(2, remainingArticles).map((article: Article) => (
+              <CoverArticleThumbnail article={article} type="small" />
+            ))}
+          </div>
+
+          <div>
+            {get(4, remainingListAds).map((ad: Ad) => (
+              <ListAd {...ad} />
+            ))}
+          </div>
+        </div>
+        <div className="mt-64 grid grid-cols-4 gap-48">
+          {get(4, remainingArticles).map((article: Article) => (
+            <CoverArticleThumbnail article={article} type="small" />
+          ))}
+        </div>
+        <div>
+          <BannerAd {...get(1, bannerAds)[0]} />
+        </div>
+        <div className="grid grid-cols-4 gap-48">
+          {get(5, remainingArticles).map((article: Article, index: number) => (
+            <CoverArticleThumbnail
+              article={article}
+              type={index === 0 ? "feature" : "small"}
+              className={classNames({ "col-span-2 row-span-2": index === 0 })}
+            />
+          ))}
+        </div>
+      </main>
     </PageWrapper>
   );
 };

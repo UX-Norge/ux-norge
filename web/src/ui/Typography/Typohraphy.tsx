@@ -53,7 +53,10 @@ export const Heading4: React.FC<IProps> = ({
 };
 export const Body1: React.FC<IProps> = ({ children, className, ...props }) => {
   return (
-    <p className={classNames("text-base", className)} {...props}>
+    <p
+      className={classNames("text-base leading-relaxed", className)}
+      {...props}
+    >
       {children}
     </p>
   );

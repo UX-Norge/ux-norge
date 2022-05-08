@@ -48,7 +48,11 @@ export const query = graphql`
       edges {
         node {
           title
+          slug {
+            current
+          }
           location
+          jobType
           advertiser {
             name
             logo {

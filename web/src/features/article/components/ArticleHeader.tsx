@@ -33,8 +33,12 @@ export const ArticleHeader: React.FC<
   authorCompany = authorCompany === "UX Norge" ? undefined : authorCompany;
 
   return (
-    <header className="relative h-aboveFold border-b-2 border-gray-900 pt-64">
-      <div className={classNames("grid h-full grid-cols-[4fr_3fr] px-[10%]")}>
+    <header className="relative h-aboveFold border-b-2 border-gray-900 bg-primary-100 pt-64">
+      <div
+        className={classNames(
+          "mx-auto grid h-full max-w-page grid-cols-[4fr_3fr] gap-48 px-[10%]"
+        )}
+      >
         <div className="relative flex h-full items-center">
           <div>
             {category && <Overline>{category.name}</Overline>}
@@ -46,11 +50,11 @@ export const ArticleHeader: React.FC<
             </div>
           </div>
           <Door
-            classNameOuter="bottom-0 left-[-20%] h-[32%] w-[15%]"
+            classNameOuter="absolute bottom-0 left-[-20%] h-[32%] w-[15%]"
             size="large"
           />
           <Door
-            classNameOuter="bottom-0 left-[-3%] h-[25%] w-[10%]"
+            classNameOuter="absolute bottom-0 left-[-3%] h-[25%] w-[10%]"
             size="large"
           />
         </div>
@@ -65,7 +69,7 @@ export const ArticleHeader: React.FC<
             />
           )}
           <Door
-            classNameOuter="bottom-0 left-[70%] h-[50%] w-[50%]"
+            classNameOuter="absolute bottom-0 left-[70%] h-[50%] w-[50%]"
             size="large"
             rounded="full"
           />

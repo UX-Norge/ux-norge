@@ -9,8 +9,6 @@ interface IProps {
 }
 
 export const ArticleImage: React.FC<IProps> = ({ image, alt, caption }) => {
-  console.log(image);
-
   if (!image) return null;
 
   return (

@@ -14,7 +14,7 @@ export const ArticleFooter: React.FC<IProps> = ({
 }) => {
   return (
     <div className="bg-primary-100 p-24 lg:p-64">
-      <div className="mx-auto max-w-page">
+      <div className="mx-auto max-w-page-sm">
         {authors.map((author) => (
           <AuthorThumbnail {...author} />
         ))}
