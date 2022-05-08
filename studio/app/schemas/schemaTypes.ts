@@ -5,5 +5,6 @@ export { Category } from "./documents/category";
 export { Author } from "./documents/author";
 export { AdPackageType } from "./documents/ad/adPackageType";
 export { Ad } from "./documents/ad/ad";
+export { AdLocation } from "./documents/ad/adLocation";
 export { Document } from "./documents/doc";
 export { SiteSettings } from "./documents/siteSettings";

@@ -1,4 +1,5 @@
 import ad from "./ad/ad";
+import adLocation from "./ad/adLocation";
 import adPackageType from "./ad/adPackageType";
 import article from "./article";
 import author from "./author";
@@ -22,4 +23,5 @@ export default [
   socialMedia,
   newsletter,
   coverPage,
+  adLocation,
 ];

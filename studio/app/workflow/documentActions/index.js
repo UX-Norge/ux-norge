@@ -10,6 +10,6 @@ const CustomAction = () => ({
 });
 
 export default function resolveDocumentActions(props) {
-  const actions = [...defaultResolve(props), CustomAction];
+  const actions = [...defaultResolve(props)];
   return addActions(props, actions);
 }

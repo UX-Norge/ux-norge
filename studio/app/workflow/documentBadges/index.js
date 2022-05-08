@@ -10,6 +10,6 @@ const CustomBadge = () => {
 };
 
 export default function resolveDocumentBadges(props) {
-  const badges = [...defaultResolve(props), CustomBadge];
+  const badges = [...defaultResolve(props)];
   return addBadge(props, badges);
 }

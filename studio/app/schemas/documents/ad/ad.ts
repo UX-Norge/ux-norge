@@ -4,18 +4,25 @@ import {
   PortableText,
   SanityDocument,
   SanityImage,
+  SanitySlug,
+  AdLocation,
 } from "@Types";
 
 import showAdDuration from "../../../components/input/showAdDuration";
 
 export interface Ad extends SanityDocument {
   title: string;
-  text: PortableText;
+  slug: SanitySlug;
+  description: string;
+  body: PortableText;
   image: SanityImage;
   jobType: "fulltid" | "deltid" | "sommerjobb";
-  location: "string";
+  location: AdLocation[];
   link: string;
   startDate: string;
+  contactName: string;
+  contactPhone: string;
+  contactEmail: string;
   packageType: AdPackageType;
   advertiser: Company;
 }
@@ -27,18 +34,36 @@ export default {
   groups: [
     { name: "content", title: "Annonseinnhold" },
     { name: "settings", title: "Annonseinnstillinger" },
+    { name: "contactPerson", title: "Kontaktperson" },
   ],
   fields: [
     {
       name: "title",
-      title: "title",
+      title: "Tittel",
       type: "string",
       group: "content",
+      validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "text",
-      title: "text",
-      type: "simpleBlockContent",
+      name: "slug",
+      title: "slug",
+      type: "slug",
+      options: {
+        source: "title",
+      },
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "description",
+      title: "Ingress",
+      type: "text",
+      group: "content",
+      validation: (Rule: any) => Rule.required().max(200),
+    },
+    {
+      name: "body",
+      title: "Innhold",
+      type: "blockContent",
       group: "content",
     },
     {
@@ -56,22 +81,14 @@ export default {
         list: ["fulltid", "deltid", "sommerjobb"],
       },
       group: "content",
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "location",
-      type: "autocomplete",
+      type: "array",
       title: "Sted",
-      options: {
-        autocompleteFieldPath: "location",
-        options: [{ value: "Trondheim" }, { value: "Oslo" }],
-        groq: {
-          query: '*[_type == $type] { "value": location }',
-          params: {
-            type: "ad",
-          },
-          transform: (values: any) => values,
-        },
-      },
+      of: [{ type: "reference", to: [{ type: "adLocation" }] }],
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "link",
@@ -87,6 +104,24 @@ export default {
       group: "settings",
     },
     {
+      name: "contactName",
+      title: "Navn (kontaktperson)",
+      type: "string",
+      group: "contactPerson",
+    },
+    {
+      name: "contactPhone",
+      title: "Mobil (kontaktperson)",
+      type: "string",
+      group: "contactPerson",
+    },
+    {
+      name: "contactEmail",
+      title: "E-post (kontaktperson)",
+      type: "string",
+      group: "contactPerson",
+    },
+    {
       name: "endDate",
       type: "string",
       title: "Sluttdato",
@@ -100,6 +135,7 @@ export default {
       type: "reference",
       to: [{ type: "adPackageType" }],
       group: "settings",
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "advertiser",
@@ -107,6 +143,7 @@ export default {
       type: "reference",
       to: [{ type: "company" }],
       group: "settings",
+      validation: (Rule: any) => Rule.required(),
     },
   ],
   preview: {
