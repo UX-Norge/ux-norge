@@ -19,7 +19,7 @@ const CategoryPage: React.FC<IProps> = ({ data }) => {
       {name}
       <main className="mx-auto grid max-w-page grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]">
         {articles.map((article) => (
-          <CoverArticleThumbnail {...article} />
+          <CoverArticleThumbnail article={article} type="list" />
         ))}
       </main>
     </div>

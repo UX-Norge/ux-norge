@@ -105,7 +105,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   data.articles
     .filter((article) => article.slug?.current)
-    .forEach((article) => {
+    .forEach((article, index) => {
       createPage("Article", {
         path: getRoute("article", article.slug.current),
         component: templates.article,
@@ -114,7 +114,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
           articleListAds: allAds?.articleListAds,
           categoryId: article.category?._id,
         },
-        defer: true,
+        defer: index > 20,
       });
     });
 

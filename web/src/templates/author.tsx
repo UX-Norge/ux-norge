@@ -11,14 +11,14 @@ interface IProps {
 
 const AuthorPage: React.FC<IProps> = ({ data }) => {
   const articles = cleanGraphqlArray(data.allSanityArticle) as Article[];
-  const { name, email } = data.sanityAuthor;
+  const author = data.sanityAuthor;
 
   return (
     <PageWrapper>
-      <header>{name}</header>
+      <header>{author.name}</header>
       <main className="mx-auto grid max-w-page grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]">
         {articles.map((article) => (
-          <CoverArticleThumbnail {...article} />
+          <CoverArticleThumbnail article={article} type="small" />
         ))}
       </main>
     </PageWrapper>
