@@ -1,16 +1,18 @@
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import * as React from "react";
 import { CoverPage } from "@Features/coverPage";
 import { ErrorPage } from "@Ui/ErrorPage/ErrorPage";
 import { GraphqlEdges, Ad, Article } from "@Types";
 import { cleanGraphqlArray } from "../lib/helpers";
 import { getCoverPageAds } from "@Features/ad/lib/getAds";
+import { Seo } from "@Components/Seo";
 
-interface IProps {
-  data: { allSanityArticle: GraphqlEdges; allSanityAd: GraphqlEdges };
+interface DataProps {
+  allSanityArticle: GraphqlEdges;
+  allSanityAd: GraphqlEdges;
 }
 
-const IndexPage: React.FC<IProps> = ({ data }) => {
+const IndexPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   let articles = cleanGraphqlArray(data.allSanityArticle) as Article[];
   let ads = cleanGraphqlArray(data.allSanityAd) as Ad[];
 
@@ -32,7 +34,10 @@ const IndexPage: React.FC<IProps> = ({ data }) => {
   }
 
   return (
-    <CoverPage articles={articles} listAds={listAds} bannerAds={bannerAds} />
+    <>
+      <Seo title="UX norge – Et sted for landets" location={location} />
+      <CoverPage articles={articles} listAds={listAds} bannerAds={bannerAds} />
+    </>
   );
 };
 

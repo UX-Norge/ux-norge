@@ -3,13 +3,14 @@ import { graphql, useStaticQuery } from "gatsby";
 import { Helmet } from "react-helmet";
 import { SanityImage, SiteSettings } from "@Types";
 import { imageUrl } from "gatsby-plugin-sanity-image";
+import { PageProps } from "gatsby";
 
 interface IProps {
   title: string;
   description?: string;
   image?: SanityImage;
   imageAlt?: string;
-  path: string;
+  location: PageProps["location"];
   type?: "article" | null;
 }
 
@@ -18,7 +19,7 @@ export const Seo: React.FC<IProps> = ({
   description,
   image,
   imageAlt,
-  path,
+  location,
   type,
 }) => {
   const { sanitySiteSettings: seo } = useStaticQuery<{
@@ -28,6 +29,7 @@ export const Seo: React.FC<IProps> = ({
       sanitySiteSettings {
         title
         description
+        titleTemplate
       }
     }
   `);
@@ -35,7 +37,10 @@ export const Seo: React.FC<IProps> = ({
   description = description || seo.description;
 
   return (
-    <Helmet title={title} titleTemplate={seo.titleTemplate}>
+    <Helmet
+      title={title}
+      titleTemplate={location.pathname === "/" ? "" : seo.titleTemplate}
+    >
       {title && <meta property="og:title" content={title} />}
       {title && <meta property="twitter:title" content={title} />}
 
@@ -58,7 +63,7 @@ export const Seo: React.FC<IProps> = ({
       {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
       <meta name="twitter:card" content="summary" />
 
-      {path && <meta property="og:url" content={path} />}
+      {location && <meta property="og:url" content={location.href} />}
       {type === "article" && <meta property="og:type" content="article" />}
     </Helmet>
   );

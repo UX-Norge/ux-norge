@@ -12,8 +12,8 @@ export const ListAd: React.FC<
   if (!advertiser || !location) return null;
   return (
     <Link type="ad" path={slug.current} className="block">
-      <Heading4 className="font-mono">{title}</Heading4>
-      <Overline className="my-4 text-gray-900">
+      <Heading4 className="">{title}</Heading4>
+      <Overline className="my-4 text-green-300">
         {advertiser.name} • {location.map(({ name }) => name).join(", ")}
       </Overline>
       <Body2 className="text-gray-600">{description}</Body2>

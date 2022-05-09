@@ -51,6 +51,9 @@ export const CoverPage: React.FC<IProps> = ({
             ))}
           </div>
         </div>
+        <div>
+          <BannerAd {...get(1, bannerAds)[0]} />
+        </div>
         <div className="mt-64 grid grid-cols-4 gap-48">
           {get(4, remainingArticles).map((article: Article) => (
             <CoverArticleThumbnail article={article} type="small" />

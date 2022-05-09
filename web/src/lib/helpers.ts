@@ -34,3 +34,8 @@ export const printDate = (date: string): string => {
     day: "numeric",
   });
 };
+
+export const flatten = (arr: any[]): any[] =>
+  arr.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []);
+
+export const removeDuplicates = (arr: any[]): any[] => [...new Set(arr)];

@@ -34,6 +34,7 @@ export const query = graphql`
       name
     }
     link
+    jobType
     startDate
     packageType {
       duration

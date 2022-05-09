@@ -21,27 +21,31 @@ module.exports = {
         400: "var(--color-primary-400)",
         500: "var(--color-primary-500)",
       },
-      "accent-2": {
-        100: "var(--color-accent-2-100)",
-        300: "var(--color-accent-2-300)",
-        600: "var(--color-accent-2-600)",
+      green: {
+        900: "var(--color-green-900)",
+        600: "var(--color-green-600)",
+        500: "var(--color-green-500)",
+        300: "var(--color-green-300)",
+        100: "var(--color-green-100)",
       },
-      "accent-3": {
-        400: "var(--color-accent-3-400)",
-        500: "var(--color-accent-3-500)",
+      orange: {
+        500: "var(--color-orange-500)",
+        400: "var(--color-orange-400)",
       },
-      "accent-4": {
-        50: "var(--color-accent-4-50)",
-        100: "var(--color-accent-4-100)",
-        200: "var(--color-accent-4-200)",
-        500: "var(--color-accent-4-500)",
+      blue: {
+        900: "var(--color-blue-900)",
+        700: "var(--color-blue-700)",
+        600: "var(--color-blue-600)",
+        500: "var(--color-blue-500)",
+        200: "var(--color-blue-200)",
+        100: "var(--color-blue-100)",
+        50: "var(--color-blue-50)",
       },
-      "accent-5": {
-        50: "var(--color-accent-5-50)",
-        100: "var(--color-accent-5-100)",
-        200: "var(--color-accent-5-200)",
-        500: "var(--color-accent-5-500)",
-        600: "var(--color-accent-5-600)",
+      yellow: {
+        500: "var(--color-yellow-500)",
+        200: "var(--color-yellow-200)",
+        100: "var(--color-yellow-100)",
+        50: "var(--color-yellow-50)",
       },
     },
     spacing: {

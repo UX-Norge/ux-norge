@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import { Ad, Article, GraphqlEdges } from "@Types";
 import { ArticleBody, ArticleFooter } from "@Features/article";
 import { PageWrapper } from "@Ui/Layout";
@@ -8,17 +8,14 @@ import { ArticleHeader } from "@Features/article/components/ArticleHeader";
 import { getRoute } from "@Components/Link";
 import { Seo } from "../components/Seo";
 
-interface IProps {
-  data: {
-    sanityArticle: Article;
-    articleListAds: GraphqlEdges;
-    articleBannerAds: GraphqlEdges;
-    relatedArticles: GraphqlEdges;
-  };
-  location: any;
+interface DataProps {
+  sanityArticle: Article;
+  articleListAds: GraphqlEdges;
+  articleBannerAds: GraphqlEdges;
+  relatedArticles: GraphqlEdges;
 }
 
-const ArticlePage: React.FC<IProps> = ({ data, location }) => {
+const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const articleListAds = shuffle(
     cleanGraphqlArray(data.articleListAds) as Ad[]
   );
@@ -33,7 +30,7 @@ const ArticlePage: React.FC<IProps> = ({ data, location }) => {
         description={data.sanityArticle.description}
         image={data.sanityArticle.mainImage?.image}
         imageAlt={data.sanityArticle.mainImage?.alt}
-        path={location.href}
+        location={location}
         type="article"
       />
       <PageWrapper>

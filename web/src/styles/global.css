@@ -20,23 +20,27 @@
 	--color-primary-400: #9786ff;
 	--color-primary-500: #7061ea;
   
-	--color-accent-2-600: #107349;
-	--color-accent-2-300: #5bc49a;
-	--color-accent-2-100: #daf9d5;
+	--color-green-900: #062008;
+	--color-green-600: #107349;
+	--color-green-500: #02865f;
+	--color-green-300: #5bc49a;
+	--color-green-100: #daf9d5;
 
-	--color-accent-3-400: #f66f33;
-	--color-accent-3-500: #d94f0d;
- 
-	--color-accent-4-500: #a36100;
-	--color-accent-4-200: #f1c048;
-	--color-accent-4-100: #ffe0a8;
-	--color-accent-4-50: #fff7ea;
+	--color-orange-500: #d94f0d;
+	--color-orange-400: #f66f33;
 
-	--color-accent-5-600: #0066b8;
-	--color-accent-5-500: #3080d7;
-	--color-accent-5-200: #b2cfff;
-	--color-accent-5-100: #d4e3ff;
-	--color-accent-5-50: #f2f7ff;
+	--color-blue-900: #001c3b;
+	--color-blue-700: #005291;
+	--color-blue-600: #0066b8;
+	--color-blue-500: #3080d7;
+	--color-blue-200: #b2cfff;
+	--color-blue-100: #d4e3ff;
+	--color-blue-50: #f2f7ff;
+	
+	--color-yellow-500: #a36100;
+	--color-yellow-200: #f1c048;
+	--color-yellow-100: #ffe0a8;
+	--color-yellow-50: #fff9f0;
 }
 
 html {

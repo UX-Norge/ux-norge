@@ -1,20 +1,23 @@
 import { CoverArticleThumbnail } from "@Components/ArticleThumbnail";
+import { Seo } from "@Components/Seo";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Article, Author, GraphqlEdges } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
-import { graphql } from "gatsby";
+import { graphql, Page, PageProps } from "gatsby";
 import * as React from "react";
 
-interface IProps {
-  data: { allSanityArticle: GraphqlEdges; sanityAuthor: Author };
+interface DataProps {
+  allSanityArticle: GraphqlEdges;
+  sanityAuthor: Author;
 }
 
-const AuthorPage: React.FC<IProps> = ({ data }) => {
+const AuthorPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const articles = cleanGraphqlArray(data.allSanityArticle) as Article[];
   const author = data.sanityAuthor;
 
   return (
     <PageWrapper>
+      <Seo title={author.name} description={author.bio} location={location} />
       <header>{author.name}</header>
       <main className="mx-auto grid max-w-page grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]">
         {articles.map((article) => (
