@@ -1,7 +1,7 @@
 import { SanityDocument, SanitySlug } from "@Types";
 
 export interface Category extends SanityDocument {
-  name: String;
+  name: string;
   slug: SanitySlug;
 }
 
