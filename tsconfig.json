@@ -37,7 +37,10 @@
       //Update this path as necessary
       "@Ui/*": ["./web/src/ui/*"],
       "@Types": ["./types"],
-      "@Features/*": ["./web/src/features/*"]
+      "@Features/*": ["./web/src/features/*"],
+      "@Images/*": ["./web/src/images/*"],
+      "@Components/*": ["./web/src/components/*"],
+      "@Lib/*": ["./web/src/lib/*"]
     },
     // "paths": {},
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
