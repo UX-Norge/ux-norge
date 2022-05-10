@@ -38,10 +38,7 @@ export const getActiveAdIds = (ads: Ad[]) => {
 export const getCoverPageAds = (ads: Ad[]) => {
   if (!ads) return { listAds: [], bannerAds: [] };
 
-  console.log(ads);
-
   const activeAds = getActiveAds(ads);
-  console.log(activeAds);
 
   return {
     listAds: activeAds.filter((ad) => ad.packageType.onCoverPage),

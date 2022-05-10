@@ -34,7 +34,7 @@ export const AdPage: React.FC<PageProps<DataProps>> = ({
           {image && (
             <Image className="mb-24" image={image} alt={title} width={1000} />
           )}
-          <Overline>
+          <Overline className="text-green-500">
             {advertiser.name} • {adLocation.map(({ name }) => name).join(", ")}
           </Overline>
           <Heading1>{title}</Heading1>

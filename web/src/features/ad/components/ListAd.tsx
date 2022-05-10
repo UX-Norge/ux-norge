@@ -13,7 +13,7 @@ export const ListAd: React.FC<
   return (
     <Link type="ad" path={slug.current} className="block">
       <Heading4 className="">{title}</Heading4>
-      <Overline className="my-4 text-green-300">
+      <Overline className="my-4 text-green-500">
         {advertiser.name} • {location.map(({ name }) => name).join(", ")}
       </Overline>
       <Body2 className="text-gray-600">{description}</Body2>

@@ -2,22 +2,30 @@ import * as React from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { ReactNode } from "react";
 
-type routeTypes = "article" | "author" | "ad" | "category" | "page";
+export type RouteTypes =
+  | "article"
+  | "archive"
+  | "author"
+  | "ad"
+  | "category"
+  | "page"
+  | "home";
 
-export const getRoute = (type: routeTypes, path: string): string => {
+export const getRoute = (type: RouteTypes, path: string): string => {
   return (
     {
-      article: `/${path}`,
+      home: "/",
+      article: `/${path}/`,
       page: `/${path}`,
-      author: `/forfatter/${path}`,
-      ad: `/stillignsannonse/${path}`,
-      category: `/kategori/${path}`,
+      author: `/forfatter/${path}/`,
+      ad: `/stillignsannonse/${path}/`,
+      category: `/kategori/${path}/`,
     }[type] ?? path
   );
 };
 
 export const Link: React.FC<{
-  type: routeTypes;
+  type: RouteTypes;
   path: string;
   children: ReactNode;
   className?: string;

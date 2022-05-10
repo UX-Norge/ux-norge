@@ -81,6 +81,9 @@ export const query = graphql`
       }
       category {
         name
+        slug {
+          current
+        }
       }
       authors {
         name

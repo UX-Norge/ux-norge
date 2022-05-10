@@ -4,6 +4,7 @@ import { Body1, Heading1, Heading2, Overline } from "@Ui/Typography";
 import * as React from "react";
 import { classNames } from "@Lib/helpers";
 import { Door } from "@Ui/Door";
+import { Link } from "@Components/Link";
 
 type MainImageWithDimensions = ArticleImage & {
   image: {
@@ -41,7 +42,11 @@ export const ArticleHeader: React.FC<
       >
         <div className="relative flex h-full items-center">
           <div>
-            {category && <Overline>{category.name}</Overline>}
+            {category && (
+              <Link path={category.slug.current} type="category">
+                <Overline>{category.name}</Overline>
+              </Link>
+            )}
             <Heading1>{title}</Heading1>
             <Body1>{description}</Body1>
             <div className="mt-16 flex space-x-16">

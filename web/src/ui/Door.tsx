@@ -38,7 +38,7 @@ export const Door: React.FC<IProps> = ({
   return (
     <div
       className={classNames(
-        "group h-128 w-64 rounded-t-full bg-gray-900",
+        "bg-primary-900 group h-128 rounded-t-full",
         {
           "transition-transform": animate,
           "z-50": zIndex === "front",

@@ -12,7 +12,7 @@ interface IProps {
   className?: string;
 }
 
-export const CoverArticleThumbnail: React.FC<IProps> = ({
+export const ArticleThumbnail: React.FC<IProps> = ({
   article: { title, mainImage, description, slug, category },
   type,
   className,
@@ -37,19 +37,19 @@ export const CoverArticleThumbnail: React.FC<IProps> = ({
         <Overline className="mt-8">{category.name}</Overline>
         <h2
           className={classNames("font-bold", {
-            "text-h2": type === "feature",
-            "text-h4": type === "small" || type === "list",
+            "text-h1": type === "feature",
+            "text-h3": type === "small" || type === "list",
           })}
         >
           {title}
         </h2>
-        <Body1
-          className={classNames({
+        <p
+          className={classNames("leading-relaxed", {
             "text-sm": type === "small" || type === "list",
           })}
         >
           {description}
-        </Body1>
+        </p>
       </div>
     </Link>
   );

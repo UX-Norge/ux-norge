@@ -1,4 +1,6 @@
-import { CoverArticleThumbnail } from "@Components/ArticleThumbnail";
+import { ArticleThumbnail } from "@Components/ArticleThumbnail";
+import { Link } from "@Components/Link";
+import { PaginationRow } from "@Components/PaginationRow";
 import { Seo } from "@Components/Seo";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Article, Category, GraphqlEdges } from "@Types";
@@ -11,33 +13,46 @@ interface DataProps {
   sanityCategory: Category;
 }
 
-const CategoryPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
+const CategoryPage: React.FC<PageProps<DataProps>> = ({
+  data,
+  location,
+  pageContext: { currentPage, numPages },
+}) => {
   const articles = cleanGraphqlArray(data.allSanityArticle) as Article[];
-  const { name } = data.sanityCategory;
+  const { name, slug } = data.sanityCategory;
+
   return (
     <PageWrapper>
       <Seo title={name} location={location} />
-      {name}
-      <main className="mx-auto grid max-w-page grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]">
+      {name} {currentPage}
+      <div className="mx-auto grid max-w-page grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]">
         {articles.map((article) => (
-          <CoverArticleThumbnail article={article} type="list" />
+          <ArticleThumbnail article={article} type="list" />
         ))}
-      </main>
+      </div>
+      <PaginationRow numPages={numPages} type="category" slug={slug} />
     </PageWrapper>
   );
 };
 
 export const query = graphql`
-  query CategoryQuery($articleSlugs: [String], $categorySlug: String) {
-    allSanityArticle(filter: { slug: { current: { in: $articleSlugs } } }) {
+  query CategoryQuery($categorySlug: String, $limit: Int, $skip: Int) {
+    sanityCategory(slug: { current: { eq: $categorySlug } }) {
+      name
+      slug {
+        current
+      }
+    }
+    allSanityArticle(
+      filter: { category: { slug: { current: { eq: $categorySlug } } } }
+      limit: $limit
+      skip: $skip
+    ) {
       edges {
         node {
           ...ArticleThumbnail
         }
       }
-    }
-    sanityCategory(slug: { current: { eq: $categorySlug } }) {
-      name
     }
   }
 `;

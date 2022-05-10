@@ -5,6 +5,7 @@ import { Ad, PortableText } from "@Types";
 import { ArticleQuote } from "./ArticleQuote";
 import { printDate } from "@Lib/helpers";
 import { ListAd } from "@Features/ad/components/ListAd";
+import { blockContentToPlainText } from "react-portable-text";
 
 interface IProps {
   body: PortableText;
@@ -19,14 +20,15 @@ export const ArticleBody: React.FC<IProps> = ({
   publishedAt,
   articleListAds,
   articleBannerAds,
-  readTime,
 }) => {
   const articleSerializers = {
     articleImage: ArticleImage,
     relatedArticle: RelatedArticleInline,
     blockquote: ArticleQuote,
   };
-  console.log(articleListAds);
+  const readTime = Math.round(
+    blockContentToPlainText(body).split(" ").length / 200
+  );
 
   return (
     <main className="relative mx-auto max-w-page-sm">

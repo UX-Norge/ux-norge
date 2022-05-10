@@ -4,6 +4,7 @@ import { Ad, Article, Author, Category, GraphqlEdges } from "@Types";
 import { getActiveAdIds, hasExpired } from "./src/features/ad/lib/getAds";
 import { cleanGraphqlArray } from "./src/lib/helpers";
 import { getRoute } from "./src/components/Link";
+import { createPaginatedPages } from "./src/pageBuilding/pagination";
 
 type SanityData = {
   allSanityArticle: GraphqlEdges;
@@ -100,6 +101,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     author: path.resolve(`src/templates/author.tsx`),
     category: path.resolve(`src/templates/category.tsx`),
     ad: path.resolve(`src/templates/ad.tsx`),
+    articleArchive: path.resolve(`src/templates/articleArchive.tsx`),
   };
 
   const allAds = getActiveAdIds(data.ads);
@@ -121,39 +123,49 @@ export const createPages: GatsbyNode["createPages"] = async ({
       });
     });
 
+  createPaginatedPages("Article Archive", {
+    routeType: "archive",
+    slug: { _type: "slug", current: "arkiv" },
+    component: templates.articleArchive,
+    postsPerPage: 10,
+    postsCount: data.articles.length,
+    createPage,
+  });
+
   data.authors
     .filter((author) => author.slug?.current)
     .forEach((author) => {
-      createPage("Author", {
-        path: getRoute("author", author.slug.current),
+      createPaginatedPages("Author", {
+        routeType: "author",
+        slug: author.slug,
         component: templates.author,
-        context: {
+        postsPerPage: 10,
+        postsCount: data.articles.filter((article) =>
+          article.authors.some(({ _id: authorId }) => authorId === author._id)
+        ).length,
+        customContext: {
           authorSlug: author.slug.current,
           // Filter all the articles that have this author as an author
-          articleSlugs: data.articles
-            .filter((article) =>
-              article.authors.some(
-                ({ _id: authorId }) => authorId === author._id
-              )
-            )
-            .map((article) => article.slug.current),
         },
+        createPage,
       });
     });
 
   data.categories
     .filter((category) => category.slug?.current)
     .forEach((category) => {
-      createPage("Category", {
-        path: getRoute("category", category.slug.current),
+      createPaginatedPages("Category", {
+        routeType: "category",
+        slug: category.slug,
+        postsPerPage: 10,
+        postsCount: data.articles.filter(
+          (article) => article.category?._id === category._id
+        ).length,
         component: templates.category,
-        context: {
+        customContext: {
           categorySlug: category.slug.current,
-          // Filter all the articles that have this category as a category
-          articleSlugs: data.articles
-            .filter((article) => article.category?._id === category._id)
-            .map((article) => article.slug.current),
         },
+        createPage,
       });
     });
 
