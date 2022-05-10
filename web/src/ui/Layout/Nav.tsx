@@ -6,7 +6,7 @@ interface IProps {}
 
 export const Nav: React.FC<IProps> = () => {
   return (
-    <nav className="flex items-center justify-between py-16 px-48">
+    <nav className="flex items-center justify-between py-16 px-24 lg:px-48">
       <Link
         type="home"
         path=""

@@ -17,7 +17,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   let ads = cleanGraphqlArray(data.allSanityAd) as Ad[];
 
   articles = articles.filter(
-    (article) => article.title && article.description && article.slug.current
+    (article) => article.title && article.description && article.slug?.current
   );
 
   const { listAds, bannerAds } = getCoverPageAds(ads);

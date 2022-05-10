@@ -1,4 +1,5 @@
 import { Seo } from "@Components/Seo";
+import { AdThumbnail } from "@Features/ad/components/AdThumbnail";
 import { FilterRow } from "@Features/ad/components/FilterRow";
 import { ListAd } from "@Features/ad/components/ListAd";
 import { getJobPageAds } from "@Features/ad/lib/getAds";
@@ -12,17 +13,25 @@ import * as React from "react";
 interface DataProps {
   allSanityAd: GraphqlEdges;
 }
+export const ALL_STRING = "Alle";
 
 export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   let ads = cleanGraphqlArray(data.allSanityAd) as Ad[];
-  const jobTypes = removeDuplicates(ads.map((ad) => ad.jobType));
+  const jobTypes = removeDuplicates(
+    ads.map((ad) => ad.jobType),
+    true
+  );
   const locations = removeDuplicates(
-    flatten(ads.map((ad) => ad.location.map((location) => location.name)))
+    flatten(ads.map((ad) => ad.location.map((location) => location.name))),
+    true
   ) as string[];
-  const [selectedJobTypes, setSelectedJobTypes] =
-    React.useState<string[]>(jobTypes);
-  const [selectedLocations, setSelectedLocations] =
-    React.useState<string[]>(locations);
+  const [selectedJobTypes, setSelectedJobTypes] = React.useState<string[]>([
+    ALL_STRING,
+  ]);
+  const [selectedLocations, setSelectedLocations] = React.useState<string[]>([
+    ALL_STRING,
+  ]);
+
   const [filteredAds, setFilteredAds] = React.useState<Ad[]>(
     getJobPageAds(ads)
   );
@@ -30,10 +39,13 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   React.useEffect(() => {
     setFilteredAds(
       ads.filter((ad) => {
-        return (
-          ad.location.some(({ name }) => selectedLocations.includes(name)) &&
-          selectedJobTypes.includes(ad.jobType)
-        );
+        const jobTypeMatch = selectedJobTypes.includes(ALL_STRING)
+          ? true
+          : selectedJobTypes.includes(ad.jobType);
+        const locationMatch = selectedLocations.includes(ALL_STRING)
+          ? true
+          : ad.location.some(({ name }) => selectedLocations.includes(name));
+        return jobTypeMatch && locationMatch;
       })
     );
   }, [selectedJobTypes, selectedLocations]);
@@ -41,23 +53,28 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   return (
     <PageWrapper>
       <Seo title="Jobber" location={location} />
-      <div className="mx-auto max-w-xl space-y-48">
-        <Heading1>Jobber</Heading1>
+      <div className="mx-auto max-w-xl space-y-24">
         <div>
           <FilterRow
-            options={jobTypes}
-            selected={selectedJobTypes}
-            setSelected={setSelectedJobTypes}
-          />
-          <FilterRow
+            label="Område"
+            allString={ALL_STRING}
             options={locations}
             selected={selectedLocations}
             setSelected={setSelectedLocations}
           />
+          <FilterRow
+            label="Stillingstype"
+            allString={ALL_STRING}
+            options={jobTypes}
+            selected={selectedJobTypes}
+            setSelected={setSelectedJobTypes}
+          />
         </div>
-        {filteredAds.map((ad) => (
-          <ListAd {...ad} />
-        ))}
+        <div className="space-y-48 p-24">
+          {filteredAds.map((ad) => (
+            <AdThumbnail ad={ad} />
+          ))}
+        </div>
       </div>
     </PageWrapper>
   );

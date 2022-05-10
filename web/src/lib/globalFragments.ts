@@ -36,11 +36,15 @@ export const query = graphql`
     link
     jobType
     startDate
+    deadline
     packageType {
       duration
     }
     advertiser {
       name
+      logo {
+        ...Image
+      }
     }
   }
 `;

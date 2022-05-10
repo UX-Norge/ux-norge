@@ -35,7 +35,28 @@ export const printDate = (date: string): string => {
   });
 };
 
+// Calculate days from now
+export const daysLeft = (deadline: string): number => {
+  const now = new Date();
+  const then = new Date(deadline);
+  const diff = then.getTime() - now.getTime();
+  return Math.ceil(diff / (1000 * 3600 * 24));
+};
+
 export const flatten = (arr: any[]): any[] =>
   arr.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []);
 
-export const removeDuplicates = (arr: any[]): any[] => [...new Set(arr)];
+export const removeDuplicates = (
+  arr: any[],
+  sortByOccurences: boolean
+): any[] => {
+  if (sortByOccurences) {
+    arr = arr.sort((a, b) => {
+      return (
+        arr.filter((item) => item === b).length -
+        arr.filter((item) => item === a).length
+      );
+    });
+  }
+  return [...new Set(arr)];
+};
