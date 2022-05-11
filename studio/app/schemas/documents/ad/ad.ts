@@ -20,6 +20,7 @@ export interface Ad extends SanityDocument {
   location: AdLocation[];
   link: string;
   startDate: string;
+  deadline: string;
   contactName: string;
   contactPhone: string;
   contactEmail: string;
@@ -58,7 +59,7 @@ export default {
       title: "Ingress",
       type: "text",
       group: "content",
-      validation: (Rule: any) => Rule.required().max(200),
+      validation: (Rule: any) => Rule.max(200),
     },
     {
       name: "body",
@@ -102,6 +103,12 @@ export default {
       type: "date",
       validation: (Rule: any) => Rule.required(),
       group: "settings",
+    },
+    {
+      name: "deadline",
+      title: "Deadline",
+      type: "date",
+      description: 'Hvis denne står tom, skriver vi "løpende"',
     },
     {
       name: "contactName",
