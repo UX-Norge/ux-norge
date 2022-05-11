@@ -15,6 +15,14 @@ export const Nav: React.FC<IProps> = () => {
         <img src={logo} className="h-48 w-auto" />
       </Link>
       <div className="lg:flex lg:space-x-48">
+        <Link
+          type="home"
+          path=""
+          className=""
+          activeClassName="border-b-2 border-gray-900"
+        >
+          Aktuelt
+        </Link>
         <Link type="page" path="nettverk" className="">
           Nettverk
         </Link>
