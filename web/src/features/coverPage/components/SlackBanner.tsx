@@ -29,7 +29,7 @@ export const SlackBanner: React.FC<IProps> = ({}) => {
           </svg>
 
           <div>
-            <Heading4>Bli med 3120 medlemmer i UX Norge-slacken</Heading4>
+            <Heading4>Bli med 3071 medlemmer i UX Norge-slacken</Heading4>
             <Body1>Diskuter alt fra Norman doors til innsiktsmetoder</Body1>
           </div>
         </div>
