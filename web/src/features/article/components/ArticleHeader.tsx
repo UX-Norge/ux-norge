@@ -54,13 +54,15 @@ export const ArticleHeader: React.FC<
         </div>
         <div className="relative flex h-full items-end">
           {mainImage && (
-            <Image
-              image={mainImage.image}
-              width={1600}
-              alt={mainImage.alt}
-              title={mainImage.caption}
-              className="door z-10 h-full w-full rounded-t-xl object-cover lg:h-[90%]"
-            />
+            <div className="aspect-w-5 aspect-h-6 relative z-10 h-full w-full lg:h-[90%]">
+              <Image
+                image={mainImage.image}
+                width={1600}
+                alt={mainImage.alt}
+                title={mainImage.caption}
+                className="door h-full w-full rounded-t-xl object-cover"
+              />
+            </div>
           )}
           <Door
             classNameOuter="absolute bottom-0 right-[70%] h-[40%] w-[50%] lg:hidden"

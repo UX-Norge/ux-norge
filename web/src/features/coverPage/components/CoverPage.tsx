@@ -45,11 +45,12 @@ export const CoverPage: React.FC<IProps> = ({
   };
 
   const TopSection = () => (
-    <div className="mt-64 grid grid-cols-1 gap-48 md:grid-cols-2 lg:grid-flow-col lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-48 md:grid-cols-2 lg:mt-64 lg:grid-flow-col lg:grid-cols-4">
       <div className="md:col-span-2">
         <ArticleThumbnail
           article={get(1, remainingArticles, true)[0]}
           type="feature"
+          className="-mx-24 lg:m-0"
         />
       </div>
       <div className="grid gap-48 sm:grid-cols-2 md:grid-cols-1 lg:col-start-1 lg:grid-cols-1">

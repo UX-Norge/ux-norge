@@ -12,9 +12,9 @@ export const ArticleImage: React.FC<IProps> = ({ image, alt, caption }) => {
   if (!image) return null;
 
   return (
-    <div>
-      <Image image={image} alt={alt} width={1200} />
-      {caption && <figcaption>{caption}</figcaption>}
+    <div className="-mx-24">
+      <Image image={image} alt={alt} width={1200} className=" mb-8" />
+      {caption && <figcaption className="mt-0 px-24">{caption}</figcaption>}
     </div>
   );
 };
