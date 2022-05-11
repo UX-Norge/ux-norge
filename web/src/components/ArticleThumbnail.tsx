@@ -28,7 +28,7 @@ export const ArticleThumbnail: React.FC<IProps> = ({
           image={mainImage.image}
           width={800}
           size="fluid"
-          height={{ feature: 500, small: 200, list: 200 }[type]}
+          height={{ feature: 500, small: 500, list: 200 }[type]}
           alt={mainImage.alt}
           rounded="large"
         />

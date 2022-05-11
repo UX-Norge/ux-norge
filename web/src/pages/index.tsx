@@ -34,7 +34,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
 
   return (
     <>
-      <Seo title="UX norge – Et sted for landets" location={location} />
+      <Seo location={location} />
       <CoverPage articles={articles} listAds={listAds} bannerAds={bannerAds} />
     </>
   );

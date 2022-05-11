@@ -66,17 +66,7 @@ export const query = graphql`
         alt
         caption
         image {
-          asset {
-            _id
-            metadata {
-              dimensions {
-                width
-                height
-              }
-            }
-          }
-          hotspot: _rawHotspot
-          crop: _rawCrop
+          ...ImageWithPreview
         }
       }
       category {

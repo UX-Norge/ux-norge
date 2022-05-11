@@ -18,30 +18,19 @@ type MainImageWithDimensions = ArticleImage & {
 export const ArticleHeader: React.FC<
   Pick<Article, "title" | "authors" | "category" | "description" | "mainImage">
 > = ({ title, authors, category, mainImage, description }) => {
-  const mainImageWithDimensions = mainImage as MainImageWithDimensions;
-
-  const dimensions: { width: number; height: number } =
-    mainImageWithDimensions?.image.crop ||
-    mainImageWithDimensions?.image.asset.metadata.dimensions;
-
-  const layout: "portrait" | "landscape" =
-    (dimensions && dimensions.width > dimensions.height) || !mainImage
-      ? "landscape"
-      : "portrait";
-
   const authorNames = authors.map((author) => author.name).join(", ");
   let authorCompany = authors[0]?.company?.name;
   authorCompany = authorCompany === "UX Norge" ? undefined : authorCompany;
 
   return (
-    <header className="relative h-aboveFold border-b-2 border-gray-900 bg-primary-100 pt-64">
+    <header className="relative border-b-2 border-gray-900 pt-64 lg:h-aboveFold">
       <div
         className={classNames(
-          "mx-auto grid h-full max-w-page grid-cols-[4fr_3fr] gap-48 px-[10%]"
+          "mx-auto grid h-full max-w-page gap-48 px-[10%] lg:grid-cols-[4fr_3fr]"
         )}
       >
         <div className="relative flex h-full items-center">
-          <div>
+          <div className="relative z-10">
             {category && (
               <Link path={category.slug.current} type="category">
                 <Overline>{category.name}</Overline>
@@ -55,11 +44,11 @@ export const ArticleHeader: React.FC<
             </div>
           </div>
           <Door
-            classNameOuter="absolute bottom-0 left-[-20%] h-[32%] w-[15%]"
+            classNameOuter="absolute bottom-0 left-[-20%] h-[32%] w-[15%] lg:block hidden"
             size="large"
           />
           <Door
-            classNameOuter="absolute bottom-0 left-[-3%] h-[25%] w-[10%]"
+            classNameOuter="absolute bottom-0 left-[-3%] h-[25%] w-[10%] lg:block hidden"
             size="large"
           />
         </div>
@@ -70,11 +59,16 @@ export const ArticleHeader: React.FC<
               width={1600}
               alt={mainImage.alt}
               title={mainImage.caption}
-              className="door z-10 h-[90%] w-full rounded-t-xl object-cover"
+              className="door z-10 h-full w-full rounded-t-xl object-cover lg:h-[90%]"
             />
           )}
           <Door
-            classNameOuter="absolute bottom-0 left-[70%] h-[50%] w-[50%]"
+            classNameOuter="absolute bottom-0 right-[70%] h-[40%] w-[50%] lg:hidden"
+            size="large"
+            rounded="full"
+          />
+          <Door
+            classNameOuter="absolute bottom-0 left-[70%] h-[70%] w-[50%]"
             size="large"
             rounded="full"
           />

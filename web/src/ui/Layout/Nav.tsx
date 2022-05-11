@@ -1,8 +1,34 @@
-import { Link } from "@Components/Link";
+import { Link, RouteTypes } from "@Components/Link";
 import * as React from "react";
 import logo from "@Images/logo-horizontal.svg";
+import { classNames } from "@Lib/helpers";
 
 interface IProps {}
+
+interface NavItemProps {
+  name: string;
+  type: RouteTypes;
+  path: string;
+  className?: string;
+  activeClassName?: string;
+}
+
+const NavItem: React.FC<NavItemProps> = ({
+  name,
+  type,
+  path,
+  className,
+  activeClassName,
+}): JSX.Element => (
+  <Link
+    type={type}
+    path={path}
+    className={classNames("", className)}
+    activeClassName={classNames("border-b-2 border-gray-900", activeClassName)}
+  >
+    {name}
+  </Link>
+);
 
 export const Nav: React.FC<IProps> = () => {
   return (
@@ -15,20 +41,9 @@ export const Nav: React.FC<IProps> = () => {
         <img src={logo} className="h-48 w-auto" />
       </Link>
       <div className="lg:flex lg:space-x-48">
-        <Link
-          type="home"
-          path=""
-          className=""
-          activeClassName="border-b-2 border-gray-900"
-        >
-          Aktuelt
-        </Link>
-        <Link type="page" path="nettverk" className="">
-          Nettverk
-        </Link>
-        <Link type="page" path="jobb" className="">
-          Jobb
-        </Link>
+        <NavItem name="Aktuelt" path="" type="home" />
+        <NavItem name="Nettverk" path="nettverk" type="page" />
+        <NavItem name="Jobb" path="jobb" type="page" />
       </div>
     </nav>
   );

@@ -47,10 +47,19 @@ html {
   height: 100%;
   font-size: 100%
 }
+
 @media screen and (min-width: 768px) {
   html {
 	font-size: 112.5%
   }
+}
+::selection {
+	color: var(--color-gray-900);
+	background-color: var(--color-yellow-100);
+}
+::-moz-selection {
+	color: var(--color-gray-900);
+	background-color: var(--color-yellow-100);
 }
 	
 @layer base {

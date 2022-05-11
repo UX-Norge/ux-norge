@@ -29,7 +29,7 @@ export const Door: React.FC<IProps> = ({
   classNameInner,
 }) => {
   const InnerDoor = (props: any) =>
-    image ? (
+    image?.asset ? (
       <Image {...props} image={image} alt={alt} width={width} height={height} />
     ) : (
       <div {...props} />
@@ -38,7 +38,7 @@ export const Door: React.FC<IProps> = ({
   return (
     <div
       className={classNames(
-        "bg-primary-900 group h-128 rounded-t-full",
+        "bg-primary-900 group  h-128 rounded-t-full",
         {
           "transition-transform": animate,
           "z-50": zIndex === "front",
@@ -46,10 +46,10 @@ export const Door: React.FC<IProps> = ({
           "w-full": size === "fluid",
           "rounded-t-lg": rounded === "large",
           "bg-primary-500": image,
+          "aspect-w-3 aspect-h-2": image,
         },
         classNameOuter
       )}
-      style={{ height }}
     >
       <InnerDoor
         className={classNames(

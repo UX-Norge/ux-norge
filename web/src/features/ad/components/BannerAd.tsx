@@ -4,12 +4,13 @@ import * as React from "react";
 import PortableText from "react-portable-text";
 
 export const BannerAd: React.FC<
-  Pick<Ad, "title" | "text" | "link" | "location" | "advertiser">
-> = ({ title, text, link, location, advertiser }) => {
+  Pick<Ad, "title" | "description" | "link" | "location" | "advertiser">
+> = ({ title, description, link, location, advertiser }) => {
+  if (!title || !description) return null;
   return (
-    <a href={link} className="my-48 block rounded bg-green-300 p-48">
+    <a href={link} className="my-48 block rounded bg-orange-400 p-48">
       <Heading3>{title}</Heading3>
-      <BlockContent blocks={text} />
+      <Body1>{description}</Body1>
     </a>
   );
 };

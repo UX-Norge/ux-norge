@@ -6,7 +6,7 @@ import { imageUrl } from "gatsby-plugin-sanity-image";
 import { PageProps } from "gatsby";
 
 interface IProps {
-  title: string;
+  title?: string;
   description?: string;
   image?: SanityImage;
   imageAlt?: string;
@@ -34,6 +34,7 @@ export const Seo: React.FC<IProps> = ({
     }
   `);
 
+  title = title || seo.title;
   description = description || seo.description;
 
   return (
