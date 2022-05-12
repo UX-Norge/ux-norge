@@ -12,7 +12,7 @@ export const SlackBanner: React.FC<IProps> = ({}) => {
     sanitySlackBanner: { title, text, buttonText },
   } = useStaticQuery<{ sanitySlackBanner: SlackBannerType }>(graphql`
     query {
-      sanitySlackBanner {
+      sanitySlackBanner(_id: { eq: "slackBanner" }) {
         title
         text
         buttonText

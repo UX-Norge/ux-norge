@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
     allSanitySocialMedia: GraphqlEdges;
   }>(graphql`
     query {
-      sanityFooter {
+      sanityFooter(_id: { eq: "footer" }) {
         contactInformation
         pages {
           name
@@ -55,7 +55,7 @@ export const Footer: React.FC = () => {
         <Link
           type="page"
           path={link.url || ""}
-          className="text-white block"
+          className="block text-primary-100"
           key={`page-${index}`}
         >
           {link.name}
@@ -73,7 +73,7 @@ export const Footer: React.FC = () => {
           <div>
             <Overline className="text-primary-400">Kontaktinfo</Overline>
             {sanityFooter.contactInformation.map((contact, index) => (
-              <Body1 className="text-white" key={`contact-${index}`}>
+              <Body1 className="text-primary-100" key={`contact-${index}`}>
                 {contact}
               </Body1>
             ))}
@@ -96,7 +96,7 @@ export const Footer: React.FC = () => {
             ))}
           </div>
         </div>
-        <Overline className="text-white flex w-full justify-center bg-gray-800 p-8">
+        <Overline className="flex w-full justify-center bg-gray-800 p-8 text-white">
           <a href="https://umble.no">Laget av Umble</a>
         </Overline>
       </footer>

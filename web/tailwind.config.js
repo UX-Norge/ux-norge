@@ -4,8 +4,8 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
+      white: "white",
       gray: {
-        0: "var(--color-white00)",
         100: "var(--color-gray-100)",
         200: "var(--color-gray-200)",
         300: "var(--color-gray-300)",
