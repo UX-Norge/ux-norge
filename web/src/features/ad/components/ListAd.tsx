@@ -1,6 +1,12 @@
 import { Link } from "@Components/Link";
 import { Ad } from "@Types";
-import { BlockContent, Body2, Heading4, Overline } from "@Ui/Typography";
+import {
+  BlockContent,
+  Body2,
+  Heading2,
+  Heading4,
+  Overline,
+} from "@Ui/Typography";
 import * as React from "react";
 
 export const ListAd: React.FC<
@@ -12,7 +18,7 @@ export const ListAd: React.FC<
   if (!advertiser || !location || !slug?.current) return null;
   return (
     <Link type="ad" path={slug.current} className="block">
-      <Heading4 className="">{title}</Heading4>
+      <Heading2 className="text-h4">{title}</Heading2>
       <Overline className="my-4 text-green-500">
         {advertiser.name} • {location.map(({ name }) => name).join(", ")}
       </Overline>

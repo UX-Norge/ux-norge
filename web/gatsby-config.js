@@ -38,6 +38,16 @@ module.exports = {
     `gatsby-transformer-sharp`,
     "gatsby-plugin-postcss",
     {
+      resolve: "gatsby-plugin-gatsby-cloud",
+      options: {
+        mergeCachingHeaders: true,
+        headers: {
+          "/*": ["Cache-Control: public, max-age=31536000, immutable"],
+          "static/*": ["Cache-Control: public, max-age=31536000, immutable"],
+        },
+      },
+    },
+    {
       resolve: "gatsby-plugin-manifest",
       options: {
         icon: "src/images/logo.svg",
