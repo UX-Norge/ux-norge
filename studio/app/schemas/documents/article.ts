@@ -67,6 +67,8 @@ export default {
     {
       name: "body",
       title: "Brødtekst",
+      description:
+        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
       type: "articleContent",
       validation: (Rule: any) => Rule.required(),
     },

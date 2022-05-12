@@ -7,7 +7,9 @@ import category from "./category";
 import company from "./company";
 import coverPage from "./coverPage";
 import doc from "./doc";
+import footer from "./footer";
 import newsletter from "./newsletter";
+import newsletterSignupForm from "./newsletterSignupForm";
 import siteSettings from "./siteSettings";
 import socialMedia from "./socialMedia";
 
@@ -24,4 +26,6 @@ export default [
   newsletter,
   coverPage,
   adLocation,
+  footer,
+  newsletterSignupForm,
 ];

@@ -1,3 +1,11 @@
+import { SanityImage } from "@Types";
+
+export interface SocialMedia {
+  name: string;
+  link: string;
+  image: SanityImage;
+}
+
 export default {
   name: "socialMedia",
   title: "Social media",
@@ -17,9 +25,6 @@ export default {
       name: "image",
       title: "image",
       type: "image",
-      options: {
-        accept: "image/.svg",
-      },
     },
   ],
 };

@@ -8,3 +8,6 @@ export { Ad } from "./documents/ad/ad";
 export { AdLocation } from "./documents/ad/adLocation";
 export { Document } from "./documents/doc";
 export { SiteSettings } from "./documents/siteSettings";
+export { RelativeLink } from "./objects/relativeLink";
+export { Footer } from "./documents/footer";
+export { SocialMedia } from "./documents/socialMedia";

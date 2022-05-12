@@ -29,5 +29,21 @@ export default S.listItem()
           .title("Sosiale medier")
           .icon(FiTwitter)
           .child(S.documentTypeList("socialMedia").title("Sosiale medier")),
+        S.listItem()
+          .title("Footer")
+          .child(
+            S.document()
+              .schemaType("footer")
+              .documentId("footer")
+              .title("Footer")
+          ),
+        S.listItem()
+          .title("Nyhetsbrevbanner")
+          .child(
+            S.document()
+              .schemaType("newsletterSignupForm")
+              .documentId("newsletterSignupForm")
+              .title("Nyhetsbrevbanner")
+          ),
       ])
   );
