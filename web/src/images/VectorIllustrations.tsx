@@ -11,7 +11,10 @@ const MonoDoor: React.FC<VectorProps> = ({ className, color }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={className}
+    aria-labelledby="labelID"
+    role="img"
   >
+    <title id="labelID">Door illustration</title>
     <path
       d="M0 24.5C0 10.969 10.969 0 24.5 0V0C38.031 0 49 10.969 49 24.5V100H0V24.5Z"
       fill="#141313"

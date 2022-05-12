@@ -79,7 +79,7 @@ export const Overline: React.FC<IProps> = ({
       className={classNames(
         "font-mono text-sm",
         {
-          "text-primary-500": !className?.includes("text-"),
+          "text-primary-600": !className?.includes("text-"),
         },
         className
       )}

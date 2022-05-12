@@ -33,8 +33,8 @@ const NavItem: React.FC<NavItemProps> = ({
 export const Nav: React.FC<IProps> = () => {
   return (
     <nav className="flex items-center justify-between py-16 px-24 lg:px-48">
-      <Link type="home" path="">
-        <img src={logo} className="h-48 w-auto" />
+      <Link type="home" path="" ariaLabel="Hjem">
+        <img src={logo} alt="Hjem, UX Norge Logo" className="h-48 w-auto" />
       </Link>
       <div className="lg:flex lg:space-x-48">
         <NavItem name="Aktuelt" path="" type="home" />

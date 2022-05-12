@@ -30,6 +30,7 @@ export const Link: React.FC<{
   className?: string;
   activeClassName?: string;
   partiallyActive?: boolean;
+  ariaLabel?: string;
 }> = ({
   type,
   path,
@@ -37,6 +38,7 @@ export const Link: React.FC<{
   className,
   activeClassName,
   partiallyActive,
+  ariaLabel,
 }) => {
   if (path.includes("/") && !["author", "category", "archive"].includes(type))
     console.error(path, "Path must not contain '/'");
@@ -48,6 +50,7 @@ export const Link: React.FC<{
       className={className}
       activeClassName={activeClassName}
       partiallyActive={partiallyActive}
+      title={ariaLabel}
     >
       {children}
     </GatsbyLink>
