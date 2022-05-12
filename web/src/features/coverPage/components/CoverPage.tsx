@@ -55,13 +55,13 @@ export const CoverPage: React.FC<IProps> = ({
       </div>
       <div className="grid gap-48 sm:grid-cols-2 md:grid-cols-1 lg:col-start-1 lg:grid-cols-1">
         {get(2, remainingArticles).map((article: Article) => (
-          <ArticleThumbnail article={article} type="small" />
+          <ArticleThumbnail article={article} type="small" key={article._id} />
         ))}
       </div>
 
       <div className="space-y-24">
         {get(4, remainingListAds).map((ad: Ad) => (
-          <ListAd {...ad} />
+          <ListAd {...ad} key={ad._id} />
         ))}
       </div>
     </div>
@@ -70,7 +70,7 @@ export const CoverPage: React.FC<IProps> = ({
   const FourColumn = () => (
     <div className="mt-64 mb-48 grid gap-48 md:grid-cols-2 lg:grid-cols-4">
       {get(4, remainingArticles).map((article: Article) => (
-        <ArticleThumbnail article={article} type="small" />
+        <ArticleThumbnail article={article} type="small" key={article._id} />
       ))}
     </div>
   );
@@ -87,7 +87,7 @@ export const CoverPage: React.FC<IProps> = ({
         })}
       />
       {get(4, remainingArticles).map((article: Article, index: number) => (
-        <ArticleThumbnail article={article} type="small" />
+        <ArticleThumbnail article={article} type="small" key={article._id} />
       ))}
     </div>
   );

@@ -5,30 +5,28 @@
 @tailwind utilities;
 
 :root {
-  --color-neutral-0: #ffffff;
-	--color-neutral-100: #f2f2f2;
-	--color-neutral-200: #d2d2d2;
-	--color-neutral-300: #b4b3b3;
-	--color-neutral-400: #969595;
-	--color-neutral-500: #797979;
-	--color-neutral-600: #5e5d5d;
-	--color-neutral-700: #434343;
-	--color-neutral-800: #2b2a2a;
-	--color-neutral-900: #141313;
-
-	--color-primary-100: #e5e1fd;
-	--color-primary-400: #9786ff;
+ 	--color-gray-900: #14121c;
+	--color-gray-800: #2b2930;
+	--color-gray-700: #424247;
+	--color-gray-600: #5e5e63;
+	--color-gray-500: #737078;
+	--color-gray-400: #99949c;
+	--color-gray-300: #b5b3ba;
+	--color-gray-200: #d4d1d6;
+	--color-gray-100: #f2f0f5;
+	--color-white00: #ffffff;
+	--color-primary-800: #29215e;
+	--color-primary-700: #3d3696;
 	--color-primary-500: #7061ea;
-  
+	--color-primary-400: #9786ff;
+	--color-primary-100: #e5e1fd;
 	--color-green-900: #062008;
 	--color-green-600: #107349;
 	--color-green-500: #02865f;
 	--color-green-300: #5bc49a;
 	--color-green-100: #daf9d5;
-
 	--color-orange-500: #d94f0d;
 	--color-orange-400: #f66f33;
-
 	--color-blue-900: #001c3b;
 	--color-blue-700: #005291;
 	--color-blue-600: #0066b8;
@@ -36,11 +34,13 @@
 	--color-blue-200: #b2cfff;
 	--color-blue-100: #d4e3ff;
 	--color-blue-50: #f2f7ff;
-	
 	--color-yellow-500: #a36100;
+	--color-yellow-300: #e3a808;
 	--color-yellow-200: #f1c048;
 	--color-yellow-100: #ffe0a8;
 	--color-yellow-50: #fff9f0;
+	--color-pink-500: #ef8cd9;
+	--color-pink-200: #f7c9ed;
 }
 
 html {

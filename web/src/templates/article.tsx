@@ -23,12 +23,10 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({
   const articleListAds = shuffle(
     cleanGraphqlArray(data.articleListAds) as Ad[]
   );
-  console.log(pageContext);
 
   const articleBannerAds = cleanGraphqlArray(data.articleBannerAds) as Ad[];
 
   const relatedArticles = cleanGraphqlArray(data.relatedArticles) as Article[];
-  console.log(articleBannerAds);
 
   return (
     <article>
@@ -106,6 +104,7 @@ export const query = graphql`
     ) {
       edges {
         node {
+          _id
           title
           description
           slug {

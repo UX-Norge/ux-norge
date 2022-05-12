@@ -51,9 +51,6 @@ export const ArticleBody: React.FC<IProps> = ({
     bannerAd: BannerAd,
     factBox: FactBox,
   };
-  console.log(articleBannerAds);
-
-  console.log(getArticlePageAds(articleBannerAds));
 
   const readTime = Math.round(
     blockContentToPlainText(body).split(" ").length / 200

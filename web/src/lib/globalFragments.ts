@@ -10,6 +10,7 @@ export const query = graphql`
   }
 
   fragment ArticleThumbnail on SanityArticle {
+    _id
     title
     mainImage {
       ...ArticleImage
@@ -25,6 +26,7 @@ export const query = graphql`
   }
 
   fragment AdThumbnail on SanityAd {
+    _id
     title
     slug {
       current

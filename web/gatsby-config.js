@@ -4,7 +4,9 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-const isDev = process.env.NODE_ENV === "development";
+const isProd = process.env.NODE_ENV === "production";
+const previewEnabled =
+  (process.env.GATSBY_IS_PREVIEW || "false").toLowerCase() === "true";
 
 module.exports = {
   siteMetadata: {
@@ -18,8 +20,8 @@ module.exports = {
         projectId: process.env.SANITY_PROJECT_ID,
         dataset: process.env.SANITY_DATASET,
         token: process.env.SANITY_TOKEN,
-        watchMode: isDev,
-        overlayDrafts: isDev,
+        watchMode: !isProd,
+        overlayDrafts: !isProd || previewEnabled,
       },
     },
     {

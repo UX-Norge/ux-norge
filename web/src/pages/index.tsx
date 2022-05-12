@@ -21,7 +21,6 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   );
 
   const { listAds, bannerAds } = getCoverPageAds(ads);
-  console.log(ads);
 
   if (!articles) {
     return (

@@ -22,8 +22,8 @@ export const PaginationRow: React.FC<IProps> = ({
           <Link
             path={path}
             type={type}
-            className="flex h-24 w-24 items-center justify-center rounded-full transition-colors hover:bg-primary-500 hover:text-gray-0"
-            activeClassName="bg-primary-500 text-gray-0"
+            className="hover:text-white flex h-24 w-24 items-center justify-center rounded-full transition-colors hover:bg-primary-500"
+            activeClassName="bg-primary-500 text-white"
           >
             {i + 1}
           </Link>

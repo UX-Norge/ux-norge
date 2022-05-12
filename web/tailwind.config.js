@@ -5,21 +5,23 @@ module.exports = {
       transparent: "transparent",
       current: "currentColor",
       gray: {
-        0: "var(--color-neutral-0)",
-        100: "var(--color-neutral-100)",
-        200: "var(--color-neutral-200)",
-        300: "var(--color-neutral-300)",
-        400: "var(--color-neutral-400)",
-        500: "var(--color-neutral-500)",
-        600: "var(--color-neutral-600)",
-        700: "var(--color-neutral-700)",
-        800: "var(--color-neutral-800)",
-        900: "var(--color-neutral-900)",
+        0: "var(--color-white00)",
+        100: "var(--color-gray-100)",
+        200: "var(--color-gray-200)",
+        300: "var(--color-gray-300)",
+        400: "var(--color-gray-400)",
+        500: "var(--color-gray-500)",
+        600: "var(--color-gray-600)",
+        700: "var(--color-gray-700)",
+        800: "var(--color-gray-800)",
+        900: "var(--color-gray-900)",
       },
       primary: {
         100: "var(--color-primary-100)",
         400: "var(--color-primary-400)",
         500: "var(--color-primary-500)",
+        700: "var(--color-primary-700)",
+        800: "var(--color-primary-800)",
       },
       green: {
         900: "var(--color-green-900)",
@@ -43,6 +45,7 @@ module.exports = {
       },
       yellow: {
         500: "var(--color-yellow-500)",
+        300: "var(--color-yellow-300)",
         200: "var(--color-yellow-200)",
         100: "var(--color-yellow-100)",
         50: "var(--color-yellow-50)",
@@ -62,9 +65,12 @@ module.exports = {
       56: "3.5rem",
       64: "4rem",
       80: "5rem",
+      96: "6rem",
       128: "8rem",
     },
     borderRadius: {
+      xs: "0.25rem", // 4px
+      sm: "0.5rem", // 8px
       DEFAULT: "1rem", // 16px
       lg: "1.5rem", // 24px,
       xl: "8rem", //64px
