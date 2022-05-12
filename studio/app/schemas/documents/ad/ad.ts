@@ -97,13 +97,7 @@ export default {
       type: "url",
       group: "content",
     },
-    {
-      name: "startDate",
-      title: "Startdato",
-      type: "date",
-      validation: (Rule: any) => Rule.required(),
-      group: "settings",
-    },
+
     {
       name: "deadline",
       title: "Deadline",
@@ -127,6 +121,13 @@ export default {
       title: "E-post (kontaktperson)",
       type: "string",
       group: "contactPerson",
+    },
+    {
+      name: "startDate",
+      title: "Startdato",
+      type: "date",
+      validation: (Rule: any) => Rule.required(),
+      group: "settings",
     },
     {
       name: "endDate",

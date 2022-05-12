@@ -3,6 +3,7 @@ import articleImage from "./article/articleImage";
 import blockContent from "./blockContent";
 import simpleBlockContent from "./simpleBlockContent";
 import inlineRelatedArticle from "./article/inlineRelatedArticle";
+import factBox from "./article/factBox";
 
 export default [
   blockContent,
@@ -10,4 +11,5 @@ export default [
   articleContent,
   articleImage,
   inlineRelatedArticle,
+  factBox,
 ];

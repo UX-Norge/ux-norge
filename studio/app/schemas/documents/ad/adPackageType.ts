@@ -4,6 +4,7 @@ export interface AdPackageType extends SanityDocument {
   name: string;
   price: number;
   duration: number;
+  type: "banner" | "list";
   onCoverPage: boolean;
   onArticles: boolean;
   onAdsPage: boolean;
@@ -32,6 +33,17 @@ export default {
       title: "Varighet",
       type: "number",
       description: "Antall dager",
+    },
+    {
+      type: "string",
+      name: "type",
+      title: "Type",
+      options: {
+        list: [
+          { value: "banner", title: "Banner" },
+          { value: "list", title: "Liste" },
+        ],
+      },
     },
     {
       name: "onCoverPage",
