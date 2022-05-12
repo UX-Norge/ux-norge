@@ -45,5 +45,13 @@ export default S.listItem()
               .documentId("newsletterSignupForm")
               .title("Nyhetsbrevbanner")
           ),
+        S.listItem()
+          .title("Slackbanner")
+          .child(
+            S.document()
+              .schemaType("slackBanner")
+              .documentId("slackBanner")
+              .title("Slackbanner")
+          ),
       ])
   );

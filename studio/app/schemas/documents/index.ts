@@ -11,6 +11,7 @@ import footer from "./footer";
 import newsletter from "./newsletter";
 import newsletterSignupForm from "./newsletterSignupForm";
 import siteSettings from "./siteSettings";
+import slackBanner from "./slackBanner";
 import socialMedia from "./socialMedia";
 
 export default [
@@ -28,4 +29,5 @@ export default [
   adLocation,
   footer,
   newsletterSignupForm,
+  slackBanner,
 ];

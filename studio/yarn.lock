@@ -8763,6 +8763,13 @@ sanity-plugin-content-calendar@^1.2.5:
     husky "^7.0.1"
     react-big-calendar "^0.35.0"
 
+sanity-plugin-gatsby-cloud-preview@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/sanity-plugin-gatsby-cloud-preview/-/sanity-plugin-gatsby-cloud-preview-1.0.2.tgz#074eabec81534ae89673a3161a575bfcd50d774c"
+  integrity sha512-6HKIJr5fBSpw/ZjqKd98dLZHt9T5kQdrT1rYsXtqhJfSG9ccSP/m+pbra+PiwG58AiZqwHait05DuWdHDI48RA==
+  dependencies:
+    react-icons "^4.3.1"
+
 sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"

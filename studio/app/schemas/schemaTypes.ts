@@ -11,3 +11,4 @@ export { SiteSettings } from "./documents/siteSettings";
 export { RelativeLink } from "./objects/relativeLink";
 export { Footer } from "./documents/footer";
 export { SocialMedia } from "./documents/socialMedia";
+export { SlackBanner } from "./documents/slackBanner";
