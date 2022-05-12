@@ -1,7 +1,11 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
 import { Ad, Article, Author, Category, GraphqlEdges } from "@Types";
-import { getActiveAdIds, hasExpired } from "./src/features/ad/lib/getAds";
+import {
+  getActiveAdIds,
+  getArticlePageAds,
+  hasExpired,
+} from "./src/features/ad/lib/getAds";
 import { cleanGraphqlArray } from "./src/lib/helpers";
 import { getRoute } from "./src/components/Link";
 import { createPaginatedPages } from "./src/pageBuilding/pagination";
@@ -55,6 +59,8 @@ export const createPages: GatsbyNode["createPages"] = async ({
             packageType {
               onCoverPage
               onArticles
+              onAdsPage
+              type
               duration
             }
           }
@@ -104,9 +110,10 @@ export const createPages: GatsbyNode["createPages"] = async ({
     articleArchive: path.resolve(`src/templates/articleArchive.tsx`),
   };
 
-  const allAds = getActiveAdIds(data.ads);
-
   printDivider();
+
+  const { listAds: articleListAds, bannerAds: articleBannerAds } =
+    getArticlePageAds(data.ads);
 
   data.articles
     .filter((article) => article.slug?.current)
@@ -115,8 +122,9 @@ export const createPages: GatsbyNode["createPages"] = async ({
         path: getRoute("article", article.slug.current),
         component: templates.article,
         context: {
+          articleListAds: articleListAds.map((ad) => ad._id),
+          articleBannerAds: articleBannerAds.map((ad) => ad._id),
           slug: article.slug.current,
-          articleListAds: allAds?.articleListAds,
           categoryId: article.category?._id,
         },
         defer: index > 20,

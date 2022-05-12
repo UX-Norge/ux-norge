@@ -1,3 +1,4 @@
+import { ArticleThumbnail } from "@Components/ArticleThumbnail";
 import { Article, Author } from "@Types";
 import * as React from "react";
 import { AuthorThumbnail } from "./AuthorThumbnail";
@@ -20,7 +21,7 @@ export const ArticleFooter: React.FC<IProps> = ({
         ))}
         <div className="space-y-32">
           {relatedArticles.map((article) => (
-            <RelatedArticleThumbnail {...article} />
+            <ArticleThumbnail type="list" article={article} />
           ))}
         </div>
       </div>

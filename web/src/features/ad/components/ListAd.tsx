@@ -9,7 +9,7 @@ export const ListAd: React.FC<
     "title" | "description" | "jobType" | "advertiser" | "location" | "slug"
   >
 > = ({ title, slug, description, advertiser, location }) => {
-  if (!advertiser || !location) return null;
+  if (!advertiser || !location || !slug?.current) return null;
   return (
     <Link type="ad" path={slug.current} className="block">
       <Heading4 className="">{title}</Heading4>

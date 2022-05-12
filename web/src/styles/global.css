@@ -53,14 +53,14 @@ html {
 	font-size: 112.5%
   }
 }
-::selection {
+/* ::selection {
 	color: var(--color-gray-900);
 	background-color: var(--color-yellow-100);
 }
 ::-moz-selection {
 	color: var(--color-gray-900);
 	background-color: var(--color-yellow-100);
-}
+} */
 	
 @layer base {
   body {

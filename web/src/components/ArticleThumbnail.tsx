@@ -17,20 +17,28 @@ export const ArticleThumbnail: React.FC<IProps> = ({
   type,
   className,
 }) => {
+  if (!slug?.current || !title) return null;
   return (
     <Link
       path={slug.current}
       type="article"
-      className={classNames("group block", className)}
+      className={classNames(
+        "group block",
+        { "flex gap-48": type === "list" },
+        className
+      )}
     >
       {mainImage && (
         <Door
           image={mainImage.image}
           width={800}
           size="fluid"
-          height={{ feature: 500, small: 500, list: 200 }[type]}
+          height={{ feature: 500, small: 500, list: 300 }[type]}
           alt={mainImage.alt}
           rounded="large"
+          classNameOuter={classNames(" h-full", {
+            "aspect-none  order-1": type === "list",
+          })}
         />
       )}
       <div className={classNames({ "p-24": type === "feature" })}>

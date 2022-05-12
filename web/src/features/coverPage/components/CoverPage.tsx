@@ -68,7 +68,7 @@ export const CoverPage: React.FC<IProps> = ({
   );
 
   const FourColumn = () => (
-    <div className="mt-64 grid gap-48 md:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-64 mb-48 grid gap-48 md:grid-cols-2 lg:grid-cols-4">
       {get(4, remainingArticles).map((article: Article) => (
         <ArticleThumbnail article={article} type="small" />
       ))}

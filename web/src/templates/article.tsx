@@ -15,13 +15,20 @@ interface DataProps {
   relatedArticles: GraphqlEdges;
 }
 
-const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
+const ArticlePage: React.FC<PageProps<DataProps>> = ({
+  data,
+  location,
+  pageContext,
+}) => {
   const articleListAds = shuffle(
     cleanGraphqlArray(data.articleListAds) as Ad[]
   );
+  console.log(pageContext);
+
   const articleBannerAds = cleanGraphqlArray(data.articleBannerAds) as Ad[];
 
   const relatedArticles = cleanGraphqlArray(data.relatedArticles) as Article[];
+  console.log(articleBannerAds);
 
   return (
     <article>
