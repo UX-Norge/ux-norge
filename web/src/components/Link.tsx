@@ -16,7 +16,8 @@ export const getRoute = (type: RouteTypes, path: string): string => {
     {
       home: "/",
       article: `/${path}/`,
-      page: `/${path}`,
+      archive: `/arkiv/${path}/`,
+      page: `/${path}/`,
       author: `/forfatter/${path}/`,
       ad: `/stillignsannonse/${path}/`,
       category: `/kategori/${path}/`,
@@ -39,7 +40,8 @@ export const Link: React.FC<{
   activeClassName,
   partiallyActive,
 }) => {
-  if (path.includes("/")) console.error("Path must not contain '/'");
+  if (path.includes("/") && !["author", "category", "archive"].includes(type))
+    console.error(path, "Path must not contain '/'");
 
   return (
     <GatsbyLink
