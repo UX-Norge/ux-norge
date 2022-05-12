@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 
 export type RouteTypes =
   | "article"
-  | "archive"
   | "author"
   | "ad"
   | "category"
@@ -16,7 +15,6 @@ export const getRoute = (type: RouteTypes, path: string): string => {
     {
       home: "/",
       article: `/${path}/`,
-      archive: `/arkiv/${path}/`,
       page: `/${path}/`,
       author: `/forfatter/${path}/`,
       ad: `/stillignsannonse/${path}/`,

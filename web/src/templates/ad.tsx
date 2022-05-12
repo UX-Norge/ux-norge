@@ -1,8 +1,17 @@
 import { Seo } from "@Components/Seo";
+import { getDaysToDeadline } from "@Features/ad/lib/getDaysToDeadline";
+import { daysLeft } from "@Lib/helpers";
 import { Ad } from "@Types";
+import { Button } from "@Ui/Button";
 import { Image } from "@Ui/Image";
 import { PageWrapper } from "@Ui/Layout";
-import { BlockContent, Body1, Heading1, Overline } from "@Ui/Typography";
+import {
+  BlockContent,
+  Body1,
+  Heading1,
+  Heading4,
+  Overline,
+} from "@Ui/Typography";
 import { graphql, Page, PageProps } from "gatsby";
 import * as React from "react";
 
@@ -19,6 +28,11 @@ export const AdPage: React.FC<PageProps<DataProps>> = ({
       image,
       location: adLocation,
       advertiser,
+      deadline,
+      contactName,
+      contactPhone,
+      contactEmail,
+      link,
       slug,
       startDate,
       packageType,
@@ -31,16 +45,41 @@ export const AdPage: React.FC<PageProps<DataProps>> = ({
       <Seo title={title} description={description} location={location} />
       <main className="mx-auto max-w-page-sm">
         <div className="max-w-prose">
+          <div className="p-24">
+            <Overline className="text-blue-500">
+              {advertiser.name} •{" "}
+              {adLocation.map(({ name }) => name).join(", ")}
+            </Overline>
+            <Heading1 className="wrap hyphen break-words">{title}</Heading1>
+            <Body1 className="font-bold">{description}</Body1>
+            <Overline className="mt-24 text-blue-500">
+              {getDaysToDeadline(deadline)}
+            </Overline>
+          </div>
           {image && (
-            <Image className="mb-24" image={image} alt={title} width={1000} />
+            <div className="aspect-w-1 aspect-h-1 mr-24">
+              <Image
+                className="mb-24 rounded-tr-xl rounded-br-xs object-cover"
+                image={image}
+                alt={title}
+                width={1000}
+              />
+            </div>
           )}
-          <Overline className="text-green-500">
-            {advertiser.name} • {adLocation.map(({ name }) => name).join(", ")}
-          </Overline>
-          <Heading1>{title}</Heading1>
-          <Body1 className="mb-48 font-bold">{description}</Body1>
-          <div className="prose">
+          <div className="prose p-24">
             <BlockContent blocks={body} />
+          </div>
+          <div className="p-24">
+            {contactName && (
+              <>
+                <Heading4>Kontaktperson:</Heading4>
+                <Body1>{contactName}</Body1>
+                {contactPhone && <Body1>{contactPhone}</Body1>}
+                {contactEmail && <Body1>{contactEmail}</Body1>}
+              </>
+            )}
+            <br />
+            <Button href={link}>Søk her</Button>
           </div>
         </div>
       </main>
@@ -54,6 +93,11 @@ export const query = graphql`
       title
       description
       body: _rawBody
+      deadline
+      link
+      contactName
+      contactPhone
+      contactEmail
       image {
         ...ImageWithPreview
       }

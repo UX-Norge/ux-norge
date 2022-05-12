@@ -1,3 +1,4 @@
+import { ArticleGrid } from "@Components/ArticleGrid";
 import { ArticleThumbnail } from "@Components/ArticleThumbnail";
 import { Link } from "@Components/Link";
 import { PaginationRow } from "@Components/PaginationRow";
@@ -5,6 +6,7 @@ import { Seo } from "@Components/Seo";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Article, Category, GraphqlEdges } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
+import { Heading1, Overline } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
 import * as React from "react";
 
@@ -24,13 +26,12 @@ const CategoryPage: React.FC<PageProps<DataProps>> = ({
   return (
     <PageWrapper>
       <Seo title={name} location={location} />
-      {name} {currentPage}
-      <div className="mx-auto grid max-w-page grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]">
-        {articles.map((article) => (
-          <ArticleThumbnail article={article} type="list" />
-        ))}
+      <div className="mx-auto max-w-page p-24">
+        <Overline>Kategori</Overline>
+        <Heading1 className="mb-48">{name}</Heading1>
+        <ArticleGrid articles={articles} />
+        <PaginationRow numPages={numPages} type="category" slug={slug} />
       </div>
-      <PaginationRow numPages={numPages} type="category" slug={slug} />
     </PageWrapper>
   );
 };

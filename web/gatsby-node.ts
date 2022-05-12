@@ -132,10 +132,10 @@ export const createPages: GatsbyNode["createPages"] = async ({
     });
 
   createPaginatedPages("Article Archive", {
-    routeType: "archive",
+    routeType: "page",
     slug: { _type: "slug", current: "arkiv" },
     component: templates.articleArchive,
-    postsPerPage: 10,
+    postsPerPage: 12,
     postsCount: data.articles.length,
     createPage,
   });
@@ -147,7 +147,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
         routeType: "author",
         slug: author.slug,
         component: templates.author,
-        postsPerPage: 10,
+        postsPerPage: 12,
         postsCount: data.articles.filter((article) =>
           article.authors.some(({ _id: authorId }) => authorId === author._id)
         ).length,

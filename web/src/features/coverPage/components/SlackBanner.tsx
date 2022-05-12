@@ -5,12 +5,10 @@ import { Body1, Heading4 } from "@Ui/Typography";
 import { graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
 
-interface IProps {}
-
-export const SlackBanner: React.FC<IProps> = ({}) => {
-  const {
-    sanitySlackBanner: { title, text, buttonText },
-  } = useStaticQuery<{ sanitySlackBanner: SlackBannerType }>(graphql`
+export const SlackBanner: React.FC = () => {
+  const { sanitySlackBanner } = useStaticQuery<{
+    sanitySlackBanner: SlackBannerType;
+  }>(graphql`
     query {
       sanitySlackBanner(_id: { eq: "slackBanner" }) {
         title
@@ -19,6 +17,8 @@ export const SlackBanner: React.FC<IProps> = ({}) => {
       }
     }
   `);
+  if (!sanitySlackBanner) return null;
+  const { title, text, buttonText } = sanitySlackBanner;
   return (
     <div className="bg-yellow-100 px-48 pt-8">
       <div className="mx-auto flex w-full max-w-page items-center justify-between">

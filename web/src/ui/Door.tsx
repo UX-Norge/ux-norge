@@ -50,6 +50,7 @@ export const Door: React.FC<IProps> = ({
         },
         classNameOuter
       )}
+      style={{ height }}
     >
       <InnerDoor
         className={classNames(

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Article } from "@Types";
-import { Image } from "@Ui/Image";
-import { Body1, Body2, Heading2, Heading3, Overline } from "@Ui/Typography";
+import { Overline } from "@Ui/Typography";
 import { Link } from "@Components/Link";
 import { Door } from "@Ui/Door";
 import { classNames } from "@Lib/helpers";
@@ -24,7 +23,10 @@ export const ArticleThumbnail: React.FC<IProps> = ({
       type="article"
       className={classNames(
         "group block",
-        { "flex gap-48": type === "list" },
+        {
+          "grid grid-cols-1 items-center md:grid-cols-[1fr_300px] md:gap-48":
+            type === "list",
+        },
         className
       )}
     >
@@ -33,11 +35,10 @@ export const ArticleThumbnail: React.FC<IProps> = ({
           image={mainImage.image}
           width={800}
           size="fluid"
-          height={{ feature: 500, small: 500, list: 300 }[type]}
           alt={mainImage.alt}
           rounded="large"
           classNameOuter={classNames(" h-full", {
-            "aspect-none  order-1": type === "list",
+            "aspect-w-3 aspect-h-2 md:order-1": type === "list",
           })}
         />
       )}
