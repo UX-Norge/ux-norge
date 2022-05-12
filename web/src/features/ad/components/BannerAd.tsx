@@ -1,6 +1,6 @@
 import { Link } from "@Components/Link";
 import { Ad } from "@Types";
-import { BlockContent, Body1, Heading3 } from "@Ui/Typography";
+import { BlockContent, Body1, Heading2, Heading3 } from "@Ui/Typography";
 import * as React from "react";
 import PortableText from "react-portable-text";
 
@@ -17,7 +17,7 @@ export const BannerAd: React.FC<
       type="ad"
       className="not-prose my-48 block rounded bg-orange-400 p-48"
     >
-      <Heading3>{title}</Heading3>
+      <Heading2>{title}</Heading2>
       <Body1>{description}</Body1>
     </Link>
   );

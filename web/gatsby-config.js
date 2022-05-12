@@ -8,10 +8,12 @@ const isProd = process.env.NODE_ENV === "production";
 const previewEnabled =
   (process.env.GATSBY_IS_PREVIEW || "false").toLowerCase() === "true";
 
+const siteUrl = `https://uxnorge.no`;
+
 module.exports = {
   siteMetadata: {
     title: `UX Norge`,
-    siteUrl: `https://uxnorge.no`,
+    siteUrl,
   },
   plugins: [
     {
@@ -32,6 +34,14 @@ module.exports = {
       },
     },
     "gatsby-plugin-react-helmet",
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: siteUrl,
+        sitemap: siteUrl + "/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
+      },
+    },
     "gatsby-plugin-sitemap",
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,

@@ -1,3 +1,4 @@
+import { classNames } from "@Lib/helpers";
 import * as React from "react";
 
 interface IProps {
@@ -17,7 +18,7 @@ export const Input: React.FC<IProps> = ({
   ...props
 }) => {
   return (
-    <div>
+    <div className="w-full">
       <input
         placeholder={placeholder}
         value={value}
@@ -25,7 +26,9 @@ export const Input: React.FC<IProps> = ({
         type={type}
         required={required}
         {...props}
-        className="bg-white rounded-xs p-8 placeholder:text-gray-600 focus-visible:outline-1 focus-visible:outline-primary-100 focus-visible:ring-4 focus-visible:ring-primary-500"
+        className={classNames(
+          "w-full rounded-xs bg-white p-8 placeholder:text-gray-600 focus-visible:outline-1 focus-visible:outline-primary-100 focus-visible:ring-4 focus-visible:ring-primary-500"
+        )}
       />
     </div>
   );

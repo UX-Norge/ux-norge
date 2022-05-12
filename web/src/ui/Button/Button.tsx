@@ -9,7 +9,7 @@ interface IProps {
 
 export const Button: React.FC<IProps> = ({ children, onClick, href, type }) => {
   const buttonClass =
-    "rounded-xs bg-primary-500 px-16 py-8 font-base text-white";
+    "whitespace-nowrap rounded-xs bg-primary-500 px-16 py-8 font-base text-white";
   return href ? (
     <a href={href} className={buttonClass}>
       {children}

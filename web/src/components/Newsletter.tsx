@@ -1,7 +1,7 @@
 import { VectorIllustrations } from "@Images/VectorIllustrations";
 import { Button } from "@Ui/Button";
 import { Input } from "@Ui/Input";
-import { BlockContent, Body1, Heading3 } from "@Ui/Typography";
+import { BlockContent, Body1, Heading2, Heading3 } from "@Ui/Typography";
 import { graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
 
@@ -36,28 +36,35 @@ export const Newsletter: React.FC<IProps> = ({}) => {
   };
 
   return (
-    <form className="relative bg-primary-400 p-32 pb-0" onSubmit={submitEmail}>
-      <Heading3>{title}</Heading3>
-      <Body1>{text}</Body1>
-      <Input
-        placeholder={placeholder}
-        value={email}
-        required
-        type="email"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setEmail(e.target.value)
-        }
-      />
-      <Button onClick={submitEmail} type="submit">
-        Bli med
-      </Button>
-      <div className="prose pr-80 prose-p:m-0">
-        <BlockContent blocks={privacyText} />
-      </div>
+    <form
+      className="relative mx-auto flex w-full max-w-page gap-48 bg-primary-400 p-32 md:my-48 md:rounded-sm"
+      onSubmit={submitEmail}
+    >
       <VectorIllustrations.MonoDoor
         color="var(--color-primary-400)"
-        className="absolute bottom-0 right-32 w-80"
+        className="w-80"
       />
+      <div className="w-full">
+        <Heading2 className="text-h1">{title}</Heading2>
+        <Body1>{text}</Body1>
+        <div className="flex w-3/4 gap-24">
+          <Input
+            placeholder={placeholder}
+            value={email}
+            required
+            type="email"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
+          />
+          <Button onClick={submitEmail} type="submit">
+            Bli med
+          </Button>
+        </div>
+        <div className="prose mt-8 pr-80 text-gray-900 prose-p:m-0">
+          <BlockContent blocks={privacyText} />
+        </div>
+      </div>
     </form>
   );
 };

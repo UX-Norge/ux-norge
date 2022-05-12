@@ -22,6 +22,7 @@
     "gatsby-plugin-image": "^2.9.1",
     "gatsby-plugin-manifest": "^4.9.1",
     "gatsby-plugin-react-helmet": "^5.13.0",
+    "gatsby-plugin-robots-txt": "^1.7.1",
     "gatsby-plugin-sanity-image": "^0.11.0",
     "gatsby-plugin-sharp": "^4.9.1",
     "gatsby-plugin-sitemap": "^5.9.0",

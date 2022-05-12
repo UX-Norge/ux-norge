@@ -39,6 +39,9 @@ export const Seo: React.FC<IProps> = ({
 
   return (
     <Helmet
+      htmlAttributes={{
+        lang: "no",
+      }}
       title={title}
       titleTemplate={location.pathname === "/" ? "" : seo.titleTemplate}
     >

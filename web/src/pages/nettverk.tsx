@@ -16,7 +16,7 @@ export const NetworkPage: React.FC<PageProps<DataProps>> = ({
   location,
 }) => {
   return (
-    <PageWrapper className="bg-yellow-100">
+    <PageWrapper className="">
       <Seo title="Nettverk" location={location} />
       <main className="mx-auto max-w-page-sm">
         <Heading1>{title}</Heading1>
