@@ -98,7 +98,11 @@ export const Footer: React.FC<FooterProps> = ({
         if (!path) return null;
         return (
           <Link
-            type={link._type === "cta" ? "external" : "page"}
+            type={
+              link._type === "cta" && path.includes("http")
+                ? "external"
+                : "page"
+            }
             path={path}
             className="block text-primary-100"
             key={`page-${index}`}
@@ -117,7 +121,7 @@ export const Footer: React.FC<FooterProps> = ({
       {showNewsletter && <Newsletter />}
       {showPartners && <Partners />}
       <footer className="bg-gray-900">
-        <div className="mx-auto max-w-page space-y-96 p-32">
+        <div className="mx-auto max-w-page space-y-96 p-32 md:grid md:grid-cols-2 md:space-y-0">
           <div>
             <Overline className="text-primary-400">Kontaktinfo</Overline>
             {sanityFooter.contactInformation.map((contact, index) => (
@@ -130,7 +134,7 @@ export const Footer: React.FC<FooterProps> = ({
             <LinkList title="Sider" links={sanityFooter.pages} />
             <LinkList title="Ressurser" links={sanityFooter.resources} />
           </div>
-          <div className="flex justify-center space-x-24">
+          <div className="flex justify-center space-x-24 md:justify-start">
             {socialMedia.map(({ name, link, image }, index) => (
               <a href={link} className="" key={`social-${index}`}>
                 <Image
