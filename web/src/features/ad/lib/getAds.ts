@@ -25,11 +25,9 @@ type ListAndBannerAds = {
 const emptyListAndBannerAds: ListAndBannerAds = { listAds: [], bannerAds: [] };
 
 const getActiveAds = (ads: Ad[]) =>
-  shuffle(
-    ads.filter(
-      (ad) =>
-        ad.slug?.current && !hasExpired(ad.startDate, ad.packageType?.duration)
-    )
+  ads.filter(
+    (ad) =>
+      ad.slug?.current && !hasExpired(ad.startDate, ad.packageType?.duration)
   );
 
 const divideListAndBannerAds = (ads: Ad[]) => {
