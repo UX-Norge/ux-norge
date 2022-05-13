@@ -51,7 +51,7 @@ html {
 
 @media screen and (min-width: 768px) {
   html {
-	font-size: 112.5%
+	font-size: 100%
   }
 }
 /* ::selection {

@@ -16,7 +16,7 @@ export const AdPageHeader: React.FC<
   return (
     <header
       className={classNames("mt-48 md:grid md:grid-cols-2 md:items-center", {
-        "mx-auto max-w-prose grid-cols-1": !image,
+        "mx-auto max-w-prose md:grid-cols-1": !image,
       })}
     >
       <div className="p-24 md:order-1">

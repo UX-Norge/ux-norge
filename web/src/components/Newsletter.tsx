@@ -58,18 +58,18 @@ export const Newsletter: React.FC<IProps> = ({}) => {
       name="mc-embedded-subscribe-form"
       target="_blank"
       noValidate={false}
-      className="relative mx-auto flex w-full max-w-page gap-48 bg-primary-400 p-32 md:my-48 md:rounded-sm"
+      className="relative mx-auto flex w-full max-w-page gap-48 rounded-t-lg bg-primary-400 p-32 md:my-48 md:rounded-sm"
       onSubmit={submitEmail}
     >
       <VectorIllustrations.MonoDoor
         foregroundColor="var(--color-primary-400)"
         backgroundColor="var(--color-primary-800)"
-        className="w-80"
+        className="absolute bottom-0 right-48 hidden h-3/4 md:block"
       />
       <div className="w-full">
-        <Heading2 className="text-h1">{title}</Heading2>
-        <Body1>{text}</Body1>
-        <div className="flex w-3/4 gap-24">
+        <Heading2 className="mb-16 max-w-prose text-h1">{title}</Heading2>
+        {text && <Body1>{text}</Body1>}
+        <div className=" max-w-md space-y-16">
           <Input
             placeholder={placeholder}
             value={email}

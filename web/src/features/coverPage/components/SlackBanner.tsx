@@ -20,12 +20,12 @@ export const SlackBanner: React.FC = () => {
   if (!sanitySlackBanner) return null;
   const { title, text, buttonText } = sanitySlackBanner;
   return (
-    <div className="bg-yellow-100 px-48 pt-8">
-      <div className="mx-auto flex w-full max-w-page items-center justify-between">
-        <div className="flex items-center space-x-24">
+    <div className="bg-yellow-100 px-48 pt-8 pb-8 md:pb-0">
+      <div className="mx-auto w-full max-w-page items-center justify-between md:flex">
+        <div className="items-center md:flex md:space-x-24">
           <VectorIllustrations.MonoDoor
             foregroundColor="var(--color-yellow-200)"
-            className="w-48"
+            className="hidden w-48 md:block"
           />
           <div>
             <Heading4>{title}</Heading4>

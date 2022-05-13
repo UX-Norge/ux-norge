@@ -114,8 +114,8 @@ export const Footer: React.FC<FooterProps> = ({
 
   return (
     <>
-      {showPartners && <Partners />}
       {showNewsletter && <Newsletter />}
+      {showPartners && <Partners />}
       <footer className="bg-gray-900">
         <div className="mx-auto max-w-page space-y-96 p-32">
           <div>

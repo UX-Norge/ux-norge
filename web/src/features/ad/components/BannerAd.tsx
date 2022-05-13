@@ -24,17 +24,22 @@ export const BannerAd: React.FC<
       <Link
         path={slug.current}
         type="ad"
-        className="my-48 block break-words rounded-xs bg-pink-500 p-24 text-gray-900"
+        className="my-48 block break-words rounded-xs bg-pink-200 p-24 text-gray-900"
       >
-        <Overline className="text-gray-900">
+        <Overline className="mb-8 text-gray-900">
           {getDaysToDeadline(deadline)}
         </Overline>
         <Heading3>{title}</Heading3>
         <Overline className="text-gray-900">
           {advertiser.name} • {location.map((place) => place.name).join(", ")}
         </Overline>
-        <Body1 className="mt-8">{description}</Body1>
-        <Image image={advertiser.logo} alt="" width={150} className="h-56" />
+        <Body1 className="mt-16 max-w-prose">{description}</Body1>
+        <Image
+          image={advertiser.logo}
+          alt=""
+          width={150}
+          className="mt-24 h-48"
+        />
       </Link>
     </div>
   );
