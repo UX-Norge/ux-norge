@@ -40,7 +40,6 @@ const publish = async (metadata, client) => {
 };
 
 const updateArticles = () => {
-  console.log("Updating articles");
   client
     .fetch(query)
     .then((response) =>

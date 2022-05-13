@@ -42,7 +42,7 @@ export const Link: React.FC<{
   partiallyActive,
   ariaLabel,
 }) => {
-  if (path.includes("/") && !["author", "category"].includes(type))
+  if (path.includes("/") && !["author", "category", "external"].includes(type))
     console.error(path, "Path must not contain '/'");
 
   return type === "external" ? (

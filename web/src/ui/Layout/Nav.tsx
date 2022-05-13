@@ -36,10 +36,15 @@ export const Nav: React.FC<IProps> = () => {
       <Link type="home" path="" ariaLabel="Hjem">
         <img src={logo} alt="Hjem, UX Norge Logo" className="h-48 w-auto" />
       </Link>
-      <div className="lg:flex lg:space-x-48">
+      <div className="flex space-x-24 lg:space-x-48">
         <NavItem name="Aktuelt" path="" type="home" />
         <NavItem name="Jobb" path="jobb" type="page" />
-        <NavItem name="Nettverk" path="nettverk" type="page" />
+        <NavItem
+          name="Nettverk"
+          path="nettverk"
+          type="page"
+          className="hidden sm:block"
+        />
       </div>
     </nav>
   );

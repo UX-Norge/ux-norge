@@ -98,7 +98,7 @@ export const Footer: React.FC<FooterProps> = ({
         if (!path) return null;
         return (
           <Link
-            type="external"
+            type={link._type === "cta" ? "external" : "page"}
             path={path}
             className="block text-primary-100"
             key={`page-${index}`}
