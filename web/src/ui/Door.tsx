@@ -17,7 +17,7 @@ interface IProps {
 }
 
 export const Door: React.FC<IProps> = ({
-  rounded = "full",
+  rounded = "large",
   image,
   size = "fluid",
   width,
@@ -38,13 +38,13 @@ export const Door: React.FC<IProps> = ({
   return (
     <div
       className={classNames(
-        "bg-primary-900 group h-128 rounded-t-full",
+        "bg-primary-900 group h-128 rounded-t-lg",
         {
           "transition-transform": animate,
           "z-50": zIndex === "front",
           "-z-0": zIndex === "back",
           "w-full": size === "fluid",
-          "rounded-t-lg": rounded === "large",
+          "rounded-t-full": rounded === "full",
           "bg-primary-500": image,
           "aspect-w-3 aspect-h-2": image,
         },

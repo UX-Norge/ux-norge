@@ -47,10 +47,12 @@ export const ArticleHeader: React.FC<
           <Door
             classNameOuter="absolute bottom-0 left-[-20%] h-[32%] w-[15%] lg:block hidden"
             size="large"
+            rounded="full"
           />
           <Door
             classNameOuter="absolute bottom-0 left-[-3%] h-[25%] w-[10%] lg:block hidden"
             size="large"
+            rounded="full"
           />
         </div>
         <div className="relative flex h-full items-end">
