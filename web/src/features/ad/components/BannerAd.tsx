@@ -15,7 +15,7 @@ export const BannerAd: React.FC<
       <Link
         path={slug.current}
         type="ad"
-        className="my-48 block rounded bg-blue-100 p-48 text-gray-900"
+        className="my-48 block break-words rounded bg-blue-100 p-48 text-gray-900"
       >
         <Heading2>{title}</Heading2>
         <Body1>{description}</Body1>

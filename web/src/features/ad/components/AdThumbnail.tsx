@@ -25,6 +25,7 @@ export const AdThumbnail: React.FC<IProps> = ({ ad }) => {
           image={ad.advertiser.logo}
           alt={ad.advertiser.name + "-logo"}
           width={200}
+          height={200}
         />
       </div>
       <div className="w-full">

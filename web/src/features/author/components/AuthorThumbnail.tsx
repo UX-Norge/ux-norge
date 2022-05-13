@@ -16,7 +16,7 @@ export const AuthorThumbnail: React.FC<
     >
       <Door image={image} alt={name} width={80} height={80} />
       <div>
-        <Heading4>{name}</Heading4>
+        <p className="text-h4">{name}</p>
         <Body1>{company?.name}</Body1>
       </div>
     </Link>
