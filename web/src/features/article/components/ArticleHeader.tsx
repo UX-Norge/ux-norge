@@ -45,12 +45,12 @@ export const ArticleHeader: React.FC<
             </div>
           </div>
           <Door
-            classNameOuter="absolute bottom-0 left-[-20%] h-[32%] w-[15%] lg:block hidden"
+            classNameOuter="absolute bottom-0 left-[-20%] h-[25%] w-[15%] lg:block hidden"
             size="large"
             rounded="full"
           />
           <Door
-            classNameOuter="absolute bottom-0 left-[-3%] h-[25%] w-[10%] lg:block hidden"
+            classNameOuter="absolute bottom-0 left-[-3%] h-[20%] w-[10%] lg:block hidden"
             size="large"
             rounded="full"
           />
