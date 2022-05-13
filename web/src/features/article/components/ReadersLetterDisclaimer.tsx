@@ -5,9 +5,7 @@ import * as React from "react";
 interface IProps {}
 
 export const ReadersLetterDisclaimer: React.FC<IProps> = ({}) => {
-  const {
-    sanityReadersLetter: { title, text },
-  } = useStaticQuery(graphql`
+  const { sanityReadersLetter } = useStaticQuery(graphql`
     query {
       sanityReadersLetter(_id: { eq: "readersLetter" }) {
         title
@@ -15,6 +13,8 @@ export const ReadersLetterDisclaimer: React.FC<IProps> = ({}) => {
       }
     }
   `);
+  if (!sanityReadersLetter) return null;
+  const { title, text } = sanityReadersLetter;
   return (
     <div className="not-prose my-16 rounded-xs bg-blue-100 p-24">
       <p className="text-h4">{title}</p>
