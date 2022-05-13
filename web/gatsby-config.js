@@ -42,6 +42,12 @@ module.exports = {
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
+    {
+      resolve: `gatsby-plugin-plausible`,
+      options: {
+        domain: `uxnorge.no`,
+      },
+    },
     "gatsby-plugin-sitemap",
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,

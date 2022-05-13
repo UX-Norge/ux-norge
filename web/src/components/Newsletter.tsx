@@ -29,19 +29,41 @@ export const Newsletter: React.FC<IProps> = ({}) => {
     }
   `);
 
-  const submitEmail = (e: React.FormEvent<HTMLFormElement> | undefined) => {
-    e?.preventDefault();
-    if (!email) return null;
-    console.log(email);
-  };
-
+  const submitEmail = (e: React.FormEvent<HTMLFormElement> | undefined) => {};
+  {
+    /* <form action="https://uxnorge.us1.list-manage.com/subscribe/post?u=d1a65b919a427cf7a70d46d26&amp;id=bd4c3e25bb" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+    <div id="mc_embed_signup_scroll">
+	    <br>
+	     <br>
+	<h2>Abonner på vårt nyhetsbrev</h2>
+<div class="mc-field-group">
+	<label for="mce-EMAIL">E-postadresse
+</label>
+	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+	<div id="mce-responses" class="clear">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d1a65b919a427cf7a70d46d26_bd4c3e25bb" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Abonner" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form> */
+  }
   return (
     <form
+      action="https://uxnorge.us1.list-manage.com/subscribe/post?u=d1a65b919a427cf7a70d46d26&amp;id=bd4c3e25bb"
+      method="post"
+      id="mc-embedded-subscribe-form"
+      name="mc-embedded-subscribe-form"
+      target="_blank"
+      noValidate={false}
       className="relative mx-auto flex w-full max-w-page gap-48 bg-primary-400 p-32 md:my-48 md:rounded-sm"
       onSubmit={submitEmail}
     >
       <VectorIllustrations.MonoDoor
-        color="var(--color-primary-400)"
+        foregroundColor="var(--color-primary-400)"
+        backgroundColor="var(--color-primary-800)"
         className="w-80"
       />
       <div className="w-full">
@@ -53,11 +75,17 @@ export const Newsletter: React.FC<IProps> = ({}) => {
             value={email}
             required
             type="email"
+            name="EMAIL"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
             }
           />
-          <Button onClick={submitEmail} type="submit" color="primary">
+          <Button
+            onClick={submitEmail}
+            type="submit"
+            color="primary"
+            name="subscribe"
+          >
             Bli med
           </Button>
         </div>

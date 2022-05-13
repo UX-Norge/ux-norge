@@ -24,7 +24,7 @@ export const SlackBanner: React.FC = () => {
       <div className="mx-auto flex w-full max-w-page items-center justify-between">
         <div className="flex items-center space-x-24">
           <VectorIllustrations.MonoDoor
-            color="var(--color-yellow-200)"
+            foregroundColor="var(--color-yellow-200)"
             className="w-48"
           />
           <div>
