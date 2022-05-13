@@ -97,7 +97,7 @@ export const Footer: React.FC = () => {
           </div>
         </div>
         <Overline className="flex w-full justify-center bg-gray-800 p-8 text-white">
-          <a href="https://umble.no">Laget av Umble</a>
+          <a href="https://umble.no">Design og kode av Umble</a>
         </Overline>
       </footer>
     </>
