@@ -1,3 +1,4 @@
+import { classNames } from "@Lib/helpers";
 import { Ad } from "@Types";
 import { Image } from "@Ui/Image";
 import { Body1, Heading1, Overline } from "@Ui/Typography";
@@ -13,7 +14,11 @@ export const AdPageHeader: React.FC<
   >
 > = ({ title, image, deadline, advertiser, location, description }) => {
   return (
-    <header className="mt-48 md:grid md:grid-cols-2 md:items-center md:p-24">
+    <header
+      className={classNames("mt-48 md:grid md:grid-cols-2 md:items-center", {
+        "mx-auto max-w-prose grid-cols-1": !image,
+      })}
+    >
       <div className="p-24 md:order-1">
         <Overline className="text-blue-500">
           {advertiser.name} • {location.map(({ name }) => name).join(", ")}

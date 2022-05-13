@@ -34,7 +34,7 @@ export const BannerAd: React.FC<
           {advertiser.name} • {location.map((place) => place.name).join(", ")}
         </Overline>
         <Body1 className="mt-8">{description}</Body1>
-        <Image image={advertiser.logo} alt="" />
+        <Image image={advertiser.logo} alt="" width={150} className="h-56" />
       </Link>
     </div>
   );

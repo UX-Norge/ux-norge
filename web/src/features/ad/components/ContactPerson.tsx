@@ -9,7 +9,7 @@ export const ContactPerson: React.FC<
   Pick<Ad, "contactName" | "contactEmail" | "contactPhone" | "link">
 > = ({ contactName, contactEmail, contactPhone, link }) => {
   return (
-    <div className="p-24">
+    <div className="mb-24">
       {contactName && (
         <>
           <Heading4>Kontaktperson:</Heading4>
