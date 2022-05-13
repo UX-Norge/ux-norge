@@ -46,6 +46,7 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({
           articleListAds={articleListAds}
           articleBannerAds={articleBannerAds}
           readTime={10}
+          isReadersLetter={data.sanityArticle.isReadersLetter}
         />
         <ArticleFooter
           relatedArticles={relatedArticles}
@@ -92,6 +93,7 @@ export const query = graphql`
           name
         }
       }
+      isReadersLetter
       body: _rawBody(resolveReferences: { maxDepth: 3 })
     }
     relatedArticles: allSanityArticle(

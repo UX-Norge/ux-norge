@@ -53,5 +53,21 @@ export default S.listItem()
               .documentId("slackBanner")
               .title("Slackbanner")
           ),
+        S.listItem()
+          .title("Samarbeidspartnerseksjon")
+          .child(
+            S.document()
+              .schemaType("partnerBanner")
+              .documentId("partnerBanner")
+              .title("Samarbeidspartnerseksjon")
+          ),
+        S.listItem()
+          .title("Leserinnlegg")
+          .child(
+            S.document()
+              .schemaType("readersLetter")
+              .documentId("readersLetter")
+              .title("Leserinnlegg")
+          ),
       ])
   );

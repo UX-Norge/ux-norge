@@ -16,7 +16,6 @@ export const query = graphql`
       ...ArticleImage
     }
     description
-    isFeature
     category {
       name
     }

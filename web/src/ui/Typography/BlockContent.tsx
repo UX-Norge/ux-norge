@@ -1,6 +1,6 @@
 import * as React from "react";
 import PortableText from "react-portable-text";
-import { BlockContentType } from "@Types";
+import { PortableText as BlockContentType } from "@Types";
 import { classNames } from "@Lib/helpers";
 
 interface IProps {

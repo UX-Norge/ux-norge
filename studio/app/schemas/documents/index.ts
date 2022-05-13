@@ -7,12 +7,14 @@ import category from "./category";
 import company from "./company";
 import coverPage from "./coverPage";
 import doc from "./doc";
-import footer from "./footer";
 import newsletter from "./newsletter";
-import newsletterSignupForm from "./newsletterSignupForm";
-import siteSettings from "./siteSettings";
-import slackBanner from "./slackBanner";
-import socialMedia from "./socialMedia";
+import footer from "./settings/footer";
+import newsletterSignupForm from "./settings/newsletterSignupForm";
+import partnerBanner from "./settings/partnerBanner";
+import readersLetter from "./settings/readersLetter";
+import siteSettings from "./settings/siteSettings";
+import slackBanner from "./settings/slackBanner";
+import socialMedia from "./settings/socialMedia";
 
 export default [
   siteSettings,
@@ -30,4 +32,6 @@ export default [
   footer,
   newsletterSignupForm,
   slackBanner,
+  partnerBanner,
+  readersLetter,
 ];

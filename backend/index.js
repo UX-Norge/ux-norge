@@ -1,4 +1,4 @@
-const { sendNewsletter } = require("./email/sendNewsletter");
+// const { sendNewsletter } = require("./email/sendNewsletter");
 const { updateArticles } = require("./articles/updateArticles");
 
 require("dotenv").config();
@@ -12,7 +12,7 @@ const startCronJob = (callback, interval = "*/5 * * * * *") => {
 };
 
 async function run() {
-  startCronJob(sendNewsletter);
+  // startCronJob(sendNewsletter);
   startCronJob(updateArticles);
 }
 

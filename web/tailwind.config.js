@@ -51,6 +51,10 @@ module.exports = {
         100: "var(--color-yellow-100)",
         50: "var(--color-yellow-50)",
       },
+      pink: {
+        500: "var(--color-pink-500)",
+        200: "var(--color-pink-200)",
+      },
     },
     spacing: {
       0: 0,

@@ -1,9 +1,9 @@
-import { RelativeLink } from "@Types";
+import { Cta, Document } from "@Types";
 
 export interface Footer {
   contactInformation: string[];
-  pages: RelativeLink[];
-  resources: RelativeLink[];
+  pages: (Cta | Document)[];
+  resources: (Cta | Document)[];
 }
 
 export default {
@@ -21,13 +21,13 @@ export default {
       name: "pages",
       type: "array",
       title: "Sider",
-      of: [{ type: "relativeLink" }],
+      of: [{ type: "reference", to: [{ type: "doc" }] }, { type: "cta" }],
     },
     {
       name: "resources",
       type: "array",
       title: "Ressurser",
-      of: [{ type: "relativeLink" }],
+      of: [{ type: "reference", to: [{ type: "doc" }] }, { type: "cta" }],
     },
   ],
 };

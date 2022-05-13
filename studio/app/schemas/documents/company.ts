@@ -36,4 +36,18 @@ export default {
   initialValue: {
     isPartner: false,
   },
+  preview: {
+    select: {
+      name: "name",
+      media: "logo",
+      isPartner: "isPartner",
+    },
+    prepare({ name, media, isPartner }: any) {
+      return {
+        title: name,
+        media,
+        subtitle: isPartner ? "Støttespiller" : "",
+      };
+    },
+  },
 };

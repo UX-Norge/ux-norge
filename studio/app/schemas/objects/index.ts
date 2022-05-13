@@ -4,7 +4,7 @@ import blockContent from "./blockContent";
 import simpleBlockContent from "./simpleBlockContent";
 import inlineRelatedArticle from "./article/inlineRelatedArticle";
 import factBox from "./article/factBox";
-import relativeLink from "./relativeLink";
+import cta from "./cta";
 
 export default [
   blockContent,
@@ -13,5 +13,5 @@ export default [
   articleImage,
   inlineRelatedArticle,
   factBox,
-  relativeLink,
+  cta,
 ];

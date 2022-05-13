@@ -17,7 +17,6 @@ export interface Article extends SanityDocument {
   slug: SanitySlug;
   relatedArticles?: Article[];
   category: Category;
-  isFeature?: boolean;
   isReadersLetter?: boolean;
 }
 
@@ -96,11 +95,6 @@ export default {
       to: { type: "category" },
       group: "metadata",
       validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: "isFeature",
-      title: "isFeature",
-      type: "boolean",
     },
     {
       name: "isReadersLetter",

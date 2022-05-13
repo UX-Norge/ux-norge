@@ -1,7 +1,10 @@
-import { PortableText, SanityDocument, SanitySlug } from "@Types";
+import { PortableText, SanityDocument, SanitySlug, Link } from "@Types";
 
 export interface Document extends SanityDocument {
+  _type: string;
   title: string;
+  description: string;
+  cta: Link;
   slug: SanitySlug;
   body: PortableText;
 }
@@ -16,6 +19,17 @@ export default {
       title: "title",
       type: "string",
       validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "description",
+      title: "description",
+      type: "text",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "cta",
+      title: "cta",
+      type: "cta",
     },
     {
       name: "slug",
