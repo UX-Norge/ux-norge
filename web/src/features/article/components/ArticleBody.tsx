@@ -58,11 +58,15 @@ export const ArticleBody: React.FC<IProps> = ({
   const bodyWithAds = insertBannerAds(body, articleBannerAds);
 
   return (
-    <main className="relative mx-auto max-w-page-sm">
-      <div className="prose-a:link w-prose prose p-24 prose-p:text-base prose-p:leading-relaxed">
-        <Overline>{printDate(publishedAt)}</Overline>
+    <main className="relative mx-auto mt-56 max-w-page-sm">
+      <div className="max-w-prose p-24">
+        <Overline className="text-base text-primary-500">
+          {printDate(publishedAt)}
+        </Overline>
         <Overline>{readTime} min</Overline>
-        <BlockContent blocks={bodyWithAds} serializers={articleSerializers} />
+        <div className="prose-a:link w-prose prose prose-p:text-base prose-p:leading-relaxed">
+          <BlockContent blocks={bodyWithAds} serializers={articleSerializers} />
+        </div>
       </div>
       {/* <div className="sticky">
         {articleListAds.map((ad) => (

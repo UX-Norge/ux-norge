@@ -38,8 +38,8 @@ export const Nav: React.FC<IProps> = () => {
       </Link>
       <div className="lg:flex lg:space-x-48">
         <NavItem name="Aktuelt" path="" type="home" />
-        <NavItem name="Nettverk" path="nettverk" type="page" />
         <NavItem name="Jobb" path="jobb" type="page" />
+        <NavItem name="Nettverk" path="nettverk" type="page" />
       </div>
     </nav>
   );

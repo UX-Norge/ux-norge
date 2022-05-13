@@ -70,7 +70,7 @@ module.exports = {
       128: "8rem",
     },
     borderRadius: {
-      xs: "0.25rem", // 4px
+      xs: "0.375rem", // 4px
       sm: "0.5rem", // 8px
       DEFAULT: "1rem", // 16px
       lg: "1.5rem", // 24px,

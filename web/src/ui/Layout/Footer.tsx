@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Body1, Overline } from "@Ui/Typography";
 import { graphql, useStaticQuery } from "gatsby";
-import { Footer as FooterProps, GraphqlEdges, SocialMedia } from "@Types";
+import { Footer as FooterData, GraphqlEdges, SocialMedia } from "@Types";
 import { Link } from "@Components/Link";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Image } from "@Ui/Image";
 import { Newsletter } from "@Components/Newsletter";
-import { MainSponsors } from "@Features/ad/components/MainSponsors";
+import { Partners } from "@Features/ad/components/Partners";
 
 import logo from "@Images/logo-white.svg";
 
@@ -15,9 +15,17 @@ interface LinkListProps {
   links: FooterProps["pages"] | FooterProps["resources"];
 }
 
-export const Footer: React.FC = () => {
+export interface FooterProps {
+  showPartners?: boolean;
+  showNewsletter?: boolean;
+}
+
+export const Footer: React.FC<FooterProps> = ({
+  showPartners = true,
+  showNewsletter = true,
+}) => {
   const { sanityFooter, allSanitySocialMedia } = useStaticQuery<{
-    sanityFooter: FooterProps;
+    sanityFooter: FooterData;
     allSanitySocialMedia: GraphqlEdges;
   }>(graphql`
     query {
@@ -66,8 +74,8 @@ export const Footer: React.FC = () => {
 
   return (
     <>
-      <MainSponsors />
-      <Newsletter />
+      {showPartners && <Partners />}
+      {showNewsletter && <Newsletter />}
       <footer className="bg-gray-900">
         <div className="mx-auto max-w-page space-y-96 p-32">
           <div>
@@ -96,7 +104,7 @@ export const Footer: React.FC = () => {
             ))}
           </div>
         </div>
-        <Overline className="flex w-full justify-center bg-gray-800 p-8 text-white">
+        <Overline className="flex w-full justify-center bg-gray-800 p-8 text-gray-300">
           <a href="https://umble.no">Design og kode av Umble</a>
         </Overline>
       </footer>

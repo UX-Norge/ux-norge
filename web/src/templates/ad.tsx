@@ -41,7 +41,7 @@ export const AdPage: React.FC<PageProps<DataProps>> = ({
   location,
 }) => {
   return (
-    <PageWrapper>
+    <PageWrapper showPartners={false} showNewsletter={false}>
       <Seo title={title} description={description} location={location} />
       <main className="mx-auto max-w-page-sm">
         <div className="max-w-prose">

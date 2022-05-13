@@ -57,7 +57,7 @@ export const Newsletter: React.FC<IProps> = ({}) => {
               setEmail(e.target.value)
             }
           />
-          <Button onClick={submitEmail} type="submit">
+          <Button onClick={submitEmail} type="submit" color="primary">
             Bli med
           </Button>
         </div>

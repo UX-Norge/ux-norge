@@ -1,8 +1,7 @@
 import { Link } from "@Components/Link";
 import { Ad } from "@Types";
-import { BlockContent, Body1, Heading2, Heading3 } from "@Ui/Typography";
+import { Body1, Heading2 } from "@Ui/Typography";
 import * as React from "react";
-import PortableText from "react-portable-text";
 
 export const BannerAd: React.FC<
   Pick<
@@ -12,13 +11,15 @@ export const BannerAd: React.FC<
 > = ({ title, description, location, advertiser, slug }) => {
   if (!title || !description || !slug?.current) return null;
   return (
-    <Link
-      path={slug.current}
-      type="ad"
-      className="not-prose my-48 block rounded bg-orange-400 p-48"
-    >
-      <Heading2>{title}</Heading2>
-      <Body1>{description}</Body1>
-    </Link>
+    <div className="not-prose">
+      <Link
+        path={slug.current}
+        type="ad"
+        className="my-48 block rounded bg-blue-100 p-48 text-gray-900"
+      >
+        <Heading2>{title}</Heading2>
+        <Body1>{description}</Body1>
+      </Link>
+    </div>
   );
 };
