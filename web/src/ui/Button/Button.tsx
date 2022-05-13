@@ -18,7 +18,7 @@ export const Button: React.FC<IProps> = ({
   color = "gray",
 }) => {
   const buttonClass = classNames(
-    "whitespace-nowrap rounded-xs px-16 py-8 font-base text-white transition-colors",
+    "inline-flex whitespace-nowrap rounded-xs px-16 py-8 font-base text-white transition-colors",
     {
       "bg-gray-900 text-white hover:bg-gray-800": color === "gray",
       "bg-primary-800 text-white hover:bg-primary-700": color === "primary",

@@ -1,6 +1,6 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
-import { Ad, Article, Author, Category, GraphqlEdges } from "@Types";
+import { Ad, Article, Author, Category, Document, GraphqlEdges } from "@Types";
 import {
   getActiveAdIds,
   getArticlePageAds,
@@ -15,6 +15,7 @@ type SanityData = {
   allSanityAd: GraphqlEdges;
   allSanityAuthor: GraphqlEdges;
   allSanityCategory: GraphqlEdges;
+  allSanityDoc: GraphqlEdges;
 };
 
 const printDivider = () => console.log("\n------------\n");
@@ -87,6 +88,15 @@ export const createPages: GatsbyNode["createPages"] = async ({
           }
         }
       }
+      allSanityDoc {
+        edges {
+          node {
+            slug {
+              current
+            }
+          }
+        }
+      }
     }
   `);
 
@@ -95,11 +105,13 @@ export const createPages: GatsbyNode["createPages"] = async ({
     ads: Ad[];
     authors: Author[];
     categories: Category[];
+    documents: Document[];
   } = {
     articles: cleanGraphqlArray(result.data?.allSanityArticle) as Article[],
     ads: cleanGraphqlArray(result.data?.allSanityAd) as Ad[],
     authors: cleanGraphqlArray(result.data?.allSanityAuthor) as Author[],
     categories: cleanGraphqlArray(result.data?.allSanityCategory) as Category[],
+    documents: cleanGraphqlArray(result.data?.allSanityDoc) as Document[],
   };
 
   const templates = {
@@ -108,6 +120,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     category: path.resolve(`src/templates/category.tsx`),
     ad: path.resolve(`src/templates/ad.tsx`),
     articleArchive: path.resolve(`src/templates/articleArchive.tsx`),
+    document: path.resolve(`src/templates/document.tsx`),
   };
 
   printDivider();
@@ -191,6 +204,20 @@ export const createPages: GatsbyNode["createPages"] = async ({
         },
       });
     });
+
+  data.documents
+    .filter((doc) => doc.slug?.current)
+    .forEach((doc, index) => {
+      createPage("Document", {
+        path: getRoute("page", doc.slug.current),
+        component: templates.document,
+        context: {
+          documentSlug: doc.slug.current,
+          pageIndex: index,
+        },
+      });
+    });
+
   console.log(`\nCreated ${pageCount} pages `);
   printDivider();
 };

@@ -1,7 +1,13 @@
 import * as React from "react";
 import { Body1, Overline } from "@Ui/Typography";
 import { graphql, useStaticQuery } from "gatsby";
-import { Footer as FooterData, GraphqlEdges, SocialMedia } from "@Types";
+import {
+  Document,
+  Footer as FooterData,
+  GraphqlEdges,
+  Cta,
+  SocialMedia,
+} from "@Types";
 import { Link } from "@Components/Link";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Image } from "@Ui/Image";
@@ -12,7 +18,7 @@ import logo from "@Images/logo-white.svg";
 
 interface LinkListProps {
   title: string;
-  links: FooterProps["pages"] | FooterProps["resources"];
+  links: (Cta | Document)[];
 }
 
 export interface FooterProps {
@@ -32,12 +38,30 @@ export const Footer: React.FC<FooterProps> = ({
       sanityFooter(_id: { eq: "footer" }) {
         contactInformation
         pages {
-          name
-          url
+          ... on SanityDoc {
+            title
+            slug {
+              current
+            }
+          }
+          ... on SanityCta {
+            _type
+            url
+            text
+          }
         }
         resources {
-          name
-          url
+          ... on SanityDoc {
+            title
+            slug {
+              current
+            }
+          }
+          ... on SanityCta {
+            _type
+            url
+            text
+          }
         }
       }
       allSanitySocialMedia {
@@ -59,18 +83,34 @@ export const Footer: React.FC<FooterProps> = ({
   const LinkList: React.FC<LinkListProps> = ({ title, links }) => (
     <div className="space-y-24">
       <Overline className="text-primary-400">{title}</Overline>
-      {links.map((link, index) => (
-        <Link
-          type="page"
-          path={link.url || ""}
-          className="block text-primary-100"
-          key={`page-${index}`}
-        >
-          {link.name}
-        </Link>
-      ))}
+      {links.map((link, index) => {
+        let path, text;
+        if (link._type === "cta") {
+          link = link as Cta;
+          path = link.url;
+          text = link.text;
+        } else {
+          link = link as Document;
+          path = link.slug.current;
+          text = link.title;
+        }
+
+        if (!path) return null;
+        return (
+          <Link
+            type="external"
+            path={path}
+            className="block text-primary-100"
+            key={`page-${index}`}
+          >
+            {text}
+          </Link>
+        );
+      })}
     </div>
   );
+
+  console.log(sanityFooter.pages);
 
   return (
     <>

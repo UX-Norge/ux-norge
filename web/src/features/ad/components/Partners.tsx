@@ -46,19 +46,9 @@ export const Partners: React.FC<IProps> = ({}) => {
       <div className="mx-auto w-full max-w-page ">
         <Heading2>{title}</Heading2>
         <div className="my-48 flex flex-wrap justify-center gap-48">
-          {sponsors
-            .filter((sponsor) => sponsor.logo)
-            .map((sponsor, index) => (
-              <div className="max-w-96 max-h-56 w-128">
-                <Image
-                  width={200}
-                  className="h-full w-full object-contain"
-                  image={sponsor.logo}
-                  alt={sponsor.name}
-                  title={sponsor.name}
-                />
-              </div>
-            ))}
+          {sponsors.map((sponsor, index) => (
+            <div>{sponsor.name}</div>
+          ))}
         </div>
         <Button href={page.slug.current} color="primary">
           {buttonText}

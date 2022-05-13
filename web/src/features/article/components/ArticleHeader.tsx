@@ -38,8 +38,9 @@ export const ArticleHeader: React.FC<
             )}
             <Heading1>{title}</Heading1>
             <Body1>{description}</Body1>
-            <div className="mt-16 flex space-x-16">
+            <div className="mt-16 flex space-x-8">
               {authorNames && <Overline>{authorNames}</Overline>}
+              {authorNames && authorCompany && <Overline>•</Overline>}
               {authorCompany && <Overline>{authorCompany}</Overline>}
             </div>
           </div>

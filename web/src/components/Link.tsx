@@ -8,6 +8,7 @@ export type RouteTypes =
   | "ad"
   | "category"
   | "page"
+  | "external"
   | "home";
 
 export const getRoute = (type: RouteTypes, path: string): string => {
@@ -19,6 +20,7 @@ export const getRoute = (type: RouteTypes, path: string): string => {
       author: `/forfatter/${path}/`,
       ad: `/stillignsannonse/${path}/`,
       category: `/kategori/${path}/`,
+      external: null,
     }[type] ?? path
   );
 };
@@ -43,7 +45,11 @@ export const Link: React.FC<{
   if (path.includes("/") && !["author", "category"].includes(type))
     console.error(path, "Path must not contain '/'");
 
-  return (
+  return type === "external" ? (
+    <a href={path} className={className} aria-label={ariaLabel}>
+      {children}
+    </a>
+  ) : (
     <GatsbyLink
       tabIndex={0}
       to={getRoute(type, path)}

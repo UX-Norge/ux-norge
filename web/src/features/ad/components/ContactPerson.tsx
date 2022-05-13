@@ -1,0 +1,25 @@
+import { Ad } from "@Types";
+import { Button } from "@Ui/Button";
+import { Body1, Heading4 } from "@Ui/Typography";
+import * as React from "react";
+
+interface IProps {}
+
+export const ContactPerson: React.FC<
+  Pick<Ad, "contactName" | "contactEmail" | "contactPhone" | "link">
+> = ({ contactName, contactEmail, contactPhone, link }) => {
+  return (
+    <div className="p-24">
+      {contactName && (
+        <>
+          <Heading4>Kontaktperson:</Heading4>
+          <Body1>{contactName}</Body1>
+          {contactPhone && <Body1>{contactPhone}</Body1>}
+          {contactEmail && <Body1>{contactEmail}</Body1>}
+        </>
+      )}
+      <br />
+      <Button href={link}>Søk her</Button>
+    </div>
+  );
+};

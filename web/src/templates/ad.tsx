@@ -1,4 +1,6 @@
 import { Seo } from "@Components/Seo";
+import { AdPageHeader } from "@Features/ad/components/AdPageHeader";
+import { ContactPerson } from "@Features/ad/components/ContactPerson";
 import { getDaysToDeadline } from "@Features/ad/lib/getDaysToDeadline";
 import { daysLeft } from "@Lib/helpers";
 import { Ad } from "@Types";
@@ -20,67 +22,21 @@ interface DataProps {
 }
 
 export const AdPage: React.FC<PageProps<DataProps>> = ({
-  data: {
-    sanityAd: {
-      title,
-      description,
-      body,
-      image,
-      location: adLocation,
-      advertiser,
-      deadline,
-      contactName,
-      contactPhone,
-      contactEmail,
-      link,
-      slug,
-      startDate,
-      packageType,
-    },
-  },
+  data: { sanityAd },
   location,
 }) => {
   return (
     <PageWrapper showPartners={false} showNewsletter={false}>
-      <Seo title={title} description={description} location={location} />
-      <main className="mx-auto max-w-page-sm">
-        <div className="max-w-prose">
-          <div className="p-24">
-            <Overline className="text-blue-500">
-              {advertiser.name} •{" "}
-              {adLocation.map(({ name }) => name).join(", ")}
-            </Overline>
-            <Heading1 className="wrap hyphen break-words">{title}</Heading1>
-            <Body1 className="font-bold">{description}</Body1>
-            <Overline className="mt-24 text-blue-500">
-              {getDaysToDeadline(deadline)}
-            </Overline>
-          </div>
-          {image && (
-            <div className="aspect-w-1 aspect-h-1 mr-24">
-              <Image
-                className="mb-24 rounded-tr-xl rounded-br-xs object-cover"
-                image={image}
-                alt={title}
-                width={1000}
-              />
-            </div>
-          )}
-          <div className="prose p-24">
-            <BlockContent blocks={body} />
-          </div>
-          <div className="p-24">
-            {contactName && (
-              <>
-                <Heading4>Kontaktperson:</Heading4>
-                <Body1>{contactName}</Body1>
-                {contactPhone && <Body1>{contactPhone}</Body1>}
-                {contactEmail && <Body1>{contactEmail}</Body1>}
-              </>
-            )}
-            <br />
-            <Button href={link}>Søk her</Button>
-          </div>
+      <Seo
+        title={sanityAd.title}
+        description={sanityAd.description}
+        location={location}
+      />
+      <main className="mx-auto max-w-page">
+        <AdPageHeader {...sanityAd} />
+        <div className="mx-auto max-w-prose p-24">
+          <ContactPerson {...sanityAd} />
+          <BlockContent blocks={sanityAd.body} prose />
         </div>
       </main>
     </PageWrapper>
