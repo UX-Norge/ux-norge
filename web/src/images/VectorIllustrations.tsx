@@ -36,6 +36,39 @@ const MonoDoor: React.FC<VectorProps> = ({ className, color }) => {
   );
 };
 
+const ShadowDoor: React.FC<VectorProps> = ({ className, color }) => {
+  const id = random6DigitNumber();
+  return (
+    <svg
+      width="170"
+      height="310"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-labelledby={id}
+    >
+      <title id={id}>Door Illustration</title>
+      <path
+        d="M0 85C0 38.056 38.056 0 85 0s85 38.056 85 85v225H0V85Z"
+        fill="#7061EA"
+      />
+      <path
+        d="M0 79.5C0 35.593 35.593 0 79.5 0S159 35.593 159 79.5V310H0V79.5Z"
+        fill="#9786FF"
+      />
+      <path
+        d="M0 85C0 38.056 38.056 0 85 0s85 38.056 85 85v225H0V85Z"
+        fill="#7061EA"
+      />
+      <path
+        d="M0 79.5C0 35.593 35.593 0 79.5 0S159 35.593 159 79.5V310H0V79.5Z"
+        fill="#9786FF"
+      />
+    </svg>
+  );
+};
+
 export const VectorIllustrations = {
   MonoDoor,
+  ShadowDoor,
 };
