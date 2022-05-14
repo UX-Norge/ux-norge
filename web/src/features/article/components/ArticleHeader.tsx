@@ -23,7 +23,7 @@ export const ArticleHeader: React.FC<
   authorCompany = authorCompany === "UX Norge" ? undefined : authorCompany;
 
   return (
-    <header className="relative border-b-2 border-gray-900 pt-64 lg:h-aboveFold">
+    <header className="lg:min-h-aboveFold relative max-w-full overflow-x-hidden border-b-2 border-gray-900 pt-64">
       <div
         className={classNames(
           "mx-auto grid h-full max-w-page gap-48 px-[10%] lg:grid-cols-[4fr_3fr]"
@@ -36,7 +36,7 @@ export const ArticleHeader: React.FC<
                 <Overline>{category.name}</Overline>
               </Link>
             )}
-            <Heading1>{title}</Heading1>
+            <Heading1 className="text-h2 md:text-h1">{title}</Heading1>
             <Body1>{description}</Body1>
             <div className="mt-16 flex space-x-8">
               {authorNames && <Overline>{authorNames}</Overline>}

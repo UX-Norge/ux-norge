@@ -47,7 +47,7 @@ export const Partners: React.FC<IProps> = ({}) => {
         <Heading2>{title}</Heading2>
         <div className="my-48 flex flex-wrap justify-center gap-48">
           {sponsors.map((sponsor, index) => (
-            <div>{sponsor.name}</div>
+            <div key={`partner-${index}`}>{sponsor.name}</div>
           ))}
         </div>
         <Button href={page.slug.current} color="primary">

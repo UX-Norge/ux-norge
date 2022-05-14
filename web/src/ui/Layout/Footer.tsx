@@ -114,8 +114,6 @@ export const Footer: React.FC<FooterProps> = ({
     </div>
   );
 
-  console.log(sanityFooter.pages);
-
   return (
     <>
       {showNewsletter && <Newsletter />}
