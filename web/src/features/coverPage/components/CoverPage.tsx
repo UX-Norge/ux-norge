@@ -78,7 +78,7 @@ export const CoverPage: React.FC<IProps> = ({
   const TwoColumnFourColumn: React.FC<{ flipped?: boolean }> = ({
     flipped = false,
   }) => (
-    <div className="grid gap-48 lg:grid-cols-4">
+    <div className="grid gap-y-48 gap-x-16 lg:grid-cols-4 lg:gap-x-48">
       <ArticleThumbnail
         article={get(1, remainingArticles, true)[0]}
         type={"feature"}
