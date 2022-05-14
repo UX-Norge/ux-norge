@@ -34,7 +34,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   const result = await graphql<SanityData>(`
     query {
-      allSanityArticle {
+      allSanityArticle(sort: { fields: publishedAt, order: DESC }) {
         edges {
           node {
             authors {
