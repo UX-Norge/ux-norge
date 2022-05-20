@@ -1,4 +1,5 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby";
+import { isValidRequest } from "@sanity/webhook";
 import fetch from "node-fetch";
 
 interface SlackMessageBody {
@@ -9,8 +10,13 @@ export default function handler(
   req: GatsbyFunctionRequest,
   res: GatsbyFunctionResponse
 ) {
-  console.log(req.body);
+  const secret = process.env.WEBHOOK_SECRET as string;
   const slackWebhook = process.env.SLACK_WEBHOOK as string;
+
+  if (!isValidRequest(req, secret)) {
+    res.status(401).json({ success: false, message: "Invalid signature" });
+    return;
+  }
 
   fetch(slackWebhook, {
     method: "POST",
