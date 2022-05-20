@@ -99,7 +99,7 @@ module.exports = {
     },
     // Extends
     extend: {
-      height: {
+      minHeight: {
         aboveFold: "80vh",
       },
       maxWidth: {

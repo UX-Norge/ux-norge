@@ -23,10 +23,10 @@ export const ArticleHeader: React.FC<
   authorCompany = authorCompany === "UX Norge" ? undefined : authorCompany;
 
   return (
-    <header className="lg:min-h-aboveFold relative max-w-full overflow-x-hidden border-b-2 border-gray-900 pt-64">
+    <header className="relative max-w-full overflow-x-hidden border-b-2 border-gray-900 pt-64 lg:min-h-aboveFold">
       <div
         className={classNames(
-          "mx-auto grid h-full max-w-page gap-48 px-[10%] lg:grid-cols-[4fr_3fr]"
+          "mx-auto grid h-full max-w-page gap-48 px-[10%] lg:min-h-aboveFold lg:grid-cols-[4fr_3fr]"
         )}
       >
         <div className="relative flex h-full items-center">
