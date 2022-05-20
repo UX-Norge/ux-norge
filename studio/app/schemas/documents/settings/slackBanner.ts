@@ -2,6 +2,7 @@ export interface SlackBanner {
   title: string;
   text: string;
   buttonText: string;
+  invitationLink: string;
 }
 
 export default {
@@ -23,6 +24,11 @@ export default {
       name: "buttonText",
       title: "Knapptekst",
       type: "string",
+    },
+    {
+      name: "invitationLink",
+      title: "Invitasjonslenke",
+      type: "url",
     },
   ],
 };
