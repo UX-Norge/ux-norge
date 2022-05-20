@@ -14,11 +14,12 @@ export const SlackBanner: React.FC = () => {
         title
         text
         buttonText
+        invitationLink
       }
     }
   `);
   if (!sanitySlackBanner) return null;
-  const { title, text, buttonText } = sanitySlackBanner;
+  const { title, text, buttonText, invitationLink } = sanitySlackBanner;
   return (
     <div className="bg-yellow-100 px-48 pt-8 pb-8 md:pb-0">
       <div className="mx-auto w-full max-w-page items-center justify-between md:flex">
@@ -32,9 +33,7 @@ export const SlackBanner: React.FC = () => {
             <Body1>{text}</Body1>
           </div>
         </div>
-        <Button href="https://uxnorge.slack.com/join/shared_invite/zt-n4kqavud-8ZYV08oyR7WuVukZkSR69Q#/shared-invite/email">
-          {buttonText}
-        </Button>
+        <Button href={invitationLink}>{buttonText}</Button>
       </div>
     </div>
   );
