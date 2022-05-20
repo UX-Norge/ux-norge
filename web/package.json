@@ -16,6 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@sanity/webhook": "^1.0.2",
     "D": "^1.0.0",
     "gatsby": "^4.9.3",
     "gatsby-plugin-gatsby-cloud": "^4.14.0",
