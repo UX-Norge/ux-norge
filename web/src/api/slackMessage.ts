@@ -1,4 +1,5 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby";
+import fetch from "node-fetch";
 
 interface SlackMessageBody {
   text: string;
@@ -9,18 +10,16 @@ export default function handler(
   res: GatsbyFunctionResponse
 ) {
   console.log(req.body);
+  const slackWebhook = process.env.SLACK_WEBHOOK as string;
 
-  fetch(
-    "https://hooks.slack.com/services/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",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: {
-        text: "Test!",
-      },
-    }
-  );
+  fetch(slackWebhook, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: {
+      text: "Test!",
+    },
+  });
   res.status(200).json({ hello: `world` });
 }
