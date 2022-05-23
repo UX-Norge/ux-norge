@@ -213,7 +213,6 @@ export const createPages: GatsbyNode["createPages"] = async ({
         component: templates.document,
         context: {
           documentSlug: doc.slug.current,
-          pageIndex: index,
         },
       });
     });

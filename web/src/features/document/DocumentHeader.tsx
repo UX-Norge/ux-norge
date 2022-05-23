@@ -5,8 +5,8 @@ import { Body1, Heading1 } from "@Ui/Typography";
 import * as React from "react";
 
 export const DocumentHeader: React.FC<
-  Pick<Document, "title" | "description"> & { cta: Cta; pageIndex: number }
-> = ({ title, description, pageIndex, cta }) => {
+  Pick<Document, "title" | "description"> & { cta: Cta }
+> = ({ title, description, cta }) => {
   const colors = [
     {
       foreground: "var(--color-primary-400)",
@@ -22,7 +22,7 @@ export const DocumentHeader: React.FC<
     },
   ];
 
-  const color = colors[pageIndex % colors.length];
+  const color = colors[0 % colors.length];
 
   return (
     <header className="border-b-2 border-gray-900">

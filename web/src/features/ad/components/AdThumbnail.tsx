@@ -12,7 +12,10 @@ interface IProps {
 export const AdThumbnail: React.FC<IProps> = ({ ad }) => {
   const deadline = () => {
     if (!ad.deadline) return "Ansetter løpende";
-    return daysLeft(ad.deadline) + " dager igjen";
+    const daysLeftValue = daysLeft(ad.deadline);
+    return daysLeftValue > 0
+      ? `${daysLeftValue} dager igjen`
+      : `Fristen har gått ut`;
   };
   return (
     <Link

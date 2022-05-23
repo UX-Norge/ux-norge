@@ -37,6 +37,7 @@ export const createPaginatedPages = (
         defer: index > 1,
         ...customContext,
       },
+      defer: index > 0,
     });
   });
 };

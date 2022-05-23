@@ -14,18 +14,12 @@ const DocumentPage: React.FC<PageProps<DataProps>> = ({
   data: {
     sanityDoc: { title, description, cta, body },
   },
-  pageContext: { pageIndex },
   location,
 }) => {
   return (
     <PageWrapper>
       <Seo title={title} description={description} location={location} />
-      <DocumentHeader
-        title={title}
-        description={description}
-        pageIndex={pageIndex}
-        cta={cta}
-      />
+      <DocumentHeader title={title} description={description} cta={cta} />
       <div className="prose mx-auto max-w-prose p-24">
         <BlockContent blocks={body} />
       </div>
