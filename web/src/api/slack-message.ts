@@ -14,6 +14,8 @@ export default async function handler(
   //   return;
   // }
 
+  console.log(req.body);
+
   const channelId = process.env.SLACK_ADS_CHANNEL_ID as string;
   const adId = req.body?.id;
 
