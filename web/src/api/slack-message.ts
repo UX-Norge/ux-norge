@@ -14,10 +14,8 @@ export default async function handler(
     return;
   }
 
-  console.log(req);
-
   const channelId = process.env.SLACK_ADS_CHANNEL_ID as string;
-  const adId = req.body?.id;
+  const adId = req.body?._id;
 
   const query = `*[_id == $adId && _type == "ad"] {
       title,
