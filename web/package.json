@@ -16,6 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@sanity/client": "^3.3.0",
     "@sanity/webhook": "^1.0.2",
     "@slack/web-api": "^6.7.1",
     "D": "^1.0.0",
