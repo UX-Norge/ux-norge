@@ -1,7 +1,6 @@
 // Require the Node Slack SDK package (github.com/slackapi/node-slack-sdk)
 import { WebClient, LogLevel, ChatPostMessageArguments } from "@slack/web-api";
 
-console.log(process.env.SLACK_TOKEN);
 // WebClient instantiates a client that can call API methods
 // When using Bolt, you can use either `app.client` or the `client` passed to listeners.
 const client = new WebClient(process.env.SLACK_TOKEN, {
