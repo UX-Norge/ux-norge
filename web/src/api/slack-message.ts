@@ -9,12 +9,12 @@ export default async function handler(
 ) {
   const secret = process.env.WEBHOOK_SECRET as string;
 
-  // if (!isValidRequest(req, secret)) {
-  //   res.status(401).json({ success: false, message: "Invalid signature" });
-  //   return;
-  // }
+  if (!isValidRequest(req, secret)) {
+    res.status(401).json({ success: false, message: "Invalid signature" });
+    return;
+  }
 
-  console.log(req.body);
+  console.log(req);
 
   const channelId = process.env.SLACK_ADS_CHANNEL_ID as string;
   const adId = req.body?.id;
