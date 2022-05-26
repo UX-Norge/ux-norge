@@ -4,6 +4,6 @@ import defaultResolve from "part:@sanity/base/document-actions";
 import { addActions } from "sanity-plugin-content-calendar/build/register";
 
 export default function resolveDocumentActions(props) {
-  const actions = [...defaultResolve(props)];
+  const actions = [...defaultResolve(props), gatsbyPreviewAction];
   return addActions(props, actions);
 }
