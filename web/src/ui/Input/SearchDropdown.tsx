@@ -26,12 +26,12 @@ export const SearchDropdown: React.FC<
     <InputWrapper label={label} helper={helper} required={required}>
       <Combobox
         onChange={handleDropdown}
-        value={options.find((option) => option.value === value)}
+        value={options.find((option) => option?.value === value)}
         name={name}
       >
         <Combobox.Input
           className={inputClassNames.all}
-          displayValue={(value: any) => value.label}
+          displayValue={(value: any) => value?.label}
           onChange={handleQuery}
         />
         <Combobox.Options className="absolute z-10 max-h-256 w-full overflow-y-auto rounded-xs border-2 border-primary-400 bg-white p-4">

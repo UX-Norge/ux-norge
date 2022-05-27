@@ -2,7 +2,7 @@ import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby";
 import { sanityClient } from "../api-lib/sanity.client";
 import { Ad } from "@Types";
 import Cors from "cors";
-import { slugify } from "@Lib/helpers";
+import { slugify } from "../lib/helpers";
 
 const cors = Cors();
 
