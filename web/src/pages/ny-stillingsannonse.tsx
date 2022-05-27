@@ -1,9 +1,9 @@
 import { Link } from "@Components/Link";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Ad, GraphqlEdges } from "@Types";
-import { Input } from "@Ui/Input";
-import { DateInput } from "@Ui/Input/DateInput";
-import { Textarea } from "@Ui/Input/Input";
+import { Dropdown, Input } from "@Ui/Input";
+import { DateInput } from "@Ui/Input";
+import { Textarea } from "@Ui/Input";
 import { PageWrapper } from "@Ui/Layout";
 import { Body1, Heading1 } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
@@ -14,18 +14,24 @@ interface DataProps {
 }
 
 const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
+  const companies = cleanGraphqlArray(data.allSanityCompany).map((company) => ({
+    value: company._id,
+    label: company.name,
+  }));
+
   const [ad, setAd] = React.useState<Partial<Ad>>({
     title: "",
     description: "",
     body: [],
+    startDate: new Date(),
     deadline: "",
     link: "",
     contactName: "",
     contactPhone: "",
     contactEmail: "",
     location: [],
+    advertiser: "df",
   });
-  const companies = cleanGraphqlArray(data.allSanityCompany);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAd({
@@ -54,7 +60,7 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
         <Textarea
           name="description"
           type="textarea"
-          label=""
+          label="Kort beskrivelse"
           value={ad.description}
           onChange={onChange}
         />
@@ -64,6 +70,42 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
           value={ad.startDate}
           onChange={onChange}
         />
+        <div className="grid grid-cols-2 gap-16">
+          <Dropdown
+            name="advertiser"
+            value={ad.advertiser}
+            onChange={onChange}
+            label="Bedrift"
+            options={companies}
+            helper="Finner du ikke bedriften din? Se teksten over"
+          />
+          <Input
+            type="text"
+            label="Firmakode"
+            placeholder="842912"
+            name="link"
+            value={ad.link}
+            onChange={onChange}
+            helper="Har du ikke firmakode? Se teksten over"
+          />
+        </div>
+        <Input
+          type="text"
+          label="Lenke til annonse/søkeportal"
+          name="link"
+          value={ad.link}
+          onChange={onChange}
+        />
+        <Input
+          type="text"
+          label="Arbeidssted"
+          name="location"
+          value={ad.location}
+          placeholder="Oslo, Bergen, Trondheim"
+          onChange={onChange}
+          helper="Kommaseparer om du har flere"
+        />
+        <Input type="text" name="link" value={ad.link} onChange={onChange} />
       </main>
     </PageWrapper>
   );
@@ -74,6 +116,7 @@ export const query = graphql`
     allSanityCompany {
       edges {
         node {
+          _id
           name
         }
       }

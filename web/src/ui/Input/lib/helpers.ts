@@ -7,8 +7,12 @@ export type InputProps = {
   required?: boolean;
   name: string;
   label?: string;
+  helper?: string;
 };
 
-export const inputClassNames = classNames(
-  "w-full rounded-xs border-2 border-gray-600 bg-white p-8 transition-all placeholder:text-gray-600 focus-visible:border-primary-500 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-primary-400"
-);
+const inputDefaultClass =
+  "w-full rounded-xs border-2 border-gray-600 bg-white p-8 transition-all placeholder:text-gray-600 outline-none focus-visible:border-primary-500 focus-visible:ring-[3px] focus-visible:ring-primary-400";
+
+export const inputClassNames = {
+  all: classNames(inputDefaultClass),
+};

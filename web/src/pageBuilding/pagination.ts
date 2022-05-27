@@ -1,5 +1,5 @@
-import { getRoute, RouteTypes } from "../components/Link";
-import { SanitySlug } from "@Types";
+import { getRoute } from "../lib/getRoute";
+import { SanitySlug, RouteTypes } from "@Types";
 
 export const createPaginatedPages = (
   type: string,

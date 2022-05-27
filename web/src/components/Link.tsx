@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { ReactNode } from "react";
 import { RouteTypes } from "@Types";
-import { getRoute } from "@Lib/getRoute";
+import { getRoute } from "../lib/getRoute";
 
 export const Link: React.FC<{
   type: RouteTypes;
