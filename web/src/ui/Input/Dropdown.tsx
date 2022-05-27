@@ -1,38 +1,27 @@
 import * as React from "react";
 import { inputClassNames, InputProps } from "./lib/helpers";
-import { Combobox } from "@headlessui/react";
+import { Combobox, Listbox } from "@headlessui/react";
 import { InputWrapper } from "./InputWrapper";
 import { classNames } from "@Lib/helpers";
 
 export const Dropdown: React.FC<
   InputProps & { options: { value: any; label: string }[] }
-> = ({ name, value, onChange, label, options, helper, ...props }) => {
-  const [query, setQuery] = React.useState("");
+> = ({ name, value, onChange, label, options, helper, required }) => {
   const handleDropdown = (selectedOptionValue: any) => {
-    onChange({ target: { value: selectedOptionValue, name } });
+    onChange({ target: { value: selectedOptionValue.value, name } });
   };
-  const handleQuery = (e: any) => {
-    setQuery(e.target.value);
-  };
-
-  const filteredOptions =
-    query === ""
-      ? options
-      : options.filter(({ label }) =>
-          label.toLowerCase().includes(query.toLowerCase())
-        );
 
   return (
-    <InputWrapper label={label} helper={helper}>
-      <Combobox onChange={handleDropdown} value={value} name={name}>
-        <Combobox.Input
-          className={inputClassNames.all}
-          displayValue={(value: any) => value.label}
-          onChange={handleQuery}
-        />
-        <Combobox.Options className="absolute top-full z-10 max-h-256 w-full overflow-y-auto rounded-xs border-2 border-primary-400 bg-white p-4">
-          {filteredOptions.map((option, index) => (
-            <Combobox.Option
+    <InputWrapper label={label} helper={helper} required={required}>
+      <Listbox onChange={handleDropdown} value={value} name={name}>
+        <Listbox.Button
+          className={classNames(inputClassNames.all, "text-left")}
+        >
+          {options?.find((option) => option?.value === value)?.label}
+        </Listbox.Button>
+        <Listbox.Options className="absolute z-10 max-h-256 w-full overflow-y-auto rounded-xs border-2 border-primary-400 bg-white p-4">
+          {options.map((option, index) => (
+            <Listbox.Option
               key={`option-${index}`}
               value={option}
               as={React.Fragment}
@@ -50,10 +39,10 @@ export const Dropdown: React.FC<
                   {option.label}
                 </li>
               )}
-            </Combobox.Option>
+            </Listbox.Option>
           ))}
-        </Combobox.Options>
-      </Combobox>
+        </Listbox.Options>
+      </Listbox>
     </InputWrapper>
   );
 };

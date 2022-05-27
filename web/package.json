@@ -20,6 +20,7 @@
     "@sanity/client": "^3.3.0",
     "@sanity/webhook": "^1.0.2",
     "@slack/web-api": "^6.7.1",
+    "cors": "^2.8.5",
     "gatsby": "^4.9.3",
     "gatsby-plugin-gatsby-cloud": "^4.14.0",
     "gatsby-plugin-image": "^2.9.1",

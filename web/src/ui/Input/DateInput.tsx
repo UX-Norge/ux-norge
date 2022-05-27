@@ -8,6 +8,7 @@ export const DateInput: React.FC<InputProps> = ({
   label,
   helper,
   onChange,
+  required,
   ...props
 }) => {
   const handleDateChange = (date: Date) => {
