@@ -26,7 +26,10 @@ export const Partners: React.FC<IProps> = ({}) => {
           }
         }
       }
-      allSanityCompany(filter: { isPartner: { eq: true } }) {
+      allSanityCompany(
+        filter: { isPartner: { eq: true } }
+        sort: { fields: name }
+      ) {
         edges {
           node {
             name
@@ -39,7 +42,7 @@ export const Partners: React.FC<IProps> = ({}) => {
     }
   `);
 
-  const sponsors = shuffle(cleanGraphqlArray(allSanityCompany)) as Company[];
+  let sponsors = cleanGraphqlArray(allSanityCompany) as Company[];
 
   return (
     <div className="bg-yellow-50 px-24 py-96 text-center">

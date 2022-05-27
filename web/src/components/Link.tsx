@@ -1,29 +1,8 @@
 import * as React from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { ReactNode } from "react";
-
-export type RouteTypes =
-  | "article"
-  | "author"
-  | "ad"
-  | "category"
-  | "page"
-  | "external"
-  | "home";
-
-export const getRoute = (type: RouteTypes, path: string): string => {
-  return (
-    {
-      home: "/",
-      article: `/${path}/`,
-      page: `/${path}/`,
-      author: `/forfatter/${path}/`,
-      ad: `/stillignsannonse/${path}/`,
-      category: `/kategori/${path}/`,
-      external: null,
-    }[type] ?? path
-  );
-};
+import { RouteTypes } from "@Types";
+import { getRoute } from "@Lib/getRoute";
 
 export const Link: React.FC<{
   type: RouteTypes;
@@ -42,8 +21,12 @@ export const Link: React.FC<{
   partiallyActive,
   ariaLabel,
 }) => {
-  if (path.includes("/") && !["author", "category", "external"].includes(type))
+  if (
+    path.includes("/") &&
+    !["author", "category", "external", "page"].includes(type)
+  ) {
     console.error(path, "Path must not contain '/'");
+  }
 
   return type === "external" ? (
     <a href={path} className={className} aria-label={ariaLabel}>

@@ -1,14 +1,11 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
 import { Ad, Article, Author, Category, Document, GraphqlEdges } from "@Types";
-import {
-  getActiveAdIds,
-  getArticlePageAds,
-  hasExpired,
-} from "./src/features/ad/lib/getAds";
+import { getArticlePageAds } from "./src/features/ad/lib/getAds";
 import { cleanGraphqlArray } from "./src/lib/helpers";
-import { getRoute } from "./src/components/Link";
 import { createPaginatedPages } from "./src/pageBuilding/pagination";
+import { getRoute } from "./src/lib/getRoute";
+import { hasExpired } from "./src/features/ad/lib/hasExpired";
 
 type SanityData = {
   allSanityArticle: GraphqlEdges;
@@ -37,6 +34,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       allSanityArticle(sort: { fields: publishedAt, order: DESC }) {
         edges {
           node {
+            _id
             authors {
               _id
             }
@@ -91,6 +89,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       allSanityDoc {
         edges {
           node {
+            _id
             slug {
               current
             }
@@ -134,6 +133,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       createPage("Article", {
         path: getRoute("article", article.slug.current),
         component: templates.article,
+        ownerNodeId: article._id,
         context: {
           articleListAds: articleListAds.map((ad) => ad._id),
           articleBannerAds: articleBannerAds.map((ad) => ad._id),
@@ -199,6 +199,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       createPage("Ad", {
         path: getRoute("ad", ad.slug.current),
         component: templates.ad,
+        ownerNodeId: ad._id,
         context: {
           adSlug: ad.slug.current,
         },
@@ -211,6 +212,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       createPage("Document", {
         path: getRoute("page", doc.slug.current),
         component: templates.document,
+        ownerNodeId: doc._id,
         context: {
           documentSlug: doc.slug.current,
         },
