@@ -67,7 +67,7 @@ export const ArticleBody: React.FC<
   const bodyWithAds = insertBannerAds(body, articleBannerAds);
 
   return (
-    <main className="relative mx-auto mt-56 grid max-w-[950px] grid-cols-[65ch_1fr] gap-24">
+    <main className="relative mx-auto mt-56 max-w-[950px] grid-cols-[65ch_1fr] gap-24 lg:grid">
       <div className="relative mx-auto max-w-prose p-24 lg:m-0">
         <Overline className="text-base text-primary-500">
           {printDate(publishedAt)}
