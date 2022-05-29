@@ -23,8 +23,8 @@ const insertBannerAds = (blocks: any[], bannerAds: Ad[]) => {
         item.style?.includes("h2") ? out.concat(index) : out,
       []
     )
-    .filter((_, index: number) => index % 2 === 0) // Every other title
-    .splice(1); // Removes the first headline
+    .splice(1) // Removes the first headline
+    .filter((_, index: number) => index % 2 === 0); // Every other title
 
   console.log(titleIndexes);
 
