@@ -1,3 +1,5 @@
+import { hasExpired } from "../../../../../web/src/features/ad/lib/hasExpired";
+
 import {
   AdPackageType,
   Company,
@@ -92,6 +94,12 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: "isRemote",
+      title: "Remote",
+      type: "boolean",
+      group: "content",
+    },
+    {
       name: "link",
       title: "link",
       type: "url",
@@ -160,23 +168,28 @@ export default {
       startDate: "startDate",
       endDate: "endDate",
       advertiser: "advertiser.name",
+      duration: "packageType.duration",
+      adType: "packageType.name",
     },
     prepare(selection: any) {
-      const { title, startDate, endDate, advertiser } = selection;
+      const { title, startDate, advertiser, duration, adType } = selection;
       let media = "";
-      if (!!startDate && !!endDate) {
-        const isActive = new Date(endDate) > new Date();
+      if (!!startDate && !!duration) {
+        const isActive = !hasExpired(startDate, duration);
         const isPending = new Date(startDate) > new Date();
         media = isPending ? "🟡" : isActive ? "🟢" : "";
       }
       return {
         title,
-        subtitle: advertiser,
-        media,
+        subtitle: `${media} ${advertiser} | ${adType}`,
       };
     },
   },
-  initialValue: {
-    fullTime: true,
-  },
+  orderings: [
+    {
+      title: "Start date, Newest first",
+      name: "startDate",
+      by: [{ field: "startDate", direction: "desc" }],
+    },
+  ],
 };

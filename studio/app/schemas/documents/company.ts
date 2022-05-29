@@ -1,4 +1,5 @@
 import { SanityDocument, SanityImage } from "@Types";
+import passwordGenerator from "../../components/input/passwordGenerator";
 
 export interface Company extends SanityDocument {
   name: string;
@@ -26,6 +27,12 @@ export default {
       name: "isPartner",
       title: "Er støttespiller",
       type: "boolean",
+    },
+    {
+      name: "code",
+      title: "Firmakode",
+      type: "string",
+      inputComponent: passwordGenerator,
     },
     // {
     //   name: "invoiceInformation",

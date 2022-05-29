@@ -1,6 +1,5 @@
 import sanityConfig from "../../sanity.json";
 const sanityClient = require("@sanity/client");
-import slugify from "slugify";
 
 const client = sanityClient({
   projectId: sanityConfig.api.projectId,

@@ -13,7 +13,8 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "content-calendar",
-    "autocomplete-input"
+    "autocomplete-input",
+    "@sanity/production-preview"
   ],
   "env": {
     "development": {
@@ -36,6 +37,10 @@
     {
       "implements": "part:@sanity/base/document-badges/resolver",
       "path": "app/workflow/documentBadges"
+    },
+    {
+      "implements": "part:@sanity/production-preview/resolve-production-url",
+      "path": "app/workflow/resolveProductionUrl.ts"
     },
     {
       "name": "part:@sanity/desk-tool/structure",
