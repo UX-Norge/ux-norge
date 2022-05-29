@@ -8,6 +8,7 @@ import { blockContentToPlainText } from "react-portable-text";
 import { BannerAd } from "@Features/ad/components/BannerAd";
 import { FactBox } from "./FactBox";
 import { ReadersLetterDisclaimer } from "./ReadersLetterDisclaimer";
+import { ListAd } from "@Features/ad/components/ListAd";
 
 interface IProps {
   readTime: number;
@@ -66,8 +67,8 @@ export const ArticleBody: React.FC<
   const bodyWithAds = insertBannerAds(body, articleBannerAds);
 
   return (
-    <main className="relative mx-auto mt-56 max-w-page-sm">
-      <div className="mx-auto max-w-prose p-24 lg:m-0">
+    <main className="relative mx-auto mt-56 grid max-w-[950px] grid-cols-[65ch_1fr] gap-24">
+      <div className="relative mx-auto max-w-prose p-24 lg:m-0">
         <Overline className="text-base text-primary-500">
           {printDate(publishedAt)}
         </Overline>
@@ -77,11 +78,11 @@ export const ArticleBody: React.FC<
           <BlockContent blocks={bodyWithAds} serializers={articleSerializers} />
         </div>
       </div>
-      {/* <div className="sticky">
+      <div className="hidden w-full space-y-48 lg:block">
         {articleListAds.map((ad) => (
           <ListAd {...ad} />
         ))}
-      </div> */}
+      </div>
     </main>
   );
 };
