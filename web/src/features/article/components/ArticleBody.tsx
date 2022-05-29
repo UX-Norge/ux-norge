@@ -18,9 +18,15 @@ interface IProps {
 const insertBannerAds = (blocks: any[], bannerAds: Ad[]) => {
   const bannerAdLength = bannerAds.length;
   const titleIndexes = blocks
-    .map((item, index) => (item.style?.includes("h2") ? index : null))
-    .filter((index) => index)
-    .splice(1);
+    .reduce(
+      (out, item, index) =>
+        item.style?.includes("h2") ? out.concat(index) : out,
+      []
+    )
+    .filter((_, index: number) => index % 2 === 0) // Every other title
+    .splice(1); // Removes the first headline
+
+  console.log(titleIndexes);
 
   for (let i = 0; i < bannerAdLength && i < titleIndexes.length; i++) {
     const ad = {
@@ -29,7 +35,7 @@ const insertBannerAds = (blocks: any[], bannerAds: Ad[]) => {
       ...bannerAds[i],
     };
     const newIndex = titleIndexes[i];
-    const shift = i > 0 ? 1 : 0;
+    const shift = i; // Shift the index by the number of banner ads previously inserted
     newIndex && blocks.splice(newIndex + shift, 0, ad);
   }
   return blocks;
@@ -44,6 +50,8 @@ export const ArticleBody: React.FC<
   articleListAds,
   articleBannerAds,
 }) => {
+  console.log(body);
+
   const articleSerializers = {
     articleImage: ArticleImage,
     relatedArticle: RelatedArticleInline,
