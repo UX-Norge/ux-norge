@@ -1,19 +1,9 @@
 import { Seo } from "@Components/Seo";
 import { AdPageHeader } from "@Features/ad/components/AdPageHeader";
 import { ContactPerson } from "@Features/ad/components/ContactPerson";
-import { getDaysToDeadline } from "@Features/ad/lib/getDaysToDeadline";
-import { daysLeft } from "@Lib/helpers";
 import { Ad } from "@Types";
-import { Button } from "@Ui/Button";
-import { Image } from "@Ui/Image";
 import { PageWrapper } from "@Ui/Layout";
-import {
-  BlockContent,
-  Body1,
-  Heading1,
-  Heading4,
-  Overline,
-} from "@Ui/Typography";
+import { BlockContent } from "@Ui/Typography";
 import { graphql, Page, PageProps } from "gatsby";
 import * as React from "react";
 

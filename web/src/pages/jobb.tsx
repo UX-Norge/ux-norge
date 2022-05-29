@@ -1,12 +1,10 @@
 import { Seo } from "@Components/Seo";
 import { AdThumbnail } from "@Features/ad/components/AdThumbnail";
 import { FilterRow } from "@Features/ad/components/FilterRow";
-import { ListAd } from "@Features/ad/components/ListAd";
-import { getJobPageAds } from "@Features/ad/lib/getAds";
+import { useJobPageAds } from "@Features/ad/lib/useAds";
 import { cleanGraphqlArray, flatten, removeDuplicates } from "@Lib/helpers";
 import { Ad, GraphqlEdges } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
-import { Heading1, Heading4 } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
 import * as React from "react";
 
@@ -33,8 +31,9 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   ]);
 
   const [filteredAds, setFilteredAds] = React.useState<Ad[]>(
-    getJobPageAds(ads)
+    useJobPageAds(ads)
   );
+  console.log(filteredAds);
 
   React.useEffect(() => {
     setFilteredAds(

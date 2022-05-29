@@ -5,7 +5,6 @@ import { ArticleBody, ArticleFooter } from "@Features/article";
 import { PageWrapper } from "@Ui/Layout";
 import { cleanGraphqlArray, shuffle } from "../lib/helpers";
 import { ArticleHeader } from "@Features/article/components/ArticleHeader";
-import { getRoute } from "@Components/Link";
 import { Seo } from "../components/Seo";
 
 interface DataProps {

@@ -4,7 +4,7 @@ import { Image } from "@Ui/Image";
 import { Body1, Heading2, Heading3, Overline } from "@Ui/Typography";
 import * as React from "react";
 import company from "studio/app/schemas/documents/company";
-import { getDaysToDeadline } from "../lib/getDaysToDeadline";
+import { getDaysToDeadline } from "../lib/adHelpers";
 
 export const BannerAd: React.FC<
   Pick<
@@ -18,7 +18,7 @@ export const BannerAd: React.FC<
     | "deadline"
   >
 > = ({ title, description, deadline, location, advertiser, slug }) => {
-  if (!title || !description || !slug?.current) return null;
+  if (!title || !description || !slug?.current || !advertiser) return null;
   return (
     <div className="not-prose">
       <Link

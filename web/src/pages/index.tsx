@@ -4,7 +4,7 @@ import { CoverPage } from "@Features/coverPage";
 import { ErrorPage } from "@Ui/ErrorPage/ErrorPage";
 import { GraphqlEdges, Ad, Article } from "@Types";
 import { cleanGraphqlArray } from "../lib/helpers";
-import { getCoverPageAds } from "@Features/ad/lib/getAds";
+import { useCoverPageAds } from "@Features/ad/lib/useAds";
 import { Seo } from "@Components/Seo";
 
 interface DataProps {
@@ -20,7 +20,9 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
     (article) => article.title && article.description && article.slug?.current
   );
 
-  const { listAds, bannerAds } = getCoverPageAds(ads);
+  const { listAds, bannerAds } = useCoverPageAds(ads);
+
+  console.log(bannerAds);
 
   if (!articles) {
     return (
@@ -55,6 +57,7 @@ export const query = graphql`
           ...AdThumbnail
           packageType {
             onCoverPage
+            duration
             type
           }
         }

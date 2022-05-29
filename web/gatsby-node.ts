@@ -1,11 +1,14 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
 import { Ad, Article, Author, Category, Document, GraphqlEdges } from "@Types";
-import { getArticlePageAds } from "./src/features/ad/lib/getAds";
-import { cleanGraphqlArray } from "./src/lib/helpers";
+import {
+  activeFilter,
+  divideListAndBannerAds,
+  validAdFilter,
+} from "./src/features/ad/lib/adHelpers";
+import { cleanGraphqlArray, shuffle } from "./src/lib/helpers";
 import { createPaginatedPages } from "./src/pageBuilding/pagination";
 import { getRoute } from "./src/lib/getRoute";
-import { hasExpired } from "./src/features/ad/lib/hasExpired";
 
 type SanityData = {
   allSanityArticle: GraphqlEdges;
@@ -55,10 +58,13 @@ export const createPages: GatsbyNode["createPages"] = async ({
               current
             }
             startDate
+            title
+            description
+            advertiser {
+              name
+            }
             packageType {
-              onCoverPage
               onArticles
-              onAdsPage
               type
               duration
             }
@@ -125,7 +131,14 @@ export const createPages: GatsbyNode["createPages"] = async ({
   printDivider();
 
   const { listAds: articleListAds, bannerAds: articleBannerAds } =
-    getArticlePageAds(data.ads);
+    divideListAndBannerAds(
+      shuffle(
+        data.ads
+          .filter(validAdFilter)
+          .filter(activeFilter)
+          .filter((ad) => ad.packageType.onArticles)
+      )
+    );
 
   data.articles
     .filter((article) => article.slug?.current)
@@ -190,21 +203,17 @@ export const createPages: GatsbyNode["createPages"] = async ({
       });
     });
 
-  data.ads
-    .filter(
-      (ad) =>
-        ad.slug?.current && !hasExpired(ad.startDate, ad.packageType?.duration)
-    )
-    .forEach((ad) => {
-      createPage("Ad", {
-        path: getRoute("ad", ad.slug.current),
-        component: templates.ad,
-        ownerNodeId: ad._id,
-        context: {
-          adSlug: ad.slug.current,
-        },
-      });
+  data.ads.filter(validAdFilter).forEach((ad) => {
+    createPage("Ad", {
+      path: getRoute("ad", ad.slug.current),
+      component: templates.ad,
+      ownerNodeId: ad._id,
+      context: {
+        adSlug: ad.slug.current,
+      },
+      defer: !activeFilter(ad),
     });
+  });
 
   data.documents
     .filter((doc) => doc.slug?.current)

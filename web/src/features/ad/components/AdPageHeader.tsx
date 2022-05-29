@@ -3,7 +3,7 @@ import { Ad } from "@Types";
 import { Image } from "@Ui/Image";
 import { Body1, Heading1, Overline } from "@Ui/Typography";
 import * as React from "react";
-import { getDaysToDeadline } from "../lib/getDaysToDeadline";
+import { getDaysToDeadline } from "../lib/adHelpers";
 
 interface IProps {}
 
@@ -21,7 +21,8 @@ export const AdPageHeader: React.FC<
     >
       <div className="p-24 md:order-1">
         <Overline className="text-blue-500">
-          {advertiser.name} • {location.map(({ name }) => name).join(", ")}
+          {advertiser?.name && `${advertiser.name} •`}{" "}
+          {location.map(({ name }) => name).join(", ")}
         </Overline>
         <Heading1 className="wrap hyphen break-words">{title}</Heading1>
         <Body1 className="font-bold">{description}</Body1>

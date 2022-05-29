@@ -1,16 +1,13 @@
 import * as React from "react";
 import { BlockContent, Overline } from "@Ui/Typography";
 import { ArticleImage, RelatedArticleInline } from "@Features/article";
-import { Ad, Article, PortableText } from "@Types";
+import { Ad, Article } from "@Types";
 import { ArticleQuote } from "./ArticleQuote";
 import { printDate } from "@Lib/helpers";
-import { ListAd } from "@Features/ad/components/ListAd";
 import { blockContentToPlainText } from "react-portable-text";
 import { BannerAd } from "@Features/ad/components/BannerAd";
 import { FactBox } from "./FactBox";
-import { getArticlePageAds } from "@Features/ad/lib/getAds";
 import { ReadersLetterDisclaimer } from "./ReadersLetterDisclaimer";
-import author from "studio/app/schemas/documents/author";
 
 interface IProps {
   readTime: number;

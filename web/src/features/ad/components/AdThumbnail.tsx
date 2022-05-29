@@ -4,12 +4,15 @@ import { Ad } from "@Types";
 import { Image } from "@Ui/Image";
 import { Body1, Body2, Heading4, Overline } from "@Ui/Typography";
 import * as React from "react";
+import { activeFilter } from "../lib/adHelpers";
 
 interface IProps {
   ad: Ad;
 }
 
 export const AdThumbnail: React.FC<IProps> = ({ ad }) => {
+  if (!activeFilter(ad)) return null;
+
   const deadline = () => {
     if (!ad.deadline) return "Ansetter løpende";
     const daysLeftValue = daysLeft(ad.deadline);
