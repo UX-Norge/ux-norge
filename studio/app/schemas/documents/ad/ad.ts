@@ -1,4 +1,4 @@
-import { hasExpired } from "../../../../../web/src/features/ad/lib/hasExpired";
+import { hasExpired } from "../../../../../web/src/features/ad/lib/adHelpers";
 
 import {
   AdPackageType,

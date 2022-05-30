@@ -12,9 +12,9 @@
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
-    "content-calendar",
     "autocomplete-input",
-    "@sanity/production-preview"
+    "@sanity/production-preview",
+    "@sanity/scheduled-publishing"
   ],
   "env": {
     "development": {

@@ -11,5 +11,5 @@ const CustomBadge = () => {
 
 export default function resolveDocumentBadges(props) {
   const badges = [...defaultResolve(props)];
-  return addBadge(props, badges);
+  return badges;
 }
