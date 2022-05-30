@@ -15,6 +15,7 @@ import { Newsletter } from "@Components/Newsletter";
 import { Partners } from "@Features/ad/components/Partners";
 
 import logo from "@Images/logo-white.svg";
+import sanityLogo from "@Images/sanity-logo.svg";
 
 interface LinkListProps {
   title: string;
@@ -132,22 +133,26 @@ export const Footer: React.FC<FooterProps> = ({
             <LinkList title="Sider" links={sanityFooter.pages} />
             <LinkList title="Ressurser" links={sanityFooter.resources} />
           </div>
-          <div className="flex justify-center space-x-24 md:justify-start">
-            {socialMedia.map(({ name, link, image }, index) => (
-              <a href={link} className="" key={`social-${index}`}>
-                <Image
-                  width={64}
-                  image={image}
-                  title={name}
-                  alt={name}
-                  className="h-24 w-24"
-                />
-              </a>
-            ))}
+          <div>
+            <div className="flex justify-center space-x-24 md:justify-start">
+              {socialMedia.map(({ name, link, image }, index) => (
+                <a href={link} className="" key={`social-${index}`}>
+                  <Image
+                    width={64}
+                    image={image}
+                    title={name}
+                    alt={name}
+                    className="h-24 w-24"
+                  />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-        <Overline className="flex w-full justify-center bg-gray-800 p-8 text-gray-300">
+
+        <Overline className="flex w-full justify-center space-x-64 bg-gray-800 p-8 text-gray-300">
           <a href="https://umble.no">Design og kode av Umble</a>
+          <a href="https://sanity.io">Strukturert innhold med Sanity.io</a>
         </Overline>
       </footer>
     </>
