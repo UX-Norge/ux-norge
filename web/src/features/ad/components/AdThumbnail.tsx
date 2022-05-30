@@ -2,7 +2,7 @@ import { Link } from "@Components/Link";
 import { daysLeft } from "@Lib/helpers";
 import { Ad } from "@Types";
 import { Image } from "@Ui/Image";
-import { Body1, Body2, Heading4, Overline } from "@Ui/Typography";
+import { Body2, Heading4, Overline } from "@Ui/Typography";
 import * as React from "react";
 import { activeFilter } from "../lib/adHelpers";
 
@@ -31,7 +31,7 @@ export const AdThumbnail: React.FC<IProps> = ({ ad }) => {
           image={ad.advertiser.logo}
           alt={ad.advertiser.name + "-logo"}
           width={200}
-          height={200}
+          className="max-w-full"
         />
       </div>
       <div className="w-full">

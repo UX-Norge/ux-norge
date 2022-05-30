@@ -38,5 +38,5 @@ export const hasExpired = (startDate: string, duration: number) => {
   const now = new Date();
   const start = new Date(startDate);
   const expiry = addDays(start, duration);
-  return now > expiry || expiry < now;
+  return now > expiry || start > now;
 };
