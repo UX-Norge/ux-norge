@@ -7,7 +7,7 @@ export const getRoute = (type: RouteTypes, path: string): string => {
       article: `/${path}/`,
       page: `/${path}/`,
       author: `/forfatter/${path}/`,
-      ad: `/stillignsannonse/${path}/`,
+      ad: `/stillingsannonse/${path}/`,
       category: `/kategori/${path}/`,
       external: null,
     }[type] ?? path
