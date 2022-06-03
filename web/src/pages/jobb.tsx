@@ -19,6 +19,7 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
     ads.map((ad) => ad.jobType),
     true
   );
+
   const locations = removeDuplicates(
     flatten(ads.map((ad) => ad.location.map((location) => location.name))),
     true
@@ -33,7 +34,6 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const [filteredAds, setFilteredAds] = React.useState<Ad[]>(
     useJobPageAds(ads)
   );
-  console.log(filteredAds);
 
   React.useEffect(() => {
     setFilteredAds(
@@ -44,6 +44,7 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         const locationMatch = selectedLocations.includes(ALL_STRING)
           ? true
           : ad.location.some(({ name }) => selectedLocations.includes(name));
+        const remoteMatch = ad.isRemote;
         return jobTypeMatch && locationMatch;
       })
     );
@@ -81,7 +82,7 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
 
 export const query = graphql`
   query {
-    allSanityAd(sort: { fields: startDate, order: DESC }) {
+    allSanityAd(sort: { fields: _createdAt, order: DESC }) {
       edges {
         node {
           ...AdThumbnail

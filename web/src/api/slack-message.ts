@@ -30,6 +30,9 @@ export default async function handler(
     if (!result) return null;
     publishMessage(channelId, "Test", [
       {
+        type: "divider",
+      },
+      {
         type: "header",
         text: {
           type: "plain_text",
@@ -52,15 +55,16 @@ export default async function handler(
           text: result.description,
         },
       },
-      {
-        type: "divider",
-      },
+
       {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `https://uxnorge.no/stillignsannonse/${result.slug}`,
+          text: `https://uxnorge.no/stillingsannonse/${result.slug}`,
         },
+      },
+      {
+        type: "divider",
       },
     ]);
   });

@@ -26,6 +26,7 @@ export const query = graphql`
 
   fragment AdThumbnail on SanityAd {
     _id
+    _createdAt
     title
     slug {
       current
@@ -41,6 +42,7 @@ export const query = graphql`
     packageType {
       duration
     }
+    isRemote
     advertiser {
       name
       logo {

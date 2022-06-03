@@ -12,8 +12,6 @@ type ListAndBannerAds = {
   bannerAds: Ad[];
 };
 
-const emptyListAndBannerAds: ListAndBannerAds = { listAds: [], bannerAds: [] };
-
 const useActiveAds = (ads: Ad[], filtering: (ad: Ad) => boolean): Ad[] => {
   const [activeAds, setActiveAds] = useState<Ad[]>([]);
 
