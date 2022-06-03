@@ -42,7 +42,6 @@ export const query = graphql`
     packageType {
       duration
     }
-    isRemote
     advertiser {
       name
       logo {
