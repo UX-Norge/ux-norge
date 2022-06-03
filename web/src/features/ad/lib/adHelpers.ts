@@ -10,7 +10,7 @@ export const validAdFilter = () => (ad: Ad) =>
   ad._createdAt;
 
 export const activeFilter = (ad: Ad) =>
-  !hasExpired(ad._createdAt, ad.packageType?.duration);
+  !hasExpired(ad.startDate, ad.packageType?.duration);
 
 export const divideListAndBannerAds = (ads: Ad[]) => {
   return {

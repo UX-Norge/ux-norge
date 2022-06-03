@@ -20,7 +20,7 @@ const ShowDuration = React.forwardRef((props: any, _) => {
       .then((result: { duration: number }) => setDuration(result.duration));
   }, [props.parent.packageType]);
 
-  return <div>Varer til: {printDate(props.parent.startDate, duration)}</div>;
+  return <div>Varer til: {printDate(props.parent._createdAt, duration)}</div>;
 });
 
 export default withDocument(ShowDuration);

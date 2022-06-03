@@ -44,7 +44,6 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         const locationMatch = selectedLocations.includes(ALL_STRING)
           ? true
           : ad.location.some(({ name }) => selectedLocations.includes(name));
-        const remoteMatch = ad.isRemote;
         return jobTypeMatch && locationMatch;
       })
     );
@@ -82,7 +81,7 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
 
 export const query = graphql`
   query {
-    allSanityAd(sort: { fields: _createdAt, order: DESC }) {
+    allSanityAd(sort: { fields: startDate, order: DESC }) {
       edges {
         node {
           ...AdThumbnail

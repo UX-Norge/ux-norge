@@ -20,8 +20,8 @@ export interface Ad extends SanityDocument {
   image: SanityImage;
   jobType: "fulltid" | "deltid" | "sommerjobb";
   location: AdLocation[];
-  link: string;
   startDate: string;
+  link: string;
   deadline: string;
   contactName: string;
   contactPhone: string;
@@ -94,18 +94,11 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "isRemote",
-      title: "Remote",
-      type: "boolean",
-      group: "content",
-    },
-    {
       name: "link",
       title: "link",
       type: "url",
       group: "content",
     },
-
     {
       name: "deadline",
       title: "Deadline",
