@@ -37,6 +37,7 @@ export const query = graphql`
   query AdPageQuery($adSlug: String) {
     sanityAd(slug: { current: { eq: $adSlug } }) {
       title
+      _createdAt
       description
       body: _rawBody
       deadline
@@ -53,7 +54,6 @@ export const query = graphql`
       location {
         name
       }
-      startDate
       packageType {
         duration
       }

@@ -51,7 +51,7 @@ export const query = graphql`
         }
       }
     }
-    allSanityAd(sort: { fields: startDate, order: DESC }) {
+    allSanityAd(sort: { fields: _createdAt, order: DESC }) {
       edges {
         node {
           ...AdThumbnail

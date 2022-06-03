@@ -53,11 +53,11 @@ export const createPages: GatsbyNode["createPages"] = async ({
       allSanityAd {
         edges {
           node {
+            _createdAt
             _id
             slug {
               current
             }
-            startDate
             title
             description
             advertiser {
