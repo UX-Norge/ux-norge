@@ -16,8 +16,12 @@ export const activeFilter = (ad: Ad) =>
 
 export const divideListAndBannerAds = (ads: Ad[]) => {
   return {
-    listAds: ads.filter((ad) => ad.packageType.type === "list"),
-    bannerAds: ads.filter((ad) => ad.packageType.type === "banner"),
+    listAds: ads.filter((ad) =>
+      ["list", "banner+list"].includes(ad.packageType.type)
+    ),
+    bannerAds: ads.filter((ad) =>
+      ["banner", "banner+list"].includes(ad.packageType.type)
+    ),
   };
 };
 
