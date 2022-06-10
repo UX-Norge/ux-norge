@@ -22,7 +22,7 @@ export const AdPage: React.FC<PageProps<DataProps>> = ({
         description={sanityAd.description}
         location={location}
       />
-      <main className="mx-auto max-w-page">
+      <main className="mx-auto max-w-page pb-128">
         <AdPageHeader {...sanityAd} />
         <div className="mx-auto max-w-prose p-24">
           <ContactPerson {...sanityAd} />

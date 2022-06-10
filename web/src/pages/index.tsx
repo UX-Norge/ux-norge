@@ -6,6 +6,7 @@ import { GraphqlEdges, Ad, Article } from "@Types";
 import { cleanGraphqlArray } from "../lib/helpers";
 import { useCoverPageAds } from "@Features/ad/lib/useAds";
 import { Seo } from "@Components/Seo";
+import { activeFilter, validAdFilter } from "@Features/ad/lib/adHelpers";
 
 interface DataProps {
   allSanityArticle: GraphqlEdges;
@@ -20,9 +21,18 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
     (article) => article.title && article.description && article.slug?.current
   );
 
-  const { listAds, bannerAds } = useCoverPageAds(ads);
+  console.log(ads);
 
-  console.log(bannerAds);
+  console.log(
+    ads.filter((ad) => {
+      console.log(ad.advertiser.name);
+      console.log(validAdFilter(ad));
+      console.log(activeFilter(ad));
+    })
+  );
+
+  const { listAds, bannerAds } = useCoverPageAds(ads);
+  console.log(listAds, bannerAds);
 
   if (!articles) {
     return (

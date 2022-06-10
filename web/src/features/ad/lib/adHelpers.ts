@@ -1,13 +1,15 @@
 import { Ad } from "@Types";
 import { daysLeft } from "../../../lib/helpers";
 
-export const validAdFilter = () => (ad: Ad) =>
+export const validAdFilter = (ad: Ad) =>
   ad.slug?.current &&
   ad.title &&
   ad.description &&
   ad.advertiser &&
   ad.advertiser.name &&
-  ad._createdAt;
+  ad.startDate
+    ? true
+    : false;
 
 export const activeFilter = (ad: Ad) =>
   !hasExpired(ad.startDate, ad.packageType?.duration);
