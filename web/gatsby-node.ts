@@ -63,6 +63,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
             advertiser {
               name
             }
+            startDate
             packageType {
               onArticles
               type
