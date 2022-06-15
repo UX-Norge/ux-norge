@@ -29,7 +29,7 @@ export const getDaysToDeadline = (deadline: string) => {
   if (!deadline) return "Ansetter fortløpende";
   return !deadline
     ? "ansetter fortløpende"
-    : "Søknadsfrist er om " + daysLeft(deadline);
+    : "Søknadsfrist er om " + daysLeft(deadline) dager;
 };
 
 // Add n days to a date
