@@ -14,7 +14,6 @@ export const Newsletter: React.FC<IProps> = ({}) => {
       title,
       text,
       placeholder,
-      buttonText,
       privacyText,
     },
   } = useStaticQuery(graphql`
@@ -58,7 +57,7 @@ export const Newsletter: React.FC<IProps> = ({}) => {
       name="mc-embedded-subscribe-form"
       target="_blank"
       noValidate={false}
-      className="relative mx-auto flex w-full max-w-page gap-48 rounded-t-lg bg-primary-400 p-32 md:my-48 md:rounded-sm"
+      className="relative mx-auto flex w-full max-w-screen-lg gap-48 mt-64 lg:rounded-t-lg bg-primary-400 p-32 md:my-48 md:rounded-sm"
       onSubmit={submitEmail}
     >
       <VectorIllustrations.MonoDoor
@@ -67,9 +66,9 @@ export const Newsletter: React.FC<IProps> = ({}) => {
         className="absolute bottom-0 right-48 hidden h-3/4 md:block"
       />
       <div className="w-full">
-        <Heading2 className="mb-16 max-w-prose text-h1">{title}</Heading2>
+        <Heading2 className="mb-16 sm:max-w-prose text-h1">{title}</Heading2>
         {text && <Body1>{text}</Body1>}
-        <div className=" max-w-md space-y-16">
+        <div className=" max-w-md">
           <Input
             placeholder={placeholder}
             value={email}
@@ -89,7 +88,7 @@ export const Newsletter: React.FC<IProps> = ({}) => {
             Bli med
           </Button>
         </div>
-        <div className="prose mt-8 pr-80 text-gray-900 prose-p:m-0">
+        <div className="prose mt-16 pr-80 text-gray-900 prose-p:m-0 max-w-none">
           <BlockContent blocks={privacyText} />
         </div>
       </div>

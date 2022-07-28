@@ -1,11 +1,11 @@
 import { classNames } from "@Lib/helpers";
-import { SanityImage } from "@Types";
+import { RoundedType, SanityImage } from "@Types";
 import * as React from "react";
 import { Image } from "./Image";
 
 interface IProps {
-  rounded?: "full" | "large" | "default";
   image?: SanityImage;
+  rounded?: RoundedType;
   size?: "fluid" | "large" | "medium" | "small";
   zIndex?: "front" | "back";
   classNameOuter?: string;
@@ -17,7 +17,7 @@ interface IProps {
 }
 
 export const Door: React.FC<IProps> = ({
-  rounded = "large",
+  rounded = "lg",
   image,
   size = "fluid",
   width,
@@ -38,26 +38,24 @@ export const Door: React.FC<IProps> = ({
   return (
     <div
       className={classNames(
-        "bg-primary-900 group h-128 rounded-t-lg",
+        "bg-primary-900 group h-128 lg:rounded-t-lg",
         {
           "transition-transform": animate,
           "z-50": zIndex === "front",
           "-z-0": zIndex === "back",
           "w-full": size === "fluid",
-          "rounded-t-full": rounded === "full",
           "bg-primary-500": image,
           "aspect-w-3 aspect-h-2": image,
         },
+        `rounded-t-${rounded}`,
         classNameOuter
       )}
       style={{ height }}
     >
       <InnerDoor
         className={classNames(
-          "group-hover:door-open group-focus:door-open h-full w-full origin-left rounded-t-lg bg-primary-400 object-cover transition-transform duration-700 ease-door",
-          {
-            "rounded-t-full": rounded === "full",
-          },
+          "group-hover:door-open group-focus:door-open lg:rounded-t-lg h-full w-full origin-left bg-primary-400 object-cover transition-transform duration-700 ease-door",
+          `rounded-t-${rounded}`,
           classNameInner
         )}
       />

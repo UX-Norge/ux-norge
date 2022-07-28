@@ -76,6 +76,7 @@ module.exports = {
       512: "32rem",
     },
     borderRadius: {
+      none: "0px",
       xs: "0.375rem", // 4px
       sm: "0.5rem", // 8px
       DEFAULT: "1rem", // 16px

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Article } from "@Types";
+import { Article, RoundedType } from "@Types";
 import { Overline } from "@Ui/Typography";
 import { Link } from "@Components/Link";
 import { Door } from "@Ui/Door";
@@ -9,10 +9,12 @@ interface IProps {
   article: Article;
   type: "feature" | "small" | "list";
   className?: string;
+  rounded?: RoundedType;
 }
 
 export const ArticleThumbnail: React.FC<IProps> = ({
   article: { title, mainImage, description, slug, category },
+  rounded = "lg",
   type,
   className,
 }) => {
@@ -36,7 +38,7 @@ export const ArticleThumbnail: React.FC<IProps> = ({
           width={800}
           size="fluid"
           alt={mainImage.alt}
-          rounded="large"
+          rounded={rounded}
           classNameOuter={classNames(" h-full", {
             "aspect-w-3 aspect-h-2 md:order-1": type === "list",
           })}
@@ -46,7 +48,7 @@ export const ArticleThumbnail: React.FC<IProps> = ({
         <Overline className="mt-8">{category.name}</Overline>
         <h2
           className={classNames("font-bold", {
-            "text-h1": type === "feature",
+            "xl:text-h1 text-h2": type === "feature",
             "text-h3": type === "small" || type === "list",
           })}
         >

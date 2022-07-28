@@ -49,8 +49,9 @@ export const CoverPage: React.FC<IProps> = ({
       <div className="md:col-span-2">
         <ArticleThumbnail
           article={get(1, remainingArticles, true)[0]}
+          rounded="none"
           type="feature"
-          className="-mx-24 lg:m-0"
+          className="-mx-24 lg:m-0 lg:rounded-none"
         />
       </div>
       <div className="grid gap-48 sm:grid-cols-2 md:grid-cols-1 lg:col-start-1 lg:grid-cols-1">
@@ -95,7 +96,7 @@ export const CoverPage: React.FC<IProps> = ({
   return (
     <PageWrapper>
       <SlackBanner />
-      <main className="mx-auto max-w-page p-24">
+      <main className="mx-auto max-w-page px-24">
         <TopSection />
         <BannerAd {...get(1, bannerAds)[0]} />
         <FourColumn />
