@@ -27,8 +27,6 @@ const insertBannerAds = (blocks: any[], bannerAds: Ad[]) => {
     .splice(1) // Removes the first headline
     .filter((_, index: number) => index % 2 === 0); // Every other title
 
-  console.log(titleIndexes);
-
   for (let i = 0; i < bannerAdLength && i < titleIndexes.length; i++) {
     const ad = {
       _key: `ad-${i}`,
@@ -51,8 +49,6 @@ export const ArticleBody: React.FC<
   articleListAds,
   articleBannerAds,
 }) => {
-  console.log(body);
-
   const articleSerializers = {
     articleImage: ArticleImage,
     relatedArticle: RelatedArticleInline,

@@ -21,18 +21,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
     (article) => article.title && article.description && article.slug?.current
   );
 
-  console.log(ads);
-
-  console.log(
-    ads.filter((ad) => {
-      console.log(ad.advertiser.name);
-      console.log(validAdFilter(ad));
-      console.log(activeFilter(ad));
-    })
-  );
-
   const { listAds, bannerAds } = useCoverPageAds(ads);
-  console.log(listAds, bannerAds);
 
   if (!articles) {
     return (
