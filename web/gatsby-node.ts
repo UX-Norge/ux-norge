@@ -7,7 +7,7 @@ import {
   validAdFilter,
 } from "./src/features/ad/lib/adHelpers";
 import { cleanGraphqlArray, shuffle } from "./src/lib/helpers";
-import { createPaginatedPages } from "./src/pageBuilding/pagination";
+import { createPaginatedPages, validateData } from "./src/pageBuilding";
 import { getRoute } from "./src/lib/getRoute";
 
 type SanityData = {
@@ -128,6 +128,8 @@ export const createPages: GatsbyNode["createPages"] = async ({
     articleArchive: path.resolve(`src/templates/articleArchive.tsx`),
     document: path.resolve(`src/templates/document.tsx`),
   };
+
+  validateData(data);
 
   printDivider();
 
