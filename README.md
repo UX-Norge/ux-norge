@@ -10,6 +10,8 @@ Prosjektet er delt inn i hovedmmappene:
 Sanity-prosjektet bor her. Ikke noe utenom det vanlige
 Start opp med `sanity start` (første gang `santiy install`)
 
+Prosjekt-id: `dcdo4kbx`, dataset: `staging` (Ja, produksjonsdatasettet heter staging. Det bare skjedde...)
+
 # Web
 Hele frontenden
 Start opp med `yarn start` (første gang `yarn install`)
