@@ -45,10 +45,10 @@ export const ArticleThumbnail: React.FC<IProps> = ({
         />
       )}
       <div className={classNames({ "p-24": type === "feature" })}>
-        <Overline className="mt-8">{category.name}</Overline>
+        {category && <Overline className="mt-8">{category.name}</Overline>}
         <h2
           className={classNames("font-bold", {
-            "xl:text-h1 text-h2": type === "feature",
+            "text-h2 xl:text-h1": type === "feature",
             "text-h3": type === "small" || type === "list",
           })}
         >
