@@ -32,7 +32,7 @@ export const ArticleHeader: React.FC<
         <div className="relative flex h-full items-center">
           <div className="relative z-10">
             {category && (
-              <Link path={category.slug.current} type="category">
+              <Link path={category.slug?.current} type="category">
                 <Overline>{category.name}</Overline>
               </Link>
             )}
