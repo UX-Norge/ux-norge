@@ -3,6 +3,7 @@ import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import { publishMessage } from "../api-lib/slack";
 import { sanityClient } from "../api-lib/sanity.client";
 import { readBody } from "../api-lib/readBody";
+import { json } from "stream/consumers";
 
 const secret = process.env.WEBHOOK_SECRET as string;
 
@@ -12,8 +13,6 @@ export default async function handler(
 ) {
   const signature = req.headers.secret as string;
   const body = await readBody(req);
-
-  console.log(req.headers);
 
   // if (!(secret === signature)) {
   //   res.status(401).json({ success: false, message: "Invalid signature" });
@@ -31,49 +30,51 @@ export default async function handler(
       "slug": slug.current
     }[0]`;
 
-  sanityClient.fetch(query, { adId }).then((result: any) => {
-    console.log(adId, result);
-    if (!result) return null;
-    publishMessage(channelId, "Test", [
-      {
-        type: "divider",
-      },
-      {
-        type: "header",
-        text: {
-          type: "plain_text",
-          text: result.title,
+  sanityClient
+    .fetch(query, { adId })
+    .then((result: any) => {
+      console.log(adId, result);
+      if (!result) return null;
+      res.status(200).json(result);
+      publishMessage(channelId, "Test", [
+        {
+          type: "divider",
         },
-      },
-      {
-        type: "section",
-        text: {
-          type: "plain_text",
-          text: `[${result.advertiser} — ${result.location
-            .map((loc: any) => loc.name)
-            .join(" / ")}]`,
+        {
+          type: "header",
+          text: {
+            type: "plain_text",
+            text: result.title,
+          },
         },
-      },
-      {
-        type: "section",
-        text: {
-          type: "plain_text",
-          text: result.description,
+        {
+          type: "section",
+          text: {
+            type: "plain_text",
+            text: `[${result.advertiser} — ${result.location
+              .map((loc: any) => loc.name)
+              .join(" / ")}]`,
+          },
         },
-      },
+        {
+          type: "section",
+          text: {
+            type: "plain_text",
+            text: result.description,
+          },
+        },
 
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `https://uxnorge.no/stillingsannonse/${result.slug}`,
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `https://uxnorge.no/stillingsannonse/${result.slug}`,
+          },
         },
-      },
-      {
-        type: "divider",
-      },
-    ]);
-  });
-
-  res.status(200).json({});
+        {
+          type: "divider",
+        },
+      ]);
+    })
+    .catch((err: any) => res.status(500).json(err));
 }
