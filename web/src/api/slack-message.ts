@@ -15,6 +15,8 @@ export default async function handler(
 
   console.log("Signature: ", signature);
 
+  console.log(req);
+
   if (!isValidSignature(body, signature, secret)) {
     res.status(401).json({ success: false, message: "Invalid signature" });
     return;
