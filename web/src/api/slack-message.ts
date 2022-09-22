@@ -20,7 +20,7 @@ export default async function handler(
   // }
 
   const channelId = process.env.SLACK_ADS_CHANNEL_ID as string;
-  const adId = req.body?._id;
+  const adId = req.body?._id ?? "2f398f32-ff87-454b-a72e-8b10da746558";
 
   const query = `*[_id == $adId && _type == "ad"] {
       title,
@@ -36,7 +36,7 @@ export default async function handler(
       console.log(adId, result);
       if (!result) return null;
       res.status(200).json(result);
-      publishMessage(channelId, "Test", [
+      publishMessage(channelId, result.title, [
         {
           type: "divider",
         },
