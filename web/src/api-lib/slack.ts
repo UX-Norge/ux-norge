@@ -18,6 +18,7 @@ export async function publishMessage(
     const result = await client.chat.postMessage({
       // The token you used to initialize your app
       token: process.env.SLACK_TOKEN,
+      text,
       channel: channelId,
       blocks,
       // You could also use a blocks[] array to send richer content
