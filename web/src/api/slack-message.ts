@@ -15,10 +15,10 @@ export default async function handler(
 
   console.log(req.headers);
 
-  if (!(secret === signature)) {
-    res.status(401).json({ success: false, message: "Invalid signature" });
-    return;
-  }
+  // if (!(secret === signature)) {
+  //   res.status(401).json({ success: false, message: "Invalid signature" });
+  //   return;
+  // }
 
   const channelId = process.env.SLACK_ADS_CHANNEL_ID as string;
   const adId = req.body?._id;
