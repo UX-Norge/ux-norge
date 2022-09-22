@@ -13,6 +13,8 @@ export default async function handler(
   const signature = req.headers[SIGNATURE_HEADER_NAME] as string;
   const body = await readBody(req);
 
+  console.log(signature);
+
   if (!isValidSignature(body, signature, secret)) {
     res.status(401).json({ success: false, message: "Invalid signature" });
     return;
