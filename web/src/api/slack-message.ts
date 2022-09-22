@@ -1,15 +1,19 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby";
-import { isValidRequest } from "@sanity/webhook";
+import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import { publishMessage } from "../api-lib/slack";
 import { sanityClient } from "../api-lib/sanity.client";
+import { readBody } from "../api-lib/readBody";
+
+const secret = process.env.WEBHOOK_SECRET as string;
 
 export default async function handler(
   req: GatsbyFunctionRequest,
   res: GatsbyFunctionResponse
 ) {
-  const secret = process.env.WEBHOOK_SECRET as string;
+  const signature = req.headers[SIGNATURE_HEADER_NAME] as string;
+  const body = await readBody(req);
 
-  if (!isValidRequest(req, secret)) {
+  if (!isValidSignature(body, signature, secret)) {
     res.status(401).json({ success: false, message: "Invalid signature" });
     return;
   }
