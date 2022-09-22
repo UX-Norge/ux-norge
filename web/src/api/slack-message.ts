@@ -10,17 +10,13 @@ export default async function handler(
   req: GatsbyFunctionRequest,
   res: GatsbyFunctionResponse
 ) {
-  const signature = req.headers[SIGNATURE_HEADER_NAME] as string;
-  const body = await readBody(req);
+  // const signature = req.headers[SIGNATURE_HEADER_NAME] as string;
+  // const body = await readBody(req);
 
-  console.log("Signature: ", signature);
-
-  console.log(req);
-
-  if (!isValidSignature(body, signature, secret)) {
-    res.status(401).json({ success: false, message: "Invalid signature" });
-    return;
-  }
+  // if (!isValidSignature(body, signature, secret)) {
+  //   res.status(401).json({ success: false, message: "Invalid signature" });
+  //   return;
+  // }
 
   const channelId = process.env.SLACK_ADS_CHANNEL_ID as string;
   const adId = req.body?._id;
