@@ -10,7 +10,7 @@ export default async function handler(
   req: GatsbyFunctionRequest,
   res: GatsbyFunctionResponse
 ) {
-  const signature = req.headers[SIGNATURE_HEADER_NAME] as string;
+  const signature = req.headers.secret as string;
   const body = await readBody(req);
 
   console.log(req.headers);
