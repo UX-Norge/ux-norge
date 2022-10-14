@@ -81,7 +81,10 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
 
 export const query = graphql`
   query {
-    allSanityAd(sort: { fields: startDate, order: DESC }) {
+    allSanityAd(
+      filter: { packageType: { onAdsPage: { eq: true } } }
+      sort: { fields: startDate, order: DESC }
+    ) {
       edges {
         node {
           ...AdThumbnail

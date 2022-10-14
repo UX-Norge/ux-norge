@@ -12,15 +12,17 @@ export default async function handler(
   res: GatsbyFunctionResponse
 ) {
   const signature = req.headers.secret as string;
-  const body = await readBody(req);
 
-  // if (!(secret === signature)) {
-  //   res.status(401).json({ success: false, message: "Invalid signature" });
-  //   return;
-  // }
+  if (!(secret === signature)) {
+    res.status(401).json({ success: false, message: "Invalid signature" });
+    return;
+  }
 
   const channelId = process.env.SLACK_ADS_CHANNEL_ID as string;
   const adId = req.body?._id;
+  const onSlack = req.body?.onSlack;
+
+  if (!onSlack) return;
 
   const query = `*[_id == $adId && _type == "ad"] {
       title,
