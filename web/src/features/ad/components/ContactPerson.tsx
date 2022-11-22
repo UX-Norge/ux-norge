@@ -6,8 +6,11 @@ import * as React from "react";
 interface IProps {}
 
 export const ContactPerson: React.FC<
-  Pick<Ad, "contactName" | "contactEmail" | "contactPhone" | "link">
-> = ({ contactName, contactEmail, contactPhone, link }) => {
+  Pick<
+    Ad,
+    "contactName" | "contactEmail" | "contactPhone" | "link" | "linkText"
+  >
+> = ({ contactName, contactEmail, contactPhone, link, linkText }) => {
   return (
     <div className="mb-24">
       {contactName && (
@@ -19,7 +22,7 @@ export const ContactPerson: React.FC<
         </>
       )}
       <br />
-      <Button href={link}>Søk her</Button>
+      <Button href={link}>{linkText || "Søk her"}</Button>
     </div>
   );
 };
