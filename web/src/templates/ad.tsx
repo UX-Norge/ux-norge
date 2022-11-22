@@ -42,6 +42,7 @@ export const query = graphql`
       body: _rawBody
       deadline
       link
+      linkText
       contactName
       contactPhone
       contactEmail

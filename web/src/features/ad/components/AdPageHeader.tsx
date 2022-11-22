@@ -5,8 +5,6 @@ import { Body1, Heading1, Overline } from "@Ui/Typography";
 import * as React from "react";
 import { getDaysToDeadline } from "../lib/adHelpers";
 
-interface IProps {}
-
 export const AdPageHeader: React.FC<
   Pick<
     Ad,

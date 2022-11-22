@@ -22,6 +22,7 @@ export interface Ad extends SanityDocument {
   location: AdLocation[];
   startDate: string;
   link: string;
+  linkText: string;
   deadline: string;
   contactName: string;
   contactPhone: string;
@@ -98,6 +99,13 @@ export default {
       title: "link",
       type: "url",
       group: "content",
+    },
+    {
+      name: "linkText",
+      title: "Tekst på lenke-knappen",
+      type: "string",
+      group: "content",
+      description: 'Hvis denne står tom, skriver vi "Søk her"',
     },
     {
       name: "deadline",

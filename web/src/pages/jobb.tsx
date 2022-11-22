@@ -20,8 +20,14 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
     true
   );
 
+  const [filteredAds, setFilteredAds] = React.useState<Ad[]>(
+    useJobPageAds(ads)
+  );
+
   const locations = removeDuplicates(
-    flatten(ads.map((ad) => ad.location.map((location) => location.name))),
+    flatten(
+      filteredAds.map((ad) => ad.location.map((location) => location.name))
+    ),
     true
   ) as string[];
   const [selectedJobTypes, setSelectedJobTypes] = React.useState<string[]>([
@@ -30,10 +36,6 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const [selectedLocations, setSelectedLocations] = React.useState<string[]>([
     ALL_STRING,
   ]);
-
-  const [filteredAds, setFilteredAds] = React.useState<Ad[]>(
-    useJobPageAds(ads)
-  );
 
   React.useEffect(() => {
     setFilteredAds(
