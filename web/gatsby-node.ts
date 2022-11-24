@@ -142,7 +142,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     .forEach((article, index) => {
       createPage("Article", {
         path: getRoute("article", article.slug.current),
-        component: path.resolve(`src/templates/article.tsx`),
+        component: path.resolve(`./src/templates/article.tsx`),
         ownerNodeId: article._id,
         context: {
           articleListAds: articleListAds.map((ad) => ad._id),
@@ -157,7 +157,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
   createPaginatedPages("Article Archive", {
     routeType: "page",
     slug: { _type: "slug", current: "arkiv" },
-    component: path.resolve(`src/templates/articleArchive.tsx`),
+    component: path.resolve(`./src/templates/articleArchive.tsx`),
     postsPerPage: 12,
     postsCount: data.articles.length,
     createPage,
@@ -169,7 +169,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       createPaginatedPages("Author", {
         routeType: "author",
         slug: author.slug,
-        component: path.resolve(`src/templates/author.tsx`),
+        component: path.resolve(`./src/templates/author.tsx`),
         postsPerPage: 12,
         postsCount: data.articles.filter((article) =>
           article.authors.some(({ _id: authorId }) => authorId === author._id)
@@ -192,7 +192,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
         postsCount: data.articles.filter(
           (article) => article.category?._id === category._id
         ).length,
-        component: path.resolve(`src/templates/category.tsx`),
+        component: path.resolve(`./src/templates/category.tsx`),
         customContext: {
           categorySlug: category.slug.current,
         },
@@ -203,7 +203,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
   data.ads.filter(validAdFilter).forEach((ad) => {
     createPage("Ad", {
       path: getRoute("ad", ad.slug.current),
-      component: path.resolve(`src/templates/ad.tsx`),
+      component: path.resolve(`./src/templates/ad.tsx`),
       ownerNodeId: ad._id,
       context: {
         adSlug: ad.slug.current,
@@ -217,7 +217,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     .forEach((doc, index) => {
       createPage("Document", {
         path: getRoute("page", doc.slug.current),
-        component: path.resolve(`src/templates/document.tsx`),
+        component: path.resolve(`./src/templates/document.tsx`),
         ownerNodeId: doc._id,
         context: {
           documentSlug: doc.slug.current,
