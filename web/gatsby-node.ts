@@ -105,6 +105,9 @@ export const createPages: GatsbyNode["createPages"] = async ({
       }
     }
   `);
+  if (result.errors) {
+    throw result.errors;
+  }
 
   const data: {
     articles: Article[];
@@ -118,15 +121,6 @@ export const createPages: GatsbyNode["createPages"] = async ({
     authors: cleanGraphqlArray(result.data?.allSanityAuthor) as Author[],
     categories: cleanGraphqlArray(result.data?.allSanityCategory) as Category[],
     documents: cleanGraphqlArray(result.data?.allSanityDoc) as Document[],
-  };
-
-  const templates = {
-    article: path.resolve(`src/templates/article.tsx`),
-    author: path.resolve(`src/templates/author.tsx`),
-    category: path.resolve(`src/templates/category.tsx`),
-    ad: path.resolve(`src/templates/ad.tsx`),
-    articleArchive: path.resolve(`src/templates/articleArchive.tsx`),
-    document: path.resolve(`src/templates/document.tsx`),
   };
 
   validateData(data);
@@ -148,7 +142,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     .forEach((article, index) => {
       createPage("Article", {
         path: getRoute("article", article.slug.current),
-        component: templates.article,
+        component: path.resolve(`src/templates/article.tsx`),
         ownerNodeId: article._id,
         context: {
           articleListAds: articleListAds.map((ad) => ad._id),
@@ -163,7 +157,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
   createPaginatedPages("Article Archive", {
     routeType: "page",
     slug: { _type: "slug", current: "arkiv" },
-    component: templates.articleArchive,
+    component: path.resolve(`src/templates/articleArchive.tsx`),
     postsPerPage: 12,
     postsCount: data.articles.length,
     createPage,
@@ -175,7 +169,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       createPaginatedPages("Author", {
         routeType: "author",
         slug: author.slug,
-        component: templates.author,
+        component: path.resolve(`src/templates/author.tsx`),
         postsPerPage: 12,
         postsCount: data.articles.filter((article) =>
           article.authors.some(({ _id: authorId }) => authorId === author._id)
@@ -198,7 +192,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
         postsCount: data.articles.filter(
           (article) => article.category?._id === category._id
         ).length,
-        component: templates.category,
+        component: path.resolve(`src/templates/category.tsx`),
         customContext: {
           categorySlug: category.slug.current,
         },
@@ -209,7 +203,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
   data.ads.filter(validAdFilter).forEach((ad) => {
     createPage("Ad", {
       path: getRoute("ad", ad.slug.current),
-      component: templates.ad,
+      component: path.resolve(`src/templates/ad.tsx`),
       ownerNodeId: ad._id,
       context: {
         adSlug: ad.slug.current,
@@ -223,7 +217,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     .forEach((doc, index) => {
       createPage("Document", {
         path: getRoute("page", doc.slug.current),
-        component: templates.document,
+        component: path.resolve(`src/templates/document.tsx`),
         ownerNodeId: doc._id,
         context: {
           documentSlug: doc.slug.current,
