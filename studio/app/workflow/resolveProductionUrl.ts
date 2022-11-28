@@ -9,7 +9,7 @@ export default function resolveProductionUrl(document) {
       doc: "page",
       ad: "ad",
     }[type]);
-  return `https://preview-uxnorge.gtsb.io${getRoute(
+  return `https://preview-uxnorge.gatsbyjs.io${getRoute(
     toType(_type),
     slug.current
   )}`;
