@@ -14,42 +14,43 @@ interface DataProps {
   relatedArticles: GraphqlEdges;
 }
 
-const ArticlePage: React.FC<PageProps<DataProps>> = ({
-  data,
-  location,
-  pageContext,
-}) => {
+const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
+  const article = data.sanityArticle;
   const articleListAds = shuffle(
     cleanGraphqlArray(data.articleListAds) as Ad[]
   );
 
   const articleBannerAds = cleanGraphqlArray(data.articleBannerAds) as Ad[];
 
-  const relatedArticles = cleanGraphqlArray(data.relatedArticles) as Article[];
+  const relatedArticles =
+    article.relatedArticles && article.relatedArticles.length > 0
+      ? article.relatedArticles
+      : (cleanGraphqlArray(data.relatedArticles) as Article[]);
+  console.log(relatedArticles);
 
   return (
     <article>
       <Seo
-        title={data.sanityArticle.title}
-        description={data.sanityArticle.description}
-        image={data.sanityArticle.mainImage?.image}
-        imageAlt={data.sanityArticle.mainImage?.alt}
+        title={article.title}
+        description={article.description}
+        image={article.mainImage?.image}
+        imageAlt={article.mainImage?.alt}
         location={location}
         type="article"
       />
       <PageWrapper>
-        <ArticleHeader {...data.sanityArticle} />
+        <ArticleHeader {...article} />
         <ArticleBody
-          body={data.sanityArticle.body}
-          publishedAt={data.sanityArticle.publishedAt}
+          body={article.body}
+          publishedAt={article.publishedAt}
           articleListAds={articleListAds}
           articleBannerAds={articleBannerAds}
           readTime={10}
-          isReadersLetter={data.sanityArticle.isReadersLetter}
+          isReadersLetter={article.isReadersLetter}
         />
         <ArticleFooter
           relatedArticles={relatedArticles}
-          authors={data.sanityArticle.authors}
+          authors={article.authors}
         />
       </PageWrapper>
     </article>
@@ -90,6 +91,20 @@ export const query = graphql`
         }
         company {
           name
+        }
+      }
+      relatedArticles {
+        _id
+        title
+        description
+        slug {
+          current
+        }
+        category {
+          name
+        }
+        mainImage {
+          ...ArticleImage
         }
       }
       isReadersLetter

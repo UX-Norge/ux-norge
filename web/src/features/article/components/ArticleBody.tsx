@@ -76,7 +76,7 @@ export const ArticleBody: React.FC<
       </div>
       <div className="hidden w-full space-y-48 lg:block">
         {articleListAds.map((ad) => (
-          <ListAd {...ad} />
+          <ListAd {...ad} key={ad._id} />
         ))}
       </div>
     </main>
