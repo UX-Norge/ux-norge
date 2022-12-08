@@ -108,7 +108,7 @@ export const query = graphql`
         }
       }
       isReadersLetter
-      body: _rawBody(resolveReferences: { maxDepth: 3 })
+      body: _rawBody(resolveReferences: { maxDepth: 4 })
     }
     relatedArticles: allSanityArticle(
       sort: { fields: publishedAt, order: DESC }

@@ -2,32 +2,34 @@ import * as React from "react";
 import { Article } from "@Types";
 import { Image } from "@Ui/Image";
 import { Link } from "@Components/Link";
+import { Body2, Heading3, Overline } from "@Ui/Typography";
 
 interface IProps {
-  article: Article;
+  inlineRelatedArticle: Article;
 }
 
 export const RelatedArticleInline: React.FC<IProps> = ({
-  article: { mainImage, title, description, slug },
+  inlineRelatedArticle: { mainImage, title, description, slug, category },
 }) => {
   if (!slug) return null;
   return (
     <Link
       path={slug.current}
       type="article"
-      className="not-prose grid grid-cols-2 gap-4 bg-gray-200 p-4"
+      className="not-prose grid grid-cols-2 items-center gap-24 rounded-sm bg-primary-100 p-8 pr-24 decoration-transparent"
     >
       {mainImage && (
         <Image
           image={mainImage.image}
           alt={title}
           width={400}
-          className="m-0 p-0 block h-full object-cover"
+          className="m-0 block h-full rounded-sm object-cover p-0"
         />
       )}
-      <div>
-        <h3>{title}</h3>
-        <p>{description}</p>
+      <div className="text-gray-900">
+        <Overline>{category.name}</Overline>
+        <Heading3>{title}</Heading3>
+        <Body2 className="text-sm">{description}</Body2>
       </div>
     </Link>
   );

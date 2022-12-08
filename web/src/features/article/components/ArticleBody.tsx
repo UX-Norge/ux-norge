@@ -51,7 +51,7 @@ export const ArticleBody: React.FC<
 }) => {
   const articleSerializers = {
     articleImage: ArticleImage,
-    relatedArticle: RelatedArticleInline,
+    inlineRelatedArticle: RelatedArticleInline,
     blockquote: ArticleQuote,
     bannerAd: BannerAd,
     factBox: FactBox,
