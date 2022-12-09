@@ -36,7 +36,7 @@ export const ArticleHeader: React.FC<
                 <Overline>{category.name}</Overline>
               </Link>
             )}
-            <Heading1 className="text-h2 md:text-h1">{title}</Heading1>
+            <h1 className="text-h2 font-bold md:text-h1">{title}</h1>
             <Body1>{description}</Body1>
             <div className="mt-16 flex space-x-8">
               {authorNames && <Overline>{authorNames}</Overline>}
