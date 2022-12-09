@@ -7,7 +7,6 @@ Mesteparten av oppgavene kommer fra UX Norge-crewet. Disse blir lagt inn og prio
 
 Hvis du har egne forslag må du gjerne jobbe med dem også, men kan være verdt å ha i bakhodet at noen i UX Norge-crewet må gi 👍 før det går live på uxnorge.no. Enten kast deg rundt å kod opp idéen, eller luft den i `#nettside-utvikling`-kanalen.
 
-
 # Teknisk
 
 Teknologi i prosjektet:
