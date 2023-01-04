@@ -1,9 +1,9 @@
 import { Link } from "@Components/Link";
+import { classNames } from "@Lib/helpers";
 import { Ad } from "@Types";
 import { Image } from "@Ui/Image";
-import { Body1, Heading2, Heading3, Overline } from "@Ui/Typography";
+import { Body1, Heading3, Overline } from "@Ui/Typography";
 import * as React from "react";
-import company from "studio/app/schemas/documents/company";
 import { getDaysToDeadline } from "../lib/adHelpers";
 
 export const BannerAd: React.FC<
@@ -16,15 +16,26 @@ export const BannerAd: React.FC<
     | "advertiser"
     | "slug"
     | "deadline"
-  >
-> = ({ title, description, deadline, location, advertiser, slug }) => {
+  > & { onHomepage: boolean }
+> = ({
+  title,
+  description,
+  deadline,
+  location,
+  advertiser,
+  slug,
+  onHomepage,
+}) => {
   if (!title || !description || !slug?.current || !advertiser) return null;
   return (
     <div className="not-prose">
       <Link
         path={slug.current}
         type="ad"
-        className="my-48 block break-words rounded-xs bg-pink-200 p-24 text-gray-900"
+        className={classNames(
+          "my-48 block break-words rounded-t-xs bg-gray-100 p-24 text-gray-900 shadow-door shadow-gray-200",
+          { "-mx-24": !onHomepage }
+        )}
       >
         <Overline className="mb-8 text-gray-900">
           {getDaysToDeadline(deadline)}
@@ -38,7 +49,7 @@ export const BannerAd: React.FC<
           image={advertiser.logo}
           alt=""
           width={150}
-          className="mt-24 h-48"
+          className="mt-24 h-48 mix-blend-darken"
         />
       </Link>
     </div>

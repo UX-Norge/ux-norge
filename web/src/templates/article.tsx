@@ -26,7 +26,6 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
     article.relatedArticles && article.relatedArticles.length > 0
       ? article.relatedArticles
       : (cleanGraphqlArray(data.relatedArticles) as Article[]);
-  console.log(relatedArticles);
 
   return (
     <article>
@@ -45,7 +44,6 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
           publishedAt={article.publishedAt}
           articleListAds={articleListAds}
           articleBannerAds={articleBannerAds}
-          readTime={10}
           isReadersLetter={article.isReadersLetter}
         />
         <ArticleFooter
