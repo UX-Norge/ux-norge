@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BlockContent, Overline } from "@Ui/Typography";
+import { BlockContent, Heading4, Overline } from "@Ui/Typography";
 import { ArticleImage, RelatedArticleInline } from "@Features/article";
 import { Ad, Article } from "@Types";
 import { ArticleQuote } from "./ArticleQuote";
@@ -9,9 +9,11 @@ import { BannerAd } from "@Features/ad/components/BannerAd";
 import { FactBox } from "./FactBox";
 import { ReadersLetterDisclaimer } from "./ReadersLetterDisclaimer";
 import { ListAd } from "@Features/ad/components/ListAd";
+import { Button } from "@Ui/Button";
+import { graphql, useStaticQuery } from "gatsby";
+import { SlackBannerType } from "@Types";
 
 interface IProps {
-  readTime: number;
   articleListAds: Ad[];
   articleBannerAds: Ad[];
 }
@@ -41,14 +43,33 @@ const insertBannerAds = (blocks: any[], bannerAds: Ad[]) => {
 };
 
 export const ArticleBody: React.FC<
-  IProps & Pick<Article, "publishedAt" | "body" | "isReadersLetter">
+  IProps &
+    Pick<Article, "publishedAt" | "body" | "isReadersLetter" | "category">
 > = ({
   isReadersLetter,
+  category,
   body,
   publishedAt,
   articleListAds,
   articleBannerAds,
 }) => {
+  const [bodyWithAds, setBodyWithAds] = React.useState([]);
+  const {
+    sanitySlackBanner: { invitationLink },
+  } = useStaticQuery<{
+    sanitySlackBanner: SlackBannerType;
+  }>(graphql`
+    query {
+      sanitySlackBanner(_id: { eq: "slackBanner" }) {
+        invitationLink
+      }
+    }
+  `);
+
+  React.useEffect(() => {
+    setBodyWithAds(insertBannerAds(body, articleBannerAds));
+  }, [body, articleBannerAds]);
+
   const articleSerializers = {
     articleImage: ArticleImage,
     inlineRelatedArticle: RelatedArticleInline,
@@ -60,7 +81,6 @@ export const ArticleBody: React.FC<
   const readTime = Math.round(
     blockContentToPlainText(body).split(" ").length / 200
   );
-  const bodyWithAds = insertBannerAds(body, articleBannerAds);
 
   return (
     <main className="relative mx-auto mt-56 max-w-[950px] grid-cols-[65ch_1fr] gap-24 lg:grid">
@@ -71,7 +91,28 @@ export const ArticleBody: React.FC<
         <Overline>{readTime} min</Overline>
         {isReadersLetter && <ReadersLetterDisclaimer />}
         <div className="prose-a:link w-prose prose prose-p:text-base prose-p:leading-relaxed">
-          <BlockContent blocks={bodyWithAds} serializers={articleSerializers} />
+          {bodyWithAds && (
+            <BlockContent
+              blocks={bodyWithAds}
+              serializers={articleSerializers}
+            />
+          )}
+        </div>
+        <div>
+          <hr className="w-64" />
+          {category?.slug.current === "ukens-designer"} <div></div>
+          <div className="my-16 space-y-8">
+            <Heading4>Diskuter artikkelen i UX Norge Slacken</Heading4>
+            <p>
+              Mangler du konto?{" "}
+              <a className="link" href={invitationLink}>
+                Bli med i Slacken
+              </a>
+            </p>
+            <Button href="https://uxnorge.slack.com/archives/C7RP430UD">
+              Gå til artikkelen
+            </Button>
+          </div>
         </div>
       </div>
       <div className="hidden w-full space-y-48 lg:block">
