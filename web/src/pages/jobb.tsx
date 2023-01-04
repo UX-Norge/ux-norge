@@ -2,7 +2,7 @@ import { Seo } from "@Components/Seo";
 import { AdThumbnail } from "@Features/ad/components/AdThumbnail";
 import { FilterRow } from "@Features/ad/components/FilterRow";
 import { ALL_STRING, useJobPageAds } from "@Features/ad/lib/useAds";
-import { cleanGraphqlArray, flatten, removeDuplicates } from "@Lib/helpers";
+import { cleanGraphqlArray } from "@Lib/helpers";
 import { Ad, GraphqlEdges } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
 import { graphql, PageProps } from "gatsby";
