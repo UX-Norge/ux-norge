@@ -9,6 +9,7 @@ import { BannerAd } from "@Features/ad/components/BannerAd";
 import { FactBox } from "./FactBox";
 import { ReadersLetterDisclaimer } from "./ReadersLetterDisclaimer";
 import { ListAd } from "@Features/ad/components/ListAd";
+import { Youtube } from "@Features/article/components/Youtube";
 import { Button } from "@Ui/Button";
 import { graphql, useStaticQuery } from "gatsby";
 import { SlackBannerType } from "@Types";
@@ -80,6 +81,7 @@ export const ArticleBody: React.FC<
 
   const articleSerializers = {
     articleImage: ArticleImage,
+    youtube: Youtube,
     inlineRelatedArticle: RelatedArticleInline,
     blockquote: ArticleQuote,
     bannerAd: BannerAd,
