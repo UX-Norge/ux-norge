@@ -12,6 +12,9 @@ export interface Article extends SanityDocument {
   title: string;
   description: string;
   authors: Author[];
+  metaTitle?: string;
+  companyName: string;
+  companyType: string;
   publishedAt: string;
   body: PortableText;
   slug: SanitySlug;
@@ -63,6 +66,21 @@ export default {
       type: "datetime",
       group: "metadata",
       validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "metaTitle",
+      type: "string",
+      group: "metadata",
+    },
+    {
+      name: "companyName",
+      type: "string",
+      group: "metadata",
+    },
+    {
+      name: "companyType",
+      type: "string",
+      group: "metadata",
     },
     {
       name: "body",
