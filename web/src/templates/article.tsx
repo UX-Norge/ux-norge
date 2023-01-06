@@ -30,12 +30,14 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   return (
     <article>
       <Seo
-        title={article.title}
+        title={article.metaTitle || article.title}
         description={article.description}
         image={article.mainImage?.image}
         imageAlt={article.mainImage?.alt}
         location={location}
+        publishDate={article.publishedAt}
         type="article"
+        authors={article.authors}
       />
       <PageWrapper>
         <ArticleHeader {...article} />
@@ -67,6 +69,9 @@ export const query = graphql`
       title
       description
       publishedAt
+      metaTitle
+      companyName
+      companyType
       mainImage {
         alt
         caption
