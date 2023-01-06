@@ -18,6 +18,7 @@ export interface Article extends SanityDocument {
   relatedArticles?: Article[];
   category: Category;
   isReadersLetter?: boolean;
+  slackMessageLink?: string;
 }
 
 export default {
@@ -100,6 +101,13 @@ export default {
       name: "isReadersLetter",
       title: "Leserinnlegg",
       type: "boolean",
+    },
+    {
+      name: "slackMessageLink",
+      title: "Link til Slackmeldingen",
+      description:
+        'Hover over en melding i Slack, finn "share message" og trykk "copy link"',
+      type: "url",
     },
   ],
   preview: {
