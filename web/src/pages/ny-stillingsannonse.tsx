@@ -9,6 +9,7 @@ import { PageWrapper } from "@Ui/Layout";
 import { Body1, Heading1, Heading3, Heading4 } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
 import * as React from "react";
+import { sanityClient } from "../api-lib/sanity.client";
 
 interface DataProps {
   allSanityCompany: GraphqlEdges;
@@ -20,30 +21,42 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
     value: company._id,
     label: company.name,
   }));
-  const packageTypes = cleanGraphqlArray(
-    data.allSanityAdPackageType
+  const packageTypes = cleanGraphqlArray(data.allSanityAdPackageType).filter(
+    (packageType) => packageType.duration
   ) as AdPackageType[];
 
   const [ad, setAd] = React.useState({
-    title: "Titteltest",
-    description: "En litt lengre beskrivelse",
+    title: "",
+    description: "",
     body: [],
     link: "",
-    contactName: "Don Norman",
-    contactPhone: "47244448",
-    contactEmail: "tobias@umble.no",
-    location: "Trondheim",
+    contactName: "",
+    contactPhone: "",
+    contactEmail: "",
+    location: "",
     packageType: "",
     advertiser: "",
-    jobType: "fulltid",
+    jobType: "",
     code: "",
   });
+  const [selectedPackageType, setSelectedPackageType] =
+    React.useState<AdPackageType | null>(packageTypes[0]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAd({
       ...ad,
       [e.target.name]: e.target.value,
     });
+    if (e.target.name === "packageType") {
+      console.log(e.target.name, e.target.value);
+
+      const newPackageType = packageTypes.find(
+        ({ _id }) => _id === e.target.value
+      );
+      console.log(newPackageType);
+
+      setSelectedPackageType(newPackageType || null);
+    }
   };
 
   const onSubmit = (e: any) => {
@@ -56,10 +69,6 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
       body: JSON.stringify(ad),
     }).then((res) => res.json());
   };
-
-  const currenetPackageType = packageTypes.find(
-    ({ _id }) => (_id === ad.packageType || {}) as AdPackageType
-  );
 
   return (
     <PageWrapper>
@@ -74,7 +83,7 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
           Hvis bedriften din aldri har annonsert på UXNorge.no, gå inn på{" "}
           <Link type="page" path="annonse">
             Annonsering
-          </Link>
+          </Link>{" "}
           for å få deg en konto
         </Body1>
         <div className="mb-24 rounded-xs bg-yellow-100 p-24">
@@ -110,9 +119,8 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
             }))}
             onChange={onChange}
           />
-          <Body1>Pris: {currenetPackageType.price} NOK ekskl. MVA</Body1>
-          <Body1>Varighet: {currenetPackageType.duration} dager</Body1>
-          <br />
+          <Body1>Pris: {selectedPackageType?.price} NOK ekskl. MVA</Body1>
+          <Body1>Varighet: {selectedPackageType?.duration} dager</Body1>
         </div>
         <Heading3>Annonseinnhold</Heading3>
         <Input

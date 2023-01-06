@@ -41,18 +41,7 @@ export default {
       type: "articleImage",
       render: "ArticleImageRenderer",
     },
-    {
-      name: "youtube",
-      type: "object",
-      fields: [
-        { name: "url", type: "url", validation: (Rule) => Rule.required() },
-        {
-          name: "title",
-          type: "string",
-          validation: (Rule) => Rule.required(),
-        },
-      ],
-    },
+    { type: "youtube" },
     { type: "inlineRelatedArticle" },
     { type: "factBox" },
   ],
