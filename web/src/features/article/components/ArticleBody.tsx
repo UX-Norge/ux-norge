@@ -44,7 +44,14 @@ const insertBannerAds = (blocks: any[], bannerAds: Ad[]) => {
 
 export const ArticleBody: React.FC<
   IProps &
-    Pick<Article, "publishedAt" | "body" | "isReadersLetter" | "category">
+    Pick<
+      Article,
+      | "publishedAt"
+      | "body"
+      | "isReadersLetter"
+      | "category"
+      | "slackMessageLink"
+    >
 > = ({
   isReadersLetter,
   category,
@@ -52,6 +59,7 @@ export const ArticleBody: React.FC<
   publishedAt,
   articleListAds,
   articleBannerAds,
+  slackMessageLink,
 }) => {
   const [bodyWithAds, setBodyWithAds] = React.useState([]);
   const {
@@ -109,7 +117,12 @@ export const ArticleBody: React.FC<
                 Bli med i Slacken
               </a>
             </p>
-            <Button href="https://uxnorge.slack.com/archives/C7RP430UD">
+            <Button
+              href={
+                slackMessageLink ||
+                "https://uxnorge.slack.com/archives/C7RP430UD"
+              }
+            >
               Gå til artikkelen
             </Button>
           </div>
