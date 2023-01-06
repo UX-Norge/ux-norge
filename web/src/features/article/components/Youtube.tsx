@@ -13,7 +13,7 @@ export const Youtube: React.FC<IProps> = ({ url, title }) => {
   if (!url) return null;
 
   return (
-    <div>
+    <div className="-mx-24">
       <LiteYouTubeEmbed
         title={title || "Video"}
         id={getYouTubeID(url) as string}

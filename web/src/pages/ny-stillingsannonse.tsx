@@ -9,7 +9,6 @@ import { PageWrapper } from "@Ui/Layout";
 import { Body1, Heading1, Heading3, Heading4 } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
 import * as React from "react";
-import { sanityClient } from "../api-lib/sanity.client";
 
 interface DataProps {
   allSanityCompany: GraphqlEdges;
