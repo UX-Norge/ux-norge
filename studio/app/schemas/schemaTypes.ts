@@ -10,6 +10,6 @@ export { Document } from "./documents/doc";
 export { SiteSettings } from "./documents/settings/siteSettings";
 export { Footer } from "./documents/settings/footer";
 export { SocialMedia } from "./documents/settings/socialMedia";
-export { SlackBanner } from "./documents/settings/slackBanner";
+export { SlackBannerType } from "./documents/settings/slackBanner";
 export { PartnerBanner } from "./documents/settings/partnerBanner";
 export { Cta } from "./objects/cta";

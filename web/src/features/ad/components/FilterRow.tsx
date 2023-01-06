@@ -1,8 +1,6 @@
 import { ToggleButton } from "@Components/ToggleButton";
-import { classNames } from "@Lib/helpers";
-import { Body1, Body2 } from "@Ui/Typography";
+import { Body1 } from "@Ui/Typography";
 import * as React from "react";
-import { ALL_STRING } from "../../../pages/jobb";
 
 interface IProps {
   allString: string;
