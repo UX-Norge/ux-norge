@@ -9,6 +9,7 @@ import { BannerAd } from "@Features/ad/components/BannerAd";
 import { FactBox } from "./FactBox";
 import { ReadersLetterDisclaimer } from "./ReadersLetterDisclaimer";
 import { ListAd } from "@Features/ad/components/ListAd";
+import { Youtube } from "@Features/article/components/Youtube";
 
 interface IProps {
   readTime: number;
@@ -51,6 +52,7 @@ export const ArticleBody: React.FC<
 }) => {
   const articleSerializers = {
     articleImage: ArticleImage,
+    youtube: Youtube,
     inlineRelatedArticle: RelatedArticleInline,
     blockquote: ArticleQuote,
     bannerAd: BannerAd,
