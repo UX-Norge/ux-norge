@@ -5,6 +5,7 @@ import simpleBlockContent from "./simpleBlockContent";
 import inlineRelatedArticle from "./article/inlineRelatedArticle";
 import factBox from "./article/factBox";
 import cta from "./cta";
+import youtube from "./article/youtube";
 
 export default [
   blockContent,
@@ -14,4 +15,5 @@ export default [
   inlineRelatedArticle,
   factBox,
   cta,
+  youtube,
 ];
