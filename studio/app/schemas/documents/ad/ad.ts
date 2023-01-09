@@ -67,7 +67,7 @@ export default {
     {
       name: "body",
       title: "Innhold",
-      type: "blockContent",
+      type: "adContent",
       group: "content",
     },
     {

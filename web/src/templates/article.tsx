@@ -42,6 +42,7 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
       <PageWrapper>
         <ArticleHeader {...article} />
         <ArticleBody
+          category={article.category}
           body={article.body}
           publishedAt={article.publishedAt}
           articleListAds={articleListAds}
@@ -80,6 +81,7 @@ export const query = graphql`
         }
       }
       category {
+        _id
         name
         slug {
           current
