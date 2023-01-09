@@ -13,6 +13,8 @@ import { Youtube } from "@Features/article/components/Youtube";
 import { Button } from "@Ui/Button";
 import { graphql, useStaticQuery } from "gatsby";
 import { SlackBannerType } from "@Types";
+import { DiscussArticle } from "./DiscussArticle";
+import { NominateSection } from "./NominateSection";
 
 interface IProps {
   articleListAds: Ad[];
@@ -62,7 +64,7 @@ export const ArticleBody: React.FC<
   articleBannerAds,
   slackMessageLink,
 }) => {
-  const [bodyWithAds, setBodyWithAds] = React.useState([]);
+  const [bodyWithAds, setBodyWithAds] = React.useState<any[]>([]);
   const {
     sanitySlackBanner: { invitationLink },
   } = useStaticQuery<{
@@ -110,24 +112,11 @@ export const ArticleBody: React.FC<
         </div>
         <div>
           <hr className="w-64" />
-          {category?.slug.current === "ukens-designer"} <div></div>
-          <div className="my-16 space-y-8">
-            <Heading4>Diskuter artikkelen i UX Norge Slacken</Heading4>
-            <p>
-              Mangler du konto?{" "}
-              <a className="link" href={invitationLink}>
-                Bli med i Slacken
-              </a>
-            </p>
-            <Button
-              href={
-                slackMessageLink ||
-                "https://uxnorge.slack.com/archives/C7RP430UD"
-              }
-            >
-              Gå til artikkelen
-            </Button>
-          </div>
+          <NominateSection category={category} />
+          <DiscussArticle
+            invitationLink={invitationLink}
+            slackMessageLink={slackMessageLink}
+          />
         </div>
       </div>
       <div className="hidden w-full space-y-48 lg:block">

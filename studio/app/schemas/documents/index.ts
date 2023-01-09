@@ -1,4 +1,5 @@
 import ad from "./ad/ad";
+import adContent from "./ad/adContent";
 import adLocation from "./ad/adLocation";
 import adPackageType from "./ad/adPackageType";
 import article from "./article";
@@ -34,4 +35,5 @@ export default [
   slackBanner,
   partnerBanner,
   readersLetter,
+  adContent,
 ];

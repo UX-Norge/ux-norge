@@ -1,6 +1,6 @@
 export default {
   title: "Block Content",
-  name: "articleContent",
+  name: "adContent",
   type: "array",
   of: [
     {
@@ -8,8 +8,8 @@ export default {
       type: "block",
       styles: [
         { title: "Normal", value: "normal" },
-        { title: "Overskrift", value: "h2" },
-        { title: "Underoverskrift", value: "h3" },
+        { title: "Tittel", value: "h2" },
+        { title: "Undertittel", value: "h3" },
         { title: "Quote", value: "blockquote" },
       ],
       lists: [
@@ -42,7 +42,5 @@ export default {
       render: "ArticleImageRenderer",
     },
     { type: "youtube" },
-    { type: "inlineRelatedArticle" },
-    { type: "factBox" },
   ],
 };
