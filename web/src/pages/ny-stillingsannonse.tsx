@@ -5,8 +5,9 @@ import { Button } from "@Ui/Button";
 import { SearchDropdown, Dropdown, Input } from "@Ui/Input";
 import { DateInput } from "@Ui/Input";
 import { Textarea } from "@Ui/Input";
+import { BlockContentInput } from "@Ui/Input/BlockContentInput";
 import { PageWrapper } from "@Ui/Layout";
-import { Body1, Heading1, Heading3, Heading4 } from "@Ui/Typography";
+import { Body1, Body2, Heading1, Heading3, Heading4 } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
 import * as React from "react";
 
@@ -35,7 +36,7 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
     location: "",
     packageType: "",
     advertiser: "",
-    jobType: "",
+    jobType: "fulltid",
     code: "",
   });
   const [selectedPackageType, setSelectedPackageType] =
@@ -60,6 +61,8 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+    console.log(ad);
+
     const response = fetch(`/api/create-ad`, {
       method: `POST`,
       headers: {
@@ -118,8 +121,6 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
             }))}
             onChange={onChange}
           />
-          <Body1>Pris: {selectedPackageType?.price} NOK ekskl. MVA</Body1>
-          <Body1>Varighet: {selectedPackageType?.duration} dager</Body1>
         </div>
         <Heading3>Annonseinnhold</Heading3>
         <Input
@@ -149,6 +150,8 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
         />
         <Dropdown
           name="jobType"
+          label="Jobbtype"
+          required
           value={ad.jobType}
           options={[
             { label: "Fulltid", value: "fulltid" },
@@ -165,6 +168,7 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
           value={ad.link}
           onChange={onChange}
         />
+        {/* <BlockContentInput onChange={onChange} name="body" /> */}
         <br />
         <Heading4>Kontaktperson:</Heading4>
         <Input
@@ -193,7 +197,13 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
           placeholder="Don Norman"
           onChange={onChange}
         />
-        <Button type="submit">Send inn forespørsel</Button>
+        <div className="mt-32">
+          <Button type="submit">Send inn forespørsel</Button>
+          <Body2 className="mt-8">
+            Pris: {selectedPackageType?.price} NOK ekskl. MVA
+          </Body2>
+          <Body2>Varighet: {selectedPackageType?.duration} dager</Body2>
+        </div>
       </form>
     </PageWrapper>
   );
