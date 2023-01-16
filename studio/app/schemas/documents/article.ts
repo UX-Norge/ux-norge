@@ -47,6 +47,13 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: "metaTitle",
+      title: "Meta Title (optional)",
+      type: "string",
+      group: "metadata",
+      description: "Egen tittel når artikkelen blir delt i SoMe og Google",
+    },
+    {
       name: "description",
       title: "Ingress",
       type: "text",
@@ -66,11 +73,6 @@ export default {
       type: "datetime",
       group: "metadata",
       validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: "metaTitle",
-      type: "string",
-      group: "metadata",
     },
     {
       name: "companyName",
