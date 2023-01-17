@@ -68,6 +68,10 @@ html {
   body {
     @apply font-sans;
   }
+  figcaption p {
+    font-size: inherit !important;
+    margin: 0;
+  }
 }
 
 @layer components {
@@ -80,6 +84,13 @@ html {
   .door-open {
     transform: perspective(2000px) rotateY(10deg);
   }
+}
+
+.ce-block__content h2.ce-header {
+  @apply text-h2 font-bold;
+}
+.ce-block__content h3.ce-header {
+  @apply text-h3 font-bold;
 }
 
 #gatsby-focus-wrapper {
