@@ -24,25 +24,30 @@ export const AdThumbnail: React.FC<IProps> = ({ ad }) => {
     <Link
       type="ad"
       path={ad.slug.current}
-      className="group flex gap-16 odd:flex-row-reverse lg:odd:flex-row"
+      className="flex flex-col gap-16 rounded-sm bg-blue-50 p-16"
     >
-      <div className="flex w-[120px] items-center justify-center rounded-t-lg bg-yellow-100 p-8 shadow-[inset_-4px_0_0_0_var(--color-yellow-200)] transition-shadow group-hover:shadow-[inset_-8px_0_0_0_var(--color-yellow-200)]">
-        <Image
-          image={ad.advertiser.logo}
-          alt={ad.advertiser.name + "-logo"}
-          width={200}
-          className="max-w-full"
-        />
+      <div className="flex gap-16">
+        <div>
+          <div className="h-[24px] w-[48px] rounded-t-full bg-blue-100" />
+          <div className="flex h-[48px] w-[48px] items-center bg-blue-100 p-[12px] pt-0">
+            <Image
+              image={ad.advertiser.logo}
+              alt={ad.advertiser.name + "-logo"}
+              width={200}
+              className="max-h-full max-w-full"
+            />
+          </div>
+        </div>
+        <Heading4 className="mb-8 self-center">{ad.title}</Heading4>
       </div>
-      <div className="w-full">
-        <Heading4 className="mb-8">{ad.title}</Heading4>
-        <Overline className="text-yellow-500">
-          {ad.advertiser.name} • 
-          {ad.location.map(({ name }) => name).join(",")}
-        </Overline>
-        <Body2>{ad.description}</Body2>
-        <Overline className="mt-8 text-yellow-500">{deadline()}</Overline>
-      </div>
+      <Body2>{ad.description}</Body2>
+      {ad.deadline && <Body2>{`📆 Søknadsfrist: ${ad.deadline}`}</Body2>}
+      {ad.advertiser && <Body2>{`💼 Bedrift: ${ad.advertiser.name}`}</Body2>}
+      {ad.advertiser.name && (
+        <Body2>{`📍 Sted: ${ad.location
+          .map((location) => location.name)
+          .join(", ")}`}</Body2>
+      )}
     </Link>
   );
 };

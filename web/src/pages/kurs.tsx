@@ -28,7 +28,7 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
         description="Bli bedre på det du er god på eller lær ny kunnskap fra de flinke folkene i familjøet vårt. 
 Her har vi samlet kursene du kan melde deg på. "
       />
-      <section className="mx-auto max-w-page grid-cols-2 gap-24 px-24 py-80 md:grid">
+      <section className="mx-auto grid max-w-page gap-24 px-24 py-80 md:grid-cols-2">
         {courses.map((course) => (
           <CourseThumbnail course={course} />
         ))}

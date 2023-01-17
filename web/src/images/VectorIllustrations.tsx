@@ -102,6 +102,44 @@ const ShadowDoor: React.FC<VectorProps> = ({
   );
 };
 
+const hamburger = () => (
+  <svg
+    width="27"
+    height="14"
+    viewBox="0 0 27 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <line
+      x1="9"
+      y1="1"
+      x2="26"
+      y2="0.999998"
+      stroke="#14121C"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+    <line
+      x1="1"
+      y1="7"
+      x2="26"
+      y2="7"
+      stroke="#14121C"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+    <line
+      x1="4"
+      y1="13"
+      x2="26"
+      y2="13"
+      stroke="#14121C"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+  </svg>
+);
+
 const coursePageDoors: React.FC<VectorProps> = ({ className }) => {
   const id = random6DigitNumber();
   return (
@@ -143,4 +181,5 @@ export const VectorIllustrations = {
   MonoDoor,
   ShadowDoor,
   coursePageDoors,
+  hamburger,
 };

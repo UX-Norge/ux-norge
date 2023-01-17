@@ -23,13 +23,16 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
     filteredAds,
     setSelectedJobTypes,
     setSelectedLocations,
+    setSelectedRemotes,
+    selectedRemotes,
+    remotes,
   } = useJobPageAds(ads);
 
   return (
     <PageWrapper>
-      <Seo title="Jobber" location={location} />
-      <div className="mx-auto max-w-xl space-y-24">
-        <div>
+      <Seo title="Jobber:" location={location} />
+      <div className="mx-auto max-w-page space-y-24 px-24 ">
+        <div className="grid grid-cols-3">
           <FilterRow
             label="Område"
             allString={ALL_STRING}
@@ -38,14 +41,21 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
             setSelected={setSelectedLocations}
           />
           <FilterRow
-            label="Stillingstype"
+            label="Remote:"
+            allString={ALL_STRING}
+            options={remotes}
+            selected={selectedRemotes}
+            setSelected={setSelectedRemotes}
+          />
+          <FilterRow
+            label="Stillingstype:"
             allString={ALL_STRING}
             options={jobTypes}
             selected={selectedJobTypes}
             setSelected={setSelectedJobTypes}
           />
         </div>
-        <div className="space-y-48 p-24">
+        <div className=" grid gap-40 p-24 md:grid-cols-4">
           {filteredAds.map((ad) => (
             <AdThumbnail ad={ad} />
           ))}

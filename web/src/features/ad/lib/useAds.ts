@@ -40,11 +40,15 @@ export const useJobPageAds = (ads: Ad[]) => {
   const activeAds = useActiveAds(ads) as Ad[];
   const [filteredAds, setFilteredAds] = useState<Ad[]>([]);
   const [locations, setLocations] = React.useState<string[]>([]);
+  const [remotes, setRemotes] = React.useState<string[]>([]);
   const [jobTypes, setJobTypes] = useState<string[]>([]);
   const [selectedJobTypes, setSelectedJobTypes] = React.useState<string[]>([
     ALL_STRING,
   ]);
   const [selectedLocations, setSelectedLocations] = React.useState<string[]>([
+    ALL_STRING,
+  ]);
+  const [selectedRemotes, setSelectedRemotes] = React.useState<string[]>([
     ALL_STRING,
   ]);
 
@@ -57,10 +61,13 @@ export const useJobPageAds = (ads: Ad[]) => {
         const locationMatch = selectedLocations.includes(ALL_STRING)
           ? true
           : ad.location.some(({ name }) => selectedLocations.includes(name));
-        return jobTypeMatch && locationMatch;
+        const remoteMatch = selectedRemotes.includes(ALL_STRING)
+          ? true
+          : selectedRemotes.includes((ad.remote && "Ja") || "Nei");
+        return jobTypeMatch && locationMatch && remoteMatch;
       })
     );
-  }, [selectedJobTypes, selectedLocations, activeAds]);
+  }, [selectedJobTypes, selectedLocations, activeAds, selectedRemotes]);
 
   useEffect(() => {
     setLocations(
@@ -77,6 +84,12 @@ export const useJobPageAds = (ads: Ad[]) => {
         true
       )
     );
+    setRemotes(
+      removeDuplicates(
+        activeAds.map((ad) => (ad.remote && "Ja") || "Nei"),
+        true
+      )
+    );
   }, [activeAds]);
 
   return {
@@ -88,5 +101,8 @@ export const useJobPageAds = (ads: Ad[]) => {
     selectedJobTypes,
     setSelectedJobTypes,
     setSelectedLocations,
+    remotes,
+    setSelectedRemotes,
+    selectedRemotes,
   };
 };
