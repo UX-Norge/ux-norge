@@ -1,7 +1,9 @@
+import { PageHeader } from "@Components/PageHeader";
 import { Seo } from "@Components/Seo";
 import { AdThumbnail } from "@Features/ad/components/AdThumbnail";
 import { FilterRow } from "@Features/ad/components/FilterRow";
 import { ALL_STRING, useJobPageAds } from "@Features/ad/lib/useAds";
+import { VectorIllustrations } from "@Images/VectorIllustrations";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Ad, GraphqlEdges } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
@@ -31,10 +33,16 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   return (
     <PageWrapper>
       <Seo title="Jobber:" location={location} />
-      <div className="mx-auto max-w-page space-y-24 px-24 ">
-        <div className="grid grid-cols-3">
+      <PageHeader
+        title="Jobber"
+        h1Class="text-blue-600"
+        description="Her har vi samlet alle designjobbene på ett sted slik at du kan åpne nye dører for deg selv!"
+        doors={<VectorIllustrations.jobPageDoors />}
+      />
+      <div className="mx-auto max-w-page space-y-24 px-24 pt-40 ">
+        <div className="grid gap-x-40 gap-y-24 md:grid-cols-3">
           <FilterRow
-            label="Område"
+            label="Område:"
             allString={ALL_STRING}
             options={locations}
             selected={selectedLocations}
@@ -55,7 +63,7 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
             setSelected={setSelectedJobTypes}
           />
         </div>
-        <div className=" grid gap-40 p-24 md:grid-cols-4">
+        <div className=" grid gap-32 p-24 md:grid-cols-4">
           {filteredAds.map((ad) => (
             <AdThumbnail ad={ad} />
           ))}
