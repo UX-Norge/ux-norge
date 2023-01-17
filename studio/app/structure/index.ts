@@ -2,6 +2,7 @@ import S from "@sanity/desk-tool/structure-builder";
 import ad from "./ad";
 import article from "./article";
 import company from "./company";
+import course from "./course";
 import cover from "./cover";
 import dokumenter from "./dokumenter";
 import newsletter from "./newsletter";
@@ -11,6 +12,6 @@ const debug = false;
 
 const studioItems = debug
   ? S.documentTypeListItems()
-  : [siteSettings, cover, article, newsletter, ad, dokumenter, company];
+  : [siteSettings, cover, article, newsletter, ad, dokumenter, company, course];
 
 export default () => S.list().title("Content").items(studioItems);

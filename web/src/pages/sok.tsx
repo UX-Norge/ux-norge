@@ -30,7 +30,7 @@ export const getServerData: GetServerData<{ searchHits: Article[] }> = async ({
     `*[_type == "article" && _score > 0 && !(_id in path("drafts.**"))]
     | score(
       boost(title match $searchTerm, 100),
-      boost(author.name match "*" + $searchTerm + "*", 20),
+      boost(authorName match "*" + $searchTerm + "*", 20),
       boost(title match "*" + $searchTerm + "*", 10),
       boost(description match $searchTerm, 1)
     )
@@ -41,7 +41,8 @@ export const getServerData: GetServerData<{ searchHits: Article[] }> = async ({
       mainImage,
       slug{
         current
-      }
+      },
+      "authorName": author->name,
     }`,
     {
       searchTerm: query && query.searchTerm,

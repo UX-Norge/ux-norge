@@ -23,7 +23,7 @@ export const Link: React.FC<{
 }) => {
   if (
     path?.includes("/") &&
-    !["author", "category", "external", "page"].includes(type)
+    !["author", "category", "external", "page", "course"].includes(type)
   ) {
     console.error(path, "Path must not contain '/'");
   }

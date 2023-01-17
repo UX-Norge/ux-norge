@@ -52,7 +52,7 @@ const SearchBar: React.FC = () => {
   const [searchTerm, setSearchTerm] = React.useState("");
   return (
     <form
-      className="flex items-center rounded-sm bg-gray-100 "
+      className="flex hidden items-center rounded-sm bg-gray-100 md:block"
       onSubmit={(e) => {
         e.preventDefault();
         navigate(`/sok?searchTerm=${searchTerm}`);

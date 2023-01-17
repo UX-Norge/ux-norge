@@ -6,6 +6,7 @@ import article from "./article";
 import author from "./author";
 import category from "./category";
 import company from "./company";
+import course from "./course";
 import coverPage from "./coverPage";
 import doc from "./doc";
 import newsletter from "./newsletter";
@@ -18,6 +19,7 @@ import slackBanner from "./settings/slackBanner";
 import socialMedia from "./settings/socialMedia";
 
 export default [
+  course,
   siteSettings,
   article,
   author,
