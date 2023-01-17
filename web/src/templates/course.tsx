@@ -1,10 +1,10 @@
 import { Seo } from "@Components/Seo";
-import { CourseInfo } from "@Features/course/courseInfo";
+import { CourseInfo } from "@Features/course/CourseInfo";
 import { DocumentHeader } from "@Features/document/DocumentHeader";
 import { Course, Document } from "@Types";
 import { Button } from "@Ui/Button";
 import { PageWrapper } from "@Ui/Layout";
-import { BlockContent } from "@Ui/Typography";
+import { BlockContent, Body1, Body2, Heading2, Heading4 } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
 import * as React from "react";
 
@@ -23,20 +23,21 @@ const coursePage: React.FC<PageProps<DataProps>> = ({
         description={sanityCourse.description}
         location={location}
       />
-      <DocumentHeader
-        title={sanityCourse.title}
-        description={sanityCourse.description}
-      />
-      <div className="mx-auto max-w-prose py-64">
-        <CourseInfo course={sanityCourse} />
+      <div className="mx-auto flex max-w-prose flex-col gap-24 pb-24 pt-128">
+        <Heading2>{sanityCourse.title}</Heading2>
+        <Body1>{sanityCourse.description}</Body1>
+        <div>
+          <Heading4>Nøkkelinformasjon</Heading4>
+          <CourseInfo course={sanityCourse} />
+        </div>
         {sanityCourse.signUpLink && (
           <div className="pt-24">
             <Button href={sanityCourse.signUpLink}>Påmeldingsskjema</Button>
           </div>
         )}
-      </div>
-      <div className="prose mx-auto max-w-prose pb-24">
-        <BlockContent blocks={sanityCourse.body} />
+        <div className="prose">
+          <BlockContent blocks={sanityCourse.body} />
+        </div>
       </div>
     </PageWrapper>
   );

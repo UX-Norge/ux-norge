@@ -1,9 +1,11 @@
+import { PageHeader, PagePageHeader } from "@Components/PageHeader";
 import { Seo } from "@Components/Seo";
 import { AdThumbnail } from "@Features/ad/components/AdThumbnail";
 import { FilterRow } from "@Features/ad/components/FilterRow";
 import { ALL_STRING, useJobPageAds } from "@Features/ad/lib/useAds";
 import { CoursePageHeader } from "@Features/course/CoursePageHeader";
 import { CourseThumbnail } from "@Features/course/CourseThumbnail";
+import { VectorIllustrations } from "@Images/VectorIllustrations";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Ad, Course, GraphqlEdges } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
@@ -23,10 +25,12 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
   return (
     <PageWrapper className="bg-primary-100">
       <Seo title="Kurs" location={location} />
-      <CoursePageHeader
+      <PageHeader
         title="Kurs"
         description="Bli bedre på det du er god på eller lær ny kunnskap fra de flinke folkene i familjøet vårt. 
-Her har vi samlet kursene du kan melde deg på. "
+Her har vi samlet kursene du kan melde deg på."
+        descriptionClass="rounded rounded-tl-none bg-primary-50 p-8"
+        doors={<VectorIllustrations.coursePageDoors />}
       />
       <section className="mx-auto grid max-w-page gap-24 px-24 py-80 md:grid-cols-2">
         {courses.map((course) => (

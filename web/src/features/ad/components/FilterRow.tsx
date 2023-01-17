@@ -35,7 +35,7 @@ export const FilterRow: React.FC<IProps> = ({
 
   return (
     <div>
-      <Body1 className="mb-4 pl-24">{label}</Body1>
+      <Body1 className="mb-4 pl-24 text-blue-600">{label}</Body1>
       <div className="mb-8 flex w-full space-x-8 p-2 pr-24">
         <ToggleButton
           name={allString}

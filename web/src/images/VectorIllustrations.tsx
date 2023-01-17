@@ -140,46 +140,76 @@ const hamburger = () => (
   </svg>
 );
 
-const coursePageDoors: React.FC<VectorProps> = ({ className }) => {
-  const id = random6DigitNumber();
-  return (
-    <svg
-      width="1666"
-      height="324"
-      viewBox="0 0 1666 324"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-labelledby={id}
-    >
-      <title id={id}>Door illustration</title>
-      <path
-        d="M1463 101.5C1463 45.4431 1508.44 0 1564.5 0V0C1620.56 0 1666 45.4431 1666 101.5V324H1463V101.5Z"
-        fill="#F5F0FF"
-      />
-      <path
-        d="M0 200.5C0 169.296 25.2959 144 56.5 144V144C87.7041 144 113 169.296 113 200.5V324H0V200.5Z"
-        fill="#F5F0FF"
-      />
-      <path
-        d="M665 200.5C665 169.296 690.296 144 721.5 144V144C752.704 144 778 169.296 778 200.5V324H665V200.5Z"
-        fill="#F5F0FF"
-      />
-      <path
-        d="M849 244C849 188.772 893.772 144 949 144H1284C1339.23 144 1384 188.772 1384 244V324H849V244Z"
-        fill="#F5F0FF"
-      />
-      <path
-        d="M126 266C126 248.327 140.327 234 158 234V234C175.673 234 190 248.327 190 266V324H126V266Z"
-        fill="#9786FF"
-      />
-    </svg>
-  );
-};
+const coursePageDoors = () => (
+  <svg
+    width="1612"
+    height="324"
+    viewBox="0 0 1612 324"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M1409 101.5C1409 45.4431 1454.44 0 1510.5 0V0C1566.56 0 1612 45.4431 1612 101.5V324H1409V101.5Z"
+      fill="#F5F0FF"
+    />
+    <path
+      d="M-54 200.5C-54 169.296 -28.7041 144 2.5 144V144C33.7041 144 59 169.296 59 200.5V324H-54V200.5Z"
+      fill="#F5F0FF"
+    />
+    <path
+      d="M611 200.5C611 169.296 636.296 144 667.5 144V144C698.704 144 724 169.296 724 200.5V324H611V200.5Z"
+      fill="#F5F0FF"
+    />
+    <path
+      d="M795 244C795 188.772 839.772 144 895 144H1230C1285.23 144 1330 188.772 1330 244V324H795V244Z"
+      fill="#F5F0FF"
+    />
+    <path
+      d="M72 266C72 248.327 86.3269 234 104 234V234C121.673 234 136 248.327 136 266V324H72V266Z"
+      fill="#9786FF"
+    />
+  </svg>
+);
+
+export const jobPageDoors: React.FC = () => (
+  <svg
+    width="1612"
+    height="242"
+    viewBox="0 0 1612 242"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M1409 101.5C1409 45.4431 1454.44 0 1510.5 0V0C1566.56 0 1612 45.4431 1612 101.5V242H1409V101.5Z"
+      fill="#B3CFFF"
+    />
+    <path
+      d="M-54 118.5C-54 87.2959 -28.7041 62 2.5 62V62C33.7041 62 59 87.2959 59 118.5V242H-54V118.5Z"
+      fill="#D4E3FF"
+    />
+    <path
+      d="M15 118.5C15 87.2959 40.2959 62 71.5 62V62C102.704 62 128 87.2959 128 118.5V242H15V118.5Z"
+      fill="#B3CFFF"
+    />
+    <path
+      d="M305 242C305 192.294 345.294 152 395 152H510C559.706 152 600 192.294 600 242V242H305V242Z"
+      fill="#D4E3FF"
+    />
+    <path
+      d="M76 187C76 175.954 84.9543 167 96 167V167C107.046 167 116 175.954 116 187V242H76V187Z"
+      fill="#D4E3FF"
+    />
+    <path
+      d="M1503 214.5C1503 205.387 1510.39 198 1519.5 198V198C1528.61 198 1536 205.387 1536 214.5V242H1503V214.5Z"
+      fill="#D4E3FF"
+    />
+  </svg>
+);
 
 export const VectorIllustrations = {
   MonoDoor,
   ShadowDoor,
   coursePageDoors,
   hamburger,
+  jobPageDoors,
 };
