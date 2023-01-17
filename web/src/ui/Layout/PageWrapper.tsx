@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Nav, Footer } from "@Ui/Layout";
+import { Nav, Footer, NavProps } from "@Ui/Layout";
 import { classNames } from "@Lib/helpers";
 import { FooterProps } from "./Footer";
 
@@ -8,15 +8,16 @@ interface IProps {
   className?: string;
 }
 
-export const PageWrapper: React.FC<IProps & FooterProps> = ({
+export const PageWrapper: React.FC<IProps & FooterProps & NavProps> = ({
   children,
   className,
   showPartners,
   showNewsletter,
+  hideSearch,
 }) => {
   return (
     <>
-      <Nav />
+      <Nav hideSearch={hideSearch} />
       <div className={classNames("flex-1", className)}>{children}</div>
       <Footer showPartners={showPartners} showNewsletter={showNewsletter} />
     </>

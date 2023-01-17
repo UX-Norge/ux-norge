@@ -16,12 +16,16 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.26.4",
+    "@editorjs/header": "^2.7.0",
+    "@editorjs/list": "^1.8.0",
     "@headlessui/react": "^1.6.3",
     "@sanity/client": "^3.3.0",
     "@sanity/webhook": "^2.0.0",
     "@slack/web-api": "^6.7.1",
     "caniuse-lite": "^1.0.30001441",
     "cors": "^2.8.5",
+    "editorjs-html": "^3.4.2",
     "gatsby": "^4.23.0",
     "gatsby-plugin-gatsby-cloud": "^4.23.0",
     "gatsby-plugin-image": "^2.9.1",
