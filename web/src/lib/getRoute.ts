@@ -10,6 +10,7 @@ export const getRoute = (type: RouteTypes, path: string): string => {
       ad: `/stillingsannonse/${path}/`,
       category: `/kategori/${path}/`,
       external: null,
+      course: `/kurs/${path}/`,
     }[type] ?? path
   );
 };

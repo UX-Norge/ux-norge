@@ -1,0 +1,41 @@
+import { Link } from "@Components/Link";
+import { CourseInfo } from "@Features/course/courseInfo";
+import { Course } from "@Types";
+import { Body1 } from "@Ui/Typography";
+import * as React from "react";
+
+const Arrow: React.FC = () => (
+  <svg
+    width="16"
+    height="14"
+    viewBox="0 0 16 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M9.16667 1L15 7M15 7L9.16667 13M15 7L1 7"
+      stroke="#7061EA"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export const CourseThumbnail: React.FC<{ course: Course }> = ({ course }) => {
+  return (
+    <div className="flex h-min flex-col gap-24 bg-primary-50 p-24 text-base text-gray-900">
+      <h2 className="text-h2 text-gray-700">{course.title}</h2>
+      <Body1>{course.description}</Body1>
+      <CourseInfo course={course} />
+      <Link
+        path={course.slug.current}
+        type="course"
+        className="ml-auto flex items-center gap-8 text-sm text-primary-500 hover:underline"
+      >
+        Les mer
+        <Arrow />
+      </Link>
+    </div>
+  );
+};

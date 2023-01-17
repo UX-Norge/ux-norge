@@ -1,3 +1,4 @@
+export { Course } from "./documents/course";
 export { Article } from "./documents/article";
 export { ArticleImage } from "./objects/article/articleImage";
 export { Company } from "./documents/company";

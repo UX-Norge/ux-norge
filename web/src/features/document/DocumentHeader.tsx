@@ -5,7 +5,7 @@ import { Body1, Heading1 } from "@Ui/Typography";
 import * as React from "react";
 
 export const DocumentHeader: React.FC<
-  Pick<Document, "title" | "description"> & { cta: Cta }
+  Pick<Document, "title" | "description"> & { cta?: Cta }
 > = ({ title, description, cta }) => {
   const colors = [
     {

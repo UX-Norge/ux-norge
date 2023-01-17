@@ -24,6 +24,22 @@ export const query = graphql`
     }
   }
 
+  fragment CourseThumbnail on SanityCourse {
+    title
+    slug {
+      current
+    }
+    description
+    location
+    date
+    startTime
+    endTime
+    price
+    courseHolder {
+      name
+    }
+  }
+
   fragment AdThumbnail on SanityAd {
     _id
     _createdAt

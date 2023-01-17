@@ -102,7 +102,45 @@ const ShadowDoor: React.FC<VectorProps> = ({
   );
 };
 
+const coursePageDoors: React.FC<VectorProps> = ({ className }) => {
+  const id = random6DigitNumber();
+  return (
+    <svg
+      width="1666"
+      height="324"
+      viewBox="0 0 1666 324"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-labelledby={id}
+    >
+      <title id={id}>Door illustration</title>
+      <path
+        d="M1463 101.5C1463 45.4431 1508.44 0 1564.5 0V0C1620.56 0 1666 45.4431 1666 101.5V324H1463V101.5Z"
+        fill="#F5F0FF"
+      />
+      <path
+        d="M0 200.5C0 169.296 25.2959 144 56.5 144V144C87.7041 144 113 169.296 113 200.5V324H0V200.5Z"
+        fill="#F5F0FF"
+      />
+      <path
+        d="M665 200.5C665 169.296 690.296 144 721.5 144V144C752.704 144 778 169.296 778 200.5V324H665V200.5Z"
+        fill="#F5F0FF"
+      />
+      <path
+        d="M849 244C849 188.772 893.772 144 949 144H1284C1339.23 144 1384 188.772 1384 244V324H849V244Z"
+        fill="#F5F0FF"
+      />
+      <path
+        d="M126 266C126 248.327 140.327 234 158 234V234C175.673 234 190 248.327 190 266V324H126V266Z"
+        fill="#9786FF"
+      />
+    </svg>
+  );
+};
+
 export const VectorIllustrations = {
   MonoDoor,
   ShadowDoor,
+  coursePageDoors,
 };
