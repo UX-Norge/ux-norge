@@ -11,7 +11,7 @@ export type Course = {
   price: string;
   location: string;
   courseHolder: Author;
-  signupLink: string;
+  signUpLink: string;
   slug: SanitySlug;
   body: PortableText;
 };

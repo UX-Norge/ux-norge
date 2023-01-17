@@ -6,7 +6,6 @@ export const query = graphql`
       ...ImageWithPreview
     }
     alt
-    caption
   }
 
   fragment ArticleThumbnail on SanityArticle {
@@ -51,6 +50,7 @@ export const query = graphql`
     location {
       name
     }
+    remote
     link
     jobType
     startDate

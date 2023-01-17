@@ -37,7 +37,7 @@ export const Search: React.FC<{
       <input
         className={classNames(
           inputClassNames.all,
-          "rounded border-0 bg-gray-100 px-16 pr-48"
+          "md:py-auto rounded border-0 bg-gray-100 py-[0.75rem] px-16 pr-48"
         )}
         placeholder={placeholder}
         type="text"

@@ -75,7 +75,6 @@ export const query = graphql`
       companyType
       mainImage {
         alt
-        caption
         image {
           ...ImageWithPreview
         }
