@@ -41,7 +41,14 @@ export const AdThumbnail: React.FC<IProps> = ({ ad }) => {
         <Heading4 className="mb-8 self-center">{ad.title}</Heading4>
       </div>
       <Body2>{ad.description}</Body2>
-      {ad.deadline && <Body2>{`📆 Søknadsfrist: ${ad.deadline}`}</Body2>}
+      {ad.deadline && (
+        <Body2>{`📆 Søknadsfrist: ${new Date(ad.deadline)
+          .toLocaleDateString("no-NO", {
+            month: "short",
+            day: "numeric",
+          })
+          .slice(0, -1)} • ${deadline()}`}</Body2>
+      )}
       {ad.advertiser && <Body2>{`💼 Bedrift: ${ad.advertiser.name}`}</Body2>}
       {ad.advertiser.name && (
         <Body2>{`📍 Sted: ${ad.location
