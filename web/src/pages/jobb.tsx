@@ -39,7 +39,7 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         description="Her har vi samlet alle designjobbene på ett sted slik at du kan åpne nye dører for deg selv!"
         doors={<VectorIllustrations.jobPageDoors />}
       />
-      <div className="mx-auto max-w-page space-y-24 px-24 pt-40 ">
+      <div className="mx-auto max-w-page space-y-24 px-24 py-40 ">
         <div className="grid gap-x-40 gap-y-24 md:grid-cols-3">
           <FilterRow
             label="Område:"
@@ -63,7 +63,7 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
             setSelected={setSelectedJobTypes}
           />
         </div>
-        <div className=" grid gap-32 p-24 md:grid-cols-4">
+        <div className=" grid gap-32 md:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
           {filteredAds.map((ad) => (
             <AdThumbnail ad={ad} />
           ))}
