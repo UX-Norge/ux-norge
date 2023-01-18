@@ -96,7 +96,7 @@ export const ArticleBody: React.FC<
 
   return (
     <main className="relative mx-auto mt-56 max-w-[950px] grid-cols-[65ch_1fr] gap-24 lg:grid">
-      <div className="relative mx-auto max-w-prose p-24 lg:m-0">
+      <div className="relative mx-auto max-w-prose lg:m-0">
         <Overline className="text-base text-primary-500">
           {printDate(publishedAt)}
         </Overline>

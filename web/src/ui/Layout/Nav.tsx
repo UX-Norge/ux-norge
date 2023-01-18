@@ -30,7 +30,7 @@ const NavItem: React.FC<NavItemProps> = ({
     type={type}
     path={path}
     className={classNames(
-      "rounded-sm bg-gray-100 py-[0.75rem] px-16 text-center md:rounded-none md:bg-transparent md:px-0 md:py-0 md:text-left",
+      "rounded-sm bg-gray-100 py-12 px-16 text-center md:rounded-none md:bg-transparent md:px-0 md:py-0 md:text-left",
       className
     )}
     activeClassName={classNames("border-b-2 border-gray-900", activeClassName)}
@@ -46,16 +46,19 @@ export const Nav: React.FC<NavProps> = ({ hideSearch }) => {
 
   const [hamburger, setHamburger] = React.useState(false);
   const navItems = [
-    !hideSearch && <Search onSubmit={search} placeholder="Finn en artikkel" />,
+    (!hideSearch || hamburger) && (
+      <Search onSubmit={search} placeholder="Finn en artikkel" />
+    ),
     <NavItem name="Aktuelt" path="" type="home" className="hidden sm:block" />,
     <NavItem name="Nettverk" path="nettverk" type="page" />,
+    <NavItem name="Kurs" path="kurs" type="page" />,
     <NavItem name="Jobb" path="jobb" type="page" />,
   ];
 
   return (
     <nav
       className={classNames({
-        "fixed z-50 h-screen w-full bg-white md:static md:h-auto md:bg-transparent":
+        "fixed z-50 h-full w-full bg-white md:static md:h-auto md:bg-transparent":
           hamburger,
       })}
     >
@@ -80,7 +83,7 @@ export const Nav: React.FC<NavProps> = ({ hideSearch }) => {
         </button>
       </div>
       {hamburger && (
-        <div className="flex flex-col gap-32 px-24 py-56 md:hidden">
+        <div className="flex flex-col gap-32 px-24 pb-56 pt-24 md:hidden">
           {navItems}
           <div className="fixed bottom-0 left-[5px] h-[166px] w-[81px] rounded-t-full bg-primary-400" />
           <div className="fixed bottom-0 left-[95px] h-[86px] w-[35px] rounded-t-full bg-primary-400" />

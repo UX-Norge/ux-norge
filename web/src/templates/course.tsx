@@ -23,7 +23,7 @@ const coursePage: React.FC<PageProps<DataProps>> = ({
         description={sanityCourse.description}
         location={location}
       />
-      <div className="mx-auto flex max-w-prose flex-col gap-24 pb-24 pt-128">
+      <div className="pt-58 mx-auto flex max-w-prose flex-col gap-24 p-24 pb-24">
         <Heading2>{sanityCourse.title}</Heading2>
         <Body1>{sanityCourse.description}</Body1>
         <div>

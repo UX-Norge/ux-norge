@@ -1,7 +1,7 @@
 import { Link } from "@Components/Link";
 import { CourseInfo } from "@Features/course/courseInfo";
 import { Course } from "@Types";
-import { Body1 } from "@Ui/Typography";
+import { Body1, Heading2 } from "@Ui/Typography";
 import * as React from "react";
 
 const Arrow: React.FC = () => (
@@ -24,8 +24,8 @@ const Arrow: React.FC = () => (
 
 export const CourseThumbnail: React.FC<{ course: Course }> = ({ course }) => {
   return (
-    <div className="flex h-min flex-col gap-24 bg-primary-50 p-24 text-base text-gray-900">
-      <h2 className="text-h2 text-gray-700">{course.title}</h2>
+    <div className="flex h-min flex-col gap-24 rounded-xs bg-primary-50 p-24 text-base text-gray-900">
+      <Heading2>{course.title}</Heading2>
       <Body1>{course.description}</Body1>
       <CourseInfo course={course} />
       <Link
