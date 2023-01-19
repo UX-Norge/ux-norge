@@ -23,13 +23,13 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
   let courses = cleanGraphqlArray(data.allSanityCourse) as Course[];
 
   return (
-    <PageWrapper className="bg-primary-100">
+    <PageWrapper>
       <Seo title="Kurs" location={location} />
       <PageHeader
         title="Kurs"
+        h1Class="text-primary-600"
         description="Bli bedre på det du er god på eller lær ny kunnskap fra de flinke folkene i familjøet vårt. 
 Her har vi samlet kursene du kan melde deg på."
-        descriptionClass="rounded rounded-tl-none bg-primary-50 p-8"
         doors={<VectorIllustrations.coursePageDoors />}
       />
       <section className="mx-auto grid max-w-page gap-24 px-24 py-80 md:grid-cols-2">

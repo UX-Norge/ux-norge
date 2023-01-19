@@ -35,7 +35,6 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
       <Seo title="Jobber:" location={location} />
       <PageHeader
         title="Jobber"
-        h1Class="text-blue-600"
         description="Her har vi samlet alle designjobbene på ett sted slik at du kan åpne nye dører for deg selv!"
         doors={<VectorIllustrations.jobPageDoors />}
       />
