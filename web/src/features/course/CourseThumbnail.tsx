@@ -24,18 +24,18 @@ const Arrow: React.FC = () => (
 
 export const CourseThumbnail: React.FC<{ course: Course }> = ({ course }) => {
   return (
-    <div className="flex h-min flex-col gap-24 rounded-xs bg-primary-100 p-24 text-base text-gray-900">
+    <Link
+      path={course.slug.current}
+      type="course"
+      className="flex h-min flex-col gap-24 rounded-xs bg-primary-100 p-24 text-base text-gray-900"
+    >
       <Heading2>{course.title}</Heading2>
       <Body1>{course.description}</Body1>
       <CourseInfo course={course} />
-      <Link
-        path={course.slug.current}
-        type="course"
-        className="ml-auto flex items-center gap-8 text-sm text-primary-500 hover:underline"
-      >
+      <p className="ml-auto flex items-center gap-8 text-sm text-primary-500 hover:underline">
         Les mer
         <Arrow />
-      </Link>
-    </div>
+      </p>
+    </Link>
   );
 };
