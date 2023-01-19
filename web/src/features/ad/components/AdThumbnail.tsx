@@ -24,12 +24,12 @@ export const AdThumbnail: React.FC<IProps> = ({ ad }) => {
     <Link
       type="ad"
       path={ad.slug.current}
-      className="flex flex-col gap-16 rounded-sm bg-blue-100 p-16"
+      className="flex flex-col gap-16 rounded-sm bg-yellow-100 p-16"
     >
       <div className="flex gap-16">
         <div>
-          <div className="h-24 w-48 rounded-t-full bg-blue-200" />
-          <div className="flex h-48 w-48 items-center bg-blue-200 p-12 pt-0">
+          <div className="h-24 w-48 rounded-t-full bg-yellow-200" />
+          <div className="flex h-48 w-48 items-center bg-yellow-200 p-12 pt-0">
             <Image
               image={ad.advertiser.logo}
               alt={ad.advertiser.name + "-logo"}
