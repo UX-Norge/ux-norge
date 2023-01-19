@@ -1,4 +1,6 @@
 import * as React from "react";
+import { theme } from "../../tailwind.config.js";
+console.log(theme.colors.yellow[100]);
 
 interface VectorProps {
   className?: string;
@@ -181,27 +183,28 @@ export const jobPageDoors: React.FC = () => (
   >
     <path
       d="M1409 101.5C1409 45.4431 1454.44 0 1510.5 0V0C1566.56 0 1612 45.4431 1612 101.5V242H1409V101.5Z"
-      fill="#B3CFFF"
+      fill="var(--color-yellow-100)"
     />
     <path
       d="M-54 118.5C-54 87.2959 -28.7041 62 2.5 62V62C33.7041 62 59 87.2959 59 118.5V242H-54V118.5Z"
-      fill="#D4E3FF"
+      fill="var(--color-yellow-100)"
     />
     <path
       d="M15 118.5C15 87.2959 40.2959 62 71.5 62V62C102.704 62 128 87.2959 128 118.5V242H15V118.5Z"
-      fill="#B3CFFF"
+      fill="var(--color-yellow-200)"
     />
     <path
       d="M305 242C305 192.294 345.294 152 395 152H510C559.706 152 600 192.294 600 242V242H305V242Z"
-      fill="#D4E3FF"
+      fill="var(--color-yellow-100)"
     />
     <path
       d="M76 187C76 175.954 84.9543 167 96 167V167C107.046 167 116 175.954 116 187V242H76V187Z"
-      fill="#D4E3FF"
+      fill="var(--color-yellow-100)"
     />
     <path
       d="M1503 214.5C1503 205.387 1510.39 198 1519.5 198V198C1528.61 198 1536 205.387 1536 214.5V242H1503V214.5Z"
-      fill="#D4E3FF"
+      fill="var(--color-yellow-200)"
+    />
     />
   </svg>
 );

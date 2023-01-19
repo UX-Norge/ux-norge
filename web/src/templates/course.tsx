@@ -31,7 +31,7 @@ const coursePage: React.FC<PageProps<DataProps>> = ({
           <CourseInfo course={sanityCourse} />
         </div>
         {sanityCourse.signUpLink && (
-          <div className="pt-24">
+          <div>
             <Button href={sanityCourse.signUpLink}>Påmeldingsskjema</Button>
           </div>
         )}
