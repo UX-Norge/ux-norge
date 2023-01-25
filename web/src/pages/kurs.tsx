@@ -3,17 +3,20 @@ import { Seo } from "@Components/Seo";
 import { AdThumbnail } from "@Features/ad/components/AdThumbnail";
 import { FilterRow } from "@Features/ad/components/FilterRow";
 import { ALL_STRING, useJobPageAds } from "@Features/ad/lib/useAds";
+import { CourseEmptyState } from "@Features/course/CourseEmptyState";
 import { CoursePageHeader } from "@Features/course/CoursePageHeader";
 import { CourseThumbnail } from "@Features/course/CourseThumbnail";
 import { VectorIllustrations } from "@Images/VectorIllustrations";
 import { cleanGraphqlArray } from "@Lib/helpers";
-import { Ad, Course, GraphqlEdges } from "@Types";
+import { Ad, Course, GraphqlEdges, PageType } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
+import { BlockContent } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
 import * as React from "react";
 
 interface DataProps {
   allSanityCourse: GraphqlEdges;
+  sanityPage: PageType;
 }
 
 export const coursePage: React.FC<PageProps<DataProps>> = ({
@@ -21,18 +24,26 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
   location,
 }) => {
   let courses = cleanGraphqlArray(data.allSanityCourse) as Course[];
+  const { title, text, emptyState } = data.sanityPage;
+
+  courses = courses.filter((course) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return today <= new Date(course.date);
+  });
 
   return (
     <PageWrapper>
-      <Seo title="Kurs" location={location} />
+      <Seo title={title} location={location} />
       <PageHeader
-        title="Kurs"
+        title={title}
         h1Class="text-primary-600"
-        description="Bli bedre på det du er god på eller lær ny kunnskap fra de flinke folkene i familjøet vårt. 
-Her har vi samlet kursene du kan melde deg på."
+        description={text}
         doors={<VectorIllustrations.coursePageDoors />}
       />
       <section className="mx-auto grid max-w-page gap-24 px-24 py-80 md:grid-cols-2">
+        {courses.length === 0 && <BlockContent blocks={emptyState} />}
         {courses.map((course) => (
           <CourseThumbnail course={course} />
         ))}
@@ -43,6 +54,9 @@ Her har vi samlet kursene du kan melde deg på."
 
 export const query = graphql`
   query {
+    sanityPage(_id: { eq: "coursePage" }) {
+      ...Page
+    }
     allSanityCourse(sort: { fields: date, order: DESC }) {
       edges {
         node {

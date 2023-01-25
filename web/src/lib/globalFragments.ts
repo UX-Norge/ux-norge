@@ -65,4 +65,9 @@ export const query = graphql`
       }
     }
   }
+  fragment Page on SanityPage {
+    title
+    text
+    emptyState: _rawEmptyState
+  }
 `;

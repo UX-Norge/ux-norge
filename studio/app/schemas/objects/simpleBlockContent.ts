@@ -23,7 +23,11 @@ export default {
                 title: "URL",
                 name: "href",
                 type: "url",
-                validation: (Rule) => Rule.uri({ allowRelative: true }),
+                validation: (Rule) =>
+                  Rule.uri({
+                    allowRelative: true,
+                    scheme: ["https", "mailto"],
+                  }),
               },
             ],
           },
