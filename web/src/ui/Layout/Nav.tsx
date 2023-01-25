@@ -45,15 +45,17 @@ export const Nav: React.FC<NavProps> = ({ hideSearch }) => {
   };
 
   const [hamburger, setHamburger] = React.useState(false);
-  const navItems = [
-    (!hideSearch || hamburger) && (
-      <Search onSubmit={search} placeholder="Finn en artikkel" />
-    ),
-    <NavItem name="Aktuelt" path="" type="home" className="hidden sm:block" />,
-    <NavItem name="Nettverk" path="nettverk" type="page" />,
-    <NavItem name="Kurs" path="kurs" type="page" />,
-    <NavItem name="Jobb" path="jobb" type="page" />,
-  ];
+  const NavItems = () => (
+    <>
+      {(!hideSearch || hamburger) && (
+        <Search onSubmit={search} placeholder="Finn en artikkel" />
+      )}
+      <NavItem name="Aktuelt" path="" type="home" className="hidden sm:block" />
+      <NavItem name="Nettverk" path="nettverk" type="page" />
+      <NavItem name="Kurs" path="kurs" type="page" />
+      <NavItem name="Jobb" path="jobb" type="page" />
+    </>
+  );
 
   return (
     <nav
@@ -76,7 +78,7 @@ export const Nav: React.FC<NavProps> = ({ hideSearch }) => {
           />
         </Link>
         <div className="hidden items-center space-x-24 md:flex lg:space-x-48">
-          {navItems}
+          <NavItems />
         </div>
         <button className="md:hidden" onClick={() => setHamburger(!hamburger)}>
           <VectorIllustrations.hamburger />
@@ -84,7 +86,7 @@ export const Nav: React.FC<NavProps> = ({ hideSearch }) => {
       </div>
       {hamburger && (
         <div className="flex flex-col gap-32 px-24 pb-56 pt-24 md:hidden">
-          {navItems}
+          <NavItems />
           <div className="fixed bottom-0 left-[5px] h-[166px] w-[81px] rounded-t-full bg-primary-400" />
           <div className="fixed bottom-0 left-[95px] h-[86px] w-[35px] rounded-t-full bg-primary-400" />
           <div className="fixed bottom-0 right-[-60px] h-[166px] w-[199px] rounded-t-full bg-primary-400" />

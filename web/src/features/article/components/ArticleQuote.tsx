@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface IProps {
-  text: string;
+  children: React.ReactNode;
 }
 
 export const ArticleQuote: React.FC<IProps> = ({ children }) => {

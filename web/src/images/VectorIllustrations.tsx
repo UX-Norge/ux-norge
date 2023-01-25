@@ -118,8 +118,8 @@ const hamburger = () => (
       x2="26"
       y2="0.999998"
       stroke="#14121C"
-      stroke-width="2"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeLinecap="round"
     />
     <line
       x1="1"
@@ -127,8 +127,8 @@ const hamburger = () => (
       x2="26"
       y2="7"
       stroke="#14121C"
-      stroke-width="2"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeLinecap="round"
     />
     <line
       x1="4"
@@ -136,8 +136,8 @@ const hamburger = () => (
       x2="26"
       y2="13"
       stroke="#14121C"
-      stroke-width="2"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeLinecap="round"
     />
   </svg>
 );
