@@ -40,6 +40,7 @@ export const JobPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         title={title}
         description={text}
         doors={<VectorIllustrations.jobPageDoors />}
+        cta={data.sanityPage.cta}
       />
       <div className="mx-auto max-w-page space-y-24 px-24 py-40 ">
         <div className="grid gap-x-40 gap-y-24 md:grid-cols-3">
