@@ -14,8 +14,7 @@ interface DataProps {
 }
 
 const adSerializers = {
-  articleImage: ArticleImage,
-  youtube: Youtube,
+  types: { articleImage: ArticleImage, youtube: Youtube },
 };
 
 export const AdPage: React.FC<PageProps<DataProps>> = ({

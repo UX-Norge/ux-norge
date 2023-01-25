@@ -81,14 +81,7 @@ export const ArticleBody: React.FC<
     setBodyWithAds(insertBannerAds(body, articleBannerAds));
   }, [body, articleBannerAds]);
 
-  const articleSerializers = {
-    articleImage: ArticleImage,
-    youtube: Youtube,
-    inlineRelatedArticle: RelatedArticleInline,
-    blockquote: ArticleQuote,
-    bannerAd: BannerAd,
-    factBox: FactBox,
-  };
+  const articleSerializers = {};
 
   const readTime = Math.round(
     blockContentToPlainText(body).split(" ").length / 200
