@@ -81,8 +81,6 @@ export const ArticleBody: React.FC<
     setBodyWithAds(insertBannerAds(body, articleBannerAds));
   }, [body, articleBannerAds]);
 
-  const articleSerializers = {};
-
   const readTime = Math.round(
     blockContentToPlainText(body).split(" ").length / 200
   );
@@ -96,12 +94,7 @@ export const ArticleBody: React.FC<
         <Overline>{readTime} min</Overline>
         {isReadersLetter && <ReadersLetterDisclaimer />}
         <div className="prose-a:link w-prose prose prose-p:text-base prose-p:leading-relaxed">
-          {bodyWithAds && (
-            <BlockContent
-              blocks={bodyWithAds}
-              serializers={articleSerializers}
-            />
-          )}
+          {bodyWithAds && <BlockContent blocks={bodyWithAds} />}
         </div>
         <div>
           <hr className="w-64" />

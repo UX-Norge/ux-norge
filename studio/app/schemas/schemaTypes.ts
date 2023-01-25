@@ -12,5 +12,7 @@ export { SiteSettings } from "./documents/settings/siteSettings";
 export { Footer } from "./documents/settings/footer";
 export { SocialMedia } from "./documents/settings/socialMedia";
 export { SlackBannerType } from "./documents/settings/slackBanner";
+export { NominateBannerType } from "./documents/settings/nominateBanner";
 export { PartnerBanner } from "./documents/settings/partnerBanner";
+export { PageType } from "./documents/page";
 export { Cta } from "./objects/cta";

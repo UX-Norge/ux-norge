@@ -76,7 +76,7 @@ html {
 
 @layer components {
   .link {
-    @apply text-primary-500 underline-offset-4 transition-all hover:underline-offset-8;
+    @apply text-primary-500 underline underline-offset-4 transition-all hover:underline-offset-8;
   }
 }
 

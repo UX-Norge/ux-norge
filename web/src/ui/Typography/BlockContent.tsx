@@ -12,15 +12,10 @@ import { Link } from "gatsby";
 
 interface IProps {
   blocks: BlockContentType | undefined | object[];
-  serializers?: object;
   prose?: boolean;
 }
 
-export const BlockContent: React.FC<IProps> = ({
-  prose,
-  blocks,
-  serializers,
-}) => {
+export const BlockContent: React.FC<IProps> = ({ prose, blocks }) => {
   if (!blocks) return null;
   return (
     <div className={classNames({ prose: prose })}>
