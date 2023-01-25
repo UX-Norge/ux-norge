@@ -1,8 +1,9 @@
-import { PortableText } from "@Types";
+import { PortableText, Cta } from "@Types";
 
 export type PageType = {
   title: string;
   text: string;
+  cta: Cta;
   emptyState: PortableText;
 };
 export default {
@@ -19,6 +20,11 @@ export default {
       name: "text",
       title: "Introduksjon",
       type: "text",
+    },
+    {
+      name: "cta",
+      title: "Button",
+      type: "cta",
     },
     {
       name: "emptyState",

@@ -41,6 +41,7 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
         h1Class="text-primary-600"
         description={text}
         doors={<VectorIllustrations.coursePageDoors />}
+        cta={data.sanityPage.cta}
       />
       <section className="mx-auto grid max-w-page gap-24 px-24 py-80 md:grid-cols-2">
         {courses.length === 0 && <BlockContent blocks={emptyState} />}

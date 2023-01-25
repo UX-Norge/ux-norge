@@ -69,5 +69,9 @@ export const query = graphql`
     title
     text
     emptyState: _rawEmptyState
+    cta {
+      text
+      url
+    }
   }
 `;
