@@ -19,11 +19,11 @@ export const ToggleButton: React.FC<IProps> = ({
   return (
     <button
       className={classNames(
-        "rounded-full px-16 py-4 capitalize text-gray-900 transition-all",
+        "whitespace-nowrap rounded-full px-16 py-4 capitalize text-gray-900 transition-all",
         {
           [activeClassName]: active,
-          "hover:bg-yellow-300 bg-yellow-200": active,
-          "hover:ring-yellow-300 ring-2 ring-yellow-200": !active,
+          "text-black bg-yellow-200 hover:bg-yellow-200": active,
+          "ring-2 ring-yellow-200 hover:ring-yellow-200": !active,
         },
         className
       )}

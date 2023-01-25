@@ -1,4 +1,4 @@
-export interface SlackBanner {
+export interface SlackBannerType {
   title: string;
   text: string;
   buttonText: string;

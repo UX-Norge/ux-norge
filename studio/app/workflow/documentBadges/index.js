@@ -1,5 +1,4 @@
 import defaultResolve from "part:@sanity/base/document-badges";
-import { addBadge } from "sanity-plugin-content-calendar/build/register";
 
 const CustomBadge = () => {
   return {

@@ -1,3 +1,4 @@
+export { Course } from "./documents/course";
 export { Article } from "./documents/article";
 export { ArticleImage } from "./objects/article/articleImage";
 export { Company } from "./documents/company";
@@ -10,6 +11,8 @@ export { Document } from "./documents/doc";
 export { SiteSettings } from "./documents/settings/siteSettings";
 export { Footer } from "./documents/settings/footer";
 export { SocialMedia } from "./documents/settings/socialMedia";
-export { SlackBanner } from "./documents/settings/slackBanner";
+export { SlackBannerType } from "./documents/settings/slackBanner";
+export { NominateBannerType } from "./documents/settings/nominateBanner";
 export { PartnerBanner } from "./documents/settings/partnerBanner";
+export { PageType } from "./documents/page";
 export { Cta } from "./objects/cta";

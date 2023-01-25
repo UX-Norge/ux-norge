@@ -26,27 +26,29 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
     article.relatedArticles && article.relatedArticles.length > 0
       ? article.relatedArticles
       : (cleanGraphqlArray(data.relatedArticles) as Article[]);
-  console.log(relatedArticles);
 
   return (
     <article>
       <Seo
-        title={article.title}
+        title={article.metaTitle || article.title}
         description={article.description}
         image={article.mainImage?.image}
         imageAlt={article.mainImage?.alt}
         location={location}
+        publishDate={article.publishedAt}
         type="article"
+        authors={article.authors}
       />
       <PageWrapper>
         <ArticleHeader {...article} />
         <ArticleBody
+          category={article.category}
           body={article.body}
           publishedAt={article.publishedAt}
           articleListAds={articleListAds}
           articleBannerAds={articleBannerAds}
-          readTime={10}
           isReadersLetter={article.isReadersLetter}
+          slackMessageLink={article.slackMessageLink}
         />
         <ArticleFooter
           relatedArticles={relatedArticles}
@@ -68,14 +70,17 @@ export const query = graphql`
       title
       description
       publishedAt
+      metaTitle
+      companyName
+      companyType
       mainImage {
         alt
-        caption
         image {
           ...ImageWithPreview
         }
       }
       category {
+        _id
         name
         slug {
           current
@@ -107,6 +112,7 @@ export const query = graphql`
           ...ArticleImage
         }
       }
+      slackMessageLink
       isReadersLetter
       body: _rawBody(resolveReferences: { maxDepth: 4 })
     }

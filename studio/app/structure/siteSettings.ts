@@ -1,5 +1,11 @@
 import S from "@sanity/desk-tool/structure-builder";
-import { FiSettings, FiTag, FiTwitter, FiUsers } from "react-icons/fi";
+import {
+  FiMessageSquare,
+  FiSettings,
+  FiTag,
+  FiTwitter,
+  FiUsers,
+} from "react-icons/fi";
 
 export default S.listItem()
   .title("Innstillinger")
@@ -17,6 +23,7 @@ export default S.listItem()
               .documentId("siteSettings")
               .title("Sideinnstillinger")
           ),
+        S.divider(),
         S.listItem()
           .title("Forfattere")
           .icon(FiUsers)
@@ -29,6 +36,44 @@ export default S.listItem()
           .title("Sosiale medier")
           .icon(FiTwitter)
           .child(S.documentTypeList("socialMedia").title("Sosiale medier")),
+        S.divider(),
+        S.listItem()
+          .title("Nyhetsbrevbanner")
+          .icon(FiMessageSquare)
+          .child(
+            S.document()
+              .schemaType("newsletterSignupForm")
+              .documentId("newsletterSignupForm")
+              .title("Nyhetsbrevbanner")
+          ),
+        S.listItem()
+          .title("Slackbanner")
+          .icon(FiMessageSquare)
+          .child(
+            S.document()
+              .schemaType("slackBanner")
+              .documentId("slackBanner")
+              .title("Slackbanner")
+          ),
+        S.listItem()
+          .title("Nominer til ukens designer")
+          .icon(FiMessageSquare)
+          .child(
+            S.document()
+              .schemaType("nominateBanner")
+              .documentId("nominateBanner")
+              .title("Nominer til ukes designer")
+          ),
+        S.listItem()
+          .title("Leserinnlegg")
+          .icon(FiMessageSquare)
+          .child(
+            S.document()
+              .schemaType("readersLetter")
+              .documentId("readersLetter")
+              .title("Leserinnlegg")
+          ),
+        S.divider(),
         S.listItem()
           .title("Footer")
           .child(
@@ -38,36 +83,12 @@ export default S.listItem()
               .title("Footer")
           ),
         S.listItem()
-          .title("Nyhetsbrevbanner")
-          .child(
-            S.document()
-              .schemaType("newsletterSignupForm")
-              .documentId("newsletterSignupForm")
-              .title("Nyhetsbrevbanner")
-          ),
-        S.listItem()
-          .title("Slackbanner")
-          .child(
-            S.document()
-              .schemaType("slackBanner")
-              .documentId("slackBanner")
-              .title("Slackbanner")
-          ),
-        S.listItem()
           .title("Samarbeidspartnerseksjon")
           .child(
             S.document()
               .schemaType("partnerBanner")
               .documentId("partnerBanner")
               .title("Samarbeidspartnerseksjon")
-          ),
-        S.listItem()
-          .title("Leserinnlegg")
-          .child(
-            S.document()
-              .schemaType("readersLetter")
-              .documentId("readersLetter")
-              .title("Leserinnlegg")
           ),
       ])
   );

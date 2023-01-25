@@ -1,57 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-	--color-gray-900: #14121c;
-	--color-gray-800: #2b2930;
-	--color-gray-700: #424247;
-	--color-gray-600: #5e5e63;
-	--color-gray-500: #737078;
-	--color-gray-400: #99949c;
-	--color-gray-300: #b5b3ba;
-	--color-gray-200: #d4d1d6;
-	--color-gray-100: #f2f0f5;
-	--color-gray-000: #ffffff;
-	--color-primary-800: #29215e;
-	--color-primary-700: #3d3696;
-	--color-primary-500: #7061ea;
-	--color-primary-400: #9786ff;
-	--color-primary-100: #e5e1fd;
-	--color-primary-600: #594fd6;
-	--color-green-900: #062008;
-	--color-green-600: #107349;
-	--color-green-500: #02865f;
-	--color-green-300: #5bc49a;
-	--color-green-100: #daf9d5;
-	--color-orange-500: #d94f0d;
-	--color-orange-400: #f66f33;
-	--color-blue-900: #001c3b;
-	--color-blue-700: #005291;
-	--color-blue-600: #0066b8;
-	--color-blue-500: #3080d7;
-	--color-blue-200: #b2cfff;
-	--color-blue-100: #d4e3ff;
-	--color-blue-50: #f2f7ff;
-	--color-yellow-500: #a36100;
-	--color-yellow-300: #e3a808;
-	--color-yellow-200: #f1c048;
-	--color-yellow-100: #ffe0a8;
-	--color-yellow-50: #fff9f0;
-	--color-pink-500: #ef8cd9;
-	--color-pink-200: #f7c9ed;
+  --color-gray-900: #14121c;
+  --color-gray-800: #2b2930;
+  --color-gray-700: #424247;
+  --color-gray-600: #5e5e63;
+  --color-gray-500: #737078;
+  --color-gray-400: #99949c;
+  --color-gray-300: #b5b3ba;
+  --color-gray-200: #d4d1d6;
+  --color-gray-100: #f2f0f5;
+  --color-gray-000: #ffffff;
+  --color-primary-800: #29215e;
+  --color-primary-700: #3d3696;
+  --color-primary-500: #7061ea;
+  --color-primary-400: #9786ff;
+  --color-primary-50: #f5f0ff;
+  --color-primary-100: #e5e1fd;
+  --color-primary-600: #594fd6;
+  --color-green-900: #062008;
+  --color-green-600: #107349;
+  --color-green-500: #02865f;
+  --color-green-300: #5bc49a;
+  --color-green-100: #daf9d5;
+  --color-orange-500: #d94f0d;
+  --color-orange-400: #f66f33;
+  --color-blue-900: #001c3b;
+  --color-blue-700: #005291;
+  --color-blue-600: #0066b8;
+  --color-blue-500: #3080d7;
+  --color-blue-200: #b2cfff;
+  --color-blue-100: #d4e3ff;
+  --color-blue-50: #f2f7ff;
+  --color-yellow-500: #a36100;
+  --color-yellow-300: #e3a808;
+  --color-yellow-200: #f1c048;
+  --color-yellow-100: #ffe0a8;
+  --color-yellow-50: #fff9f0;
+  --color-pink-500: #ef8cd9;
+  --color-pink-200: #f7c9ed;
 }
 
 html {
   height: 100%;
-  font-size: 100%
+  font-size: 100%;
 }
 
 @media screen and (min-width: 768px) {
   html {
-	font-size: 100%
+    font-size: 100%;
   }
 }
 /* ::selection {
@@ -62,23 +63,34 @@ html {
 	color: var(--color-gray-900);
 	background-color: var(--color-yellow-100);
 } */
-	
+
 @layer base {
   body {
     @apply font-sans;
   }
+  figcaption p {
+    font-size: inherit !important;
+    margin: 0;
+  }
 }
 
 @layer components {
-	.link {
-		@apply text-primary-500 underline-offset-4 hover:underline-offset-8 transition-all;
-	}
+  .link {
+    @apply text-primary-500 underline underline-offset-4 transition-all hover:underline-offset-8;
+  }
 }
 
 @layer utilities {
-	.door-open {
-		transform: perspective(2000px) rotateY(10deg);
-	}
+  .door-open {
+    transform: perspective(2000px) rotateY(10deg);
+  }
+}
+
+.ce-block__content h2.ce-header {
+  @apply text-h2 font-bold;
+}
+.ce-block__content h3.ce-header {
+  @apply text-h3 font-bold;
 }
 
 #gatsby-focus-wrapper {
@@ -88,22 +100,21 @@ html {
 }
 
 :root {
-    --cover-page-desktop-layout: "";
-    --cover-page-mobile-layout: "";
-    --cover-page-table-layout: "";
+  --cover-page-desktop-layout: "";
+  --cover-page-mobile-layout: "";
+  --cover-page-table-layout: "";
 
-    --cover-page-layout: var(--cover-page-mobile-layout);
+  --cover-page-layout: var(--cover-page-mobile-layout);
 }
 
 @media screen and (min-width: 700px) {
-	:root {
-		--cover-page-layout: var(--cover-page-tablet-layout);
-	}
+  :root {
+    --cover-page-layout: var(--cover-page-tablet-layout);
+  }
 }
 
 @media screen and (min-width: 1200px) {
-    :root {
-        --cover-page-layout: var(--cover-page-desktop-layout);
-    }
+  :root {
+    --cover-page-layout: var(--cover-page-desktop-layout);
+  }
 }
-

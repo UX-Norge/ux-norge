@@ -5,11 +5,11 @@ export const InputWrapper: React.FC<{
   children: React.ReactNode;
   helper?: string;
   required?: boolean;
-}> = ({ label, helper, required, children }) => {
+}> = ({ id, label, helper, required, children }) => {
   return (
     <div className="relative mb-16">
       {label && (
-        <label>
+        <label htmlFor={id}>
           {label}
           {!required && (
             <span className="text-sm text-gray-600"> (Valgfri)</span>

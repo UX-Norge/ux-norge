@@ -18,13 +18,13 @@ export const AdPageHeader: React.FC<
       })}
     >
       <div className="p-24 md:order-1">
-        <Overline className="text-blue-500">
+        <Overline className="text-yellow-500">
           {advertiser?.name && `${advertiser.name} •`}{" "}
           {location.map(({ name }) => name).join(", ")}
         </Overline>
         <Heading1 className="wrap hyphen break-words">{title}</Heading1>
         <Body1 className="font-bold">{description}</Body1>
-        <Overline className="mt-24 text-blue-500">
+        <Overline className="mt-24 text-yellow-500">
           {getDaysToDeadline(deadline)}
         </Overline>
       </div>
@@ -36,7 +36,7 @@ export const AdPageHeader: React.FC<
             alt={title}
             width={1000}
           />
-          <div className="absolute top-1/3 -left-96 -z-10 h-2/3 rounded-t-xl bg-blue-200" />
+          <div className="absolute top-1/3 -left-96 -z-10 h-2/3 rounded-t-xl bg-yellow-100" />
         </div>
       )}
     </header>

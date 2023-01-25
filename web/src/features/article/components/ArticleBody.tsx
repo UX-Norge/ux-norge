@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BlockContent, Overline } from "@Ui/Typography";
+import { BlockContent, Heading4, Overline } from "@Ui/Typography";
 import { ArticleImage, RelatedArticleInline } from "@Features/article";
 import { Ad, Article } from "@Types";
 import { ArticleQuote } from "./ArticleQuote";
@@ -9,9 +9,14 @@ import { BannerAd } from "@Features/ad/components/BannerAd";
 import { FactBox } from "./FactBox";
 import { ReadersLetterDisclaimer } from "./ReadersLetterDisclaimer";
 import { ListAd } from "@Features/ad/components/ListAd";
+import { Youtube } from "@Features/article/components/Youtube";
+import { Button } from "@Ui/Button";
+import { graphql, useStaticQuery } from "gatsby";
+import { SlackBannerType } from "@Types";
+import { DiscussArticle } from "./DiscussArticle";
+import { NominateSection } from "./NominateSection";
 
 interface IProps {
-  readTime: number;
   articleListAds: Ad[];
   articleBannerAds: Ad[];
 }
@@ -41,37 +46,63 @@ const insertBannerAds = (blocks: any[], bannerAds: Ad[]) => {
 };
 
 export const ArticleBody: React.FC<
-  IProps & Pick<Article, "publishedAt" | "body" | "isReadersLetter">
+  IProps &
+    Pick<
+      Article,
+      | "publishedAt"
+      | "body"
+      | "isReadersLetter"
+      | "category"
+      | "slackMessageLink"
+    >
 > = ({
   isReadersLetter,
+  category,
   body,
   publishedAt,
   articleListAds,
   articleBannerAds,
+  slackMessageLink,
 }) => {
-  const articleSerializers = {
-    articleImage: ArticleImage,
-    inlineRelatedArticle: RelatedArticleInline,
-    blockquote: ArticleQuote,
-    bannerAd: BannerAd,
-    factBox: FactBox,
-  };
+  const [bodyWithAds, setBodyWithAds] = React.useState<any[]>([]);
+  const {
+    sanitySlackBanner: { invitationLink },
+  } = useStaticQuery<{
+    sanitySlackBanner: SlackBannerType;
+  }>(graphql`
+    query {
+      sanitySlackBanner(_id: { eq: "slackBanner" }) {
+        invitationLink
+      }
+    }
+  `);
+
+  React.useEffect(() => {
+    setBodyWithAds(insertBannerAds(body, articleBannerAds));
+  }, [body, articleBannerAds]);
 
   const readTime = Math.round(
     blockContentToPlainText(body).split(" ").length / 200
   );
-  const bodyWithAds = insertBannerAds(body, articleBannerAds);
 
   return (
     <main className="relative mx-auto mt-56 max-w-[950px] grid-cols-[65ch_1fr] gap-24 lg:grid">
-      <div className="relative mx-auto max-w-prose p-24 lg:m-0">
+      <div className="relative mx-auto max-w-prose lg:m-0">
         <Overline className="text-base text-primary-500">
           {printDate(publishedAt)}
         </Overline>
         <Overline>{readTime} min</Overline>
         {isReadersLetter && <ReadersLetterDisclaimer />}
         <div className="prose-a:link w-prose prose prose-p:text-base prose-p:leading-relaxed">
-          <BlockContent blocks={bodyWithAds} serializers={articleSerializers} />
+          {bodyWithAds && <BlockContent blocks={bodyWithAds} />}
+        </div>
+        <div>
+          <hr className="w-64" />
+          <NominateSection category={category} />
+          <DiscussArticle
+            invitationLink={invitationLink}
+            slackMessageLink={slackMessageLink}
+          />
         </div>
       </div>
       <div className="hidden w-full space-y-48 lg:block">

@@ -19,6 +19,7 @@ export default async function handler(
       resolve(result);
     });
   });
+  console.log(req);
 
   const {
     title,
@@ -27,6 +28,7 @@ export default async function handler(
     contactName,
     contactEmail,
     contactPhone,
+    jobType,
     packageType,
     code,
     location,
@@ -37,10 +39,11 @@ export default async function handler(
     _type: "ad",
     _id: "drafts.",
     title,
-    slug: slugify(title),
+    slug: { current: slugify(title) },
     description,
     advertiser: { _type: "reference", _ref: advertiser },
     contactName,
+    jobType,
     contactEmail,
     contactPhone,
     packageType: { _type: "reference", _ref: packageType },
