@@ -14,9 +14,6 @@ import { Image } from "@Ui/Image";
 import { Newsletter } from "@Components/Newsletter";
 import { Partners } from "@Features/ad/components/Partners";
 
-import logo from "@Images/logo-white.svg";
-import sanityLogo from "@Images/sanity-logo.svg";
-
 interface LinkListProps {
   title: string;
   links: (Cta | Document)[];

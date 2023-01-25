@@ -1,7 +1,7 @@
 import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { Helmet } from "react-helmet";
-import { SanityImage, SiteSettings } from "@Types";
+import { Author, SanityImage, SiteSettings } from "@Types";
 import { imageUrl } from "gatsby-plugin-sanity-image";
 import { PageProps } from "gatsby";
 
@@ -12,6 +12,10 @@ interface IProps {
   imageAlt?: string;
   location: PageProps["location"];
   type?: "article" | null;
+  companyType?: string;
+  companyName?: string;
+  publishDate?: string;
+  authors?: Author[];
 }
 
 export const Seo: React.FC<IProps> = ({
@@ -21,6 +25,10 @@ export const Seo: React.FC<IProps> = ({
   imageAlt,
   location,
   type,
+  companyType,
+  companyName,
+  publishDate,
+  authors,
 }) => {
   const { sanitySiteSettings: seo } = useStaticQuery<{
     sanitySiteSettings: SiteSettings;
@@ -33,6 +41,34 @@ export const Seo: React.FC<IProps> = ({
       }
     }
   `);
+
+  let siteJSONLD: any = [
+    {
+      "@context": "http://uxnorge.org",
+      "@type": "WebSite",
+      url: "https://uxnorge.no/",
+      name: "UX Norge",
+    },
+  ];
+
+  if (type === "article")
+    siteJSONLD = [
+      {
+        "@context": "http://uxnorge.org",
+        "@type": "article",
+        url: "https://uxnorge.no/",
+        name: "UX Norge",
+        author: {
+          "@type": "Person",
+          name: authors[0].name,
+        },
+      },
+      {
+        "@type": "Organization",
+        type: companyType,
+        name: companyName,
+      },
+    ];
 
   title = title || seo.title;
   description = description || seo.description;
@@ -55,7 +91,7 @@ export const Seo: React.FC<IProps> = ({
       {image && (
         <meta
           property="og:image"
-          content={imageUrl(image?.asset, { width: 1200, height: 627 })}
+          content={imageUrl(image?.asset, { width: 1200, height: 630 })}
         />
       )}
       {image && (

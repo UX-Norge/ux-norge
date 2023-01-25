@@ -12,12 +12,16 @@ export interface Article extends SanityDocument {
   title: string;
   description: string;
   authors: Author[];
+  metaTitle?: string;
+  companyName: string;
+  companyType: string;
   publishedAt: string;
   body: PortableText;
   slug: SanitySlug;
   relatedArticles?: Article[];
   category: Category;
   isReadersLetter?: boolean;
+  slackMessageLink?: string;
 }
 
 export default {
@@ -43,6 +47,13 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: "metaTitle",
+      title: "Meta Title (optional)",
+      type: "string",
+      group: "metadata",
+      description: "Egen tittel når artikkelen blir delt i SoMe og Google",
+    },
+    {
       name: "description",
       title: "Ingress",
       type: "text",
@@ -62,6 +73,16 @@ export default {
       type: "datetime",
       group: "metadata",
       validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "companyName",
+      type: "string",
+      group: "metadata",
+    },
+    {
+      name: "companyType",
+      type: "string",
+      group: "metadata",
     },
     {
       name: "body",
@@ -100,6 +121,13 @@ export default {
       name: "isReadersLetter",
       title: "Leserinnlegg",
       type: "boolean",
+    },
+    {
+      name: "slackMessageLink",
+      title: "Link til Slackmeldingen",
+      description:
+        'Hover over en melding i Slack, finn "share message" og trykk "copy link"',
+      type: "url",
     },
   ],
   preview: {

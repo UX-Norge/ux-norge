@@ -1,6 +1,14 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
-import { Ad, Article, Author, Category, Document, GraphqlEdges } from "@Types";
+import {
+  Ad,
+  Article,
+  Author,
+  Category,
+  Course,
+  Document,
+  GraphqlEdges,
+} from "@Types";
 import {
   activeFilter,
   divideListAndBannerAds,
@@ -16,6 +24,7 @@ type SanityData = {
   allSanityAuthor: GraphqlEdges;
   allSanityCategory: GraphqlEdges;
   allSanityDoc: GraphqlEdges;
+  allSanityCourse: GraphqlEdges;
 };
 
 const printDivider = () => console.log("\n------------\n");
@@ -103,6 +112,16 @@ export const createPages: GatsbyNode["createPages"] = async ({
           }
         }
       }
+      allSanityCourse {
+        edges {
+          node {
+            _id
+            slug {
+              current
+            }
+          }
+        }
+      }
     }
   `);
   if (result.errors) {
@@ -115,12 +134,14 @@ export const createPages: GatsbyNode["createPages"] = async ({
     authors: Author[];
     categories: Category[];
     documents: Document[];
+    courses: Course[];
   } = {
     articles: cleanGraphqlArray(result.data?.allSanityArticle) as Article[],
     ads: cleanGraphqlArray(result.data?.allSanityAd) as Ad[],
     authors: cleanGraphqlArray(result.data?.allSanityAuthor) as Author[],
     categories: cleanGraphqlArray(result.data?.allSanityCategory) as Category[],
     documents: cleanGraphqlArray(result.data?.allSanityDoc) as Document[],
+    courses: cleanGraphqlArray(result.data?.allSanityCourse) as Course[],
   };
 
   validateData(data);
@@ -221,6 +242,19 @@ export const createPages: GatsbyNode["createPages"] = async ({
         ownerNodeId: doc._id,
         context: {
           documentSlug: doc.slug.current,
+        },
+      });
+    });
+
+  data.courses
+    .filter((courses) => courses.slug?.current)
+    .forEach((courses) => {
+      createPage("Course", {
+        path: getRoute("course", courses.slug.current),
+        component: path.resolve(`./src/templates/course.tsx`),
+        ownerNodeId: courses._id,
+        context: {
+          slugSlug: courses.slug.current,
         },
       });
     });

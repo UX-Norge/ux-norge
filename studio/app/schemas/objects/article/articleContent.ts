@@ -41,6 +41,7 @@ export default {
       type: "articleImage",
       render: "ArticleImageRenderer",
     },
+    { type: "youtube" },
     { type: "inlineRelatedArticle" },
     { type: "factBox" },
   ],

@@ -5,4 +5,5 @@ export type RouteTypes =
   | "category"
   | "page"
   | "external"
-  | "home";
+  | "home"
+  | "course";

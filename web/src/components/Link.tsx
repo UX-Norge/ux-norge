@@ -23,13 +23,13 @@ export const Link: React.FC<{
 }) => {
   if (
     path?.includes("/") &&
-    !["author", "category", "external", "page"].includes(type)
+    !["author", "category", "external", "page", "course"].includes(type)
   ) {
     console.error(path, "Path must not contain '/'");
   }
 
   return type === "external" ? (
-    <a href={path} className={className} aria-label={ariaLabel}>
+    <a href={path} target="_blank" className={className} aria-label={ariaLabel}>
       {children}
     </a>
   ) : (

@@ -1,5 +1,5 @@
 import { VectorIllustrations } from "@Images/VectorIllustrations";
-import { SlackBanner as SlackBannerType } from "@Types";
+import { SlackBannerType } from "@Types";
 import { Button } from "@Ui/Button";
 import { Body1, Heading4 } from "@Ui/Typography";
 import { graphql, useStaticQuery } from "gatsby";

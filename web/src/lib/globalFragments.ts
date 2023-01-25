@@ -6,7 +6,6 @@ export const query = graphql`
       ...ImageWithPreview
     }
     alt
-    caption
   }
 
   fragment ArticleThumbnail on SanityArticle {
@@ -24,6 +23,22 @@ export const query = graphql`
     }
   }
 
+  fragment CourseThumbnail on SanityCourse {
+    title
+    slug {
+      current
+    }
+    description
+    location
+    date
+    startTime
+    endTime
+    price
+    courseHolder {
+      name
+    }
+  }
+
   fragment AdThumbnail on SanityAd {
     _id
     _createdAt
@@ -35,6 +50,7 @@ export const query = graphql`
     location {
       name
     }
+    remote
     link
     jobType
     startDate
@@ -48,5 +64,10 @@ export const query = graphql`
         ...Image
       }
     }
+  }
+  fragment Page on SanityPage {
+    title
+    text
+    emptyState: _rawEmptyState
   }
 `;

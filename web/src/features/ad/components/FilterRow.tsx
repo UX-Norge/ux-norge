@@ -1,8 +1,6 @@
 import { ToggleButton } from "@Components/ToggleButton";
-import { classNames } from "@Lib/helpers";
-import { Body1, Body2 } from "@Ui/Typography";
+import { Body1 } from "@Ui/Typography";
 import * as React from "react";
-import { ALL_STRING } from "../../../pages/jobb";
 
 interface IProps {
   allString: string;
@@ -37,12 +35,11 @@ export const FilterRow: React.FC<IProps> = ({
 
   return (
     <div>
-      <Body1 className="mb-4 pl-24">{label}</Body1>
-      <div className="mb-8 flex w-full flex-nowrap space-x-8 overflow-x-auto overflow-y-visible p-2 pr-24">
+      <Body1 className="text-black mb-4">{label}</Body1>
+      <div className="mb-8 flex w-full flex-wrap gap-8 p-2 pr-24">
         <ToggleButton
           name={allString}
           toggle={toggle}
-          className="ml-24"
           active={selected.includes(allString)}
         />
         {options.map((option) => (

@@ -1,4 +1,6 @@
 import * as React from "react";
+import { theme } from "../../tailwind.config.js";
+console.log(theme.colors.yellow[100]);
 
 interface VectorProps {
   className?: string;
@@ -102,7 +104,115 @@ const ShadowDoor: React.FC<VectorProps> = ({
   );
 };
 
+const hamburger = () => (
+  <svg
+    width="27"
+    height="14"
+    viewBox="0 0 27 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <line
+      x1="9"
+      y1="1"
+      x2="26"
+      y2="0.999998"
+      stroke="#14121C"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <line
+      x1="1"
+      y1="7"
+      x2="26"
+      y2="7"
+      stroke="#14121C"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <line
+      x1="4"
+      y1="13"
+      x2="26"
+      y2="13"
+      stroke="#14121C"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+const coursePageDoors = () => (
+  <svg
+    width="1612"
+    height="324"
+    viewBox="0 0 1612 324"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M1409 101.5C1409 45.4431 1454.44 0 1510.5 0V0C1566.56 0 1612 45.4431 1612 101.5V324H1409V101.5Z"
+      fill="#F5F0FF"
+    />
+    <path
+      d="M-54 200.5C-54 169.296 -28.7041 144 2.5 144V144C33.7041 144 59 169.296 59 200.5V324H-54V200.5Z"
+      fill="#F5F0FF"
+    />
+    <path
+      d="M611 200.5C611 169.296 636.296 144 667.5 144V144C698.704 144 724 169.296 724 200.5V324H611V200.5Z"
+      fill="#F5F0FF"
+    />
+    <path
+      d="M795 244C795 188.772 839.772 144 895 144H1230C1285.23 144 1330 188.772 1330 244V324H795V244Z"
+      fill="#F5F0FF"
+    />
+    <path
+      d="M72 266C72 248.327 86.3269 234 104 234V234C121.673 234 136 248.327 136 266V324H72V266Z"
+      fill="#9786FF"
+    />
+  </svg>
+);
+
+export const jobPageDoors: React.FC = () => (
+  <svg
+    width="1612"
+    height="242"
+    viewBox="0 0 1612 242"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M1409 101.5C1409 45.4431 1454.44 0 1510.5 0V0C1566.56 0 1612 45.4431 1612 101.5V242H1409V101.5Z"
+      fill="var(--color-yellow-100)"
+    />
+    <path
+      d="M-54 118.5C-54 87.2959 -28.7041 62 2.5 62V62C33.7041 62 59 87.2959 59 118.5V242H-54V118.5Z"
+      fill="var(--color-yellow-100)"
+    />
+    <path
+      d="M15 118.5C15 87.2959 40.2959 62 71.5 62V62C102.704 62 128 87.2959 128 118.5V242H15V118.5Z"
+      fill="var(--color-yellow-200)"
+    />
+    <path
+      d="M305 242C305 192.294 345.294 152 395 152H510C559.706 152 600 192.294 600 242V242H305V242Z"
+      fill="var(--color-yellow-100)"
+    />
+    <path
+      d="M76 187C76 175.954 84.9543 167 96 167V167C107.046 167 116 175.954 116 187V242H76V187Z"
+      fill="var(--color-yellow-100)"
+    />
+    <path
+      d="M1503 214.5C1503 205.387 1510.39 198 1519.5 198V198C1528.61 198 1536 205.387 1536 214.5V242H1503V214.5Z"
+      fill="var(--color-yellow-200)"
+    />
+    />
+  </svg>
+);
+
 export const VectorIllustrations = {
   MonoDoor,
   ShadowDoor,
+  coursePageDoors,
+  hamburger,
+  jobPageDoors,
 };

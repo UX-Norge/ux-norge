@@ -5,8 +5,9 @@ import { Button } from "@Ui/Button";
 import { SearchDropdown, Dropdown, Input } from "@Ui/Input";
 import { DateInput } from "@Ui/Input";
 import { Textarea } from "@Ui/Input";
+import { BlockContentInput } from "@Ui/Input/BlockContentInput";
 import { PageWrapper } from "@Ui/Layout";
-import { Body1, Heading1, Heading3, Heading4 } from "@Ui/Typography";
+import { Body1, Body2, Heading1, Heading3, Heading4 } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
 import * as React from "react";
 
@@ -20,34 +21,48 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
     value: company._id,
     label: company.name,
   }));
-  const packageTypes = cleanGraphqlArray(
-    data.allSanityAdPackageType
+  const packageTypes = cleanGraphqlArray(data.allSanityAdPackageType).filter(
+    (packageType) => packageType.duration
   ) as AdPackageType[];
 
   const [ad, setAd] = React.useState({
-    title: "Titteltest",
-    description: "En litt lengre beskrivelse",
+    title: "",
+    description: "",
     body: [],
     link: "",
-    contactName: "Don Norman",
-    contactPhone: "47244448",
-    contactEmail: "tobias@umble.no",
-    location: "Trondheim",
+    contactName: "",
+    contactPhone: "",
+    contactEmail: "",
+    location: "",
     packageType: "",
     advertiser: "",
     jobType: "fulltid",
     code: "",
   });
+  const [selectedPackageType, setSelectedPackageType] =
+    React.useState<AdPackageType | null>(packageTypes[0]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAd({
       ...ad,
       [e.target.name]: e.target.value,
     });
+    if (e.target.name === "packageType") {
+      console.log(e.target.name, e.target.value);
+
+      const newPackageType = packageTypes.find(
+        ({ _id }) => _id === e.target.value
+      );
+      console.log(newPackageType);
+
+      setSelectedPackageType(newPackageType || null);
+    }
   };
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+    console.log(ad);
+
     const response = fetch(`/api/create-ad`, {
       method: `POST`,
       headers: {
@@ -56,10 +71,6 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
       body: JSON.stringify(ad),
     }).then((res) => res.json());
   };
-
-  const currenetPackageType = packageTypes.find(
-    ({ _id }) => (_id === ad.packageType || {}) as AdPackageType
-  );
 
   return (
     <PageWrapper>
@@ -74,7 +85,7 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
           Hvis bedriften din aldri har annonsert på UXNorge.no, gå inn på{" "}
           <Link type="page" path="annonse">
             Annonsering
-          </Link>
+          </Link>{" "}
           for å få deg en konto
         </Body1>
         <div className="mb-24 rounded-xs bg-yellow-100 p-24">
@@ -110,9 +121,6 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
             }))}
             onChange={onChange}
           />
-          <Body1>Pris: {currenetPackageType.price} NOK ekskl. MVA</Body1>
-          <Body1>Varighet: {currenetPackageType.duration} dager</Body1>
-          <br />
         </div>
         <Heading3>Annonseinnhold</Heading3>
         <Input
@@ -142,6 +150,8 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
         />
         <Dropdown
           name="jobType"
+          label="Jobbtype"
+          required
           value={ad.jobType}
           options={[
             { label: "Fulltid", value: "fulltid" },
@@ -158,6 +168,7 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
           value={ad.link}
           onChange={onChange}
         />
+        {/* <BlockContentInput onChange={onChange} name="body" /> */}
         <br />
         <Heading4>Kontaktperson:</Heading4>
         <Input
@@ -186,7 +197,13 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
           placeholder="Don Norman"
           onChange={onChange}
         />
-        <Button type="submit">Send inn forespørsel</Button>
+        <div className="mt-32">
+          <Button type="submit">Send inn forespørsel</Button>
+          <Body2 className="mt-8">
+            Pris: {selectedPackageType?.price} NOK ekskl. MVA
+          </Body2>
+          <Body2>Varighet: {selectedPackageType?.duration} dager</Body2>
+        </div>
       </form>
     </PageWrapper>
   );
