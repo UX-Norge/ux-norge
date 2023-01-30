@@ -35,7 +35,6 @@ export const BlockContent: React.FC<IProps> = ({ prose, blocks }) => {
             },
           },
           types: {
-            // articleImage: (prop) => console.log(prop),
             articleImage: ({ value }) => <ArticleImage {...value} />,
             youtube: ({ value }) => <Youtube {...value} />,
             inlineRelatedArticle: ({ value }) => (

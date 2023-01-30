@@ -18,6 +18,8 @@ export const DiscussArticle: React.FC<DiscussArticleProps> = ({
       }
     }
   `);
+  console.log(sanityDiscussInSlack);
+
   if (!sanityDiscussInSlack) return null;
   const { title, text } = sanityDiscussInSlack;
   return (

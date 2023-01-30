@@ -12,8 +12,6 @@ export const PageHeader: React.FC<
     cta?: Cta;
   }
 > = ({ title, description, doors, h1Class, cta, descriptionClass }) => {
-  console.log(cta);
-
   return (
     <header className="overflow-hidden border-b-2 border-gray-900">
       <div className="relative mx-auto max-w-page gap-48 px-24 pt-128">
