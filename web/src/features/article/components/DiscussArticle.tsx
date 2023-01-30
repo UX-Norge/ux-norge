@@ -20,6 +20,7 @@ export const DiscussArticle: React.FC<DiscussArticleProps> = ({
       }
     }
   `);
+  if (!title || !text) return null;
   return (
     <div className="space-y-8">
       <Heading4>{title}</Heading4>
