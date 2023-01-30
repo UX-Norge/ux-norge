@@ -10,9 +10,7 @@ interface DiscussArticleProps {
 export const DiscussArticle: React.FC<DiscussArticleProps> = ({
   slackMessageLink,
 }) => {
-  const {
-    sanityDiscussInSlack: { title, text },
-  } = useStaticQuery(graphql`
+  const { sanityDiscussInSlack } = useStaticQuery(graphql`
     query {
       sanityDiscussInSlack(_id: { eq: "discussInSlack" }) {
         title
@@ -20,7 +18,8 @@ export const DiscussArticle: React.FC<DiscussArticleProps> = ({
       }
     }
   `);
-  if (!title || !text) return null;
+  if (!sanityDiscussInSlack) return null;
+  const { title, text } = sanityDiscussInSlack;
   return (
     <div className="space-y-8">
       <Heading4>{title}</Heading4>
