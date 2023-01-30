@@ -1,24 +1,18 @@
 import * as React from "react";
-import { BlockContent, Heading4, Overline } from "@Ui/Typography";
-import { ArticleImage, RelatedArticleInline } from "@Features/article";
-import { Ad, Article } from "@Types";
-import { ArticleQuote } from "./ArticleQuote";
+import { BlockContent, Overline } from "@Ui/Typography";
+import { Ad, Article, PortableText } from "@Types";
 import { printDate } from "@Lib/helpers";
 import { blockContentToPlainText } from "react-portable-text";
-import { BannerAd } from "@Features/ad/components/BannerAd";
-import { FactBox } from "./FactBox";
 import { ReadersLetterDisclaimer } from "./ReadersLetterDisclaimer";
 import { ListAd } from "@Features/ad/components/ListAd";
-import { Youtube } from "@Features/article/components/Youtube";
-import { Button } from "@Ui/Button";
-import { graphql, useStaticQuery } from "gatsby";
-import { SlackBannerType } from "@Types";
 import { DiscussArticle } from "./DiscussArticle";
 import { NominateSection } from "./NominateSection";
 
 interface IProps {
   articleListAds: Ad[];
   articleBannerAds: Ad[];
+  nominateBanner: { title: string; text: PortableText };
+  discussInSlack: { title: string; text: PortableText };
 }
 
 const insertBannerAds = (blocks: any[], bannerAds: Ad[]) => {
@@ -63,6 +57,8 @@ export const ArticleBody: React.FC<
   articleListAds,
   articleBannerAds,
   slackMessageLink,
+  discussInSlack,
+  nominateBanner,
 }) => {
   const [bodyWithAds, setBodyWithAds] = React.useState<any[]>([]);
 
@@ -87,8 +83,8 @@ export const ArticleBody: React.FC<
         </div>
         <div className="mb-48 space-y-32">
           <hr className="w-64" />
-          <NominateSection category={category} />
-          <DiscussArticle slackMessageLink={slackMessageLink} />
+          <NominateSection category={category} {...nominateBanner} />
+          <DiscussArticle {...discussInSlack} />
         </div>
       </div>
       <div className="hidden w-full space-y-48 lg:block">

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, PageProps } from "gatsby";
-import { Ad, Article, GraphqlEdges } from "@Types";
+import { Ad, Article, GraphqlEdges, PortableText } from "@Types";
 import { ArticleBody, ArticleFooter } from "@Features/article";
 import { PageWrapper } from "@Ui/Layout";
 import { cleanGraphqlArray, shuffle } from "../lib/helpers";
@@ -12,6 +12,8 @@ interface DataProps {
   articleListAds: GraphqlEdges;
   articleBannerAds: GraphqlEdges;
   relatedArticles: GraphqlEdges;
+  nominateBanner: { title: string; text: PortableText };
+  discussInSlack: { title: string; text: PortableText };
 }
 
 const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
@@ -19,6 +21,7 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const articleListAds = shuffle(
     cleanGraphqlArray(data.articleListAds) as Ad[]
   );
+  console.log(data);
 
   const articleBannerAds = cleanGraphqlArray(data.articleBannerAds) as Ad[];
 
@@ -49,6 +52,8 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
           articleBannerAds={articleBannerAds}
           isReadersLetter={article.isReadersLetter}
           slackMessageLink={article.slackMessageLink}
+          discussInSlack={data.discussInSlack}
+          nominateBanner={data.nominateBanner}
         />
         <ArticleFooter
           relatedArticles={relatedArticles}
@@ -154,6 +159,14 @@ export const query = graphql`
           ...AdThumbnail
         }
       }
+    }
+    discussInSlack: sanityDiscussInSlack(_id: { eq: "discussInSlack" }) {
+      title
+      text: _rawText
+    }
+    nominateBanner: sanityNominateBanner(_id: { eq: "nominateBanner" }) {
+      title
+      text: _rawText
     }
   }
 `;
