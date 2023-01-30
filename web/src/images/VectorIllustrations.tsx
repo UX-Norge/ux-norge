@@ -1,6 +1,5 @@
 import * as React from "react";
 import { theme } from "../../tailwind.config.js";
-console.log(theme.colors.yellow[100]);
 
 interface VectorProps {
   className?: string;
