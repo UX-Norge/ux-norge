@@ -55,6 +55,16 @@ export default S.listItem()
               .documentId("slackBanner")
               .title("Slackbanner")
           ),
+        S.divider(),
+        S.listItem()
+          .title("Diskuter artikkelen i Slack")
+          .icon(FiMessageSquare)
+          .child(
+            S.document()
+              .schemaType("discussInSlack")
+              .documentId("discussInSlack")
+              .title("Diskuter i Slacken")
+          ),
         S.listItem()
           .title("Nominer til ukens designer")
           .icon(FiMessageSquare)

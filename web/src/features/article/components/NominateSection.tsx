@@ -26,7 +26,7 @@ export const NominateSection: React.FC<NominateSectionProps> = ({
   if (category._id !== UKENS_DESIGNER_CATEGORY_ID) return null;
   const { title, text } = sanityNominateBanner;
   return (
-    <div className="my-24">
+    <div>
       <Heading4>{title}</Heading4>
       <div className="[&_a]:link [&_p]:text-base">
         <BlockContent blocks={text} />

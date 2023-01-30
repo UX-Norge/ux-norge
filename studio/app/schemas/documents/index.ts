@@ -11,6 +11,7 @@ import coverPage from "./coverPage";
 import doc from "./doc";
 import newsletter from "./newsletter";
 import page from "./page";
+import discussInSlack from "./settings/discussInSlack";
 import footer from "./settings/footer";
 import newsletterSignupForm from "./settings/newsletterSignupForm";
 import nominateBanner from "./settings/nominateBanner";
@@ -38,6 +39,7 @@ export default [
   newsletterSignupForm,
   slackBanner,
   nominateBanner,
+  discussInSlack,
   partnerBanner,
   readersLetter,
   adContent,
