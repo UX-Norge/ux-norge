@@ -1,25 +1,31 @@
 import { Button } from "@Ui/Button";
-import { Body1, Heading4 } from "@Ui/Typography";
+import { BlockContent, Body1, Heading4 } from "@Ui/Typography";
+import { graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
 
 interface DiscussArticleProps {
-  invitationLink: string;
   slackMessageLink?: string;
 }
 
 export const DiscussArticle: React.FC<DiscussArticleProps> = ({
-  invitationLink,
   slackMessageLink,
 }) => {
+  const {
+    sanityDiscussInSlack: { title, text },
+  } = useStaticQuery(graphql`
+    query {
+      sanityDiscussInSlack(_id: { eq: "discussInSlack" }) {
+        title
+        text: _rawText
+      }
+    }
+  `);
   return (
-    <div className="my-24 space-y-8">
-      <Heading4>Diskuter artikkelen i UX Norge Slacken</Heading4>
-      <Body1>
-        Mangler du konto?{" "}
-        <a className="link" href={invitationLink}>
-          Bli med i Slacken
-        </a>
-      </Body1>
+    <div className="space-y-8">
+      <Heading4>{title}</Heading4>
+      <div className="[&_a]:link [&_p]:text-base">
+        <BlockContent blocks={text} />
+      </div>
       <Button
         href={
           slackMessageLink || "https://uxnorge.slack.com/archives/C7RP430UD"

@@ -65,17 +65,6 @@ export const ArticleBody: React.FC<
   slackMessageLink,
 }) => {
   const [bodyWithAds, setBodyWithAds] = React.useState<any[]>([]);
-  const {
-    sanitySlackBanner: { invitationLink },
-  } = useStaticQuery<{
-    sanitySlackBanner: SlackBannerType;
-  }>(graphql`
-    query {
-      sanitySlackBanner(_id: { eq: "slackBanner" }) {
-        invitationLink
-      }
-    }
-  `);
 
   React.useEffect(() => {
     setBodyWithAds(insertBannerAds(body, articleBannerAds));
@@ -96,13 +85,10 @@ export const ArticleBody: React.FC<
         <div className="prose-a:link w-prose prose prose-p:text-base prose-p:leading-relaxed">
           {bodyWithAds && <BlockContent blocks={bodyWithAds} />}
         </div>
-        <div>
+        <div className="mb-48 space-y-32">
           <hr className="w-64" />
           <NominateSection category={category} />
-          <DiscussArticle
-            invitationLink={invitationLink}
-            slackMessageLink={slackMessageLink}
-          />
+          <DiscussArticle slackMessageLink={slackMessageLink} />
         </div>
       </div>
       <div className="hidden w-full space-y-48 lg:block">
