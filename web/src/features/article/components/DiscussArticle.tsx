@@ -1,27 +1,20 @@
+import { PortableText } from "@Types";
 import { Button } from "@Ui/Button";
-import { BlockContent, Body1, Heading4 } from "@Ui/Typography";
-import { graphql, useStaticQuery } from "gatsby";
+import { BlockContent, Heading4 } from "@Ui/Typography";
 import * as React from "react";
 
 interface DiscussArticleProps {
   slackMessageLink?: string;
+  title: string;
+  text: PortableText;
 }
 
 export const DiscussArticle: React.FC<DiscussArticleProps> = ({
   slackMessageLink,
+  title,
+  text,
 }) => {
-  const { sanityDiscussInSlack } = useStaticQuery(graphql`
-    query {
-      sanityDiscussInSlack(_id: { eq: "discussInSlack" }) {
-        title
-        text: _rawText
-      }
-    }
-  `);
-  console.log(sanityDiscussInSlack);
-
-  if (!sanityDiscussInSlack) return null;
-  const { title, text } = sanityDiscussInSlack;
+  if (!title || !text) return null;
   return (
     <div className="space-y-8">
       <Heading4>{title}</Heading4>
