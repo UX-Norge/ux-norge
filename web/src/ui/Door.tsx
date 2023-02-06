@@ -54,7 +54,7 @@ export const Door: React.FC<IProps> = ({
     >
       <InnerDoor
         className={classNames(
-          "group-hover:door-open group-focus:door-open h-full w-full origin-left origin-left bg-primary-400 object-cover transition-transform duration-700 ease-door lg:rounded-t-lg",
+          "group-hover:door-open group-focus:door-open h-full w-full origin-left bg-primary-400 object-cover transition-transform duration-700 ease-door lg:rounded-t-lg",
           `rounded-t-${rounded}`,
           classNameInner
         )}
