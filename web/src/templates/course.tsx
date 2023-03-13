@@ -1,10 +1,9 @@
 import { Seo } from "@Components/Seo";
 import { CourseInfo } from "@Features/course/CourseInfo";
-import { DocumentHeader } from "@Features/document/DocumentHeader";
-import { Course, Document } from "@Types";
+import { Course } from "@Types";
 import { Button } from "@Ui/Button";
 import { PageWrapper } from "@Ui/Layout";
-import { BlockContent, Body1, Body2, Heading2, Heading4 } from "@Ui/Typography";
+import { BlockContent, Body1, Heading2, Heading4 } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
 import * as React from "react";
 
@@ -32,7 +31,7 @@ const coursePage: React.FC<PageProps<DataProps>> = ({
         </div>
         {sanityCourse.signUpLink && (
           <div>
-            <Button href={sanityCourse.signUpLink}>Påmeldingsskjema</Button>
+            <Button href={sanityCourse.signUpLink}>Kjøp billett</Button>
           </div>
         )}
         <div className="prose">
