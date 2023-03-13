@@ -81,6 +81,10 @@ html {
 }
 
 @layer utilities {
+  .door {
+    /* Fix for flickering door animation in Safari */
+    perspective: 2000px;
+  }
   .door-open {
     transform: perspective(2000px) rotateY(10deg);
   }
