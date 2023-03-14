@@ -1,9 +1,14 @@
-import * as React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import { Helmet } from "react-helmet";
 import { Author, SanityImage, SiteSettings } from "@Types";
+import { graphql, PageProps, useStaticQuery } from "gatsby";
 import { imageUrl } from "gatsby-plugin-sanity-image";
-import { PageProps } from "gatsby";
+import * as React from "react";
+import { Helmet } from "react-helmet";
+
+/**
+ * Tools for SEO:
+ * - https://webcode.tools/generators — Generate JSON-LD, Open Graph, Twitter Card, etc.
+ * - https://chrome.google.com/webstore/detail/json-ld-tester/aohmciehgjboidolkmoaofcbnejmokan — Chrome extension for testing, can be used in localhost
+ */
 
 interface IProps {
   title?: string;
@@ -12,8 +17,6 @@ interface IProps {
   imageAlt?: string;
   location: PageProps["location"];
   type?: "article" | null;
-  companyType?: string;
-  companyName?: string;
   publishDate?: string;
   authors?: Author[];
 }
@@ -25,8 +28,6 @@ export const Seo: React.FC<IProps> = ({
   imageAlt,
   location,
   type,
-  companyType,
-  companyName,
   publishDate,
   authors,
 }) => {
@@ -42,33 +43,30 @@ export const Seo: React.FC<IProps> = ({
     }
   `);
 
-  let siteJSONLD: any = [
-    {
-      "@context": "http://uxnorge.org",
-      "@type": "WebSite",
-      url: "https://uxnorge.no/",
-      name: "UX Norge",
-    },
-  ];
+  let siteJSONLD: any = {
+    "@context": "http://schema.org/",
+    "@type": "WebSite",
+    url: "https://uxnorge.no/",
+    name: "UX Norge",
+  };
 
   if (type === "article")
-    siteJSONLD = [
-      {
-        "@context": "http://uxnorge.org",
-        "@type": "article",
-        url: "https://uxnorge.no/",
-        name: "UX Norge",
-        author: {
-          "@type": "Person",
-          name: authors[0].name,
+    siteJSONLD = {
+      "@context": "http://schema.org/",
+      "@type": "Article",
+      name: "UX Norge",
+      url: location.href,
+      headline: title,
+      datePublished: publishDate,
+      author: authors?.map((author) => ({
+        "@type": "Person",
+        name: author.name,
+        worksFor: {
+          "@type": "Organization",
+          name: author.company?.name,
         },
-      },
-      {
-        "@type": "Organization",
-        type: companyType,
-        name: companyName,
-      },
-    ];
+      })),
+    };
 
   title = title || seo.title;
   description = description || seo.description;
@@ -105,6 +103,19 @@ export const Seo: React.FC<IProps> = ({
 
       {location && <meta property="og:url" content={location.href} />}
       {type === "article" && <meta property="og:type" content="article" />}
+      {type === "article" &&
+        authors?.map((author) => (
+          <meta
+            key={author._id}
+            property="article:author"
+            content={author.name}
+          />
+        ))}
+      {type === "article" && publishDate && (
+        <meta property="article:published_time" content={publishDate} />
+      )}
+
+      <script type="application/ld+json">{JSON.stringify(siteJSONLD)}</script>
     </Helmet>
   );
 };
