@@ -1,10 +1,10 @@
-import { Article, ArticleImage } from "@Types";
-import { Image } from "@Ui/Image";
-import { Body1, Heading1, Heading2, Overline } from "@Ui/Typography";
-import * as React from "react";
-import { classNames } from "@Lib/helpers";
-import { Door } from "@Ui/Door";
 import { Link } from "@Components/Link";
+import { classNames } from "@Lib/helpers";
+import { Article, ArticleImage, Author } from "@Types";
+import { Door } from "@Ui/Door";
+import { Image } from "@Ui/Image";
+import { Body1, Overline } from "@Ui/Typography";
+import * as React from "react";
 
 type MainImageWithDimensions = ArticleImage & {
   image: {
@@ -18,9 +18,7 @@ type MainImageWithDimensions = ArticleImage & {
 export const ArticleHeader: React.FC<
   Pick<Article, "title" | "authors" | "category" | "description" | "mainImage">
 > = ({ title, authors, category, mainImage, description }) => {
-  const authorNames = authors.map((author) => author.name).join(", ");
-  let authorCompany = authors[0]?.company?.name;
-  authorCompany = authorCompany === "UX Norge" ? undefined : authorCompany;
+  const articleAuthors = formatArticleAuthors(authors);
 
   return (
     <header className="relative max-w-full overflow-x-hidden border-b-2 border-gray-900 pt-64 lg:min-h-aboveFold">
@@ -39,9 +37,7 @@ export const ArticleHeader: React.FC<
             <h1 className="text-h2 font-bold md:text-h1">{title}</h1>
             <Body1>{description}</Body1>
             <div className="mt-16 flex space-x-8">
-              {authorNames && <Overline>{authorNames}</Overline>}
-              {authorNames && authorCompany && <Overline>•</Overline>}
-              {authorCompany && <Overline>{authorCompany}</Overline>}
+              <Overline>{articleAuthors}</Overline>
             </div>
           </div>
           <Door
@@ -81,4 +77,31 @@ export const ArticleHeader: React.FC<
       </div>
     </header>
   );
+};
+
+const formatArticleAuthors = (authors: Author[]) => {
+  const everyAuthorIsFromSameCompany =
+    authors.every(
+      (author) => author.company?.name === authors[0].company?.name
+    ) && authors.length > 1;
+  const everyAuthorIsFromUxNorge = authors.every(
+    (author) => author.company?.name === "UX Norge"
+  );
+
+  if (everyAuthorIsFromSameCompany && !everyAuthorIsFromUxNorge) {
+    const authorNames = authors.map((author) => author.name).join(", ");
+    return `${authorNames} • ${authors[0].company?.name}`;
+  }
+
+  if (everyAuthorIsFromUxNorge) {
+    return authors.map((author) => author.name).join(", ");
+  }
+
+  const articleAuthors = authors
+    .map((author) =>
+      !!author.company ? `${author.name} • ${author.company.name}` : author.name
+    )
+    .join(", ");
+
+  return articleAuthors;
 };
