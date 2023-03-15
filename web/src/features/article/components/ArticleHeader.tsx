@@ -1,6 +1,6 @@
 import { Link } from "@Components/Link";
-import { classNames } from "@Lib/helpers";
-import { Article, ArticleImage, Author } from "@Types";
+import { classNames, formatArticleAuthors } from "@Lib/helpers";
+import { Article, ArticleImage } from "@Types";
 import { Door } from "@Ui/Door";
 import { Image } from "@Ui/Image";
 import { Body1, Overline } from "@Ui/Typography";
@@ -77,31 +77,4 @@ export const ArticleHeader: React.FC<
       </div>
     </header>
   );
-};
-
-const formatArticleAuthors = (authors: Author[]) => {
-  const everyAuthorIsFromSameCompany =
-    authors.every(
-      (author) => author.company?.name === authors[0].company?.name
-    ) && authors.length > 1;
-  const everyAuthorIsFromUxNorge = authors.every(
-    (author) => author.company?.name === "UX Norge"
-  );
-
-  if (everyAuthorIsFromSameCompany && !everyAuthorIsFromUxNorge) {
-    const authorNames = authors.map((author) => author.name).join(", ");
-    return `${authorNames} • ${authors[0].company?.name}`;
-  }
-
-  if (everyAuthorIsFromUxNorge) {
-    return authors.map((author) => author.name).join(", ");
-  }
-
-  const articleAuthors = authors
-    .map((author) =>
-      !!author.company ? `${author.name} • ${author.company.name}` : author.name
-    )
-    .join(", ");
-
-  return articleAuthors;
 };
