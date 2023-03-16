@@ -1,4 +1,7 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./src/**/*", "./gatsby-node.ts"]
+  "include": ["./src/**/*", "./gatsby-node.ts"],
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  }
 }
