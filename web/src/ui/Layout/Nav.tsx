@@ -1,11 +1,11 @@
 import { Link, RouteTypes } from "@Components/Link";
-import * as React from "react";
 import logo from "@Images/logo-horizontal.svg";
 import logoMobile from "@Images/logo.svg";
+import { VectorIllustrations } from "@Images/VectorIllustrations";
 import { classNames } from "@Lib/helpers";
 import { Search } from "@Ui/Input/Search";
 import { navigate } from "gatsby";
-import { VectorIllustrations } from "@Images/VectorIllustrations";
+import * as React from "react";
 
 export interface NavProps {
   hideSearch?: boolean;
@@ -44,10 +44,10 @@ export const Nav: React.FC<NavProps> = ({ hideSearch }) => {
     navigate(`/sok?searchTerm=${searchTerm}`);
   };
 
-  const [hamburger, setHamburger] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const NavItems = () => (
     <>
-      {(!hideSearch || hamburger) && (
+      {(!hideSearch || mobileMenuOpen) && (
         <Search onSubmit={search} placeholder="Finn en artikkel" />
       )}
       <NavItem name="Aktuelt" path="" type="home" className="hidden sm:block" />
@@ -61,7 +61,7 @@ export const Nav: React.FC<NavProps> = ({ hideSearch }) => {
     <nav
       className={classNames({
         "fixed z-50 h-full w-full bg-white md:static md:h-auto md:bg-transparent":
-          hamburger,
+          mobileMenuOpen,
       })}
     >
       <div className="flex items-center justify-between py-16 px-24 lg:px-48">
@@ -80,11 +80,11 @@ export const Nav: React.FC<NavProps> = ({ hideSearch }) => {
         <div className="hidden items-center space-x-24 md:flex lg:space-x-48">
           <NavItems />
         </div>
-        <button className="md:hidden" onClick={() => setHamburger(!hamburger)}>
+        <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? 'Lukk meny' : 'Åpne meny' }>
           <VectorIllustrations.hamburger />
         </button>
       </div>
-      {hamburger && (
+      {mobileMenuOpen && (
         <div className="flex flex-col gap-32 px-24 pb-56 pt-24 md:hidden">
           <NavItems />
           <div className="fixed bottom-0 left-[5px] h-[166px] w-[81px] rounded-t-full bg-primary-400" />
