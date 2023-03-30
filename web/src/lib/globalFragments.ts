@@ -34,7 +34,7 @@ export const query = graphql`
     startTime
     endTime
     price
-    courseHolder {
+    courseHolders {
       name
     }
   }

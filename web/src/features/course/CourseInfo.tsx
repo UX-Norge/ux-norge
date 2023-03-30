@@ -3,7 +3,7 @@ import { Body1 } from "@Ui/Typography";
 import * as React from "react";
 
 export const CourseInfo: React.FC<{ course: Course }> = ({
-  course: { date, startTime, endTime, location, price, courseHolder },
+  course: { date, startTime, endTime, location, price, courseHolders },
 }) => {
   const formattedDate =
     date && new Date(date).toLocaleDateString("no-nb", { dateStyle: "long" });
@@ -15,7 +15,7 @@ export const CourseInfo: React.FC<{ course: Course }> = ({
       {startTime && <Body1>{`🕐 Tid: ${formattedTime}`}</Body1>}
       {location && <Body1>{`📍 Sted: ${location}`}</Body1>}
       {price && <Body1>{`💰 Pris: ${price}`}</Body1>}
-      {courseHolder && <Body1>{`👨‍🏫 Kursholder: ${courseHolder.name}`}</Body1>}
+      {courseHolders && courseHolders.length > 0 && <Body1>{`👨‍🏫 Kursholder: ${courseHolders.join(", ")}`}</Body1>}
     </div>
   );
 };
