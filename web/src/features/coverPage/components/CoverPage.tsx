@@ -96,7 +96,7 @@ export const CoverPage: React.FC<IProps> = ({
   return (
     <PageWrapper>
       <SlackBanner />
-      <main className="mx-auto max-w-page px-24">
+      <main className="mx-auto max-w-page px-24 pb-24">
         <TopSection />
         <BannerAd {...get(1, bannerAds)[0]} onHomepage />
         <FourColumn />
