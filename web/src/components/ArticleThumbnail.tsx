@@ -48,8 +48,8 @@ export const ArticleThumbnail: React.FC<IProps> = ({
         {category && <Overline className="mt-8">{category.name}</Overline>}
         <h2
           className={classNames("font-bold", {
-            "text-h2 xl:text-h1": type === "feature",
-            "text-h3": type === "small" || type === "list",
+            "break-words text-h2 xl:text-h1": type === "feature",
+            "text-h4 md:text-h3": type === "small" || type === "list",
           })}
         >
           {title}

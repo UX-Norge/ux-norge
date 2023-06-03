@@ -21,7 +21,6 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const articleListAds = shuffle(
     cleanGraphqlArray(data.articleListAds) as Ad[]
   );
-  console.log(data);
 
   const articleBannerAds = cleanGraphqlArray(data.articleBannerAds) as Ad[];
 
