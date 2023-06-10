@@ -35,13 +35,7 @@ export default {
       components: {
         input: PasswordGenerator
       }
-      // inputComponent: passwordGenerator,
     },
-    // {
-    //   name: "invoiceInformation",
-    //   title: "invoiceInformation",
-    //   type: "invoiceInformation",
-    // },
   ],
   initialValue: {
     isPartner: false,
