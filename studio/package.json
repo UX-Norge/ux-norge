@@ -7,15 +7,18 @@
   "author": "Tobias Wulvik <tobias.wulvik@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "sanity start",
     "build": "sanity build",
-    "graphql": "sanity graphql deploy"
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy",
+    "dev": "sanity dev",
+    "start": "sanity start"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/scheduled-publishing": "^0.1.9",
+    "@sanity/scheduled-publishing": "^1.1.1",
+    "@sanity/ui": "^1.5.0",
     "@sanity/vision": "^2.28.2",
     "prop-types": "^15.7",
     "react": "^18.2.0",
