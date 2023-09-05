@@ -103,6 +103,9 @@ export const CoverPage: React.FC<IProps> = ({
         <BannerAd {...get(1, bannerAds)[0]} onHomepage />
         <TwoColumnFourColumn />
         <BannerAd {...get(1, bannerAds)[0]} onHomepage />
+        <FourColumn />
+        <BannerAd {...get(1, bannerAds)[0]} onHomepage />
+        <TwoColumnFourColumn />
       </main>
     </PageWrapper>
   );
