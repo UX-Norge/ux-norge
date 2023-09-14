@@ -47,18 +47,26 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "metaTitle",
-      title: "Meta Title (optional)",
-      type: "string",
-      group: "metadata",
-      description: "Egen tittel når artikkelen blir delt i SoMe og Google",
-    },
-    {
       name: "description",
       title: "Ingress",
       type: "text",
       description: "Vises i thumbnails på forsiden og i toppen av artikler",
       validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "body",
+      title: "Brødtekst",
+      description:
+        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
+      type: "articleContent",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "metaTitle",
+      title: "Meta Title (optional)",
+      type: "string",
+      group: "metadata",
+      description: "Egen tittel når artikkelen blir delt i SoMe og Google",
     },
     {
       name: "authors",
@@ -83,14 +91,6 @@ export default {
       name: "companyType",
       type: "string",
       group: "metadata",
-    },
-    {
-      name: "body",
-      title: "Brødtekst",
-      description:
-        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
-      type: "articleContent",
-      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "slug",

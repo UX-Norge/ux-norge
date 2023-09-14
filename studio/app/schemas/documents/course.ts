@@ -40,6 +40,14 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: "body",
+      title: "Brødtekst",
+      description:
+        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
+      type: "articleContent",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
       name: "date",
       title: "Dato",
       type: "date",
@@ -74,14 +82,6 @@ export default {
       name: "signUpLink",
       title: "Påmeldingslenke",
       type: "url",
-    },
-    {
-      name: "body",
-      title: "Brødtekst",
-      description:
-        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
-      type: "articleContent",
-      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "slug",
