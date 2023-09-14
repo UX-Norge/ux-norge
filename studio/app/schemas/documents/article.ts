@@ -76,13 +76,9 @@ export default {
     },
     {
       name: "companyName",
-      type: "string",
+      type: "reference",
       group: "metadata",
-    },
-    {
-      name: "companyType",
-      type: "string",
-      group: "metadata",
+      to: [{ type: "company"}],
     },
     {
       name: "body",
