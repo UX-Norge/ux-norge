@@ -5,7 +5,7 @@
   },
   "api": {
     "projectId": "dcdo4kbx",
-    "dataset": "production-copy"
+    "dataset": "staging"
   },
   "plugins": [
     "@sanity/base",
