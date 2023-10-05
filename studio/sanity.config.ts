@@ -12,8 +12,8 @@ export default defineConfig({
   name: "default",
   title: "UX Norge",
 
-  projectId: "qag5cqiv",
-  dataset: "production",
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
+  dataset: process.env.SANITY_STUDIO_DATASET!,
 
   plugins: [
     deskTool({
