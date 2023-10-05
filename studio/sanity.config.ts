@@ -7,6 +7,7 @@ import {
   scheduledPublishing,
   ScheduleAction,
 } from "@sanity/scheduled-publishing";
+import { RouteTypes } from "../types";
 
 export default defineConfig({
   name: "default",
@@ -15,6 +16,16 @@ export default defineConfig({
   projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
   dataset: process.env.SANITY_STUDIO_DATASET!,
 
+  document: {
+    productionUrl: async (prev, context) => {
+      // context includes the client and other details
+      const doc = context.document;
+      const { slug } = doc;
+      if (slug) {
+        return Promise.resolve("https://preview-uxnorge.netlify.app/"+(slug as any).current);
+      }
+    }
+  },
   plugins: [
     deskTool({
       structure,
