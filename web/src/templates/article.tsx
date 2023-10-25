@@ -1,11 +1,11 @@
-import * as React from "react";
-import { graphql, PageProps } from "gatsby";
-import { Ad, Article, GraphqlEdges, PortableText } from "@Types";
 import { ArticleBody, ArticleFooter } from "@Features/article";
-import { PageWrapper } from "@Ui/Layout";
-import { cleanGraphqlArray, shuffle } from "../lib/helpers";
 import { ArticleHeader } from "@Features/article/components/ArticleHeader";
+import { Ad, Article, GraphqlEdges, PortableText } from "@Types";
+import { PageWrapper } from "@Ui/Layout";
+import { graphql, PageProps } from "gatsby";
+import * as React from "react";
 import { Seo } from "../components/Seo";
+import { cleanGraphqlArray, shuffle } from "../lib/helpers";
 
 interface DataProps {
   sanityArticle: Article;
@@ -75,8 +75,6 @@ export const query = graphql`
       description
       publishedAt
       metaTitle
-      companyName
-      companyType
       mainImage {
         alt
         image {

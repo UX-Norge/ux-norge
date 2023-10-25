@@ -1,10 +1,8 @@
 import {
-  ArticleImage,
-  Category,
+  ArticleImage, Author, Category,
   PortableText,
   SanityDocument,
-  SanitySlug,
-  Author,
+  SanitySlug
 } from "@Types";
 
 export interface Article extends SanityDocument {
@@ -13,8 +11,6 @@ export interface Article extends SanityDocument {
   description: string;
   authors: Author[];
   metaTitle?: string;
-  companyName: string;
-  companyType: string;
   publishedAt: string;
   body: PortableText;
   slug: SanitySlug;
@@ -73,16 +69,6 @@ export default {
       type: "datetime",
       group: "metadata",
       validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: "companyName",
-      type: "string",
-      group: "metadata",
-    },
-    {
-      name: "companyType",
-      type: "string",
-      group: "metadata",
     },
     {
       name: "body",
