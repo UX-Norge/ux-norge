@@ -34,6 +34,10 @@ export default {
     },
   ],
   preview: {
-    component: ArticleImageRenderer,
+    //component: ArticleImageRenderer,
+    select: {
+      title: 'alt',
+      media: 'image'
+    }
   },
 };
