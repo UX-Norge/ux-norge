@@ -36,7 +36,7 @@ export default async function handler(
   sanityClient
     .fetch(query, { adId })
     .then((result: any) => {
-      console.log(adId, result);
+        console.log(adId, result);
       if (!result) {
         console.log('sender 404')
         res.send(404);
@@ -86,8 +86,9 @@ export default async function handler(
     .then((response: any) => {
       console.log('Slack-promise oppfylt', response);
       if (response && response.ok) {
+        console.log('respons ok');
         res.status(200).json(response);
-      }  {
+      } else {
         res.status(500).json(res)
       }
     })
