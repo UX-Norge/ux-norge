@@ -89,7 +89,8 @@ export default async function handler(
         console.log('respons ok');
         res.status(200).json(response);
       } else {
-        res.status(500).json(res)
+        console.log('respons ikke ok')
+        res.status(200).json(response)
       }
     })
     .catch((err: any) => res.status(500).json(err));
