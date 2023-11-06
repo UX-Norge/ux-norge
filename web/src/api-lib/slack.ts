@@ -13,20 +13,16 @@ export async function publishMessage(
   text: string,
   blocks: ChatPostMessageArguments["blocks"]
 ) {
-  try {
     // Call the chat.postMessage method using the built-in WebClient
     const result = await client.chat.postMessage({
-      // The token you used to initialize your app
+    // The token you used to initialize your app
       token: process.env.SLACK_TOKEN,
       text,
       channel: channelId,
       blocks,
-      // You could also use a blocks[] array to send richer content
+    // You could also use a blocks[] array to send richer content
     });
 
     // Print result, which includes information about the message (like TS)
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
+    return result;
 }
