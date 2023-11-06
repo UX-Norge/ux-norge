@@ -84,6 +84,7 @@ export default async function handler(
       ]);
     })
     .then((response: any) => {
+      console.log('Slack-promise oppfylt', response);
       if (response && response.ok) {
         res.status(200).json(response);
       }  {
