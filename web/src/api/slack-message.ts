@@ -11,8 +11,9 @@ export default async function handler(
   req: GatsbyFunctionRequest,
   res: GatsbyFunctionResponse
 ) {
+  console.log('Starter webhook for slack-message')
   const signature = req.headers.secret as string;
-
+  
   if (!(secret === signature)) {
     res.status(401).json({ success: false, message: "Invalid signature" });
     return;
@@ -35,10 +36,13 @@ export default async function handler(
   sanityClient
     .fetch(query, { adId })
     .then((result: any) => {
-      console.log(adId, result);
-      if (!result) return null;
-      res.status(200).json(result);
-      publishMessage(channelId, result.title, [
+        console.log(adId, result);
+      if (!result) {
+        res.send(404);
+        return null;
+      }
+      
+      return publishMessage(channelId, result.title, [
         {
           type: "divider",
         },
@@ -77,6 +81,14 @@ export default async function handler(
           type: "divider",
         },
       ]);
+    })
+    .then((response: any) => {
+      console.log('Slack-promise oppfylt', response);
+      if (response && response.ok) {
+        res.status(200).json(response);
+      } else {
+        res.status(500).json(response)
+      }
     })
     .catch((err: any) => res.status(500).json(err));
 }
