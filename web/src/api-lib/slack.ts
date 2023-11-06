@@ -24,6 +24,5 @@ export async function publishMessage(
     });
 
     // Print result, which includes information about the message (like TS)
-    console.log('Resultat fra slack', result);
     return result;
 }
