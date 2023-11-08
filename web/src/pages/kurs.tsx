@@ -1,14 +1,9 @@
-import { PageHeader, PagePageHeader } from "@Components/PageHeader";
+import { PageHeader } from "@Components/PageHeader";
 import { Seo } from "@Components/Seo";
-import { AdThumbnail } from "@Features/ad/components/AdThumbnail";
-import { FilterRow } from "@Features/ad/components/FilterRow";
-import { ALL_STRING, useJobPageAds } from "@Features/ad/lib/useAds";
-import { CourseEmptyState } from "@Features/course/CourseEmptyState";
-import { CoursePageHeader } from "@Features/course/CoursePageHeader";
 import { CourseThumbnail } from "@Features/course/CourseThumbnail";
 import { VectorIllustrations } from "@Images/VectorIllustrations";
 import { cleanGraphqlArray } from "@Lib/helpers";
-import { Ad, Course, GraphqlEdges, PageType } from "@Types";
+import { Course, GraphqlEdges, PageType } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
 import { BlockContent } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
