@@ -4,6 +4,7 @@
   // here will be ignored.
   "extends": "../tsconfig.json",
   "include": [
+    "../types/*.ts",
     "./node_modules/@sanity/base/types/**/*.ts",
     "./app/*.ts",
     "./app/*.tsx"
