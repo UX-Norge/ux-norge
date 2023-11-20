@@ -79,7 +79,7 @@ export default async function handler(
           type: "divider",
         },
       ];
-      return publishMessage(channelId, result.title, blocks, Date.now() + (1000 * 180));
+      return publishMessage(channelId, result.title, blocks, Math.ceil(Date.now() / 1000) + 120);
     })
     .then((response: any) => {
       console.log('Slack-promise oppfylt', response);
