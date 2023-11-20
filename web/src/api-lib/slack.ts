@@ -15,7 +15,7 @@ export async function publishMessage(
   post_at: number
 ) {
     // Call the chat.postMessage method using the built-in WebClient
-    const result = await client.chat.postMessage({
+    const result = await client.chat.scheduleMessage({
     // The token you used to initialize your app
       token: process.env.SLACK_TOKEN,
       text,
