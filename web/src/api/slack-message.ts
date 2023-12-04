@@ -3,7 +3,6 @@ import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import { publishMessage } from "../api-lib/slack";
 import { sanityClient } from "../api-lib/sanity.client";
 import { readBody } from "../api-lib/readBody";
-import { json } from "stream/consumers";
 
 const secret = process.env.WEBHOOK_SECRET as string;
 
@@ -41,8 +40,7 @@ export default async function handler(
         res.send(404);
         return null;
       }
-      
-      return publishMessage(channelId, result.title, [
+      const blocks = [
         {
           type: "divider",
         },
@@ -80,7 +78,8 @@ export default async function handler(
         {
           type: "divider",
         },
-      ]);
+      ];
+      return publishMessage(channelId, result.title, blocks, Math.ceil(Date.now() / 1000) + 120);
     })
     .then((response: any) => {
       console.log('Slack-promise oppfylt', response);
