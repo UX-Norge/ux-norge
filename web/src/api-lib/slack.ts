@@ -11,15 +11,17 @@ const client = new WebClient(process.env.SLACK_TOKEN, {
 export async function publishMessage(
   channelId: string,
   text: string,
-  blocks: ChatPostMessageArguments["blocks"]
+  blocks: ChatPostMessageArguments["blocks"],
+  post_at: number
 ) {
     // Call the chat.postMessage method using the built-in WebClient
-    const result = await client.chat.postMessage({
+    const result = await client.chat.scheduleMessage({
     // The token you used to initialize your app
       token: process.env.SLACK_TOKEN,
       text,
       channel: channelId,
       blocks,
+      post_at: post_at
     // You could also use a blocks[] array to send richer content
     });
 
