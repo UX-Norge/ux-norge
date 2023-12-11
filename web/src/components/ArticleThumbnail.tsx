@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export const ArticleThumbnail: React.FC<IProps> = ({
-  article: { title, mainImage, description, slug, category },
+  article: { title, coverPageTitle, mainImage, description, slug, category },
   rounded = "lg",
   type,
   className,
@@ -53,6 +53,7 @@ export const ArticleThumbnail: React.FC<IProps> = ({
           })}
         >
           {title}
+          ****
         </h2>
         <p
           className={classNames("leading-relaxed", {
