@@ -72,6 +72,16 @@ html {
     font-size: inherit !important;
     margin: 0;
   }
+  footer p a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+  footer p a:hover {
+    text-underline-offset: 8px;
+  }
 }
 
 @layer components {
