@@ -53,15 +53,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     "gatsby-plugin-postcss",
-    {
-      resolve: "gatsby-plugin-gatsby-cloud",
-      options: {
-        mergeCachingHeaders: true,
-        headers: {
-          "static/*": ["Cache-Control: public, max-age=31536000, immutable"],
-        },
-      },
-    },
+    "gatsby-plugin-netlify",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
