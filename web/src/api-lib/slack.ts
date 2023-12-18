@@ -11,22 +11,20 @@ const client = new WebClient(process.env.SLACK_TOKEN, {
 export async function publishMessage(
   channelId: string,
   text: string,
-  blocks: ChatPostMessageArguments["blocks"]
+  blocks: ChatPostMessageArguments["blocks"],
+  post_at: number
 ) {
-  try {
     // Call the chat.postMessage method using the built-in WebClient
-    const result = await client.chat.postMessage({
-      // The token you used to initialize your app
+    const result = await client.chat.scheduleMessage({
+    // The token you used to initialize your app
       token: process.env.SLACK_TOKEN,
       text,
       channel: channelId,
       blocks,
-      // You could also use a blocks[] array to send richer content
+      post_at: post_at
+    // You could also use a blocks[] array to send richer content
     });
 
     // Print result, which includes information about the message (like TS)
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
+    return result;
 }

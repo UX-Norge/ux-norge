@@ -25,16 +25,18 @@ SANITY_TOKEN = <Sendes på Slack>
 ```
 3. Gjør det samme i `/studio`-mappen
 ```
-SANITY_STUDIO_API_PROJECT_ID = dcdo4kbx
-SANITY_STUDIO_API_DATASET = staging
+SANITY_STUDIO_PROJECT_ID = dcdo4kbx
+SANITY_STUDIO_DATASET = staging
 SANITY_TOKEN = <Samme som over>
 ```
+
+For å jobbe med en kopi av datasettet, finnes datasettet production-copy i sanity.
 
 ## Prosjektstruktur:
 Prosjektet er delt inn i hovedmmappene:
 
 ### Studio
-Sanity-prosjektet bor her. Start opp med `sanity start` (første gang `santiy install`)
+Sanity-prosjektet bor her. Start opp med `yarn run dev` (første gang `yarn install`)
 
 Prosjekt-id: `dcdo4kbx`, dataset: `staging` (Ja, produksjonsdatasettet heter staging. Det bare skjedde...)
 
