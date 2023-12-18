@@ -52,8 +52,7 @@ export const ArticleThumbnail: React.FC<IProps> = ({
             "text-h4 md:text-h3": type === "small" || type === "list",
           })}
         >
-          {title}
-          ****
+          {coverPageTitle || title}
         </h2>
         <p
           className={classNames("leading-relaxed", {
