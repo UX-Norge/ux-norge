@@ -10,6 +10,7 @@ import {
 export interface Article extends SanityDocument {
   mainImage?: ArticleImage;
   title: string;
+  coverPageTitle?: string;
   description: string;
   authors: Author[];
   metaTitle?: string;
@@ -45,6 +46,11 @@ export default {
       title: "Tittel",
       type: "string",
       validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "coverPageTitle",
+      title: "Forsidetittel",
+      type: "string",
     },
     {
       name: "metaTitle",
