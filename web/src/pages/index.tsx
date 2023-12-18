@@ -16,7 +16,6 @@ interface DataProps {
 const IndexPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   let articles = cleanGraphqlArray(data.allSanityArticle) as Article[];
   let ads = cleanGraphqlArray(data.allSanityAd) as Ad[];
-
   articles = articles.filter(
     (article) => article.title && article.description && article.slug?.current
   );
@@ -46,6 +45,7 @@ export const query = graphql`
     allSanityArticle(sort: { order: DESC, fields: publishedAt }) {
       edges {
         node {
+          coverPageTitle
           ...ArticleThumbnail
         }
       }
