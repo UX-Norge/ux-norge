@@ -12,10 +12,15 @@ export default {
   type: "document",
   fields: [
     {
-      name: "contactInformation",
-      title: "Kontaktinformasjon",
-      type: "array",
-      of: [{ type: "string" }],
+      name: 'footerHeading',
+      title: 'Footeroverskrift',
+      type: 'string'
+    },
+    {
+      name: 'footerText',
+      title: 'Footertekst',
+      type: 'array',
+      of: [{ type: 'block' }]
     },
     {
       name: "pages",

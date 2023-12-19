@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Body1, Overline } from "@Ui/Typography";
+import { Body1, Body2, BlockContent, Overline } from "@Ui/Typography";
 import { graphql, useStaticQuery } from "gatsby";
 import {
   Document,
@@ -34,7 +34,8 @@ export const Footer: React.FC<FooterProps> = ({
   }>(graphql`
     query {
       sanityFooter(_id: { eq: "footer" }) {
-        contactInformation
+        footerHeading
+        footerText: _rawFooterText(resolveReferences: { maxDepth: 4 })
         pages {
           ... on SanityDoc {
             title
@@ -119,12 +120,14 @@ export const Footer: React.FC<FooterProps> = ({
       <footer className="bg-gray-900">
         <div className="mx-auto max-w-page space-y-96 p-32 md:grid md:grid-cols-2 md:space-y-0">
           <div>
-            <Overline className="text-primary-400">Kontaktinfo</Overline>
-            {sanityFooter.contactInformation.map((contact, index) => (
-              <Body1 className="text-primary-100" key={`contact-${index}`}>
-                {contact}
-              </Body1>
-            ))}
+            <Overline className="text-primary-400">{sanityFooter.footerHeading}</Overline>
+            {sanityFooter.footerText && (
+              <div className="py-24">
+                <Body1 className="text-primary-100">
+                  <BlockContent blocks={sanityFooter.footerText} />
+                </Body1>
+              </div>
+            )}
           </div>
           <div className="grid grid-cols-2">
             <LinkList title="Sider" links={sanityFooter.pages} />
