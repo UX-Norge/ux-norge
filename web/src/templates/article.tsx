@@ -72,6 +72,7 @@ export const query = graphql`
   ) {
     sanityArticle(slug: { current: { eq: $slug } }) {
       title
+      coverPageTitle
       description
       publishedAt
       metaTitle
