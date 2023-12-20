@@ -123,9 +123,9 @@ export const Footer: React.FC<FooterProps> = ({
             <Overline className="text-primary-400">{sanityFooter.footerHeading}</Overline>
             {sanityFooter.footerText && (
               <div className="py-24">
-                <Body1 className="text-primary-100">
+                <p className="text-primary-100 leading-relaxed">
                   <BlockContent blocks={sanityFooter.footerText} />
-                </Body1>
+                </p>
               </div>
             )}
           </div>
