@@ -45,7 +45,7 @@ export const query = graphql`
       }
     }
     allSanityArticle(
-      sort: { fields: publishedAt, order: DESC }
+      sort: { publishedAt: DESC }
       filter: { category: { slug: { current: { eq: $categorySlug } } } }
       limit: $limit
       skip: $skip
