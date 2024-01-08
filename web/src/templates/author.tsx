@@ -55,7 +55,7 @@ export const query = graphql`
       }
     }
     allSanityArticle(
-      sort: { fields: publishedAt, order: DESC }
+      sort: { publishedAt: DESC }
       filter: {
         authors: { elemMatch: { slug: { current: { eq: $authorSlug } } } }
       }

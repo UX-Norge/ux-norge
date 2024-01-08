@@ -122,7 +122,7 @@ export const query = graphql`
       body: _rawBody(resolveReferences: { maxDepth: 4 })
     }
     relatedArticles: allSanityArticle(
-      sort: { fields: publishedAt, order: DESC }
+      sort: { publishedAt: DESC }
       filter: {
         category: { _id: { eq: $categoryId } }
         slug: { current: { ne: $slug } }

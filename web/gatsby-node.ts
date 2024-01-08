@@ -43,86 +43,86 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   const result = await graphql<SanityData>(`
     query {
-      allSanityArticle(sort: { fields: publishedAt, order: DESC }) {
-        edges {
-          node {
-            _id
-            authors {
+        allSanityArticle(sort: { publishedAt: DESC }) {
+          edges {
+            node {
               _id
-            }
-            slug {
-              current
-            }
-            category {
-              _id
+              authors {
+                _id
+              }
+              slug {
+                current
+              }
+              category {
+                _id
+              }
             }
           }
         }
-      }
-      allSanityAd {
-        edges {
-          node {
-            _createdAt
-            _id
-            slug {
-              current
+        allSanityAd {
+          edges {
+            node {
+              _createdAt
+              _id
+              slug {
+                current
+              }
+              title
+              description
+              advertiser {
+                name
+              }
+              startDate
+              packageType {
+                onArticles
+                type
+                duration
+              }
             }
-            title
-            description
-            advertiser {
+          }
+        }
+        allSanityAuthor {
+          edges {
+            node {
+              _id
+              slug {
+                current
+              }
+            }
+          }
+        }
+        allSanityCategory {
+          edges {
+            node {
+              _id
               name
+              slug {
+                current
+              }
             }
-            startDate
-            packageType {
-              onArticles
-              type
-              duration
+          }
+        }
+        allSanityDoc {
+          edges {
+            node {
+              _id
+              slug {
+                current
+              }
+            }
+          }
+        }
+        allSanityCourse {
+          edges {
+            node {
+              _id
+              slug {
+                current
+              }
             }
           }
         }
       }
-      allSanityAuthor {
-        edges {
-          node {
-            _id
-            slug {
-              current
-            }
-          }
-        }
-      }
-      allSanityCategory {
-        edges {
-          node {
-            _id
-            name
-            slug {
-              current
-            }
-          }
-        }
-      }
-      allSanityDoc {
-        edges {
-          node {
-            _id
-            slug {
-              current
-            }
-          }
-        }
-      }
-      allSanityCourse {
-        edges {
-          node {
-            _id
-            slug {
-              current
-            }
-          }
-        }
-      }
-    }
   `);
   if (result.errors) {
     throw result.errors;
