@@ -8,6 +8,7 @@ import {
   ScheduleAction,
 } from "@sanity/scheduled-publishing";
 import { RouteTypes } from "../types";
+import { getRoute } from "../web/src/lib/getRoute";
 
 export default defineConfig({
   name: "default",
@@ -19,10 +20,13 @@ export default defineConfig({
   document: {
     productionUrl: async (prev, context) => {
       // context includes the client and other details
+
       const doc = context.document;
+      const type = doc._type;
       const { slug } = doc;
+      const path = getRoute(type, (slug as any).current);
       if (slug) {
-        return Promise.resolve("https://preview-uxnorge.netlify.app/"+(slug as any).current);
+        return Promise.resolve("https://preview-uxnorge.netlify.app"+path);
       }
     }
   },
