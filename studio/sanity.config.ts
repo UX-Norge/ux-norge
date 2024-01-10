@@ -24,8 +24,8 @@ export default defineConfig({
       const doc = context.document;
       const type = doc._type;
       const { slug } = doc;
-      const path = getRoute(type, (slug as any).current);
       if (slug) {
+        const path = getRoute(type, (slug as any).current);
         return Promise.resolve("https://preview-uxnorge.netlify.app"+path);
       }
     }
