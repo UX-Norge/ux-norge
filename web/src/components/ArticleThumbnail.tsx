@@ -39,7 +39,7 @@ export const ArticleThumbnail: React.FC<IProps> = ({
           size="fluid"
           alt={mainImage.alt}
           rounded={rounded}
-          classNameOuter={classNames(" h-full", {
+          classNameOuter={classNames({
             "aspect-w-3 aspect-h-2 md:order-1": type === "list",
           })}
         />
