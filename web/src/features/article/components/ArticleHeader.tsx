@@ -34,7 +34,7 @@ export const ArticleHeader: React.FC<
                 <Overline>{category.name}</Overline>
               </Link>
             )}
-            <h1 className="text-h2 font-bold md:text-h1">{title}</h1>
+            <h1 className="text-h2 font-bold md:text-h1 hyphens-auto">{title}</h1>
             <Body1>{description}</Body1>
             <div className="mt-16 flex space-x-8">
               <Overline>{articleAuthors}</Overline>
