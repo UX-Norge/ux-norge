@@ -56,6 +56,9 @@ export const createPages: GatsbyNode["createPages"] = async ({
               category {
                 _id
               }
+              company {
+                _id
+              }
             }
           }
         }
@@ -157,7 +160,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
           .filter((ad) => ad.packageType.onArticles)
       )
     );
-
+       
   data.articles
     .filter((article) => article.slug?.current)
     .forEach((article, index) => {
@@ -170,6 +173,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
           articleBannerAds: articleBannerAds.map((ad) => ad._id),
           slug: article.slug.current,
           categoryId: article.category?._id,
+          companyId: article.company?._id
         },
         defer: index > 20,
       });
