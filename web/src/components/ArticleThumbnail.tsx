@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export const ArticleThumbnail: React.FC<IProps> = ({
-  article: { title, coverPageTitle, mainImage, description, slug, category },
+  article: { title, coverPageTitle, mainImage, description, slug, category, company },
   rounded = "lg",
   type,
   className,
@@ -45,7 +45,7 @@ export const ArticleThumbnail: React.FC<IProps> = ({
         />
       )}
       <div className={classNames({ "p-24": type === "feature" })}>
-        {category && <Overline className="mt-8">{category.name}</Overline>}
+        {(category || company) && <Overline className="mt-8">{category?.name || company?.name}</Overline>}
         <h2
           className={classNames("font-bold", {
             "break-words text-h2 xl:text-h1": type === "feature",

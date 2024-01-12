@@ -12,8 +12,15 @@ interface DataProps {
   articleListAds: GraphqlEdges;
   articleBannerAds: GraphqlEdges;
   relatedArticles: GraphqlEdges;
+  relatedArticlesByCompany: GraphqlEdges;
   nominateBanner: { title: string; text: PortableText };
   discussInSlack: { title: string; text: PortableText };
+}
+
+function mergeArticleLists(list1: Article[], list2: Article[]) :Article[] {
+  // Må merge de to queryene her i javascript
+  // Gatsby støtter ikke or-operator i graphql
+  return list1.concat(list2).sort((a,b) => a.publishedAt < b.publishedAt ? 1 : -1).slice(0,4);
 }
 
 const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
@@ -27,8 +34,7 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const relatedArticles =
     article.relatedArticles && article.relatedArticles.length > 0
       ? article.relatedArticles
-      : (cleanGraphqlArray(data.relatedArticles) as Article[]);
-
+      : mergeArticleLists(cleanGraphqlArray(data.relatedArticles) as Article[], cleanGraphqlArray(data.relatedArticlesByCompany) as Article[]);
   return (
     <article>
       <Seo
@@ -68,7 +74,8 @@ export const query = graphql`
     $slug: String
     $articleListAds: [String]
     $articleBannerAds: [String]
-    $categoryId: String
+    $categoryId: String,
+    $companyId: String
   ) {
     sanityArticle(slug: { current: { eq: $slug } }) {
       title
@@ -76,6 +83,9 @@ export const query = graphql`
       description
       publishedAt
       metaTitle
+      company { 
+        name
+      }
       companyName
       companyType
       mainImage {
@@ -134,12 +144,40 @@ export const query = graphql`
           _id
           title
           description
+          publishedAt
           slug {
             current
           }
           category {
             name
           }
+          mainImage {
+            ...ArticleImage
+          }
+        }
+      }
+    }
+    relatedArticlesByCompany: allSanityArticle(
+      sort: { publishedAt: DESC }
+      filter: {
+        company: { _id: { eq: $companyId } }
+        slug: { current: { ne: $slug } }
+      }
+      limit: 4
+    ) {
+      edges {
+        node {
+          _id
+          title
+          description
+          publishedAt
+          slug {
+            current
+          }
+          company {
+            name
+          }
+
           mainImage {
             ...ArticleImage
           }

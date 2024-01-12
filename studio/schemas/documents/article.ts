@@ -5,6 +5,7 @@ import {
   SanityDocument,
   SanitySlug,
   Author,
+  Company,
 } from "@Types";
 
 export interface Article extends SanityDocument {
@@ -16,6 +17,7 @@ export interface Article extends SanityDocument {
   metaTitle?: string;
   companyName: string;
   companyType: string;
+  company: Company;
   publishedAt: string;
   body: PortableText;
   slug: SanitySlug;
@@ -41,7 +43,7 @@ export default {
       title: "Hovedbilde",
       type: "articleImage",
     },
-    {
+    { 
       name: "title",
       title: "Tittel",
       type: "string",
@@ -89,6 +91,12 @@ export default {
       name: "companyType",
       type: "string",
       group: "metadata",
+    },
+    {
+      name: "company",
+      type: "reference",
+      group: "metadata",
+      to: [{type: "company" }]
     },
     {
       name: "body",
