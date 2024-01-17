@@ -73,6 +73,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
               name
             }
             startDate
+            deadline
             packageType {
               onArticles
               type
