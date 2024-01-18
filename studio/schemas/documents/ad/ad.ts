@@ -1,5 +1,5 @@
 import { hasExpired } from "../../../../web/src/features/ad/lib/adHelpers";
-
+import {  slugify_ad } from "../../../helpers/slugify_ad"
 import {
   AdPackageType,
   Company,
@@ -55,6 +55,7 @@ export default {
       type: "slug",
       options: {
         source: "title",
+        slugify: slugify_ad
       },
       validation: (Rule: any) => Rule.required(),
     },
