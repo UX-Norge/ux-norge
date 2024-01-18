@@ -45,7 +45,7 @@ export const ArticleThumbnail: React.FC<IProps> = ({
         />
       )}
       <div className={classNames({ "p-24": type === "feature" })}>
-        {(category || company) && <Overline className="mt-8">{category?.name || company?.name}</Overline>}
+        { category && <Overline className="mt-8">{category.name}</Overline>}
         <h2
           className={classNames("font-bold", {
             "break-words text-h2 xl:text-h1": type === "feature",
