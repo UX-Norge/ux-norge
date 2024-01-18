@@ -86,8 +86,6 @@ export const query = graphql`
       company { 
         name
       }
-      companyName
-      companyType
       mainImage {
         alt
         image {

@@ -15,8 +15,6 @@ export interface Article extends SanityDocument {
   description: string;
   authors: Author[];
   metaTitle?: string;
-  companyName: string;
-  companyType: string;
   company: Company;
   publishedAt: string;
   body: PortableText;
@@ -81,16 +79,6 @@ export default {
       type: "datetime",
       group: "metadata",
       validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: "companyName",
-      type: "string",
-      group: "metadata",
-    },
-    {
-      name: "companyType",
-      type: "string",
-      group: "metadata",
     },
     {
       name: "company",
