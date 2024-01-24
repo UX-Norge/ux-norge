@@ -4,7 +4,7 @@ import { PageWrapper } from "@Ui/Layout";
 import { ArticleThumbnail } from "../../../components/ArticleThumbnail";
 import { ListAd } from "@Features/ad/components/ListAd";
 import { BannerAd } from "@Features/ad/components/BannerAd";
-import { classNames } from "@Lib/helpers";
+import { classNames, pushSponsoredContentDownOnFrontPage } from "@Lib/helpers";
 import { SlackBanner } from "./SlackBanner";
 import { Link } from "@Components/Link";
 
@@ -36,8 +36,7 @@ export const CoverPage: React.FC<IProps> = ({
 }) => {
   const remainingBannerAds = bannerAds;
   const remainingListAds = listAds;
-  const remainingArticles = articles;
-
+  const remainingArticles = pushSponsoredContentDownOnFrontPage(articles);
   const get = (
     count: number,
     source:
