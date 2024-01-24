@@ -72,29 +72,29 @@ export const slugify = (value: string): string => {
     .replace(/-+$/, ""); // Trim - from end of text
 };
 
-export const formatArticleAuthors = (authors: Author[]) => {
-  const everyAuthorIsFromSameCompany =
-    authors.every(
-      (author) => author.company?.name === authors[0].company?.name
-    ) && authors.length > 1;
-  const everyAuthorIsFromUxNorge = authors.every(
-    (author) => author.company?.name === "UX Norge"
-  );
+// export const formatArticleAuthors = (authors: Author[]) => {
+//   const everyAuthorIsFromSameCompany =
+//     authors.every(
+//       (author) => author.company?.name === authors[0].company?.name
+//     ) && authors.length > 1;
+//   const everyAuthorIsFromUxNorge = authors.every(
+//     (author) => author.company?.name === "UX Norge"
+//   );
 
-  if (everyAuthorIsFromSameCompany && !everyAuthorIsFromUxNorge) {
-    const authorNames = authors.map((author) => author.name).join(", ");
-    return `${authorNames} • ${authors[0].company?.name}`;
-  }
+//   if (everyAuthorIsFromSameCompany && !everyAuthorIsFromUxNorge) {
+//     const authorNames = authors.map((author) => author.name).join(", ");
+//     return `${authorNames} • ${authors[0].company?.name}`;
+//   }
 
-  if (everyAuthorIsFromUxNorge) {
-    return authors.map((author) => author.name).join(", ");
-  }
+//   if (everyAuthorIsFromUxNorge) {
+//     return authors.map((author) => author.name).join(", ");
+//   }
 
-  const articleAuthors = authors
-    .map((author) =>
-      !!author.company ? `${author.name} • ${author.company.name}` : author.name
-    )
-    .join(", ");
+//   const articleAuthors = authors
+//     .map((author) =>
+//       !!author.company ? `${author.name} • ${author.company.name}` : author.name
+//     )
+//     .join(", ");
 
-  return articleAuthors;
-};
+//   return articleAuthors;
+// };
