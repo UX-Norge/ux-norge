@@ -36,12 +36,8 @@ export const ArticleHeader: React.FC<
       >
         <div className="relative flex h-full items-center">
           <div className="relative z-10">
-            {/* {category && (
-              <Link path={category.slug?.current} type="category">
-                <Overline>{category.name}</Overline>
-              </Link>
-            )} */}
-            { isSponsoredContent ? <Overline>Annonsørinnhold</Overline> : "Gi meg kategorien her"}
+            { articleOverline(isSponsoredContent, category) }
+            
 
             <h1 className="text-h2 font-bold md:text-h1 hyphens-auto">{title}</h1>
             <Body1>{description}</Body1>
@@ -87,6 +83,18 @@ export const ArticleHeader: React.FC<
     </header>
   );
 };
+
+const articleOverline = (isSponsoredContent: boolean | undefined, category: any) => {
+  if (isSponsoredContent) {
+    return <Overline>Annonsørinnhold</Overline> 
+  } else {
+    if (category) {
+      return <Link path={category.slug?.current} type="category">
+              <Overline>{category.name}</Overline>
+            </Link>
+    }
+  }
+}
 
 const articleLinks = (authors: Author[]) => {
   const everyAuthorIsFromSameCompany =
