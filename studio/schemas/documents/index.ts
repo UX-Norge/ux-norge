@@ -20,7 +20,7 @@ import readersLetter from "./settings/readersLetter";
 import siteSettings from "./settings/siteSettings";
 import slackBanner from "./settings/slackBanner";
 import socialMedia from "./settings/socialMedia";
-import sponsoredContentLetter from "./settings/sponsoredContentLetter";
+import sponsoredContent from "./settings/sponsoredContent";
 
 export default [
   course,
@@ -43,7 +43,7 @@ export default [
   discussInSlack,
   partnerBanner,
   readersLetter,
-  sponsoredContentLetter,
+  sponsoredContent,
   adContent,
   page,
 ];
