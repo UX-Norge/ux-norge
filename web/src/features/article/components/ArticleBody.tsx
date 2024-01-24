@@ -7,6 +7,7 @@ import { ReadersLetterDisclaimer } from "./ReadersLetterDisclaimer";
 import { ListAd } from "@Features/ad/components/ListAd";
 import { DiscussArticle } from "./DiscussArticle";
 import { NominateSection } from "./NominateSection";
+import { SponsoredContentDisclaimer } from "./sponsoredContentDisclaimer";
 
 interface IProps {
   articleListAds: Ad[];
@@ -46,11 +47,13 @@ export const ArticleBody: React.FC<
       | "publishedAt"
       | "body"
       | "isReadersLetter"
+      | "isSponsoredContent"
       | "category"
       | "slackMessageLink"
     >
 > = ({
   isReadersLetter,
+  isSponsoredContent,
   category,
   body,
   publishedAt,
@@ -78,6 +81,7 @@ export const ArticleBody: React.FC<
         </Overline>
         <Overline>{readTime} min</Overline>
         {isReadersLetter && <ReadersLetterDisclaimer />}
+        {isSponsoredContent && <SponsoredContentDisclaimer />}
         <div className="prose-a:link w-prose prose prose-p:text-base prose-p:leading-relaxed">
           {bodyWithAds && <BlockContent blocks={bodyWithAds} />}
         </div>
