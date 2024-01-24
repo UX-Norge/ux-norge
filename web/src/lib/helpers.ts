@@ -1,4 +1,4 @@
-import { Author, GraphqlEdges } from "@Types";
+import { Article, Author, GraphqlEdges } from "@Types";
 
 export const cleanGraphqlArray = (result: GraphqlEdges | undefined): any[] => {
   if (!result?.edges) return [];
@@ -71,6 +71,32 @@ export const slugify = (value: string): string => {
     .replace(/^-+/, "") // Trim - from start of text
     .replace(/-+$/, ""); // Trim - from end of text
 };
+
+// Algorithm to push newly published artices down to third place on cover page
+export const pushSponsoredContentDownOnFrontPage = (articles: Article[]): Article[]  => {
+  let indexOfFirstSponsored = articles.slice(0,2).findIndex(a => a.isSponsoredContent);
+  
+  if (indexOfFirstSponsored !== -1) {
+
+    // Ta ut sponsored content av articles
+    const sponsoredContent = articles.splice(indexOfFirstSponsored,1);
+    
+    // finn neste tilfelle av vanlig artikkel i array
+    const firstUnsponsoredAfterSponsoredContent = articles.slice(indexOfFirstSponsored).findIndex(article => !article.isSponsoredContent) + indexOfFirstSponsored;
+    const after = articles.splice(firstUnsponsoredAfterSponsoredContent + 1);
+    
+    articles = articles.concat(sponsoredContent, after);
+    return pushSponsoredContentDownOnFrontPage(articles);
+  } else {
+    return articles;
+  }
+}
+
+const splitArray = (array: [], index: number) => {
+  const beforeArray = array.slice(index, 1);
+  const afterArray = array.slice(index);
+  return { beforeArray, afterArray };
+}
 
 // export const formatArticleAuthors = (authors: Author[]) => {
 //   const everyAuthorIsFromSameCompany =
