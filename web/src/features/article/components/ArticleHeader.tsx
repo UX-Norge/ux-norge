@@ -16,11 +16,19 @@ type MainImageWithDimensions = ArticleImage & {
 };
 
 export const ArticleHeader: React.FC<
-  Pick<Article, "title" | "authors" | "category" | "description" | "mainImage" | "isSponsoredContent">
-> = ({ title, authors, category, mainImage, description, isSponsoredContent }) => {
+  Pick<Article, "title" | "authors" | "company" | "category" | "description" | "mainImage" | "isSponsoredContent">
+> = ({ title, authors, company, category, mainImage, description, isSponsoredContent }) => {
 
   return (
-    <header className="relative max-w-full overflow-x-hidden border-b-2 border-gray-900 pt-64 lg:min-h-aboveFold">
+    <header
+      className={classNames(
+        "relative max-w-full overflow-x-hidden border-b-2 border-gray-900 pt-64 lg:min-h-aboveFold",
+        {
+          "bg-primary-100":
+            isSponsoredContent,
+        }
+      )}
+      >
       <div
         className={classNames(
           "mx-auto grid h-full max-w-page gap-48 px-[10%] lg:min-h-aboveFold lg:grid-cols-[4fr_3fr]"
@@ -28,16 +36,17 @@ export const ArticleHeader: React.FC<
       >
         <div className="relative flex h-full items-center">
           <div className="relative z-10">
-            {category && (
+            {/* {category && (
               <Link path={category.slug?.current} type="category">
                 <Overline>{category.name}</Overline>
               </Link>
-            )}
+            )} */}
+            { isSponsoredContent ? <Overline>Annonsørinnhold</Overline> : "Gi meg kategorien her"}
+
             <h1 className="text-h2 font-bold md:text-h1 hyphens-auto">{title}</h1>
             <Body1>{description}</Body1>
             <div className="mt-16 flex space-x-8">
-              { isSponsoredContent ? <Overline>Annonsørinnhold</Overline> : '' }
-              <Overline>{articleLinks(authors)}</Overline>
+              { isSponsoredContent ? <Overline>{company.name}</Overline> : <Overline>{articleLinks(authors)}</Overline> }
             </div>
           </div>
           <Door
