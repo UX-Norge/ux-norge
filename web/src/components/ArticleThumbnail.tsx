@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export const ArticleThumbnail: React.FC<IProps> = ({
-  article: { title, coverPageTitle, mainImage, description, slug, category, company },
+  article: { title, coverPageTitle, mainImage, description, slug, category, company, isSponsoredContent },
   rounded = "lg",
   type,
   className,
@@ -52,7 +52,7 @@ export const ArticleThumbnail: React.FC<IProps> = ({
             "text-h4 md:text-h3": type === "small" || type === "list",
           })}
         >
-          {coverPageTitle || title}
+          {coverPageTitle || title} { isSponsoredContent ? <span className="text-sm">Annonsørinnhold</span> : ''}
         </h2>
         <p
           className={classNames("leading-relaxed", {

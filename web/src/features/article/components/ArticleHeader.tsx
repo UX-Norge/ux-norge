@@ -16,8 +16,8 @@ type MainImageWithDimensions = ArticleImage & {
 };
 
 export const ArticleHeader: React.FC<
-  Pick<Article, "title" | "authors" | "category" | "description" | "mainImage">
-> = ({ title, authors, category, mainImage, description }) => {
+  Pick<Article, "title" | "authors" | "category" | "description" | "mainImage" | "isSponsoredContent">
+> = ({ title, authors, category, mainImage, description, isSponsoredContent }) => {
 
   return (
     <header className="relative max-w-full overflow-x-hidden border-b-2 border-gray-900 pt-64 lg:min-h-aboveFold">
@@ -36,6 +36,7 @@ export const ArticleHeader: React.FC<
             <h1 className="text-h2 font-bold md:text-h1 hyphens-auto">{title}</h1>
             <Body1>{description}</Body1>
             <div className="mt-16 flex space-x-8">
+              { isSponsoredContent ? <Overline>Annonsørinnhold</Overline> : '' }
               <Overline>{articleLinks(authors)}</Overline>
             </div>
           </div>

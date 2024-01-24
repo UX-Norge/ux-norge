@@ -15,6 +15,7 @@ export const query = graphql`
       ...ArticleImage
     }
     description
+    isSponsoredContent
     category {
       name
     }

@@ -22,6 +22,7 @@ export interface Article extends SanityDocument {
   relatedArticles?: Article[];
   category: Category;
   isReadersLetter?: boolean;
+  isSponsoredContent?: boolean;
   slackMessageLink?: string;
 }
 
@@ -122,6 +123,11 @@ export default {
     {
       name: "isReadersLetter",
       title: "Leserinnlegg",
+      type: "boolean",
+    },
+    {
+      name: "isSponsoredContent",
+      title: "Annonsørinnhold",
       type: "boolean",
     },
     {
