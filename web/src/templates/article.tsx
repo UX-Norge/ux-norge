@@ -127,6 +127,7 @@ export const query = graphql`
       }
       slackMessageLink
       isReadersLetter
+      isSponsoredContent
       body: _rawBody(resolveReferences: { maxDepth: 4 })
     }
     relatedArticles: allSanityArticle(
