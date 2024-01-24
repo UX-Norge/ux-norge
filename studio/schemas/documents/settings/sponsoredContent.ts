@@ -1,6 +1,6 @@
 export default {
-  name: "sponsoredContentLetter",
-  title: "Sponsored Content Letter",
+  name: "sponsoredContent",
+  title: "Sponsored Content",
   type: "document",
   fields: [
     {

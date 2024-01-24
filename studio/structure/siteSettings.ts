@@ -89,8 +89,8 @@ export default (S: StructureBuilder) =>
             .icon(FiMessageSquare)
             .child(
               S.document()
-                .schemaType("sponsoredContentLetter")
-                .documentId("sponsoredContentLetter")
+                .schemaType("sponsoredContent")
+                .documentId("sponsoredContent")
                 .title("Annonsørinnhold")
             ),
           S.divider(),
