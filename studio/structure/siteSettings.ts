@@ -84,6 +84,15 @@ export default (S: StructureBuilder) =>
                 .documentId("readersLetter")
                 .title("Leserinnlegg")
             ),
+          S.listItem()
+            .title("Annonsørinnhold")
+            .icon(FiMessageSquare)
+            .child(
+              S.document()
+                .schemaType("sponsoredContentLetter")
+                .documentId("sponsoredContentLetter")
+                .title("Annonsørinnhold")
+            ),
           S.divider(),
           S.listItem()
             .title("Footer")
