@@ -56,6 +56,7 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
           articleListAds={articleListAds}
           articleBannerAds={articleBannerAds}
           isReadersLetter={article.isReadersLetter}
+          isSponsoredContent={article.isSponsoredContent}
           slackMessageLink={article.slackMessageLink}
           discussInSlack={data.discussInSlack}
           nominateBanner={data.nominateBanner}
@@ -127,6 +128,7 @@ export const query = graphql`
       }
       slackMessageLink
       isReadersLetter
+      isSponsoredContent
       body: _rawBody(resolveReferences: { maxDepth: 4 })
     }
     relatedArticles: allSanityArticle(

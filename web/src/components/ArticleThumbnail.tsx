@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export const ArticleThumbnail: React.FC<IProps> = ({
-  article: { title, coverPageTitle, mainImage, description, slug, category, company },
+  article: { title, coverPageTitle, mainImage, description, slug, category, company, isSponsoredContent },
   rounded = "lg",
   type,
   className,
@@ -29,9 +29,29 @@ export const ArticleThumbnail: React.FC<IProps> = ({
           "grid grid-cols-1 items-center md:grid-cols-[1fr_300px] md:gap-48":
             type === "list",
         },
+        {
+          "bg-primary-100 lg:rounded-t-lg w-full p-16 rounded-t-lg":
+            isSponsoredContent,
+        },
         className
       )}
     >
+      { isSponsoredContent ?
+        <div
+          className={classNames(
+            "bg-primary-100 inline-block lg:rounded-br-lg p-16 rounded-br-lg",
+            {
+              "absolute z-10":
+                mainImage,
+            }
+          )}
+          >
+            <p className="text-h3 font-bold text-primary-700">
+              Annonseinnhold
+            </p>
+        </div> :
+        ''
+      }
       {mainImage && (
         <Door
           image={mainImage.image}
