@@ -49,6 +49,21 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: "description",
+      title: "Ingress",
+      type: "text",
+      description: "Vises i thumbnails på forsiden og i toppen av artikler",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "body",
+      title: "Brødtekst",
+      description:
+        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
+      type: "articleContent",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
       name: "coverPageTitle",
       title: "Forsidetittel",
       type: "string",
@@ -59,13 +74,6 @@ export default {
       type: "string",
       group: "metadata",
       description: "Egen tittel når artikkelen blir delt i SoMe og Google",
-    },
-    {
-      name: "description",
-      title: "Ingress",
-      type: "text",
-      description: "Vises i thumbnails på forsiden og i toppen av artikler",
-      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "authors",
@@ -79,20 +87,6 @@ export default {
       title: "Publiseringstidspunkt",
       type: "datetime",
       group: "metadata",
-      validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: "company",
-      type: "reference",
-      group: "metadata",
-      to: [{type: "company" }]
-    },
-    {
-      name: "body",
-      title: "Brødtekst",
-      description:
-        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
-      type: "articleContent",
       validation: (Rule: any) => Rule.required(),
     },
     {
@@ -136,6 +130,12 @@ export default {
       description:
         'Hover over en melding i Slack, finn "share message" og trykk "copy link"',
       type: "url",
+    },
+    {
+      name: "company",
+      type: "reference",
+      group: "metadata",
+      to: [{type: "company" }]
     },
   ],
   preview: {
