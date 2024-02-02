@@ -133,6 +133,13 @@ export default {
     },
     {
       name: "company",
+      validation: (Rule: any) => Rule.custom((value: any, {document}: any) => {
+        if (!value && document.isSponsoredContent) {
+          return "Artikkelen er merket som annonsørinnhold men mangler verdi i feltet 'firma'.";
+        } else {
+          return true;
+        }
+      }),
       type: "reference",
       group: "metadata",
       to: [{type: "company" }]
