@@ -78,24 +78,24 @@ export const pushSponsoredContentDownOnFrontPage = (articles: Article[]): Articl
   
   if (indexOfFirstSponsored !== -1) {
 
-    // Ta ut sponsored content av articles
-    const sponsoredContent = articles.splice(indexOfFirstSponsored,1);
-    
-    // finn neste tilfelle av vanlig artikkel i array
-    const firstUnsponsoredAfterSponsoredContent = articles.slice(indexOfFirstSponsored).findIndex(article => !article.isSponsoredContent) + indexOfFirstSponsored;
-    const after = articles.splice(firstUnsponsoredAfterSponsoredContent + 1);
-    
-    articles = articles.concat(sponsoredContent, after);
-    return pushSponsoredContentDownOnFrontPage(articles);
-  } else {
-    return articles;
-  }
-}
+    // Finn første artikkel som ikke er annonsørinnhold og legg den inn rett før
 
-const splitArray = (array: [], index: number) => {
-  const beforeArray = array.slice(index, 1);
-  const afterArray = array.slice(index);
-  return { beforeArray, afterArray };
+    const articleToMoveUp = articles.slice(indexOfFirstSponsored).find(a => !a.isSponsoredContent);
+    if (articleToMoveUp) {
+    // slett gammel artikkel fra liste
+      articles.splice(articles.findIndex(a => a === articleToMoveUp), 1);
+
+    // sett inn ikke-annonsørinnholdet rett før den første sponsa artikkelen
+      articles.splice(indexOfFirstSponsored, 0, articleToMoveUp)
+
+      return pushSponsoredContentDownOnFrontPage(articles);
+    } else {
+      return articles;
+    } 
+  }
+  else {
+    return articles;
+  }    
 }
 
 // export const formatArticleAuthors = (authors: Author[]) => {

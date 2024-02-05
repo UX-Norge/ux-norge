@@ -62,6 +62,22 @@ describe("pushSponsoredContentDownOnFrontPage", () => {
     const result = pushSponsoredContentDownOnFrontPage(articles);
     expect(result).toEqual(expected);
   })
+  it('Første og tredje artikkel er sponset', () => {
+    const articles = [
+      { _id: '1', isSponsoredContent: true },
+      { _id: '2', isSponsoredContent: false },
+      { _id: '3', isSponsoredContent: true },
+      { _id: '4', isSponsoredContent: false },
+    ] as Article[];
+    const expected = [
+      { _id: '2', isSponsoredContent: false },
+      { _id: '4', isSponsoredContent: false },
+      { _id: '1', isSponsoredContent: true },
+      { _id: '3', isSponsoredContent: true },
+    ] as Article[];
+    const result = pushSponsoredContentDownOnFrontPage(articles);
+    expect(result).toEqual(expected);
+  })
 })
 
 // describe.skip("formatArticleAuthors", () => {
