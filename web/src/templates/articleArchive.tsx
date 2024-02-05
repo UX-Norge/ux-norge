@@ -39,7 +39,7 @@ const ArticleArchive: React.FC<PageProps<DataProps>> = ({
 export const query = graphql`
   query ArticleArchiveQuery($limit: Int, $skip: Int) {
     allSanityArticle(
-      sort: { fields: publishedAt, order: DESC }
+      sort: { publishedAt: DESC }
       limit: $limit
       skip: $skip
     ) {

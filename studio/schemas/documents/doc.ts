@@ -27,6 +27,12 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: "body",
+      title: "Innhold",
+      type: "blockContent",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
       name: "cta",
       title: "cta",
       type: "cta",
@@ -35,12 +41,6 @@ export default {
       name: "slug",
       title: "Slug",
       type: "slug",
-      validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: "body",
-      title: "Innhold",
-      type: "blockContent",
       validation: (Rule: any) => Rule.required(),
     },
   ],
