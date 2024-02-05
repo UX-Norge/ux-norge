@@ -18,18 +18,18 @@
   ],
   "dependencies": {
     "@sanity/scheduled-publishing": "^1.1.1",
-    "@sanity/ui": "^1.5.0",
-    "@sanity/vision": "^2.28.2",
+    "@sanity/ui": "^2.0.1",
+    "@sanity/vision": "^3.23.4",
     "prop-types": "^15.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.3.1",
-    "sanity": "^3.12.0",
+    "react-icons": "^5.0.1",
+    "sanity": "^3.26.0",
     "slugify": "^1.6.5",
-    "styled-components": "^5.2.0"
+    "styled-components": "^6.1.6"
   },
   "devDependencies": {
-    "prettier": "^2.5.1",
+    "prettier": "^3.1.1",
     "sanity-codegen": "^0.9.8"
   },
   "repository": {

@@ -42,15 +42,14 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
 
 export const query = graphql`
   query CoverPageQuery {
-    allSanityArticle(sort: { order: DESC, fields: publishedAt }) {
+    allSanityArticle(sort: { publishedAt: DESC }) {
       edges {
         node {
-          coverPageTitle
           ...ArticleThumbnail
         }
       }
     }
-    allSanityAd(sort: { fields: startDate, order: DESC }) {
+    allSanityAd(sort: { startDate: DESC }) {
       edges {
         node {
           ...AdThumbnail

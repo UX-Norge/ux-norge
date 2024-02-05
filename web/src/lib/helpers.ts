@@ -1,4 +1,4 @@
-import { Author, GraphqlEdges } from "@Types";
+import { Article, Author, GraphqlEdges } from "@Types";
 
 export const cleanGraphqlArray = (result: GraphqlEdges | undefined): any[] => {
   if (!result?.edges) return [];
@@ -72,29 +72,55 @@ export const slugify = (value: string): string => {
     .replace(/-+$/, ""); // Trim - from end of text
 };
 
-export const formatArticleAuthors = (authors: Author[]) => {
-  const everyAuthorIsFromSameCompany =
-    authors.every(
-      (author) => author.company?.name === authors[0].company?.name
-    ) && authors.length > 1;
-  const everyAuthorIsFromUxNorge = authors.every(
-    (author) => author.company?.name === "UX Norge"
-  );
+// Algorithm to push newly published artices down to third place on cover page
+export const pushSponsoredContentDownOnFrontPage = (articles: Article[]): Article[]  => {
+  let indexOfFirstSponsored = articles.slice(0,2).findIndex(a => a.isSponsoredContent);
+  
+  if (indexOfFirstSponsored !== -1) {
 
-  if (everyAuthorIsFromSameCompany && !everyAuthorIsFromUxNorge) {
-    const authorNames = authors.map((author) => author.name).join(", ");
-    return `${authorNames} • ${authors[0].company?.name}`;
+    // Finn første artikkel som ikke er annonsørinnhold og legg den inn rett før
+
+    const articleToMoveUp = articles.slice(indexOfFirstSponsored).find(a => !a.isSponsoredContent);
+    if (articleToMoveUp) {
+    // slett gammel artikkel fra liste
+      articles.splice(articles.findIndex(a => a === articleToMoveUp), 1);
+
+    // sett inn ikke-annonsørinnholdet rett før den første sponsa artikkelen
+      articles.splice(indexOfFirstSponsored, 0, articleToMoveUp)
+
+      return pushSponsoredContentDownOnFrontPage(articles);
+    } else {
+      return articles;
+    } 
   }
+  else {
+    return articles;
+  }    
+}
 
-  if (everyAuthorIsFromUxNorge) {
-    return authors.map((author) => author.name).join(", ");
-  }
+// export const formatArticleAuthors = (authors: Author[]) => {
+//   const everyAuthorIsFromSameCompany =
+//     authors.every(
+//       (author) => author.company?.name === authors[0].company?.name
+//     ) && authors.length > 1;
+//   const everyAuthorIsFromUxNorge = authors.every(
+//     (author) => author.company?.name === "UX Norge"
+//   );
 
-  const articleAuthors = authors
-    .map((author) =>
-      !!author.company ? `${author.name} • ${author.company.name}` : author.name
-    )
-    .join(", ");
+//   if (everyAuthorIsFromSameCompany && !everyAuthorIsFromUxNorge) {
+//     const authorNames = authors.map((author) => author.name).join(", ");
+//     return `${authorNames} • ${authors[0].company?.name}`;
+//   }
 
-  return articleAuthors;
-};
+//   if (everyAuthorIsFromUxNorge) {
+//     return authors.map((author) => author.name).join(", ");
+//   }
+
+//   const articleAuthors = authors
+//     .map((author) =>
+//       !!author.company ? `${author.name} • ${author.company.name}` : author.name
+//     )
+//     .join(", ");
+
+//   return articleAuthors;
+// };

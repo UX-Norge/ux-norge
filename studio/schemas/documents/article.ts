@@ -5,6 +5,7 @@ import {
   SanityDocument,
   SanitySlug,
   Author,
+  Company,
 } from "@Types";
 
 export interface Article extends SanityDocument {
@@ -14,14 +15,14 @@ export interface Article extends SanityDocument {
   description: string;
   authors: Author[];
   metaTitle?: string;
-  companyName: string;
-  companyType: string;
+  company: Company;
   publishedAt: string;
   body: PortableText;
   slug: SanitySlug;
   relatedArticles?: Article[];
   category: Category;
   isReadersLetter?: boolean;
+  isSponsoredContent?: boolean;
   slackMessageLink?: string;
 }
 
@@ -41,10 +42,25 @@ export default {
       title: "Hovedbilde",
       type: "articleImage",
     },
-    {
+    { 
       name: "title",
       title: "Tittel",
       type: "string",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "description",
+      title: "Ingress",
+      type: "text",
+      description: "Vises i thumbnails på forsiden og i toppen av artikler",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "body",
+      title: "Brødtekst",
+      description:
+        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
+      type: "articleContent",
       validation: (Rule: any) => Rule.required(),
     },
     {
@@ -60,13 +76,6 @@ export default {
       description: "Egen tittel når artikkelen blir delt i SoMe og Google",
     },
     {
-      name: "description",
-      title: "Ingress",
-      type: "text",
-      description: "Vises i thumbnails på forsiden og i toppen av artikler",
-      validation: (Rule: any) => Rule.required(),
-    },
-    {
       name: "authors",
       title: "Forfatter",
       type: "array",
@@ -78,24 +87,6 @@ export default {
       title: "Publiseringstidspunkt",
       type: "datetime",
       group: "metadata",
-      validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: "companyName",
-      type: "string",
-      group: "metadata",
-    },
-    {
-      name: "companyType",
-      type: "string",
-      group: "metadata",
-    },
-    {
-      name: "body",
-      title: "Brødtekst",
-      description:
-        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
-      type: "articleContent",
       validation: (Rule: any) => Rule.required(),
     },
     {
@@ -129,11 +120,29 @@ export default {
       type: "boolean",
     },
     {
+      name: "isSponsoredContent",
+      title: "Annonsørinnhold",
+      type: "boolean",
+    },
+    {
       name: "slackMessageLink",
       title: "Link til Slackmeldingen",
       description:
         'Hover over en melding i Slack, finn "share message" og trykk "copy link"',
       type: "url",
+    },
+    {
+      name: "company",
+      validation: (Rule: any) => Rule.custom((value: any, {document}: any) => {
+        if (!value && document.isSponsoredContent) {
+          return "Artikkelen er merket som annonsørinnhold men mangler verdi i feltet 'firma'.";
+        } else {
+          return true;
+        }
+      }),
+      type: "reference",
+      group: "metadata",
+      to: [{type: "company" }]
     },
   ],
   preview: {

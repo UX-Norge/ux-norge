@@ -43,87 +43,90 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   const result = await graphql<SanityData>(`
     query {
-      allSanityArticle(sort: { fields: publishedAt, order: DESC }) {
-        edges {
-          node {
-            _id
-            authors {
+        allSanityArticle(sort: { publishedAt: DESC }) {
+          edges {
+            node {
               _id
-            }
-            slug {
-              current
-            }
-            category {
-              _id
+              authors {
+                _id
+              }
+              slug {
+                current
+              }
+              category {
+                _id
+              }
+              company {
+                _id
+              }
             }
           }
         }
-      }
-      allSanityAd {
-        edges {
-          node {
-            _createdAt
-            _id
-            slug {
-              current
+        allSanityAd {
+          edges {
+            node {
+              _createdAt
+              _id
+              slug {
+                current
+              }
+              title
+              description
+              advertiser {
+                name
+              }
+              startDate
+              deadline
+              packageType {
+                onArticles
+                type
+                duration
+              }
             }
-            title
-            description
-            advertiser {
+          }
+        }
+        allSanityAuthor {
+          edges {
+            node {
+              _id
+              slug {
+                current
+              }
+            }
+          }
+        }
+        allSanityCategory {
+          edges {
+            node {
+              _id
               name
+              slug {
+                current
+              }
             }
-            startDate
-            deadline
-            packageType {
-              onArticles
-              type
-              duration
+          }
+        }
+        allSanityDoc {
+          edges {
+            node {
+              _id
+              slug {
+                current
+              }
+            }
+          }
+        }
+        allSanityCourse {
+          edges {
+            node {
+              _id
+              slug {
+                current
+              }
             }
           }
         }
       }
-      allSanityAuthor {
-        edges {
-          node {
-            _id
-            slug {
-              current
-            }
-          }
-        }
-      }
-      allSanityCategory {
-        edges {
-          node {
-            _id
-            name
-            slug {
-              current
-            }
-          }
-        }
-      }
-      allSanityDoc {
-        edges {
-          node {
-            _id
-            slug {
-              current
-            }
-          }
-        }
-      }
-      allSanityCourse {
-        edges {
-          node {
-            _id
-            slug {
-              current
-            }
-          }
-        }
-      }
-    }
   `);
   if (result.errors) {
     throw result.errors;
@@ -158,7 +161,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
           .filter((ad) => ad.packageType.onArticles)
       )
     );
-
+       
   data.articles
     .filter((article) => article.slug?.current)
     .forEach((article, index) => {
@@ -171,6 +174,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
           articleBannerAds: articleBannerAds.map((ad) => ad._id),
           slug: article.slug.current,
           categoryId: article.category?._id,
+          companyId: article.company?._id
         },
         defer: index > 20,
       });

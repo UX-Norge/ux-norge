@@ -22,3 +22,5 @@ node_modules
 /dist
 
 .sanity
+
+dataset_exports
