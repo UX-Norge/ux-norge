@@ -83,7 +83,7 @@ export const CoverPage: React.FC<IProps> = ({
         >
           <p className="text-sm">Leter du etter designer?</p>
           <div className="flex gap-16">
-            <p className="font-bold">Legg ut stillingsannonse her!</p>
+            <p className="font-bold">Legg ut stillingsannonse</p>
             <ArrowLeftIcon />
           </div>
         </Link>
