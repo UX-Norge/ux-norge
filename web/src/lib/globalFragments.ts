@@ -16,6 +16,7 @@ export const query = graphql`
     }
     description
     isSponsoredContent
+    coverPageTitle
     category {
       name
     }
