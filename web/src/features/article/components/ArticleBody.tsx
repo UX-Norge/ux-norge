@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BlockContent, Overline } from "@Ui/Typography";
+import { BlockContent, Heading3, Overline } from "@Ui/Typography";
 import { Ad, Article, PortableText } from "@Types";
 import { printDate } from "@Lib/helpers";
 import { blockContentToPlainText } from "react-portable-text";
@@ -8,6 +8,7 @@ import { ListAd } from "@Features/ad/components/ListAd";
 import { DiscussArticle } from "./DiscussArticle";
 import { NominateSection } from "./NominateSection";
 import { SponsoredContentDisclaimer } from "./sponsoredContentDisclaimer";
+import { Button } from "@Ui/Button";
 
 interface IProps {
   articleListAds: Ad[];
@@ -95,6 +96,14 @@ export const ArticleBody: React.FC<
         {articleListAds.map((ad) => (
           <ListAd {...ad} key={ad._id} />
         ))}
+        <div className="block space-y-4 border-2 border-primary-500 py-16 px-16 rounded-sm">
+          <Heading3>Tips oss</Heading3>
+          <p className="py-16">
+            Har du tips eller leserinnlegg?<br />
+            Send en e-post til:
+          </p>
+          <Button href="mailto:tips@uxnorge.no">tips@uxnorge.no</Button>
+        </div>
       </div>
     </main>
   );
