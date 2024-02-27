@@ -7,6 +7,8 @@ import { BannerAd } from "@Features/ad/components/BannerAd";
 import { classNames, pushSponsoredContentDownOnFrontPage } from "@Lib/helpers";
 import { SlackBanner } from "./SlackBanner";
 import { Link } from "@Components/Link";
+import { Button } from "@Ui/Button";
+import { Heading3 } from "@Ui/Typography";
 
 interface IProps {
   articles: Article[];
@@ -90,6 +92,14 @@ export const CoverPage: React.FC<IProps> = ({
         {get(4, remainingListAds).map((ad: Ad) => (
           <ListAd {...ad} key={ad._id} />
         ))}
+        <div className="block space-y-4 border-2 border-primary-500 py-16 px-16 rounded-sm">
+          <Heading3>Tips oss</Heading3>
+          <p className="py-16">
+            Har du tips eller leserinnlegg?<br />
+            Send en e-post til:
+          </p>
+          <Button href="mailto:tips@uxnorge.no">tips@uxnorge.no</Button>
+        </div>
       </div>
     </div>
   );
