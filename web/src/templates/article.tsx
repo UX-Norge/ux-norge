@@ -64,6 +64,7 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         <ArticleFooter
           relatedArticles={relatedArticles}
           authors={article.authors}
+          isSponsoredContent={article.isSponsoredContent}
         />
       </PageWrapper>
     </article>
