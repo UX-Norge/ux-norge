@@ -7,19 +7,23 @@ import { RelatedArticleThumbnail } from "./RelatedArticleThumbnail";
 interface IProps {
   relatedArticles: Article[];
   authors: Author[];
+  isSponsoredContent: boolean;
 }
 
 export const ArticleFooter: React.FC<IProps> = ({
   authors,
   relatedArticles,
+  isSponsoredContent,
 }) => {
   return (
     <div className="bg-primary-100 p-24 lg:p-64">
       <div className="mx-auto max-w-page-sm">
         <div className="mb-48 space-y-24">
-          {authors.map((author, index) => (
+        {!isSponsoredContent &&
+          authors.map((author, index) => (
             <AuthorThumbnail {...author} key={`author-${index}`} />
-          ))}
+          ))
+        }
         </div>
         <div className="space-y-32">
           {relatedArticles.map((article) => (
