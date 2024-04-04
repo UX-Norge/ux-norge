@@ -83,12 +83,9 @@ export const ArticleBody: React.FC<
   nominateBanner,
 }) => {
   const [bodyWithAds, setBodyWithAds] = React.useState<any[]>([]);
-  const [bodyWithoutAds, setBodyWithoutAds] = React.useState<any[]>([]);
 
   React.useEffect(() => {
-    if (isSponsoredContent) {
-      setBodyWithoutAds(body);
-    } else {
+    if (!isSponsoredContent) {
       setBodyWithAds(insertBannerAds(body, articleBannerAds));
     }
   }, [body, articleBannerAds]);
@@ -107,7 +104,7 @@ export const ArticleBody: React.FC<
         {isReadersLetter && <ReadersLetterDisclaimer />}
         {isSponsoredContent && <SponsoredContentDisclaimer company={company} />}
         <div className="prose-a:link w-prose prose prose-p:text-base prose-p:leading-relaxed">
-          {isSponsoredContent ? <BlockContent blocks={bodyWithoutAds}/> : <BlockContent blocks={bodyWithAds} />}
+          {isSponsoredContent ? <BlockContent blocks={body}/> : <BlockContent blocks={bodyWithAds} />}
         </div>
         <div className="mb-48 space-y-32">
           <hr className="w-64" />
