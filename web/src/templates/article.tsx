@@ -52,6 +52,7 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         <ArticleBody
           category={article.category}
           body={article.body}
+          company={article.company}
           publishedAt={article.publishedAt}
           articleListAds={articleListAds}
           articleBannerAds={articleBannerAds}
@@ -64,6 +65,7 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         <ArticleFooter
           relatedArticles={relatedArticles}
           authors={article.authors}
+          isSponsoredContent={article.isSponsoredContent}
         />
       </PageWrapper>
     </article>
