@@ -63,6 +63,7 @@ export const ArticleBody: React.FC<
       Article,
       | "publishedAt"
       | "body"
+      | "company"
       | "isReadersLetter"
       | "isSponsoredContent"
       | "category"
@@ -73,6 +74,7 @@ export const ArticleBody: React.FC<
   isSponsoredContent,
   category,
   body,
+  company,
   publishedAt,
   articleListAds,
   articleBannerAds,
@@ -83,7 +85,9 @@ export const ArticleBody: React.FC<
   const [bodyWithAds, setBodyWithAds] = React.useState<any[]>([]);
 
   React.useEffect(() => {
-    setBodyWithAds(insertBannerAds(body, articleBannerAds));
+    if (!isSponsoredContent) {
+      setBodyWithAds(insertBannerAds(body, articleBannerAds));
+    }
   }, [body, articleBannerAds]);
 
   const readTime = Math.round(
@@ -98,9 +102,9 @@ export const ArticleBody: React.FC<
         </Overline>
         <Overline>{readTime} min</Overline>
         {isReadersLetter && <ReadersLetterDisclaimer />}
-        {isSponsoredContent && <SponsoredContentDisclaimer />}
+        {isSponsoredContent && <SponsoredContentDisclaimer company={company} />}
         <div className="prose-a:link w-prose prose prose-p:text-base prose-p:leading-relaxed">
-          {bodyWithAds && <BlockContent blocks={bodyWithAds} />}
+          {isSponsoredContent ? <BlockContent blocks={body}/> : <BlockContent blocks={bodyWithAds} />}
         </div>
         <div className="mb-48 space-y-32">
           <hr className="w-64" />
