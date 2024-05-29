@@ -8,6 +8,7 @@ import dokumenter from "./dokumenter";
 import newsletter from "./newsletter";
 import page from "./page";
 import siteSettings from "./siteSettings";
+import product from "./product";
 
 export default (S: StructureBuilder) =>
   S.list()
@@ -22,4 +23,5 @@ export default (S: StructureBuilder) =>
       dokumenter(S),
       company(S),
       course(S),
+      product(S)
     ]);
