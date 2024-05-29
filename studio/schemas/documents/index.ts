@@ -11,6 +11,8 @@ import coverPage from "./coverPage";
 import doc from "./doc";
 import newsletter from "./newsletter";
 import page from "./page";
+import product from "./product";
+import productVariant from "./productVariant";
 import discussInSlack from "./settings/discussInSlack";
 import footer from "./settings/footer";
 import newsletterSignupForm from "./settings/newsletterSignupForm";
@@ -46,4 +48,6 @@ export default [
   sponsoredContent,
   adContent,
   page,
+  product,
+  productVariant
 ];
