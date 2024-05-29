@@ -8,6 +8,7 @@ import {
   ScheduleAction,
 } from "@sanity/scheduled-publishing";
 import { getRoute } from "../web/src/lib/getRoute";
+import {shopifyAssets} from 'sanity-plugin-shopify-assets';
 
 export default defineConfig({
   name: "default",
@@ -34,6 +35,9 @@ export default defineConfig({
       structure,
     }),
     scheduledPublishing(),
+    shopifyAssets({
+      shopifyDomain: '*.myshopify.com'
+    })
   ],
 
   theme: uxNorgeTheme,
