@@ -20,3 +20,7 @@ node_modules
 
 # Compiled sanity studio
 /dist
+
+.sanity
+
+dataset_exports

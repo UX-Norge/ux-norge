@@ -28,7 +28,7 @@ export const Partners: React.FC<IProps> = ({}) => {
       }
       allSanityCompany(
         filter: { isPartner: { eq: true } }
-        sort: { fields: name }
+        sort: { name: ASC }
       ) {
         edges {
           node {

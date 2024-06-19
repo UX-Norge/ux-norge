@@ -31,7 +31,7 @@ export const Button: React.FC<IProps> = ({
         {children}
       </button>
     );
-  } else if (href.includes("http")) {
+  } else if (href.includes("http") || href.includes("mailto")) {
     return (
       <a href={href} className={buttonClass}>
         {children}

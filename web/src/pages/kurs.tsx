@@ -53,7 +53,7 @@ export const query = graphql`
     sanityPage(_id: { eq: "coursePage" }) {
       ...Page
     }
-    allSanityCourse(sort: { fields: date, order: DESC }) {
+    allSanityCourse(sort: { date : DESC }) {
       edges {
         node {
           ...CourseThumbnail

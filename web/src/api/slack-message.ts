@@ -3,7 +3,6 @@ import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import { publishMessage } from "../api-lib/slack";
 import { sanityClient } from "../api-lib/sanity.client";
 import { readBody } from "../api-lib/readBody";
-import { json } from "stream/consumers";
 
 const secret = process.env.WEBHOOK_SECRET as string;
 
@@ -11,8 +10,9 @@ export default async function handler(
   req: GatsbyFunctionRequest,
   res: GatsbyFunctionResponse
 ) {
+  console.log('Starter webhook for slack-message')
   const signature = req.headers.secret as string;
-
+  
   if (!(secret === signature)) {
     res.status(401).json({ success: false, message: "Invalid signature" });
     return;
@@ -35,10 +35,12 @@ export default async function handler(
   sanityClient
     .fetch(query, { adId })
     .then((result: any) => {
-      console.log(adId, result);
-      if (!result) return null;
-      res.status(200).json(result);
-      publishMessage(channelId, result.title, [
+        console.log(adId, result);
+      if (!result) {
+        res.send(404);
+        return null;
+      }
+      const blocks = [
         {
           type: "divider",
         },
@@ -76,7 +78,16 @@ export default async function handler(
         {
           type: "divider",
         },
-      ]);
+      ];
+      return publishMessage(channelId, result.title, blocks, Math.ceil(Date.now() / 1000) + 120);
+    })
+    .then((response: any) => {
+      console.log('Slack-promise oppfylt', response);
+      if (response && response.ok) {
+        res.status(200).json(response);
+      } else {
+        res.status(500).json(response)
+      }
     })
     .catch((err: any) => res.status(500).json(err));
 }
