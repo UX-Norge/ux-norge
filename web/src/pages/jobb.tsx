@@ -84,7 +84,7 @@ export const query = graphql`
     }
     allSanityAd(
       filter: { packageType: { onAdsPage: { eq: true } } }
-      sort: { fields: startDate, order: DESC }
+      sort: { startDate: DESC }
     ) {
       edges {
         node {

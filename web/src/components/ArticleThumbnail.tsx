@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export const ArticleThumbnail: React.FC<IProps> = ({
-  article: { title, mainImage, description, slug, category },
+  article: { title, coverPageTitle, mainImage, description, slug, category, company, isSponsoredContent },
   rounded = "lg",
   type,
   className,
@@ -29,9 +29,29 @@ export const ArticleThumbnail: React.FC<IProps> = ({
           "grid grid-cols-1 items-center md:grid-cols-[1fr_300px] md:gap-48":
             type === "list",
         },
+        {
+          "bg-primary-100 lg:rounded-t-lg w-full p-16 rounded-t-lg":
+            isSponsoredContent,
+        },
         className
       )}
     >
+      { isSponsoredContent ?
+        <div
+          className={classNames(
+            "bg-primary-100 inline-block lg:rounded-br-lg p-16 rounded-br-lg",
+            {
+              "absolute z-10":
+                mainImage,
+            }
+          )}
+          >
+            <p className="text-h3 font-bold text-primary-700">
+              Annonseinnhold
+            </p>
+        </div> :
+        ''
+      }
       {mainImage && (
         <Door
           image={mainImage.image}
@@ -39,20 +59,20 @@ export const ArticleThumbnail: React.FC<IProps> = ({
           size="fluid"
           alt={mainImage.alt}
           rounded={rounded}
-          classNameOuter={classNames(" h-full", {
+          classNameOuter={classNames({
             "aspect-w-3 aspect-h-2 md:order-1": type === "list",
           })}
         />
       )}
       <div className={classNames({ "p-24": type === "feature" })}>
-        {category && <Overline className="mt-8">{category.name}</Overline>}
+        { category && <Overline className="mt-8">{category.name}</Overline>}
         <h2
           className={classNames("font-bold", {
-            "text-h2 xl:text-h1": type === "feature",
-            "text-h3": type === "small" || type === "list",
+            "break-words text-h2 xl:text-h1": type === "feature",
+            "text-h4 md:text-h3": type === "small" || type === "list",
           })}
         >
-          {title}
+          {coverPageTitle || title}
         </h2>
         <p
           className={classNames("leading-relaxed", {

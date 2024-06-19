@@ -16,7 +16,7 @@ export const RelatedArticleInline: React.FC<IProps> = ({
     <Link
       path={slug.current}
       type="article"
-      className="not-prose grid grid-cols-2 items-center gap-24 rounded-sm bg-primary-100 p-8 pr-24 decoration-transparent"
+      className="not-prose grid items-center gap-24 rounded-sm bg-primary-100 p-8 decoration-transparent md:grid-cols-2 md:pr-24"
     >
       {mainImage && (
         <Image

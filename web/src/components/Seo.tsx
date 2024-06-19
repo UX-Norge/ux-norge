@@ -1,7 +1,7 @@
 import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { Helmet } from "react-helmet";
-import { Author, SanityImage, SiteSettings } from "@Types";
+import { Author, Company, SanityImage, SiteSettings } from "@Types";
 import { imageUrl } from "gatsby-plugin-sanity-image";
 import { PageProps } from "gatsby";
 
@@ -12,8 +12,7 @@ interface IProps {
   imageAlt?: string;
   location: PageProps["location"];
   type?: "article" | null;
-  companyType?: string;
-  companyName?: string;
+  company: Company;
   publishDate?: string;
   authors?: Author[];
 }
@@ -25,8 +24,7 @@ export const Seo: React.FC<IProps> = ({
   imageAlt,
   location,
   type,
-  companyType,
-  companyName,
+  company,
   publishDate,
   authors,
 }) => {
@@ -65,8 +63,7 @@ export const Seo: React.FC<IProps> = ({
       },
       {
         "@type": "Organization",
-        type: companyType,
-        name: companyName,
+        name: company?.name,
       },
     ];
 

@@ -1,6 +1,6 @@
 import { Link } from "@Components/Link";
-import { classNames, formatArticleAuthors } from "@Lib/helpers";
-import { Article, ArticleImage } from "@Types";
+import { classNames } from "@Lib/helpers";
+import { Article, ArticleImage, Author } from "@Types";
 import { Door } from "@Ui/Door";
 import { Image } from "@Ui/Image";
 import { Body1, Overline } from "@Ui/Typography";
@@ -16,12 +16,19 @@ type MainImageWithDimensions = ArticleImage & {
 };
 
 export const ArticleHeader: React.FC<
-  Pick<Article, "title" | "authors" | "category" | "description" | "mainImage">
-> = ({ title, authors, category, mainImage, description }) => {
-  const articleAuthors = formatArticleAuthors(authors);
+  Pick<Article, "title" | "authors" | "company" | "category" | "description" | "mainImage" | "isSponsoredContent">
+> = ({ title, authors, company, category, mainImage, description, isSponsoredContent }) => {
 
   return (
-    <header className="relative max-w-full overflow-x-hidden border-b-2 border-gray-900 pt-64 lg:min-h-aboveFold">
+    <header
+      className={classNames(
+        "relative max-w-full overflow-x-hidden border-b-2 border-gray-900 pt-64 lg:min-h-aboveFold",
+        {
+          "bg-primary-100":
+            isSponsoredContent,
+        }
+      )}
+      >
       <div
         className={classNames(
           "mx-auto grid h-full max-w-page gap-48 px-[10%] lg:min-h-aboveFold lg:grid-cols-[4fr_3fr]"
@@ -29,15 +36,13 @@ export const ArticleHeader: React.FC<
       >
         <div className="relative flex h-full items-center">
           <div className="relative z-10">
-            {category && (
-              <Link path={category.slug?.current} type="category">
-                <Overline>{category.name}</Overline>
-              </Link>
-            )}
-            <h1 className="text-h2 font-bold md:text-h1">{title}</h1>
+            { articleOverline(isSponsoredContent, category) }
+            
+
+            <h1 className="text-h2 font-bold md:text-h1 hyphens-auto">{title}</h1>
             <Body1>{description}</Body1>
             <div className="mt-16 flex space-x-8">
-              <Overline>{articleAuthors}</Overline>
+              { isSponsoredContent ? <Overline>{company.name}</Overline> : <Overline>{articleLinks(authors)}</Overline> }
             </div>
           </div>
           <Door
@@ -78,3 +83,58 @@ export const ArticleHeader: React.FC<
     </header>
   );
 };
+
+const articleOverline = (isSponsoredContent: boolean | undefined, category: any) => {
+  if (isSponsoredContent) {
+    return <Overline>Annonsørinnhold</Overline> 
+  } else {
+    if (category) {
+      return <Link path={category.slug?.current} type="category">
+              <Overline>{category.name}</Overline>
+            </Link>
+    }
+  }
+}
+
+const articleLinks = (authors: Author[]) => {
+  const everyAuthorIsFromSameCompany =
+    authors.every(
+      (author) => author.company?.name === authors[0].company?.name
+    ) && authors.length > 1;
+  const everyAuthorIsFromUxNorge = authors.every(
+    (author) => author.company?.name === "UX Norge"
+  );
+  if (everyAuthorIsFromSameCompany && !everyAuthorIsFromUxNorge) {
+    return <> 
+        {authors.map((author, index) => 
+          <>
+            <Link path={author.slug.current} type="author">{author.name}</Link>
+            { index === authors.length -1 ? '' : ', '}
+          </>
+        )} • {authors[0].company?.name} </>;
+
+  }
+
+  if (everyAuthorIsFromUxNorge) {
+    return authors.map((author, index) => 
+      <>
+        <Link path={author.slug.current} type="author">{author.name}</Link>
+        { index === authors.length -1 ? '' : ', '}
+      </>
+    )
+  }
+
+  const articleAuthors = 
+    <>
+      {authors.map((author, index) => 
+        <>
+          <Link path={author.slug.current} type="author">{author.name}</Link>
+          { !!author.company ? ' • ' + author.company?.name : ''}
+          { index === authors.length -1 ? '' : ', '}
+        </>
+      )}
+    </>;
+  
+  
+  return articleAuthors;
+}

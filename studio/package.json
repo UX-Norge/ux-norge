@@ -7,33 +7,29 @@
   "author": "Tobias Wulvik <tobias.wulvik@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "sanity start",
     "build": "sanity build",
-    "graphql": "sanity graphql deploy"
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy",
+    "dev": "sanity dev",
+    "start": "sanity start"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/base": "^2.28.2",
-    "@sanity/core": "^2.28.1",
-    "@sanity/default-layout": "^2.28.2",
-    "@sanity/default-login": "^2.28.2",
-    "@sanity/desk-tool": "^2.28.2",
-    "@sanity/production-preview": "^2.29.3",
-    "@sanity/scheduled-publishing": "^0.1.9",
-    "@sanity/vision": "^2.28.2",
+    "@sanity/scheduled-publishing": "^1.1.1",
+    "@sanity/ui": "^2.0.1",
+    "@sanity/vision": "^3.23.4",
     "prop-types": "^15.7",
-    "react": "^17.0",
-    "react-dom": "^17.0",
-    "react-icons": "^4.3.1",
-    "sanity-plugin-autocomplete-input": "^1.3.1",
-    "sanity-plugin-gatsby-cloud-preview": "^1.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
+    "sanity": "^3.26.0",
     "slugify": "^1.6.5",
-    "styled-components": "^5.2.0"
+    "styled-components": "^6.1.6"
   },
   "devDependencies": {
-    "prettier": "^2.5.1",
+    "prettier": "^3.1.1",
     "sanity-codegen": "^0.9.8"
   },
   "repository": {
