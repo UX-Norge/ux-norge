@@ -15,7 +15,7 @@ export const CourseInfo: React.FC<{ course: Course }> = ({
       {startTime && <Body1>{`🕐 Tid: ${formattedTime}`}</Body1>}
       {location && <Body1>{`📍 Sted: ${location}`}</Body1>}
       {price && <Body1>{`💰 Pris: ${price}`}</Body1>}
-      {courseHolders && courseHolders.length > 0 && <Body1>{`👨‍🏫 Kursholder: ${courseHolders.join(", ")}`}</Body1>}
+      {courseHolders && courseHolders.length > 0 && <Body1>{`👨‍🏫 Kursholder: ${courseHolders.map(ch => ch.name).join(", ")}`}</Body1>}
     </div>
   );
 };

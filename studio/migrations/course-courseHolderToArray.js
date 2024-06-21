@@ -55,7 +55,7 @@ const createTransaction = (patches) =>
     client.transaction()
   );
 
-const commitTransaction = (tx) => tx.commit();
+const commitTransaction = (tx) => tx.commit({autoGenerateArrayKeys: true, dryRun: true});
 
 const migrateNextBatch = async () => {
   const documents = await fetchDocuments();
