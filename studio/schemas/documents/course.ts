@@ -1,5 +1,5 @@
-import { Author } from "../schemaTypes";
 import { PortableText, SanitySlug } from "../../../../types/sanityTypes";
+import { Author } from "../schemaTypes";
 
 export type Course = {
   _id: string;
@@ -10,7 +10,7 @@ export type Course = {
   endTime: string;
   price: string;
   location: string;
-  courseHolder: Author;
+  courseHolders: Author[];
   signUpLink: string;
   slug: SanitySlug;
   body: PortableText;
@@ -73,10 +73,10 @@ export default {
       type: "string",
     },
     {
-      name: "courseHolder",
-      title: "Kursholder",
-      type: "reference",
-      to: [{ type: "author" }],
+      name: "courseHolders",
+      title: "Kursholdere",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "author" }] }],
     },
     {
       name: "signUpLink",
