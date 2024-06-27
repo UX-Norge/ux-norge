@@ -10,7 +10,7 @@ export type Course = {
   endDate: string;
   endTime: string;
   price: string;
-  location: string;
+  venue: string;
   courseHolders: Author[];
   signUpLink: string;
   slug: SanitySlug;
@@ -119,7 +119,7 @@ export default {
       type: "string",
     },
     {
-      name: "location",
+      name: "venue",
       title: "Sted",
       type: "string",
     },
