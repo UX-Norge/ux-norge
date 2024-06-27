@@ -25,8 +25,36 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    return today <= new Date(course.date);
+    return today <= new Date(course.startDate);
   });
+
+  /* lag en datastruktur med kurs etter hvilken måned startDate er i */
+  const coursesByMonth = courses.reduce((acc: any, course: Course) => {
+    const month: number = new Date(course.startDate).getMonth();
+    if (!acc[month]) {
+      acc[month] = [];
+    }
+    acc[month].push(course);
+    return acc;
+  }, {});
+
+  console.log(coursesByMonth)
+  /* array med måneder på norsk */
+  const months = [
+    "Januar",
+    "Februar",
+    "Mars",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+
 
   return (
     <PageWrapper>
@@ -38,12 +66,19 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
         doors={<VectorIllustrations.coursePageDoors />}
         cta={data.sanityPage.cta}
       />
-      <section className="mx-auto grid max-w-page gap-24 px-24 py-80 md:grid-cols-2">
-        {courses.length === 0 && <BlockContent blocks={emptyState} />}
-        {courses.map((course) => (
-          <CourseThumbnail course={course} />
-        ))}
-      </section>
+      {Object.keys(coursesByMonth)
+       .sort((a, b) => parseInt(a) - parseInt(b))
+       .map((month) => (
+        <div key={month}>
+          <section  className="mx-auto grid max-w-page gap-24 px-24 py-80 md:grid-cols-2">
+            {courses.length === 0 && <BlockContent blocks={emptyState} />}
+            {months[parseInt(month)]}
+            {coursesByMonth[month].map((course: Course) => (
+              <CourseThumbnail key={course._id} course={course} />
+          ))}
+          </section>
+        </div>
+      ))}
     </PageWrapper>
   );
 };
@@ -53,7 +88,7 @@ export const query = graphql`
     sanityPage(_id: { eq: "coursePage" }) {
       ...Page
     }
-    allSanityCourse(sort: { date : DESC }) {
+    allSanityCourse(sort: { startDate : DESC }) {
       edges {
         node {
           ...CourseThumbnail

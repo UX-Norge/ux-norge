@@ -31,8 +31,9 @@ export const query = graphql`
       current
     }
     description
-    location
-    date
+    venue
+    startDate
+    endDate
     startTime
     endTime
     price
