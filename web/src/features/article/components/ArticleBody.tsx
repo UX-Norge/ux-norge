@@ -62,6 +62,7 @@ export const ArticleBody: React.FC<
     Pick<
       Article,
       | "publishedAt"
+      | "updatedAt"
       | "body"
       | "company"
       | "isReadersLetter"
@@ -76,6 +77,7 @@ export const ArticleBody: React.FC<
   body,
   company,
   publishedAt,
+  updatedAt,
   articleListAds,
   articleBannerAds,
   slackMessageLink,
@@ -83,7 +85,6 @@ export const ArticleBody: React.FC<
   nominateBanner,
 }) => {
   const [bodyWithAds, setBodyWithAds] = React.useState<any[]>([]);
-
   React.useEffect(() => {
     if (!isSponsoredContent) {
       setBodyWithAds(insertBannerAds(body, articleBannerAds));
@@ -98,7 +99,7 @@ export const ArticleBody: React.FC<
     <main className="relative mx-auto mt-56 max-w-[950px] grid-cols-[65ch_1fr] gap-24 px-24 lg:grid">
       <div className="relative mx-auto max-w-prose lg:m-0">
         <Overline className="text-base text-primary-500">
-          {printDate(publishedAt)}
+          {printDate(publishedAt)} { updatedAt && String.fromCharCode(183) +  " Oppdatert " + printDate(updatedAt) }
         </Overline>
         <Overline>{readTime} min</Overline>
         {isReadersLetter && <ReadersLetterDisclaimer />}

@@ -54,6 +54,7 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
           body={article.body}
           company={article.company}
           publishedAt={article.publishedAt}
+          updatedAt={article.updatedAt}
           articleListAds={articleListAds}
           articleBannerAds={articleBannerAds}
           isReadersLetter={article.isReadersLetter}
@@ -84,6 +85,7 @@ export const query = graphql`
       title
       description
       publishedAt
+      updatedAt
       metaTitle
       company { 
         name
