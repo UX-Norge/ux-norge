@@ -32,6 +32,9 @@ export const query = graphql`
     }
     description
     venue
+    location {
+      name
+    }
     startDate
     endDate
     startTime

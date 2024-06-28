@@ -1,5 +1,5 @@
 import { PortableText, SanitySlug } from "../../../types/sanityTypes";
-import { Author } from "../schemaTypes";
+import { AdLocation, Author } from "../schemaTypes";
 
 export type Course = {
   _id: string;
@@ -11,6 +11,7 @@ export type Course = {
   endTime: string;
   price: string;
   venue: string;
+  location: AdLocation;
   courseHolders: Author[];
   signUpLink: string;
   slug: SanitySlug;
@@ -119,8 +120,14 @@ export default {
       type: "string",
     },
     {
-      name: "venue",
+      name: "location",
+      type: "reference",
       title: "Sted",
+      to: [{ type: "adLocation" }]
+    },
+    {
+      name: "venue",
+      title: "Venue",
       type: "string",
     },
     {
