@@ -1,7 +1,6 @@
 import { Link } from "@Components/Link";
-import { CourseInfo } from "@Features/course/CourseInfo";
 import { Course } from "@Types";
-import { Body1, Heading2 } from "@Ui/Typography";
+import { Body1, Heading4 } from "@Ui/Typography";
 import * as React from "react";
 
 const Arrow: React.FC = () => (
@@ -23,23 +22,20 @@ const Arrow: React.FC = () => (
 );
 
 export const CourseThumbnail: React.FC<{ course: Course }> = ({ course }) => {
+  const formattedDate =
+    course.startDate && new Date(course.startDate).toLocaleDateString("no-nb", { dateStyle: "long" });
   return (
     <Link
       path={course.slug.current}
       type="course"
-      className="flex h-min flex-col gap-24 rounded-xs bg-primary-100 p-24 text-base text-gray-900"
+      className="flex flex-col gap-16 rounded-t bg-primary-100 p-24 pb-40 text-base text-gray-900"
     >
-      
-      { course.location ? "Sted: " + course.location.name: ''}
-      { course.venue ? "Venue: " + course.venue: ''} 
-
-      <Heading2>{course.title}</Heading2>
+      <Heading4 className="text-primary-800">{course.title}</Heading4>
+      <div>
+        {course.location && <Body1>{`📍 Sted: ${course.location.name}`}</Body1>}
+        {course.startDate && <Body1>{`📆 Dato: ${formattedDate}`}</Body1>}
+      </div>
       <Body1>{course.description}</Body1>
-      <CourseInfo course={course} />
-      <p className="ml-auto flex items-center gap-8 text-sm text-primary-500 hover:underline">
-        Les mer
-        <Arrow />
-      </p>
     </Link>
   );
 };

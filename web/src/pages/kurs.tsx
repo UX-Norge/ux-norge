@@ -6,7 +6,7 @@ import { VectorIllustrations } from "@Images/VectorIllustrations";
 import { cleanGraphqlArray } from "@Lib/helpers";
 import { Course, GraphqlEdges, PageType } from "@Types";
 import { PageWrapper } from "@Ui/Layout";
-import { BlockContent } from "@Ui/Typography";
+import { BlockContent, Heading2 } from "@Ui/Typography";
 import { graphql, PageProps } from "gatsby";
 import * as React from "react";
 
@@ -29,7 +29,6 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
     today.setHours(0, 0, 0, 0);
     return today <= new Date(course.startDate);
   });
-  
 
   React.useEffect(() => {
     let filteredCourses;
@@ -95,24 +94,27 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
         doors={<VectorIllustrations.coursePageDoors />}
         cta={data.sanityPage.cta}
       />
-
-      <FilterRow
-            label="Sted:"
-            allString={ALL_STRING}
-            options={uniqueLocations}
-            selected={selectedLocations}
-            setSelected={setSelectedLocations}
-          />
+      <div className="mx-auto max-w-page space-y-24 px-24 py-40 ">
+        <FilterRow
+          label="Sted:"
+          allString={ALL_STRING}
+          options={uniqueLocations}
+          selected={selectedLocations}
+          setSelected={setSelectedLocations}
+        />
+      </div>
       {Object.keys(filteredCoursesByMonth)
        .sort((a, b) => parseInt(a) - parseInt(b))
        .map((month) => (
-        <div key={month}>
-          <section className="mx-auto grid max-w-page gap-24 px-24 py-80 md:grid-cols-2">
+        <div key={month} className="last:pb-80">
+          <section className="mx-auto max-w-page px-24 py-24">
             {courses.length === 0 && <BlockContent blocks={emptyState} />}
-            {months[parseInt(month)]}
-            {filteredCoursesByMonth[month].map((course: Course) => (
-              <CourseThumbnail key={course.slug.current} course={course} />
-          ))}
+            <Heading2 className="mb-16 font-normal">{months[parseInt(month)]}</Heading2>
+            <div className="grid gap-24 items-stretch sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {filteredCoursesByMonth[month].map((course: Course) => (
+                <CourseThumbnail key={course.slug.current} course={course} />
+              ))}
+            </div>
           </section>
         </div>
       ))}
