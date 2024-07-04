@@ -6,6 +6,7 @@ import structure from "./structure";
 import {
   ScheduleAction
 } from "sanity";
+
 import { getRoute } from "../web/src/lib/getRoute";
 
 export default defineConfig({
