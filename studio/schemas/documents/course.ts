@@ -29,13 +29,13 @@ export default {
   ],
   fieldsets: [
     {
-      name: "startTidspunkt",
-      title: "Starttidspunkt",
+      name: "dato",
+      title: "Dato",
       options: { columns: 2 }
     },
     {
-      name: "sluttTidspunkt",
-      title: "Sluttidspunkt",
+      name: "tidspunkt",
+      title: "Klokkeslett",
       options: { columns: 2 },
     }
   ],
@@ -63,17 +63,17 @@ export default {
     },
     {
       name: "startDate",
-      title: "Dato",
+      title: "Startdato",
       type: "date",
-      fieldset: "startTidspunkt",
+      fieldset: "dato",
       validation: (Rule: any) => Rule.required(),
     },
     {
       name: "endDate",
-      title: "Dato",
+      title: "Sluttdato",
       type: "date",
-      fieldset: "sluttTidspunkt",
-      validation: (Rule: any) => Rule.custom((endDate: string, context: { document: Course}) => {
+      fieldset: "dato",
+      validation: (Rule: any) => Rule.custom((endDate: string, context: { document: Course }) => {
         const startDate = context.document.startDate;
         if (!endDate || !startDate) {
           return true; // Validation is considered successful if either date is not set
@@ -83,9 +83,9 @@ export default {
     },
     {
       name: "startTime",
-      title: "Klokkeslett",
+      title: "Starttid",
       type: "string",
-      fieldset: "startTidspunkt",
+      fieldset: "tidspunkt",
       validation: (Rule: any) => Rule.required().custom((startTime: string) => {
         const isValidTimeFormat = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(startTime);
         return isValidTimeFormat || 'Starttid må være i formatet HH:MM';
@@ -93,8 +93,8 @@ export default {
     },
     {
       name: "endTime",
-      title: "Klokkeslett",
-      fieldset: "sluttTidspunkt",
+      title: "Sluttid",
+      fieldset: "tidspunkt",
       type: "string",
       validation: (Rule: any) => Rule.custom((endTime: string, context: { document: Course }) => {
         const { startDate, startTime, endDate } = context.document;
