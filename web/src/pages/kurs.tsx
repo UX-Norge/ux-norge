@@ -127,7 +127,7 @@ export const query = graphql`
     sanityPage(_id: { eq: "coursePage" }) {
       ...Page
     }
-    allSanityCourse(sort: { startDate : DESC }) {
+    allSanityCourse(sort: [{ startDate : ASC }, { startTime : ASC }]) {
       edges {
         node {
           ...CourseThumbnail
