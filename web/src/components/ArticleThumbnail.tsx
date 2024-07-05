@@ -39,14 +39,14 @@ export const ArticleThumbnail: React.FC<IProps> = ({
       { isSponsoredContent ?
         <div
           className={classNames(
-            "bg-primary-100 inline-block lg:rounded-br-lg p-16 rounded-br-lg",
+            "bg-primary-100 inline-block lg:rounded-br-lg pb-4 pe-12 rounded-br-lg",
             {
               "absolute z-10":
                 mainImage,
             }
           )}
           >
-            <p className="text-h3 font-bold text-primary-700">
+            <p className="text-sm font-bold text-primary-700">
               Annonseinnhold
             </p>
         </div> :
