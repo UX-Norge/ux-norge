@@ -24,6 +24,7 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
   let courses = cleanGraphqlArray(data.allSanityCourse) as Course[];
   const [ selectedLocations, setSelectedLocations ] = React.useState<string[]>([ALL_STRING]);
   const [filteredCoursesByMonth, setFilteredCoursesByMonth] = React.useState<{[key: string]: Course[]}>({});
+  const [filteredResult, setFilteredResult] = React.useState<Course[]>([])
   courses = courses.filter((course) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -48,6 +49,7 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
         }
       })
     }
+    setFilteredResult(filteredCourses);
     /* lag en datastruktur med kurs etter hvilken måned startDate er i */
     const coursesByMonth = filteredCourses.reduce((acc: any, course: Course) => {
       const month: number = new Date(course.startDate).getMonth();
@@ -103,7 +105,7 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
           setSelected={setSelectedLocations}
         />
       </div>
-      {Object.keys(filteredCoursesByMonth)
+      {/* {Object.keys(filteredCoursesByMonth)
        .sort((a, b) => parseInt(a) - parseInt(b))
        .map((month) => (
         <div key={month} className="last:pb-80">
@@ -117,7 +119,13 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
             </div>
           </section>
         </div>
-      ))}
+      ))} */}
+      <section className="mx-auto max-w-page grid gap-24 items-stretch sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-24 py-24 last:pb-80">
+        {courses.length === 0 && <BlockContent blocks={emptyState} />}
+          {filteredResult.map((course: Course) => (
+            <CourseThumbnail key={course.slug.current} course={course} />
+          ))}
+      </section>
     </PageWrapper>
   );
 };
