@@ -1,16 +1,18 @@
-import { Author } from "../schemaTypes";
-import { PortableText, SanitySlug } from "../../../../types/sanityTypes";
+import { PortableText, SanitySlug } from "../../../types/sanityTypes";
+import { AdLocation, Author } from "../schemaTypes";
 
 export type Course = {
   _id: string;
   title: string;
   description: string;
-  date: string;
+  startDate: string;
   startTime: string;
+  endDate: string;
   endTime: string;
   price: string;
-  location: string;
-  courseHolder: Author;
+  venue: string;
+  location: AdLocation;
+  courseHolders: Author[];
   signUpLink: string;
   slug: SanitySlug;
   body: PortableText;
@@ -24,6 +26,18 @@ export default {
       name: "metadata",
       title: "Metadata",
     },
+  ],
+  fieldsets: [
+    {
+      name: "dato",
+      title: "Dato",
+      options: { columns: 2 }
+    },
+    {
+      name: "tidspunkt",
+      title: "Klokkeslett",
+      options: { columns: 2 },
+    }
   ],
   fields: [
     {
@@ -48,19 +62,57 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "date",
-      title: "Dato",
+      name: "startDate",
+      title: "Startdato",
       type: "date",
+      fieldset: "dato",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "endDate",
+      title: "Sluttdato",
+      type: "date",
+      fieldset: "dato",
+      validation: (Rule: any) => Rule.custom((endDate: string, context: { document: Course }) => {
+        const startDate = context.document.startDate;
+        if (!endDate || !startDate) {
+          return true; // Validation is considered successful if either date is not set
+        }
+        return startDate <= endDate ? true : 'Sluttdato må være etter startdato';
+      }).required(),
     },
     {
       name: "startTime",
-      title: "StartTid",
+      title: "Starttid",
       type: "string",
+      fieldset: "tidspunkt",
+      validation: (Rule: any) => Rule.required().custom((startTime: string) => {
+        const isValidTimeFormat = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(startTime);
+        return isValidTimeFormat || 'Starttid må være i formatet HH:MM';
+      })
     },
     {
       name: "endTime",
-      title: "StartTid",
+      title: "Sluttid",
+      fieldset: "tidspunkt",
       type: "string",
+      validation: (Rule: any) => Rule.custom((endTime: string, context: { document: Course }) => {
+        const { startDate, startTime, endDate } = context.document;
+        if (!endTime || !startTime) {
+          return true; // Validation is considered successful if either time is not set
+        }
+        const isValidTimeFormat = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(endTime);
+        if (!isValidTimeFormat) {
+          return 'Sluttid må være i formatet HH:MM';
+        }
+        if (startDate === endDate) {
+          // If dates are the same, compare times
+          const start = new Date(`1970/01/01 ${startTime}`);
+          const end = new Date(`1970/01/01 ${endTime}`);
+          return start < end ? true : 'Sluttid må være etter starttid';
+        }
+        return true;
+      }),
     },
     {
       name: "price",
@@ -69,14 +121,20 @@ export default {
     },
     {
       name: "location",
+      type: "reference",
       title: "Sted",
+      to: [{ type: "adLocation" }]
+    },
+    {
+      name: "venue",
+      title: "Venue",
       type: "string",
     },
     {
-      name: "courseHolder",
-      title: "Kursholder",
-      type: "reference",
-      to: [{ type: "author" }],
+      name: "courseHolders",
+      title: "Kursholdere",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "author" }] }],
     },
     {
       name: "signUpLink",

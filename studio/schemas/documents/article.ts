@@ -17,6 +17,7 @@ export interface Article extends SanityDocument {
   metaTitle?: string;
   company: Company;
   publishedAt: string;
+  updatedAt: string;
   body: PortableText;
   slug: SanitySlug;
   relatedArticles?: Article[];
@@ -88,6 +89,12 @@ export default {
       type: "datetime",
       group: "metadata",
       validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "updatedAt",
+      title: "Sist oppdatert",
+      type: "datetime",
+      group: "metadata"
     },
     {
       name: "slug",
