@@ -4,14 +4,17 @@ import { schemaTypes } from "./schemas/schema";
 import { uxNorgeTheme } from "./theme";
 import structure from "./structure";
 import {
-  scheduledPublishing,
-  ScheduleAction,
-} from "@sanity/scheduled-publishing";
+  ScheduleAction
+} from "sanity";
+
 import { getRoute } from "../web/src/lib/getRoute";
 
 export default defineConfig({
   name: "default",
-  title: process.env.SANITY_STUDIO_DATASET === 'production' ? "UX Norge" : 'UX Norge kopi av databasen',
+  scheduledPublishing: {
+    enabled: true,
+  },
+  title: process.env.SANITY_STUDIO_DATASET === 'staging' ? "UX Norge" : 'UX Norge kopi av databasen',
 
   projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
   dataset: process.env.SANITY_STUDIO_DATASET!,
@@ -33,7 +36,6 @@ export default defineConfig({
     deskTool({
       structure,
     }),
-    scheduledPublishing(),
   ],
 
   theme: uxNorgeTheme,

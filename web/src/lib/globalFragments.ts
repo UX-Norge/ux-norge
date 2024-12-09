@@ -31,12 +31,16 @@ export const query = graphql`
       current
     }
     description
-    location
-    date
+    venue
+    location {
+      name
+    }
+    startDate
+    endDate
     startTime
     endTime
     price
-    courseHolder {
+    courseHolders {
       name
     }
   }

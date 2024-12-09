@@ -22,7 +22,7 @@ export const NominateSection: React.FC<NominateSectionProps> = ({
   text,
 }) => {
   if (!title || !text) return null;
-  if (category._id !== UKENS_DESIGNER_CATEGORY_ID) return null;
+  if (category?._id !== UKENS_DESIGNER_CATEGORY_ID) return null;
   return (
     <div>
       <Heading4>{title}</Heading4>

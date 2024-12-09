@@ -52,7 +52,9 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         <ArticleBody
           category={article.category}
           body={article.body}
+          company={article.company}
           publishedAt={article.publishedAt}
+          updatedAt={article.updatedAt}
           articleListAds={articleListAds}
           articleBannerAds={articleBannerAds}
           isReadersLetter={article.isReadersLetter}
@@ -64,6 +66,7 @@ const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         <ArticleFooter
           relatedArticles={relatedArticles}
           authors={article.authors}
+          isSponsoredContent={article.isSponsoredContent}
         />
       </PageWrapper>
     </article>
@@ -82,6 +85,7 @@ export const query = graphql`
       title
       description
       publishedAt
+      updatedAt
       metaTitle
       company { 
         name

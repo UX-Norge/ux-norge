@@ -45,6 +45,7 @@ export const FilterRow: React.FC<IProps> = ({
         {options.map((option) => (
           <ToggleButton
             name={option}
+            key={option}
             toggle={toggle}
             active={selected.includes(option)}
           />
