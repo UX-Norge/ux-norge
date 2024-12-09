@@ -30,6 +30,23 @@ const ArrowLeftIcon: React.FC = () => (
       />
   </svg>
 );
+const Arrow: React.FC = () => (
+  <svg
+    width="18"
+    height="16"
+    viewBox="0 0 18 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M9.16667 1L15 7M15 7L9.16667 13M15 7L1 7"
+      stroke="#7061EA"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
 
 export const CoverPage: React.FC<IProps> = ({
   articles,
@@ -142,6 +159,18 @@ export const CoverPage: React.FC<IProps> = ({
         <FourColumn />
         <BannerAd {...get(1, bannerAds)[0]} onHomepage />
         <TwoColumnFourColumn />
+        <div className="px-24 py-64 text-right">
+          <div className="mx-auto w-full max-w-page ">
+            <Link
+              path="arkiv"
+              type="page"
+              className="ml-auto flex items-center gap-8 justify-end text-right text-primary-500 hover:underline"
+            >
+                Flere saker
+                <Arrow />
+            </Link>
+          </div>
+        </div>
       </main>
     </PageWrapper>
   );
