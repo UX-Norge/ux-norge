@@ -22,7 +22,7 @@ export const ArticleQuote: React.FC<IProps> = ({ children }) => {
           fill="var(--color-primary-100)"
         />
       </svg>
-      <blockquote className="not-prose relative z-10 text-h2 text-primary-500">
+      <blockquote className="not-prose relative z-10 text-h3 text-primary-500">
         {children}
       </blockquote>
     </div>
