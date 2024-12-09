@@ -89,7 +89,7 @@ const articleOverline = (isSponsoredContent: boolean | undefined, category: any
     return <Overline>Annonsørinnhold</Overline> 
   } else {
     if (category) {
-      return <Link path={category.slug?.current} type="category">
+      return <Link path={category.slug?.current} type="category" className="underline decoration-dotted">
               <Overline>{category.name}</Overline>
             </Link>
     }
@@ -108,7 +108,7 @@ const articleLinks = (authors: Author[]) => {
     return <> 
         {authors.map((author, index) => 
           <>
-            <Link path={author.slug.current} type="author">{author.name}</Link>
+            <Link path={author.slug.current} type="author" className="underline decoration-dotted">{author.name}</Link>
             { index === authors.length -1 ? '' : ', '}
           </>
         )} • {authors[0].company?.name} </>;
@@ -118,7 +118,7 @@ const articleLinks = (authors: Author[]) => {
   if (everyAuthorIsFromUxNorge) {
     return authors.map((author, index) => 
       <>
-        <Link path={author.slug.current} type="author">{author.name}</Link>
+        <Link path={author.slug.current} type="author" className="underline decoration-dotted">{author.name}</Link>
         { index === authors.length -1 ? '' : ', '}
       </>
     )
@@ -128,7 +128,7 @@ const articleLinks = (authors: Author[]) => {
     <>
       {authors.map((author, index) => 
         <>
-          <Link path={author.slug.current} type="author">{author.name}</Link>
+          <Link path={author.slug.current} type="author" className="underline decoration-dotted">{author.name}</Link>
           { !!author.company ? ' • ' + author.company?.name : ''}
           { index === authors.length -1 ? '' : ', '}
         </>
