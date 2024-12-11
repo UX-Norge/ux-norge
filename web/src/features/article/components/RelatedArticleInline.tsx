@@ -19,12 +19,16 @@ export const RelatedArticleInline: React.FC<IProps> = ({
       className="not-prose grid items-center gap-24 rounded-sm bg-primary-100 p-8 decoration-transparent md:grid-cols-2 md:pr-24"
     >
       {mainImage && (
-        <Image
-          image={mainImage.image}
-          alt={title}
-          width={400}
-          className="m-0 block h-full rounded-sm object-cover p-0"
-        />
+        <div
+          className="h-128 aspect-w-3 aspect-h-2"
+        >
+          <Image
+            image={mainImage.image}
+            alt={title}
+            width={400}
+            className="m-0 block rounded-sm object-cover p-0"
+          />
+        </div>
       )}
       <div className="text-gray-900">
         <Overline>{category.name}</Overline>
