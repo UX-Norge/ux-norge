@@ -54,6 +54,7 @@ export const Nav: React.FC<NavProps> = ({ hideSearch }) => {
       <NavItem name="Nettverk" path="nettverk" type="page" />
       <NavItem name="Kurs" path="kurs" type="page" />
       <NavItem name="Jobb" path="jobb" type="page" />
+      <NavItem name="Nettbutikk" path="https://nettbutikk.uxnorge.no/" type="external" />
     </>
   );
 
