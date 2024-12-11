@@ -27,5 +27,12 @@ export default (S: StructureBuilder) =>
                 .documentId("coursePage")
                 .title("Kurs")
             ),
+          S.listItem()
+            .title("Dokumenter")
+            .icon(FiFile)
+            .child(
+              S.documentTypeList("doc")
+              .title("Dokumenter")
+            )
         ])
     );

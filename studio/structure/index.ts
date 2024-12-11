@@ -4,7 +4,6 @@ import article from "./article";
 import company from "./company";
 import course from "./course";
 import cover from "./cover";
-import dokumenter from "./dokumenter";
 import newsletter from "./newsletter";
 import page from "./page";
 import siteSettings from "./siteSettings";
@@ -19,7 +18,6 @@ export default (S: StructureBuilder) =>
       page(S),
       newsletter(S),
       ad(S),
-      dokumenter(S),
       company(S),
       course(S),
     ]);
