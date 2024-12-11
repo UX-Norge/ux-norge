@@ -50,18 +50,14 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "description",
-      title: "Ingress",
-      type: "text",
-      description: "Vises i thumbnails på forsiden og i toppen av artikler",
-      validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: "body",
-      title: "Brødtekst",
-      description:
-        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
-      type: "articleContent",
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "title",
+        maxLength: 96,
+      },
+      group: "metadata",
       validation: (Rule: any) => Rule.required(),
     },
     {
@@ -75,6 +71,21 @@ export default {
       type: "string",
       group: "metadata",
       description: "Egen tittel når artikkelen blir delt i SoMe og Google",
+    },
+    {
+      name: "description",
+      title: "Ingress",
+      type: "text",
+      description: "Vises i thumbnails på forsiden og i toppen av artikler",
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: "body",
+      title: "Brødtekst",
+      description:
+        'Bruk "overskrift" som standard, hvis man trenger flere nivåer, kan man spe på med "underoverskrift"',
+      type: "articleContent",
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "authors",
@@ -95,17 +106,6 @@ export default {
       title: "Sist oppdatert",
       type: "datetime",
       group: "metadata"
-    },
-    {
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: {
-        source: "title",
-        maxLength: 96,
-      },
-      group: "metadata",
-      validation: (Rule: any) => Rule.required(),
     },
     {
       name: "relatedArticles",
