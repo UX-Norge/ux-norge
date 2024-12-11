@@ -131,7 +131,7 @@ export const ArticleBody: React.FC<
         <div className="block space-y-4 border-2 border-primary-500 py-16 px-16 rounded-sm">
           <Heading3>Tips oss</Heading3>
           <p className="py-16">
-            Har du tips eller leserinnlegg?<br />
+            Har du tips, pressemelding eller leserinnlegg?<br />
             Send en e-post til:
           </p>
           <Button href="mailto:tips@uxnorge.no">tips@uxnorge.no</Button>
