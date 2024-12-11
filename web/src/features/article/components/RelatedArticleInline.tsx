@@ -23,7 +23,7 @@ export const RelatedArticleInline: React.FC<IProps> = ({
           image={mainImage.image}
           alt={title}
           width={400}
-          className="m-0 block h-full rounded-sm object-cover p-0"
+          className="m-0 block rounded-sm object-cover p-0"
         />
       )}
       <div className="text-gray-900">
