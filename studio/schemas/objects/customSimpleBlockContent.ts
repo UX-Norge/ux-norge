@@ -1,7 +1,7 @@
 import CustomSimpleBlockContentInput from '../../components/inputs/customSimpleBlockContentInput';
 
 export default {
-  title: 'Tekst sdf sd',
+  title: 'Tekst',
   name: 'customSimpleBlockContent',
   type: 'array',
   components: {
