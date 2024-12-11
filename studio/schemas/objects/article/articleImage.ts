@@ -30,7 +30,7 @@ export default {
     {
       name: "caption",
       title: "Bildetekst",
-      type: "simpleBlockContent",
+      type: "customSimpleBlockContent",
     },
   ],
   preview: {
