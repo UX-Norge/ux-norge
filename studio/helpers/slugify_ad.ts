@@ -4,7 +4,7 @@ import slugify from 'slugify'
 /* hvis "stilling-ledig" finnes fra før, blir ny slug "stilling-ledig-2" osv*/ 
 
 export async function slugify_ad(input: string, schemaType: any, context: any) {
-  const myslug = slugify(input, { lower: true})
+  const myslug = slugify(input, { lower: true, strict: true})
   const {getClient} = context
   const client = getClient({apiVersion: '2024-01-15'})
   const query = '*[_type=="ad" && slug.current match $slug]{slug}'
