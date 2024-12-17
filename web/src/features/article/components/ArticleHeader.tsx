@@ -36,7 +36,7 @@ export const ArticleHeader: React.FC<
       >
         <div className="relative flex h-full items-center">
           <div className="relative z-10">
-            { articleOverline(isSponsoredContent, category) }
+            <Overline>{ articleOverline(isSponsoredContent, category) }</Overline>
             
 
             <h1 className="text-h2 font-bold md:text-h1 hyphens-auto">{title}</h1>
@@ -86,11 +86,11 @@ export const ArticleHeader: React.FC<
 
 const articleOverline = (isSponsoredContent: boolean | undefined, category: any) => {
   if (isSponsoredContent) {
-    return <Overline>Annonsørinnhold</Overline> 
+    return 'Annonsørinnhold'
   } else {
     if (category) {
-      return <Link path={category.slug?.current} type="category" className="underline decoration-dotted">
-              <Overline>{category.name}</Overline>
+      return <Link path={category.slug?.current} type="category" className="underline decoration-dashed">
+              {category.name}
             </Link>
     }
   }
@@ -109,7 +109,7 @@ const articleLinks = (authors: Author[]) => {
       <>
         {authors.map((author, index) => (
           <span key={author._id || `author-${index}`}>
-            <Link path={author.slug.current} type="author" className="underline decoration-dotted">{author.name}</Link>
+            <Link path={author.slug.current} type="author" className="underline decoration-dashed">{author.name}</Link>
             {index === authors.length - 1 ? '' : ', '}
           </span>
         ))}
@@ -121,7 +121,7 @@ const articleLinks = (authors: Author[]) => {
   if (everyAuthorIsFromUxNorge) {
     return authors.map((author, index) => (
       <span key={author._id || `author-${index}`}>
-        <Link path={author.slug.current} type="author" className="underline decoration-dotted">{author.name}</Link>
+        <Link path={author.slug.current} type="author" className="underline decoration-dashed">{author.name}</Link>
         {index === authors.length - 1 ? '' : ', '}
       </span>
     ));
@@ -129,9 +129,10 @@ const articleLinks = (authors: Author[]) => {
 
   return authors.map((author, index) => (
     <span key={author._id || `author-${index}`}>
-      <Link path={author.slug.current} type="author" className="underline decoration-dotted">{author.name}</Link>
+      <Link path={author.slug.current} type="author" className="underline decoration-dashed">{author.name}</Link>
       {!!author.company ? ' • ' + author.company?.name : ''}
       {index === authors.length - 1 ? '' : ', '}
     </span>
   ));
 };
+
