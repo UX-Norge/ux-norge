@@ -154,6 +154,12 @@ export default {
       components: {
         input: ShowAdDuration,
       },
+      validation: (Rule: any) => Rule.custom((duration:any, context:any) => {
+        if (!(context.document.startDate && context.document.packageType)) {
+          return 'Sluttdato og Pakketype må velges'
+        }  
+        return true
+      })
     },
     {
       name: "packageType",
