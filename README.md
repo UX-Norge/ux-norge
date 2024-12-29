@@ -58,3 +58,28 @@ WEBHOOK_SECRET = <Sendes på Slack>
 SLACK_TOKEN = <Sendes på Slack>
 SLACK_ADS_CHANNEL_ID = C03GL204KC3
 ```
+
+## Bidragsytere ✨
+
+Takk til alle som bidrar ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/tonenordbo"><img src="https://avatars.githubusercontent.com/u/21240822?v=4?s=100" width="100px;" alt="tonenordbo"/><br /><sub><b>tonenordbo</b></sub></a><br /><a href="#ideas-tonenordbo" title="Ideas, Planning, & Feedback">🤔</a> <a href="#blog-tonenordbo" title="Blogposts">📝</a> <a href="#content-tonenordbo" title="Content">🖋</a> <a href="https://github.com/UX-Norge/ux-norge/issues?q=author%3Atonenordbo" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/TobWul"><img src="https://avatars.githubusercontent.com/u/22070120?v=4?s=100" width="100px;" alt="Tobias Wulvik"/><br /><sub><b>Tobias Wulvik</b></sub></a><br /><a href="https://github.com/UX-Norge/ux-norge/commits?author=TobWul" title="Code">💻</a> <a href="https://github.com/UX-Norge/ux-norge/commits?author=TobWul" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/aswinnalliah"><img src="https://avatars.githubusercontent.com/u/42807783?v=4?s=100" width="100px;" alt="aswinnalliah"/><br /><sub><b>aswinnalliah</b></sub></a><br /><a href="https://github.com/UX-Norge/ux-norge/commits?author=aswinnalliah" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://itbegins.no/blog"><img src="https://avatars.githubusercontent.com/u/6494049?v=4?s=100" width="100px;" alt="Simon Jespersen"/><br /><sub><b>Simon Jespersen</b></sub></a><br /><a href="https://github.com/UX-Norge/ux-norge/commits?author=simjes" title="Code">💻</a> <a href="https://github.com/UX-Norge/ux-norge/commits?author=simjes" title="Tests">⚠️</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Prosjektet bruker [all-contributors](https://github.com/all-contributors/all-contributors) spesifikasjonen. Tusen takk til alle som bidrar!
