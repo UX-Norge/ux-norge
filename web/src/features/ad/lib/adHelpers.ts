@@ -12,7 +12,7 @@ export const validAdFilter = (ad: Ad) =>
     : false;
 
 export const activeFilter = (ad: Ad) =>
-  !hasExpired(ad.startDate, ad.packageType?.duration, ad.deadline);
+  !hasExpired(ad.startDate, ad.packageType?.duration, ad.deadline, ad.title);
 
 export const divideListAndBannerAds = (ads: Ad[]) => {
   return {
@@ -42,7 +42,8 @@ const addDays = (date: Date, days: number) => {
 export const hasExpired = (
   startDate: string,
   duration: number,
-  deadline: string
+  deadline: string,
+  title: string
 ) => {
   let expired = false;
   if (!startDate || !duration) return false;
