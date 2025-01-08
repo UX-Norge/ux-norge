@@ -13,6 +13,12 @@ interface DataProps {
   sanityAd: Ad;
 }
 
+export const getExpiryDate = (startDateString: string, duration: number): Date => {
+  const endDate = new Date(startDateString);
+  endDate.setDate(endDate.getDate() + duration);
+  return endDate; 
+}
+
 const adSerializers = {
   types: { articleImage: ArticleImage, youtube: Youtube },
 };
@@ -26,7 +32,10 @@ export const AdPage: React.FC<PageProps<DataProps>> = ({
       <Seo
         title={sanityAd.title}
         description={sanityAd.description}
-        location={location}
+        adLocationString={sanityAd.location.map(({ name }) => name).join(", ")}
+        type="job-ad"
+        company={sanityAd.advertiser}
+        adExpiryDate={getExpiryDate(sanityAd.startDate, sanityAd.packageType?.duration)}
       />
       <main className="mx-auto max-w-page pb-128">
         <AdPageHeader {...sanityAd} />
@@ -56,6 +65,7 @@ export const query = graphql`
       contactName
       contactPhone
       contactEmail
+      startDate
       image {
         ...ImageWithPreview
       }
