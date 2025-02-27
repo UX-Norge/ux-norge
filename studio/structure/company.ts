@@ -1,4 +1,4 @@
-import { StructureBuilder } from "sanity/desk";
+import { StructureBuilder } from 'sanity/structure';
 import { FiBriefcase, FiFileText } from "react-icons/fi";
 
 export default (S: StructureBuilder) =>
