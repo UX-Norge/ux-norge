@@ -6,22 +6,22 @@ export interface Category extends SanityDocument {
 }
 
 export default {
-  name: "category",
-  title: "Category",
-  type: "document",
+  name: 'category',
+  title: 'Category',
+  type: 'document',
   fields: [
     {
-      name: "name",
-      title: "Navn",
-      type: "string",
+      name: 'name',
+      title: 'Navn*',
+      type: 'string',
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "slug",
-      title: "Slug",
-      type: "slug",
+      name: 'slug',
+      title: 'Slug*',
+      type: 'slug',
       options: {
-        source: "name",
+        source: 'name',
       },
       validation: (Rule: any) => Rule.required(),
     },
