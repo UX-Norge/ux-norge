@@ -7,34 +7,34 @@ export interface Company extends SanityDocument {
   isPartner?: boolean;
 }
 export default {
-  name: "company",
-  title: "Company",
-  type: "document",
+  name: 'company',
+  title: 'Company',
+  type: 'document',
   fields: [
     {
-      name: "name",
-      title: "Navn",
-      type: "string",
+      name: 'name',
+      title: 'Navn*',
+      type: 'string',
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "logo",
-      title: "Logo",
-      type: "image",
-      description: "Helst .svg",
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+      description: 'Helst .svg',
     },
     {
-      name: "isPartner",
-      title: "Er støttespiller",
-      type: "boolean",
+      name: 'isPartner',
+      title: 'Er støttespiller',
+      type: 'boolean',
     },
     {
-      name: "code",
-      title: "Firmakode",
-      type: "string",
+      name: 'code',
+      title: 'Firmakode',
+      type: 'string',
       components: {
-        input: PasswordGenerator
-      }
+        input: PasswordGenerator,
+      },
     },
   ],
   initialValue: {
@@ -42,15 +42,15 @@ export default {
   },
   preview: {
     select: {
-      name: "name",
-      media: "logo",
-      isPartner: "isPartner",
+      name: 'name',
+      media: 'logo',
+      isPartner: 'isPartner',
     },
     prepare({ name, media, isPartner }: any) {
       return {
         title: name,
         media,
-        subtitle: isPartner ? "Støttespiller" : "",
+        subtitle: isPartner ? 'Støttespiller' : '',
       };
     },
   },
