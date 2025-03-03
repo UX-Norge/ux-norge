@@ -17,10 +17,22 @@ interface DataProps {
   discussInSlack: { title: string; text: PortableText };
 }
 
-function mergeArticleLists(list1: Article[], list2: Article[]) :Article[] {
-  // Må merge de to queryene her i javascript
-  // Gatsby støtter ikke or-operator i graphql
-  return list1.concat(list2).sort((a,b) => a.publishedAt < b.publishedAt ? 1 : -1).slice(0,4);
+function mergeArticleLists(list1: Article[], list2: Article[]): Article[] {
+  const uniqueIds = new Set();
+  const uniqueArticles = [...list1, ...list2]
+    .filter(article => {
+      if (!article.slug?.current || !article.title) {
+        return false;
+      }
+      if (uniqueIds.has(article._id)) {
+        return false;
+      }
+      uniqueIds.add(article._id);
+      return true;
+    })
+    .sort((a, b) => a.publishedAt < b.publishedAt ? 1 : -1)
+    .slice(0, 3);
+  return uniqueArticles;
 }
 
 const ArticlePage: React.FC<PageProps<DataProps>> = ({ data, location }) => {
