@@ -25,9 +25,9 @@ export const ArticleFooter: React.FC<IProps> = ({
           ))
         }
         </div>
-        <div className="space-y-32">
+        <div className="grid gap-48 md:grid-cols-3">
           {relatedArticles.map((article) => (
-            <ArticleThumbnail type="list" article={article} key={article._id} />
+            <ArticleThumbnail type="small" article={article} key={article._id} />
           ))}
         </div>
       </div>
