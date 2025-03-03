@@ -226,7 +226,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       });
     });
 
-  data.ads.filter(validAdFilter).forEach((ad) => {
+  data.ads.filter(validAdFilter).filter(activeFilter).forEach((ad) => {
     createPage("Ad", {
       path: getRoute("ad", ad.slug.current),
       component: path.resolve(`./src/templates/ad.tsx`),
@@ -234,7 +234,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       context: {
         adSlug: ad.slug.current,
       },
-      defer: !activeFilter(ad),
+      // defer: !activeFilter(ad),
     });
   });
 
