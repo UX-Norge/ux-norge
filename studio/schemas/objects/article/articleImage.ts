@@ -8,36 +8,36 @@ export interface ArticleImage {
 }
 
 export default {
-  name: "articleImage",
-  type: "object",
-  title: "Article Image",
+  name: 'articleImage',
+  type: 'object',
+  title: 'Article Image',
   fields: [
     {
-      name: "image",
-      type: "image",
-      title: "Bilde",
+      name: 'image',
+      type: 'image',
+      title: 'Bilde*',
       options: {
         hotspot: true,
       },
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "alt",
-      type: "string",
-      title: "Alt-tekst",
+      name: 'alt',
+      type: 'string',
+      title: 'Alt-tekst*',
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "caption",
-      title: "Bildetekst",
-      type: "customSimpleBlockContent",
+      name: 'caption',
+      title: 'Bildetekst',
+      type: 'customSimpleBlockContent',
     },
   ],
   preview: {
     //component: ArticleImageRenderer,
     select: {
       title: 'alt',
-      media: 'image'
-    }
+      media: 'image',
+    },
   },
 };

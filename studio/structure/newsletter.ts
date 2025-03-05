@@ -1,4 +1,4 @@
-import { StructureBuilder } from "sanity/desk";
+import { StructureBuilder } from 'sanity/structure';
 import { FiMail } from "react-icons/fi";
 
 export default (S: StructureBuilder) =>
