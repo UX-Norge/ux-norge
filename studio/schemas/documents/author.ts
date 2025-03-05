@@ -16,54 +16,54 @@ export interface Author extends SanityDocument {
 }
 
 export default {
-  name: "author",
-  title: "Author",
-  type: "document",
+  name: 'author',
+  title: 'Author',
+  type: 'document',
   fields: [
     {
-      name: "name",
-      title: "Fullt navn",
-      type: "string",
+      name: 'name',
+      title: 'Fullt navn*',
+      type: 'string',
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "slug",
-      title: "Slug",
-      type: "slug",
+      name: 'slug',
+      title: 'Slug*',
+      type: 'slug',
       options: {
-        source: "name",
+        source: 'name',
         maxLength: 96,
       },
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: "company",
-      title: "company",
-      type: "reference",
-      to: [{ type: "company" }],
+      name: 'company',
+      title: 'company',
+      type: 'reference',
+      to: [{ type: 'company' }],
     },
     {
-      name: "email",
-      title: "E-post",
-      type: "string",
+      name: 'email',
+      title: 'E-post',
+      type: 'string',
     },
     {
-      name: "image",
-      title: "Portrett",
-      type: "image",
+      name: 'image',
+      title: 'Portrett',
+      type: 'image',
       options: {
         hotspot: true,
       },
     },
     {
-      name: "bio",
-      title: "Bio",
-      type: "array",
+      name: 'bio',
+      title: 'Bio',
+      type: 'array',
       of: [
         {
-          title: "Block",
-          type: "block",
-          styles: [{ title: "Normal", value: "normal" }],
+          title: 'Block',
+          type: 'block',
+          styles: [{ title: 'Normal', value: 'normal' }],
           lists: [],
         },
       ],
@@ -71,8 +71,8 @@ export default {
   ],
   preview: {
     select: {
-      title: "name",
-      media: "image",
+      title: 'name',
+      media: 'image',
     },
   },
 };
