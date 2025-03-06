@@ -29,6 +29,12 @@ type SanityData = {
 
 const printDivider = () => console.log("\n------------\n");
 
+const courseHasNotEnded = (course: Course) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today <= new Date(course.endDate);
+};
+
 export const createPages: GatsbyNode["createPages"] = async ({
   graphql,
   actions,
@@ -123,6 +129,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
               slug {
                 current
               }
+              endDate
             }
           }
         }
@@ -226,16 +233,19 @@ export const createPages: GatsbyNode["createPages"] = async ({
       });
     });
 
-  data.ads.filter(validAdFilter).filter(activeFilter).forEach((ad) => {
-    createPage("Ad", {
-      path: getRoute("ad", ad.slug.current),
-      component: path.resolve(`./src/templates/ad.tsx`),
-      ownerNodeId: ad._id,
-      context: {
-        adSlug: ad.slug.current,
-      },
-      // defer: !activeFilter(ad),
-    });
+  data.ads
+    .filter(validAdFilter)
+    .filter(activeFilter)
+    .forEach((ad) => {
+      createPage("Ad", {
+        path: getRoute("ad", ad.slug.current),
+        component: path.resolve(`./src/templates/ad.tsx`),
+        ownerNodeId: ad._id,
+        context: {
+          adSlug: ad.slug.current,
+        },
+        // defer: !activeFilter(ad),
+      });
   });
 
   data.documents
@@ -252,14 +262,15 @@ export const createPages: GatsbyNode["createPages"] = async ({
     });
 
   data.courses
-    .filter((courses) => courses.slug?.current)
-    .forEach((courses) => {
+    .filter((course) => course.slug?.current)
+    .filter(courseHasNotEnded)
+    .forEach((course) => {
       createPage("Course", {
-        path: getRoute("course", courses.slug.current),
+        path: getRoute("course", course.slug.current),
         component: path.resolve(`./src/templates/course.tsx`),
-        ownerNodeId: courses._id,
+        ownerNodeId: course._id,
         context: {
-          slugSlug: courses.slug.current,
+          slugSlug: course.slug.current,
         },
       });
     });
