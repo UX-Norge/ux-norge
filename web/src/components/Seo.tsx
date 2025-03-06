@@ -10,11 +10,13 @@ interface IProps {
   description?: string;
   image?: SanityImage;
   imageAlt?: string;
-  location: PageProps["location"];
-  type?: "article" | null;
-  company: Company;
+  location?: PageProps["location"];
+  type?: "article" |"job-ad" | null;
+  company?: Company;
   publishDate?: string;
   authors?: Author[];
+  adExpiryDate?: Date;
+  adLocationString?: string;
 }
 
 export const Seo: React.FC<IProps> = ({
@@ -27,6 +29,8 @@ export const Seo: React.FC<IProps> = ({
   company,
   publishDate,
   authors,
+  adExpiryDate,
+  adLocationString
 }) => {
   const { sanitySiteSettings: seo } = useStaticQuery<{
     sanitySiteSettings: SiteSettings;
@@ -40,32 +44,59 @@ export const Seo: React.FC<IProps> = ({
     }
   `);
 
-  let siteJSONLD: any = [
+    
+  let siteJSONLD: string = `
     {
-      "@context": "http://uxnorge.org",
+      "@context": "https://schema.org",
       "@type": "WebSite",
-      url: "https://uxnorge.no/",
-      name: "UX Norge",
-    },
-  ];
-
-  if (type === "article")
-    siteJSONLD = [
-      {
-        "@context": "http://uxnorge.org",
-        "@type": "article",
-        url: "https://uxnorge.no/",
-        name: "UX Norge",
-        author: {
-          "@type": "Person",
-          name: authors[0].name,
-        },
-      },
-      {
+      "publisher": {
         "@type": "Organization",
-        name: company?.name,
-      },
-    ];
+        "name": "UX Norge",
+        "url": "https://uxnorge.no/",
+      }
+    }
+  `;
+
+  let articleJSONLD: any;
+  if (type === "article")
+     articleJSONLD = `
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "title": "${title}",
+        "description": "${description}",
+        "image": "${imageUrl(image?.asset, { width: 1200, height: 630 })}",
+        "author": {
+          "@type": "Person",
+          "name": "${authors?.length ? authors[0].name : ''}"
+        },
+      }
+    `;
+
+    let jobPostJSONLD: any;
+    if (type === "job-ad") {
+      let validThrough = adExpiryDate ? '"validThrough": "' + adExpiryDate.toISOString() + '"' : "";
+      jobPostJSONLD = `
+        {
+          "@context": "https://schema.org",
+          "@type": "JobPosting",
+          "title": "${title}",
+          "description": "${description}",
+          ${validThrough}
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": "${company?.name}",
+          },
+          "jobLocation": {
+            "@type": "Place",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "${adLocationString}",
+            },
+          }
+        }
+      `;
+    }
 
   title = title || seo.title;
   description = description || seo.description;
@@ -76,7 +107,7 @@ export const Seo: React.FC<IProps> = ({
         lang: "no",
       }}
       title={title}
-      titleTemplate={location.pathname === "/" ? "" : seo.titleTemplate}
+      titleTemplate={location?.pathname === "/" ? "" : seo.titleTemplate}
     >
       {title && <meta property="og:title" content={title} />}
       {title && <meta property="twitter:title" content={title} />}
@@ -102,6 +133,19 @@ export const Seo: React.FC<IProps> = ({
 
       {location && <meta property="og:url" content={location.href} />}
       {type === "article" && <meta property="og:type" content="article" />}
+
+      {siteJSONLD && (
+        <script type="application/ld+json">{siteJSONLD}</script>
+      )}
+
+      {articleJSONLD && (
+        <script type="application/ld+json">{articleJSONLD}</script>
+      )}
+
+      {jobPostJSONLD && (
+        <script type="application/ld+json">{jobPostJSONLD}</script>
+      )}
+
     </Helmet>
   );
 };
