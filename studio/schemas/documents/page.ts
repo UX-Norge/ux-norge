@@ -1,4 +1,5 @@
 import { PortableText, Cta } from "@Types";
+import { FiFile } from "react-icons/fi";
 
 export type PageType = {
   title: string;
@@ -32,4 +33,16 @@ export default {
       type: "simpleBlockContent",
     },
   ],
+  preview: {
+    select: {
+      title: "title",
+    },
+    prepare({ title }: any) {
+      return {
+        title: title,
+        subtitle: "Side",
+        media: FiFile,
+      };
+    },
+  },
 };

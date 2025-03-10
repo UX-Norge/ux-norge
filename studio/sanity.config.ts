@@ -27,6 +27,12 @@ interface ActionContext {
   schemaType: SchemaType;
 }
 
+// Define the actions that should be available for singleton documents
+const singletonActions = new Set(["publish", "discardChanges", "restore"])
+
+// Define the singleton document types
+const singletonTypes = new Set(["siteSettings", "newsletterSignupForm", "slackBanner", "discussInSlack", "nominateBanner", "readersLetter", "sponsoredContent", "footer", "partnerBanner", "coverPage", "page"])
+
 export default defineConfig({
   name: 'default',
   scheduledPublishing: {
@@ -50,6 +56,10 @@ export default defineConfig({
         return Promise.resolve('https://preview-uxnorge.netlify.app' + path);
       }
     },
+    actions: (input, context) =>
+      singletonTypes.has(context.schemaType)
+        ? input.filter(({ action }) => action && singletonActions.has(action))
+        : input,
   },
   plugins: [
     structureTool({
@@ -70,5 +80,7 @@ export default defineConfig({
 
       return previousActions;
     },
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
   },
 });
