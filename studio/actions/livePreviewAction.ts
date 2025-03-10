@@ -28,6 +28,12 @@ export function livePreviewAction(props: DocumentActionProps) {
       const isDevelopment = process.env.NODE_ENV === 'development';
       const dataset = process.env.SANITY_STUDIO_DATASET;
       
+      console.log('Current environment:', {
+        NODE_ENV: process.env.NODE_ENV,
+        DATASET: dataset,
+        isDevelopment
+      });
+      
       let baseUrl = 'https://uxnorge.no'; // prod default
       
       if (isDevelopment) {
@@ -36,8 +42,9 @@ export function livePreviewAction(props: DocumentActionProps) {
         baseUrl = 'https://staging-uxnorge.netlify.app';
       }
 
+      console.log('Selected baseUrl:', baseUrl);
       const previewUrl = `${baseUrl}/live-preview?${params.toString()}`;
-      console.log('Opening preview URL:', previewUrl);
+      console.log('Final preview URL:', previewUrl);
       window.open(previewUrl, '_blank');
     },
     disabled: !document?.slug?.current,
