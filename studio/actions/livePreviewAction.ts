@@ -38,7 +38,7 @@ export function livePreviewAction(props: DocumentActionProps) {
       
       if (isDevelopment) {
         baseUrl = 'http://localhost:8000';
-      } else if (dataset === 'staging') {
+      } else if (dataset === 'production-copy') {
         baseUrl = 'https://staging-uxnorge.netlify.app';
       }
 
