@@ -1,7 +1,19 @@
 import { createClient } from '@sanity/client';
 
+// Logg alle tilgjengelige miljøvariabler som inneholder 'SANITY'
+console.log('Available environment variables:', 
+  Object.keys(process.env)
+    .filter(key => key.includes('SANITY'))
+    .reduce((obj, key) => {
+      return {
+        ...obj,
+        [key]: key.includes('TOKEN') ? '***' : process.env[key]
+      };
+    }, {})
+);
+
 const projectId = process.env.SANITY_PROJECT_ID;
-const dataset = process.env.SANITY_DATASET;
+const dataset = process.env.SANITY_DATASET || 'production-copy';
 const token = process.env.SANITY_TOKEN;
 
 console.log('Sanity Config:', {
@@ -11,12 +23,8 @@ console.log('Sanity Config:', {
   tokenStart: token ? token.substring(0, 5) + '...' : 'none'
 });
 
-if (!projectId || !dataset) {
+if (!projectId) {
   throw new Error('Missing Sanity project configuration. Check your environment variables.');
-}
-
-if (!token) {
-  throw new Error('Missing Sanity token. Make sure SANITY_TOKEN is set in your .env.development file.');
 }
 
 export const previewClient = createClient({
@@ -55,6 +63,6 @@ export const getPreviewDocument = async (type: string, slug: string) => {
         hasToken: !!token
       }
     });
-    return null;
+    throw error; // La feilen propagere for bedre feilhåndtering
   }
 }; 
