@@ -1,9 +1,14 @@
 import { createClient } from '@sanity/client';
 
-// Logg alle tilgjengelige miljøvariabler som inneholder 'SANITY'
+// Konstanter for Sanity-konfigurasjon
+const SANITY_PROJECT_ID = '7ygxjqxr';  // Dette er prosjekt-ID-en som brukes i prod
+const SANITY_DATASET = 'production-copy';  // Default dataset for staging/utvikling
+const SANITY_API_VERSION = '2024-03-05';
+
+// Logg alle tilgjengelige miljøvariabler som inneholder 'GATSBY'
 console.log('Available environment variables:', 
   Object.keys(process.env)
-    .filter(key => key.includes('SANITY'))
+    .filter(key => key.includes('GATSBY'))
     .reduce((obj, key) => {
       return {
         ...obj,
@@ -12,9 +17,10 @@ console.log('Available environment variables:',
     }, {})
 );
 
-const projectId = process.env.SANITY_PROJECT_ID;
-const dataset = process.env.SANITY_DATASET || 'production-copy';
-const token = process.env.SANITY_TOKEN;
+// Bruk miljøvariabler hvis tilgjengelig, ellers fall tilbake til defaults
+const projectId = process.env.GATSBY_SANITY_PROJECT_ID || SANITY_PROJECT_ID;
+const dataset = process.env.GATSBY_SANITY_DATASET || SANITY_DATASET;
+const token = process.env.GATSBY_SANITY_TOKEN;
 
 console.log('Sanity Config:', {
   projectId,
@@ -23,14 +29,10 @@ console.log('Sanity Config:', {
   tokenStart: token ? token.substring(0, 5) + '...' : 'none'
 });
 
-if (!projectId) {
-  throw new Error('Missing Sanity project configuration. Check your environment variables.');
-}
-
 export const previewClient = createClient({
   projectId,
   dataset,
-  apiVersion: '2024-03-05',
+  apiVersion: SANITY_API_VERSION,
   useCdn: false,
   perspective: 'previewDrafts',
   token,
@@ -63,6 +65,6 @@ export const getPreviewDocument = async (type: string, slug: string) => {
         hasToken: !!token
       }
     });
-    throw error; // La feilen propagere for bedre feilhåndtering
+    throw error;
   }
 }; 
