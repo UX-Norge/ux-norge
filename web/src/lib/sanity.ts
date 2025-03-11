@@ -34,7 +34,7 @@ console.log('Sanity Config:', {
   apiVersion: SANITY_API_VERSION
 });
 
-export const previewClient = createClient({
+const previewClient = createClient({
   projectId: SANITY_PROJECT_ID,
   dataset: SANITY_DATASET,
   apiVersion: SANITY_API_VERSION,
@@ -44,7 +44,7 @@ export const previewClient = createClient({
   withCredentials: false
 });
 
-export const getPreviewDocument = async (type: string, slug: string) => {
+const getPreviewDocument = async (type: string, slug: string) => {
   const query = `*[_type == $type && slug.current == $slug][0]`;
   const params = { type, slug };
   
@@ -85,4 +85,9 @@ export const getPreviewDocument = async (type: string, slug: string) => {
     
     throw err;
   }
+};
+
+export default {
+  previewClient,
+  getPreviewDocument
 }; 
