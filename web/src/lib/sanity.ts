@@ -1,10 +1,5 @@
 import { createClient } from '@sanity/client';
 
-// Konstanter for Sanity-konfigurasjon
-const SANITY_PROJECT_ID = '7ygxjqxr';  // Dette er prosjekt-ID-en som brukes i prod
-const SANITY_DATASET = 'production-copy';  // Default dataset for staging/utvikling
-const SANITY_API_VERSION = '2024-03-05';
-
 // Logg alle tilgjengelige miljøvariabler som inneholder 'SANITY'
 console.log('Available environment variables:', 
   Object.keys(process.env)
@@ -17,25 +12,35 @@ console.log('Available environment variables:',
     }, {})
 );
 
-// Bruk miljøvariabler hvis tilgjengelig, ellers fall tilbake til defaults
-const projectId = process.env.SANITY_PROJECT_ID || SANITY_PROJECT_ID;
-const dataset = process.env.SANITY_DATASET || SANITY_DATASET;
-const token = process.env.SANITY_TOKEN;
+// Hent nødvendige miljøvariabler
+const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID;
+const SANITY_DATASET = process.env.SANITY_DATASET;
+const SANITY_TOKEN = process.env.SANITY_TOKEN;
+const SANITY_API_VERSION = process.env.SANITY_API_VERSION || '2024-03-05';
+
+// Valider at nødvendige variabler er satt
+if (!SANITY_PROJECT_ID) {
+  throw new Error('SANITY_PROJECT_ID må være satt i miljøvariabler');
+}
+if (!SANITY_DATASET) {
+  throw new Error('SANITY_DATASET må være satt i miljøvariabler');
+}
 
 console.log('Sanity Config:', {
-  projectId,
-  dataset,
-  hasToken: !!token,
-  tokenStart: token ? token.substring(0, 5) + '...' : 'none'
+  projectId: SANITY_PROJECT_ID,
+  dataset: SANITY_DATASET,
+  hasToken: !!SANITY_TOKEN,
+  tokenStart: SANITY_TOKEN ? SANITY_TOKEN.substring(0, 5) + '...' : 'none',
+  apiVersion: SANITY_API_VERSION
 });
 
 export const previewClient = createClient({
-  projectId,
-  dataset,
+  projectId: SANITY_PROJECT_ID,
+  dataset: SANITY_DATASET,
   apiVersion: SANITY_API_VERSION,
   useCdn: false,
   perspective: 'previewDrafts',
-  token,
+  token: SANITY_TOKEN,
   withCredentials: false
 });
 
@@ -45,7 +50,7 @@ export const getPreviewDocument = async (type: string, slug: string) => {
   
   console.log('Executing Sanity query:', { query, params });
   
-  if (!token) {
+  if (!SANITY_TOKEN) {
     console.error('No preview token available. Make sure SANITY_TOKEN is set.');
     throw new Error('Preview token is required for accessing draft content');
   }
@@ -65,9 +70,9 @@ export const getPreviewDocument = async (type: string, slug: string) => {
     console.error('Error fetching preview document:', {
       error: err,
       config: {
-        projectId,
-        dataset,
-        hasToken: !!token
+        projectId: SANITY_PROJECT_ID,
+        dataset: SANITY_DATASET,
+        hasToken: !!SANITY_TOKEN
       }
     });
     
