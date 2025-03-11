@@ -267,3 +267,16 @@ export const createPages: GatsbyNode["createPages"] = async ({
   console.log(`\nCreated ${pageCount} pages `);
   printDivider();
 };
+
+export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ stage, actions }) => {
+  actions.setWebpackConfig({
+    plugins: [
+      new actions.webpack.DefinePlugin({
+        "process.env.SANITY_PROJECT_ID": JSON.stringify(process.env.SANITY_PROJECT_ID),
+        "process.env.SANITY_DATASET": JSON.stringify(process.env.SANITY_DATASET),
+        "process.env.SANITY_TOKEN": JSON.stringify(process.env.SANITY_TOKEN),
+        "process.env.SANITY_API_VERSION": JSON.stringify(process.env.SANITY_API_VERSION),
+      }),
+    ],
+  });
+};

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import sanityClient from '../lib/sanity';
+import { getPreviewDocument } from '../lib/sanity';
 import { ArticleHeader } from '../features/article/components/ArticleHeader';
 import { ArticleBody } from '../features/article/components/ArticleBody';
 import { ArticleFooter } from '../features/article/components/ArticleFooter';
@@ -37,7 +37,7 @@ export default function LivePreviewPage() {
 
       try {
         console.log('Fetching document with params:', params);
-        const doc = await sanityClient.getPreviewDocument(params.type, params.slug);
+        const doc = await getPreviewDocument(params.type, params.slug);
         console.log('Received document:', doc);
         setDocument(doc);
         setError(null);

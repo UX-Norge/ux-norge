@@ -1,5 +1,15 @@
 import { createClient } from '@sanity/client';
 
+// Logg alle miljøvariabler for debugging
+console.log('All environment variables:',
+  Object.keys(process.env).reduce((obj, key) => {
+    return {
+      ...obj,
+      [key]: key.includes('TOKEN') ? '***' : process.env[key]
+    };
+  }, {})
+);
+
 // Logg alle tilgjengelige miljøvariabler som inneholder 'SANITY'
 console.log('Available environment variables:', 
   Object.keys(process.env)
@@ -34,7 +44,7 @@ console.log('Sanity Config:', {
   apiVersion: SANITY_API_VERSION
 });
 
-const previewClient = createClient({
+export const previewClient = createClient({
   projectId: SANITY_PROJECT_ID,
   dataset: SANITY_DATASET,
   apiVersion: SANITY_API_VERSION,
@@ -44,7 +54,7 @@ const previewClient = createClient({
   withCredentials: false
 });
 
-const getPreviewDocument = async (type: string, slug: string) => {
+export const getPreviewDocument = async (type: string, slug: string) => {
   const query = `*[_type == $type && slug.current == $slug][0]`;
   const params = { type, slug };
   
@@ -85,9 +95,4 @@ const getPreviewDocument = async (type: string, slug: string) => {
     
     throw err;
   }
-};
-
-export default {
-  previewClient,
-  getPreviewDocument
 }; 
