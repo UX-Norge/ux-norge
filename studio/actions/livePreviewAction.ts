@@ -38,13 +38,13 @@ export function livePreviewAction(props: DocumentActionProps) {
       
       if (isDevelopment) {
         baseUrl = 'http://localhost:8000';
-      } else if (dataset === 'production-copy') {
+      } else if (dataset === 'staging' || dataset === 'production-copy') {
         baseUrl = 'https://staging-uxnorge.netlify.app';
       }
 
       console.log('Selected baseUrl:', baseUrl);
+
       const previewUrl = `${baseUrl}/live-preview?${params.toString()}`;
-      console.log('Final preview URL:', previewUrl);
       window.open(previewUrl, '_blank');
     },
     disabled: !document?.slug?.current,

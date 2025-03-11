@@ -18,6 +18,14 @@ interface DocumentContext {
   };
 }
 
+interface SchemaType {
+  name: string;
+}
+
+interface ActionContext {
+  schemaType: SchemaType;
+}
+
 export default defineConfig({
   name: 'default',
   scheduledPublishing: {
