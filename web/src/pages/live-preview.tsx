@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { getPreviewDocument } from '../lib/sanity';
 import { ArticleHeader } from '../features/article/components/ArticleHeader';
 import { ArticleBody } from '../features/article/components/ArticleBody';
 import { ArticleFooter } from '../features/article/components/ArticleFooter';
@@ -9,6 +8,34 @@ interface PreviewParams {
   type: string | null;
   slug: string | null;
 }
+
+const getPreviewDocument = async (params: PreviewParams) => {
+  try {
+    const baseUrl = process.env.NODE_ENV === 'development'
+      ? 'http://localhost:8888'
+      : '';
+
+    const response = await fetch(
+      `${baseUrl}/.netlify/functions/getPreviewDocument?type=${params.type}&slug=${params.slug}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching preview:", error);
+    throw error;
+  }
+};
 
 export default function LivePreviewPage() {
   const [params, setParams] = useState<PreviewParams>({ type: null, slug: null });
@@ -37,12 +64,12 @@ export default function LivePreviewPage() {
 
       try {
         console.log('Fetching document with params:', params);
-        const doc = await getPreviewDocument(params.type, params.slug);
+        const doc = await getPreviewDocument(params);
         console.log('Received document:', doc);
         setDocument(doc);
         setError(null);
-      } catch (err) {
-        setError('Kunne ikke hente dokumentet');
+      } catch (err: any) {
+        setError(err.message || 'Kunne ikke hente dokumentet');
         console.error('Error fetching document:', err);
       } finally {
         setLoading(false);

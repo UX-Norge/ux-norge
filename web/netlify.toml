@@ -1,2 +1,31 @@
 [[plugins]]
 package = "@netlify/plugin-gatsby"
+
+[functions]
+directory = "netlify/functions"
+
+[build]
+command = "npm run build"
+publish = "public"
+functions = "netlify/functions"
+
+[dev]
+framework = "gatsby"
+targetPort = 8000
+port = 8888
+command = "npm run develop"
+autoLaunch = true
+publish = "public"
+functions = "netlify/functions"
+envFiles = [".env"]
+
+[context.staging]
+environment = { SANITY_DATASET = "staging" }
+
+[context.production]
+environment = { SANITY_DATASET = "production" }
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
