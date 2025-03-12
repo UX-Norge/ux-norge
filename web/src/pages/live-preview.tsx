@@ -11,7 +11,7 @@ interface PreviewParams {
 
 const getPreviewDocument = async (params: PreviewParams) => {
   try {
-    const baseUrl = process.env.NODE_ENV === 'development'
+    const baseUrl = typeof window !== 'undefined' && window.location.port === '8000'
       ? 'http://localhost:8888'
       : '';
 

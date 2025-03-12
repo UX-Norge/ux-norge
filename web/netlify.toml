@@ -19,12 +19,6 @@ publish = "public"
 functions = "netlify/functions"
 envFiles = [".env"]
 
-[context.staging]
-environment = { SANITY_DATASET = "staging" }
-
-[context.production]
-environment = { SANITY_DATASET = "production" }
-
 [[redirects]]
 from = "/*"
 to = "/index.html"

@@ -8,20 +8,23 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Opprett Sanity-klient kun hvis alle påkrevde miljøvariabler er tilgjengelige
 const createSanityClient = () => {
-  const requiredEnvVars = ['SANITY_PROJECT_ID', 'SANITY_DATASET', 'SANITY_TOKEN'];
-  const missingEnvVars = requiredEnvVars.filter(varName => !process.env[varName]);
-  
-  if (missingEnvVars.length > 0) {
-    throw new Error(`Mangler påkrevde miljøvariabler: ${missingEnvVars.join(', ')}`);
-  }
-
-  return createClient({
+  const config = {
     projectId: process.env.SANITY_PROJECT_ID,
     dataset: process.env.SANITY_DATASET,
     token: process.env.SANITY_TOKEN,
-    apiVersion: process.env.SANITY_API_VERSION || '2024-03-05',
+    apiVersion: '2024-03-05',
     useCdn: false
-  });
+  };
+
+  // Sjekk at vi har de nødvendige verdiene (ikke inkluder useCdn og apiVersion)
+  const requiredKeys = ['projectId', 'dataset', 'token'];
+  const missingKeys = requiredKeys.filter(key => !config[key]);
+
+  if (missingKeys.length > 0) {
+    throw new Error(`Mangler påkrevde miljøvariabler: ${missingKeys.map(key => key.toUpperCase()).join(', ')}`);
+  }
+
+  return createClient(config);
 };
 
 exports.handler = async (event, context) => {
