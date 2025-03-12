@@ -13,7 +13,8 @@ const createSanityClient = () => {
     dataset: process.env.SANITY_DATASET,
     token: process.env.SANITY_TOKEN,
     apiVersion: '2024-03-05',
-    useCdn: false
+    useCdn: false,
+    perspective: 'previewDrafts'
   };
 
   // Sjekk at vi har de nødvendige verdiene (ikke inkluder useCdn og apiVersion)
@@ -72,7 +73,8 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const query = `*[_type == $type && slug.current == $slug][0]`;
+    // Hent både publisert og draft versjon, prioriter draft hvis den finnes
+    const query = `*[_type == $type && slug.current == $slug && (_id in path("drafts.**") || !defined(*[_id == "drafts." + ^._id][0]._id))][0]`;
     const params = { type, slug };
     
     const document = await client.fetch(query, params);
