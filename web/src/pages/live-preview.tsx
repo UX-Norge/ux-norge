@@ -16,11 +16,12 @@ const getPreviewDocument = async (params: PreviewParams) => {
       : '';
 
     const response = await fetch(
-      `${baseUrl}/.netlify/functions/getPreviewDocument?type=${params.type}&slug=${params.slug}`,
+      `${baseUrl}/.netlify/functions/getPreviewDocument?type=${params.type}&slug=${params.slug}&_t=${Date.now()}`,
       {
         headers: {
           'Content-Type': 'application/json',
         },
+        cache: 'no-store'
       }
     );
 
