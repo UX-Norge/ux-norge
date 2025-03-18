@@ -46,9 +46,10 @@ export default defineConfig({
   dataset: process.env.SANITY_STUDIO_DATASET!,
 
   document: {
-    actions: (prev) => {
+    actions: (input, context) => {
       // Legg til live preview for alle dokumenter
-      return [...prev, livePreviewAction];
+      const filteredInput = singletonTypes.has(context.schemaType) ? input.filter(({ action }) => action && singletonActions.has(action)) : input;
+      return [...filteredInput, livePreviewAction];
     },
 
     productionUrl: async (prev: any, context: DocumentContext) => {
@@ -60,10 +61,6 @@ export default defineConfig({
         return Promise.resolve('https://preview-uxnorge.netlify.app' + path);
       }
     },
-    actions: (input, context) =>
-      singletonTypes.has(context.schemaType)
-        ? input.filter(({ action }) => action && singletonActions.has(action))
-        : input,
   },
 
   plugins: [
