@@ -24,25 +24,7 @@ export function livePreviewAction(props: DocumentActionProps) {
         slug: document.slug.current
       });
 
-      // Velg riktig base URL basert på miljø
-      const isDevelopment = process.env.NODE_ENV === 'development';
-      const dataset = process.env.SANITY_STUDIO_DATASET;
-      
-      console.log('Current environment:', {
-        NODE_ENV: process.env.NODE_ENV,
-        DATASET: dataset,
-        isDevelopment
-      });
-      
-      let baseUrl = 'https://uxnorge.no'; // prod default
-      
-      if (isDevelopment) {
-        baseUrl = 'http://localhost:8000';
-      } else if (dataset === 'staging' || dataset === 'production-copy') {
-        baseUrl = 'https://staging-uxnorge.netlify.app';
-      }
-
-      console.log('Selected baseUrl:', baseUrl);
+      const baseUrl = process.env.SANITY_STUDIO_PREVIEW_URL || 'https://uxnorge.no'; // 'http://localhost:8000' || 'https://uxnorge.no' || 'https://staging-uxnorge.netlify.app'
 
       const previewUrl = `${baseUrl}/live-preview?${params.toString()}`;
       window.open(previewUrl, '_blank');
