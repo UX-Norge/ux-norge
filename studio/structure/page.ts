@@ -1,38 +1,14 @@
-import { StructureBuilder } from 'sanity/structure';
-import { FiFile, FiSidebar } from "react-icons/fi";
+import { StructureBuilder } from "sanity/structure";
+import { FiFile } from "react-icons/fi";
 
 export default (S: StructureBuilder) =>
   S.listItem()
     .title("Sider")
-    .icon(FiSidebar)
+    .icon(FiFile)
     .child(
-      S.list()
-        .title("Sider")
-        .items([
-          S.listItem()
-            .title("Jobb")
-            .icon(FiFile)
-            .child(
-              S.document()
-                .schemaType("page")
-                .documentId("jobPage")
-                .title("Jobb")
-            ),
-          S.listItem()
-            .title("Kurs")
-            .icon(FiFile)
-            .child(
-              S.document()
-                .schemaType("page")
-                .documentId("coursePage")
-                .title("Kurs")
-            ),
-          S.listItem()
-            .title("Dokumenter")
-            .icon(FiFile)
-            .child(
-              S.documentTypeList("doc")
-              .title("Dokumenter")
-            )
-        ])
+      S.documentList()
+        .id('pages-docs')
+        .title('Sider')
+        .filter(`_type in ['page', 'doc']`)
+        .defaultOrdering([{ field: '_type', direction: 'desc' }])
     );

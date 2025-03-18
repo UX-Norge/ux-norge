@@ -1,4 +1,5 @@
 import { PortableText, SanityDocument, SanitySlug, Link } from "@Types";
+import { FiFileText } from "react-icons/fi";
 
 export interface Document extends SanityDocument {
   _type: string;
@@ -44,4 +45,16 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
   ],
+  preview: {
+    select: {
+      title: "title",
+    },
+    prepare({ title }: any) {
+      return {
+        title: title,
+        subtitle: "Dokument",
+        media: FiFileText,
+      };
+    },
+  },
 };
