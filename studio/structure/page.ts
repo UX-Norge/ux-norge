@@ -1,7 +1,6 @@
 import { StructureBuilder } from "sanity/structure";
 import { FiFile } from "react-icons/fi";
 
-
 export default (S: StructureBuilder) =>
   S.listItem()
     .title("Sider")
@@ -13,5 +12,3 @@ export default (S: StructureBuilder) =>
         .filter(`_type in ['page', 'doc']`)
         .defaultOrdering([{ field: '_type', direction: 'desc' }])
     );
-
-
