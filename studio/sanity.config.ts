@@ -3,9 +3,8 @@ import { StructureBuilder, structureTool } from 'sanity/structure';
 import { schemaTypes } from "./schemas/schema";
 import { uxNorgeTheme } from "./theme";
 import structure from "./structure";
-import {
-  ScheduleAction
-} from "sanity";
+import { ScheduleAction, DocumentActionComponent } from "sanity";
+import { livePreviewAction } from './actions/livePreviewAction';
 
 import { getRoute } from "../web/src/lib/getRoute";
 import { RouteTypes } from '@Types';
@@ -47,6 +46,11 @@ export default defineConfig({
   dataset: process.env.SANITY_STUDIO_DATASET!,
 
   document: {
+    actions: (prev) => {
+      // Legg til live preview for alle dokumenter
+      return [...prev, livePreviewAction];
+    },
+
     productionUrl: async (prev: any, context: DocumentContext) => {
       const doc = context.document;
       const type = doc._type;
@@ -61,6 +65,7 @@ export default defineConfig({
         ? input.filter(({ action }) => action && singletonActions.has(action))
         : input,
   },
+
   plugins: [
     structureTool({
       structure: (S: StructureBuilder, context: ConfigContext) => {

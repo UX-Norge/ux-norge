@@ -17,6 +17,8 @@ import {
 import { cleanGraphqlArray, shuffle } from "./src/lib/helpers";
 import { createPaginatedPages, validateData } from "./src/pageBuilding";
 import { getRoute } from "./src/lib/getRoute";
+const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 type SanityData = {
   allSanityArticle: GraphqlEdges;
@@ -266,4 +268,19 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   console.log(`\nCreated ${pageCount} pages `);
   printDivider();
+};
+
+export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ actions }) => {
+  actions.setWebpackConfig({
+    plugins: [
+      new webpack.DefinePlugin({
+        "process.env.SANITY_PROJECT_ID": JSON.stringify(process.env.SANITY_PROJECT_ID),
+        "process.env.SANITY_DATASET": JSON.stringify(process.env.SANITY_DATASET),
+        "process.env.SANITY_TOKEN": JSON.stringify(process.env.SANITY_TOKEN),
+      }),
+      new Dotenv({
+        systemvars: true
+      })
+    ],
+  });
 };
