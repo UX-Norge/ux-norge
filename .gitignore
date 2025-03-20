@@ -24,3 +24,5 @@ node_modules
 .sanity
 
 dataset_exports
+# Local Netlify folder
+.netlify

@@ -43,6 +43,9 @@ Prosjekt-id: `dcdo4kbx`, dataset: `staging` (Ja, produksjonsdatasettet heter sta
 ### Web
 Hele frontenden Start opp med `yarn start` (første gang `yarn install`)
 
+### Live preview (web katalogen)
+Start opp med `netlify dev`
+
 ### Types
 Alt av typer går hit. Henter håndskrevne typer fra filen schemaTypes inne i studio også. Skulle gjerne hatt det automatisert med [Sanity Codegen](https://www.sanity.io/plugins/sanity-codegen), men det fungerte svært dårlig.
 

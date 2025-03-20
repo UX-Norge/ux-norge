@@ -3,11 +3,11 @@ export default {
   title: "Youtube",
   type: "object",
   fields: [
-    { name: "url", type: "url", validation: (Rule) => Rule.required() },
+    { name: "url", type: "url", validation: (Rule: any) => Rule.required() },
     {
       name: "title",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: any) => Rule.required(),
     },
   ],
 };

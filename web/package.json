@@ -61,6 +61,7 @@
     "@types/react-dom": "^18.2.18",
     "@types/react-helmet": "^6.1.5",
     "autoprefixer": "^10.4.3",
+    "dotenv-webpack": "^8.1.0",
     "gatsby-plugin-postcss": "^6.13.0",
     "gatsby-plugin-root-import": "^2.0.8",
     "postcss": "^8.4.11",

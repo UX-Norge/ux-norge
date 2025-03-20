@@ -28,9 +28,9 @@ export const BlockContent: React.FC<IProps> = ({ prose, blocks }) => {
           marks: {
             link: ({ text, value: { href }, ...props }) => {
               return href.includes("http") ? (
-                <Link to={href}>{text}</Link>
+                <Link to={href} className='underline underline-offset-4 text-primary-500 transition-all duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)] hover:underline-offset-8'>{text}</Link>
               ) : (
-                <a href={href}>{text}</a>
+                <a href={href} className='underline underline-offset-4 text-primary-500 transition-all duration-150 ease-[cubic-bezier(0.4, 0, 0.2, 1)] hover:underline-offset-8'>{text}</a>
               );
             },
           },
