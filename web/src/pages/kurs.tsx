@@ -28,7 +28,7 @@ export const coursePage: React.FC<PageProps<DataProps>> = ({
   courses = courses.filter((course) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    return today <= new Date(course.startDate);
+    return today <= new Date(course.endDate);
   });
 
   React.useEffect(() => {
