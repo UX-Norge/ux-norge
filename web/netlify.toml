@@ -3,6 +3,7 @@ package = "@netlify/plugin-gatsby"
 
 [functions]
 directory = "netlify/functions"
+node_bundler = "esbuild"
 
 [build]
 command = "npm run build"
@@ -17,9 +18,21 @@ command = "npm run develop"
 autoLaunch = true
 publish = "public"
 functions = "netlify/functions"
-envFiles = [".env"]
+envFiles = [".env.development"]
 
 [[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200
+
+[[headers]]
+for = "/.netlify/functions/*"
+[headers.values]
+Access-Control-Allow-Origin = "https://staging-uxnorge.netlify.app, https://uxnorge.no"
+Access-Control-Allow-Headers = "Content-Type"
+Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+
+[dev.headers]
+for = "/.netlify/functions/*"
+[dev.headers.values]
+Access-Control-Allow-Origin = "http://localhost:8000, http://localhost:8888, https://staging-uxnorge.netlify.app, https://uxnorge.no"

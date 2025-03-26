@@ -32,6 +32,9 @@ exports.handler = async (event, context) => {
   // Tillatte origins basert på miljø
   const allowedOrigins = [
     'http://localhost:8000',
+    'http://localhost:8888',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:8888',
     'https://staging-uxnorge.netlify.app',
     'https://uxnorge.no'
   ];
