@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { ArticleHeader } from '../features/article/components/ArticleHeader';
 import { ArticleBody } from '../features/article/components/ArticleBody';
 import { ArticleFooter } from '../features/article/components/ArticleFooter';
-import { Article, Author } from '@Types';
+import { AdPageHeader } from '../features/ad/components/AdPageHeader';
+import { ContactPerson } from '../features/ad/components/ContactPerson';
+import { CourseInfo } from '../features/course/CourseInfo';
+import { DocumentHeader } from '../features/document/DocumentHeader';
+import { AuthorPageHeader } from '../features/author';
+import { Article, Author, Ad, Course, Document } from '@Types';
+import { BlockContent } from '@Ui/Typography';
+import { PageWrapper } from '@Ui/Layout';
 
 interface PreviewParams {
   type: string | null;
@@ -11,8 +18,8 @@ interface PreviewParams {
 
 const getPreviewDocument = async (params: PreviewParams) => {
   try {
-    const baseUrl = typeof window !== 'undefined' && window.location.port === '8000'
-      ? 'http://localhost:8888'
+    const baseUrl = typeof window !== 'undefined' && (window.location.port === '8000' || window.location.port === '8888')
+      ? 'http://localhost:9999'
       : '';
 
     const response = await fetch(
@@ -149,50 +156,96 @@ export default function LivePreviewPage() {
     }))
   };
 
-  // Hent ut nødvendige props for ArticleHeader
-  const headerProps = {
-    title: safeDocument.title || '',
-    authors: safeDocument.authors,
-    company: safeDocument.company,
-    category: safeDocument.category,
-    description: safeDocument.description || '',
-    mainImage: safeDocument.mainImage,
-    isSponsoredContent: safeDocument.isSponsoredContent
-  };
+  // Render innhold basert på type
+  const renderContent = () => {
+    switch (params.type) {
+      case 'article':
+        return (
+          <article className="px-4 py-8">
+            <ArticleHeader {...safeDocument} />
+            <ArticleBody {...safeDocument} />
+            <ArticleFooter {...safeDocument} />
+          </article>
+        );
 
-  // Mock data for banners og annonser
-  const mockBanners = {
-    nominateBanner: {
-      title: '',
-      text: []
-    },
-    discussInSlack: {
-      title: '',
-      text: []
+      case 'ad':
+        return (
+          <main className="mx-auto max-w-page pb-128">
+            <AdPageHeader {...safeDocument} />
+            <div className="mx-auto max-w-prose p-24">
+              <ContactPerson {...safeDocument} />
+              <BlockContent blocks={safeDocument.body} prose />
+            </div>
+          </main>
+        );
+
+      case 'course':
+        return (
+          <div className="pt-58 mx-auto flex max-w-prose flex-col gap-24 p-24 pb-24">
+            <h2 className="text-2xl font-bold">{safeDocument.title}</h2>
+            <p>{safeDocument.description}</p>
+            <div>
+              <h4 className="text-lg font-semibold">Nøkkelinformasjon</h4>
+              <CourseInfo course={safeDocument} />
+            </div>
+            {safeDocument.signUpLink && (
+              <div>
+                <a href={safeDocument.signUpLink} className="btn">
+                  Kjøp billett
+                </a>
+              </div>
+            )}
+            <div className="prose">
+              <BlockContent blocks={safeDocument.body} />
+            </div>
+          </div>
+        );
+
+      case 'document':
+      case 'doc':
+        return (
+          <main className="mx-auto max-w-page">
+            <DocumentHeader
+              title={safeDocument.title}
+              description={safeDocument.description}
+              cta={safeDocument.cta}
+            />
+            <div className="prose mx-auto max-w-prose p-24">
+              <BlockContent blocks={safeDocument.body} />
+            </div>
+          </main>
+        );
+
+      case 'author':
+        return (
+          <div className="mx-auto max-w-page p-24">
+            <AuthorPageHeader {...safeDocument} />
+            <div className="mt-8">
+              <BlockContent blocks={safeDocument.bio} />
+            </div>
+          </div>
+        );
+
+      default:
+        return (
+          <div className="p-8">
+            <div className="max-w-3xl mx-auto">
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                <p className="text-yellow-600">Ukjent innholdstype: {params.type}</p>
+              </div>
+            </div>
+          </div>
+        );
     }
-  };
-
-  const mockAds = {
-    articleListAds: [],
-    articleBannerAds: []
-  };
-
-  // Props for ArticleBody
-  const bodyProps = {
-    ...safeDocument,
-    ...mockAds,
-    ...mockBanners
   };
 
   return (
     <>
       <PreviewBanner />
-      <div className="pt-16"> {/* Legg til padding-top for å kompensere for preview-banneret */}
-        <article className="px-4 py-8">
-          <ArticleHeader {...headerProps} />
-          <ArticleBody {...bodyProps} />
-          <ArticleFooter {...safeDocument} />
-        </article>
+      <div className="pt-16">
+        <PageWrapper>
+          {renderContent()}
+        </PageWrapper>
       </div>
     </>
   );
