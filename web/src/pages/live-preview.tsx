@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ArticleHeader } from '../features/article/components/ArticleHeader';
-import { ArticleBody } from '../features/article/components/ArticleBody';
+import { ArticlePreviewBody } from '../features/article/components/ArticlePreviewBody';
 import { ArticleFooter } from '../features/article/components/ArticleFooter';
 import { AdPageHeader } from '../features/ad/components/AdPageHeader';
 import { ContactPerson } from '../features/ad/components/ContactPerson';
@@ -135,6 +135,7 @@ export default function LivePreviewPage() {
   // Ensure required properties exist with defaults
   const safeDocument = {
     ...document,
+    // Article fields
     authors: (document.authors || []).map((author: Partial<Author>) => ({
       _id: author?._id || '',
       name: author?.name || '',
@@ -153,7 +154,25 @@ export default function LivePreviewPage() {
       title: article?.title || '',
       slug: { current: article?.slug?.current || '' },
       mainImage: article?.mainImage || null
-    }))
+    })),
+    // Ad fields
+    title: document.title || '',
+    description: document.description || '',
+    image: document.image || null,
+    deadline: document.deadline || null,
+    advertiser: document.advertiser || { name: '' },
+    location: document.location || [{ name: '' }],
+    contactName: document.contactName || '',
+    contactEmail: document.contactEmail || '',
+    contactPhone: document.contactPhone || '',
+    link: document.link || '',
+    linkText: document.linkText || '',
+    // Course fields
+    signUpLink: document.signUpLink || '',
+    // Document fields
+    cta: document.cta || null,
+    // Author fields
+    bio: document.bio || []
   };
 
   // Render innhold basert på type
@@ -163,7 +182,7 @@ export default function LivePreviewPage() {
         return (
           <article className="px-4 py-8">
             <ArticleHeader {...safeDocument} />
-            <ArticleBody {...safeDocument} />
+            <ArticlePreviewBody body={safeDocument.body} />
             <ArticleFooter {...safeDocument} />
           </article>
         );
