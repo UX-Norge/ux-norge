@@ -10,11 +10,16 @@ const previewEnabled =
 
 const siteUrl = `https://uxnorge.no`;
 
+const netlify = require('gatsby-adapter-netlify').default
+
 module.exports = {
   siteMetadata: {
     title: `UX Norge`,
     siteUrl,
   },
+  adapter: netlify({
+    // leave empty unless you know you need options
+  }),
   plugins: [
     {
       resolve: "gatsby-source-sanity",
