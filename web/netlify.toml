@@ -1,4 +1,5 @@
 [[plugins]]
+package = "@netlify/plugin-gatsby"
 
 [functions]
 directory = "netlify/functions"
