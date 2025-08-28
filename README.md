@@ -38,7 +38,7 @@ Prosjektet er delt inn i hovedmmappene:
 ### Studio
 Sanity-prosjektet bor her. Start opp med `yarn run dev` (første gang `yarn install`)
 
-Prosjekt-id: `dcdo4kbx`, dataset: `staging` (Ja, produksjonsdatasettet heter staging. Det bare skjedde...)
+Prosjekt-id: `dcdo4kbx`, dataset: `staging` (Ja, produksjonsdatasettet heter staging. Det bare skjedde...).
 
 ### Web
 Hele frontenden Start opp med `yarn start` (første gang `yarn install`)
