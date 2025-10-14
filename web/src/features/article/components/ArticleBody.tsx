@@ -113,7 +113,7 @@ export const ArticleBody: React.FC<
           <DiscussArticle {...discussInSlack} />
         </div>
       </div>
-      <div className="hidden w-full space-y-48 lg:block">
+      <div className="w-full space-y-48 my-64 max-w-prose mx-auto lg:my-0">
         <Link
           path="annonse"
           type="page"
