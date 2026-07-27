@@ -174,7 +174,15 @@ export default {
       by: [{ field: 'publishedAt', direction: 'desc' }],
     },
   ],
-  initialValue: {
-    isReadersLetter: false,
+  initialValue: () => {
+    const publishedAt = new Date();
+    publishedAt.setHours(7, 0, 0, 0);
+    if (publishedAt <= new Date()) {
+      publishedAt.setDate(publishedAt.getDate() + 1);
+    }
+    return {
+      isReadersLetter: false,
+      publishedAt: publishedAt.toISOString(),
+    };
   },
 };
