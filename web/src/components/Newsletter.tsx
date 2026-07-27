@@ -57,7 +57,7 @@ export const Newsletter: React.FC<IProps> = ({}) => {
               Bli med
             </Button>
           </div>
-          <div className="prose mt-16 max-w-none pr-80 text-gray-900 prose-p:m-0">
+          <div className="prose mt-16 max-w-none pr-80 text-gray-900 prose-p:m-0 [&_a]:text-primary-800">
             <BlockContent blocks={privacyText} />
           </div>
         </div>
