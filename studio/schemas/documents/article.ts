@@ -7,6 +7,7 @@ import {
   Author,
   Company,
 } from "@Types";
+import { SlugWithUrl } from "../../components/inputs/SlugWithUrl";
 
 export interface Article extends SanityDocument {
   mainImage?: ArticleImage;
@@ -59,6 +60,9 @@ export default {
       },
       group: 'metadata',
       validation: (Rule: any) => Rule.required(),
+      components: {
+        input: SlugWithUrl,
+      },
     },
     {
       name: 'coverPageTitle',
