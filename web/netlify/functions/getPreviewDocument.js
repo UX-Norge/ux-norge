@@ -49,6 +49,58 @@ const createSanityClient = () => {
   return createClient(config);
 };
 
+const SANITY_IMAGE = `
+  hotspot,
+  crop,
+  asset->{
+    _id,
+    url,
+    metadata {
+      dimensions { width, height }
+    }
+  }
+`;
+
+const ARTICLE_PREVIEW_QUERY = `
+  *[_type == $type && slug.current == $slug && (_id in path("drafts.**") || !defined(*[_id == "drafts." + ^._id][0]._id))][0]{
+    ...,
+    category->{ _id, name, slug },
+    company->{ _id, name, slug },
+    authors[]->{
+      _id,
+      name,
+      slug,
+      company->{ name },
+      image {
+        ${SANITY_IMAGE}
+      }
+    },
+    relatedArticles[]->{
+      _id,
+      title,
+      description,
+      publishedAt,
+      isSponsoredContent,
+      slug,
+      category->{ name },
+      company->{ name },
+      mainImage {
+        alt,
+        image {
+          ${SANITY_IMAGE}
+        }
+      }
+    },
+    mainImage {
+      alt,
+      caption,
+      image {
+        ${SANITY_IMAGE}
+      }
+    }
+  }
+`;
+
 exports.handler = async (event, context) => {
   // Tillatte origins basert på miljø
   const allowedOrigins = [
@@ -98,7 +150,7 @@ exports.handler = async (event, context) => {
     }
 
     // Hent både publisert og draft versjon, prioriter draft hvis den finnes
-    const query = `*[_type == $type && slug.current == $slug && (_id in path("drafts.**") || !defined(*[_id == "drafts." + ^._id][0]._id))][0]`;
+    const query = type === 'article' ? ARTICLE_PREVIEW_QUERY : `*[_type == $type && slug.current == $slug && (_id in path("drafts.**") || !defined(*[_id == "drafts." + ^._id][0]._id))][0]`;
     const params = { type, slug };
     
     const document = await client.fetch(query, params);
