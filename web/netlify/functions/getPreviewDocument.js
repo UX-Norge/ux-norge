@@ -1,13 +1,34 @@
 const { createClient } = require('@sanity/client');
 const path = require('path');
 
-// Last miljøvariabler fra .env i utvikling
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+const loadLocalEnv = () => {
+  try {
+    const dotenv = require('dotenv');
+    const rootFromFile = path.resolve(__dirname, '../../');
+    const rootFromCwd = process.cwd();
+    const envFiles = ['.env', '.env.development'];
+
+    for (const root of [rootFromFile, rootFromCwd]) {
+      for (const file of envFiles) {
+        dotenv.config({ path: path.join(root, file) });
+      }
+    }
+  } catch {
+    // dotenv not available in production bundle
+  }
+};
+
+// Netlify Dev often runs with NODE_ENV=production; still need local .env files
+if (process.env.NETLIFY_DEV || process.env.NODE_ENV !== 'production') {
+  loadLocalEnv();
 }
 
 // Opprett Sanity-klient kun hvis alle påkrevde miljøvariabler er tilgjengelige
 const createSanityClient = () => {
+  if (!process.env.SANITY_PROJECT_ID || !process.env.SANITY_DATASET || !process.env.SANITY_TOKEN) {
+    loadLocalEnv();
+  }
+
   const config = {
     projectId: process.env.SANITY_PROJECT_ID,
     dataset: process.env.SANITY_DATASET,

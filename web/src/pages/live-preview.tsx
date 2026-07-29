@@ -16,11 +16,20 @@ interface PreviewParams {
   slug: string | null;
 }
 
+const getPreviewDocumentBaseUrl = () => {
+  if (typeof window === 'undefined') return '';
+
+  // Studio opens preview on Gatsby (8000); Netlify Dev serves functions on 8888
+  if (window.location.port === '8000') {
+    return 'http://localhost:8888';
+  }
+
+  return '';
+};
+
 const getPreviewDocument = async (params: PreviewParams) => {
   try {
-    const baseUrl = typeof window !== 'undefined' && (window.location.port === '8000' || window.location.port === '8888')
-      ? 'http://localhost:9999'
-      : '';
+    const baseUrl = getPreviewDocumentBaseUrl();
 
     const response = await fetch(
       `${baseUrl}/.netlify/functions/getPreviewDocument?type=${params.type}&slug=${params.slug}&_t=${Date.now()}`,
