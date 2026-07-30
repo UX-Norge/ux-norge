@@ -14,21 +14,27 @@ interface IProps {
 const pagePath = (slug: string, page: number) =>
   page <= 1 ? slug : `${slug}/${page}`;
 
+const focusRingClassName =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500";
+
 export const PaginationRow: React.FC<IProps> = ({
   numPages,
   currentPage,
   slug,
   type,
 }) => {
+  const selectId = React.useId();
+  const totalPagesId = React.useId();
+
   if (numPages <= 1) return null;
 
   const hasPrevious = currentPage > 1;
   const hasNext = currentPage < numPages;
-  const linkClassName =
-    "rounded-full px-16 py-8 transition-colors hover:bg-primary-500 hover:text-white";
-  const disabledClassName = "rounded-full px-16 py-8 text-gray-400";
+  const linkClassName = `rounded-full px-16 py-8 transition-colors hover:bg-primary-500 hover:text-white ${focusRingClassName}`;
+  const disabledClassName = "rounded-full px-16 py-8 text-gray-700";
 
   const goToPage = (page: number) => {
+    if (page === currentPage) return;
     navigate(getRoute(type, pagePath(slug.current, page)));
   };
 
@@ -47,17 +53,19 @@ export const PaginationRow: React.FC<IProps> = ({
           Forrige
         </Link>
       ) : (
-        <span className={disabledClassName} aria-disabled="true">
+        <span className={disabledClassName}>
           Forrige
+          <span className="sr-only"> (ikke tilgjengelig)</span>
         </span>
       )}
 
-      <label className="flex items-center gap-8 text-sm tabular-nums">
-        <span>Side</span>
+      <div className="flex items-center gap-8 text-sm tabular-nums">
+        <label htmlFor={selectId}>Side</label>
         <select
-          className="rounded border border-gray-900 bg-white px-8 py-4"
+          id={selectId}
+          className={`rounded border border-gray-900 bg-white px-8 py-4 ${focusRingClassName}`}
           value={currentPage}
-          aria-label="Velg side"
+          aria-describedby={totalPagesId}
           onChange={(event) => goToPage(Number(event.target.value))}
         >
           {Array.from({ length: numPages }, (_, index) => {
@@ -69,8 +77,8 @@ export const PaginationRow: React.FC<IProps> = ({
             );
           })}
         </select>
-        <span>av {numPages}</span>
-      </label>
+        <span id={totalPagesId}>av {numPages}</span>
+      </div>
 
       {hasNext ? (
         <Link
@@ -82,8 +90,9 @@ export const PaginationRow: React.FC<IProps> = ({
           Neste
         </Link>
       ) : (
-        <span className={disabledClassName} aria-disabled="true">
+        <span className={disabledClassName}>
           Neste
+          <span className="sr-only"> (ikke tilgjengelig)</span>
         </span>
       )}
     </nav>
