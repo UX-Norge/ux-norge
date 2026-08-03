@@ -18,7 +18,7 @@ export interface Ad extends SanityDocument {
   description: string;
   body: PortableText;
   image: SanityImage;
-  jobType: "fulltid" | "deltid" | "sommerjobb";
+  jobType: "fulltid" | "deltid" | "sommerjobb" | "vikariat";
   location: AdLocation[];
   remote: boolean;
   startDate: string;
@@ -84,7 +84,7 @@ export default {
       title: 'Jobbtype*',
       type: 'string',
       options: {
-        list: ['fulltid', 'deltid', 'sommerjobb'],
+        list: ['fulltid', 'deltid', 'sommerjobb', 'vikariat'],
       },
       group: 'content',
       validation: (Rule: any) => Rule.required(),
