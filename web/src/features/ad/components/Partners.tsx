@@ -1,7 +1,7 @@
-import { cleanGraphqlArray, shuffle } from "@Lib/helpers";
+import { Link } from "@Components/Link";
+import { cleanGraphqlArray } from "@Lib/helpers";
 import { Company, GraphqlEdges, PartnerBanner } from "@Types";
 import { Button } from "@Ui/Button";
-import { Image } from "@Ui/Image";
 import { Heading2 } from "@Ui/Typography";
 import { graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
@@ -33,6 +33,9 @@ export const Partners: React.FC<IProps> = ({}) => {
         edges {
           node {
             name
+            slug {
+              current
+            }
             logo {
               ...ImageWithPreview
             }
@@ -49,9 +52,20 @@ export const Partners: React.FC<IProps> = ({}) => {
       <div className="mx-auto w-full max-w-page ">
         <Heading2>{title}</Heading2>
         <div className="my-48 flex flex-wrap justify-center gap-48">
-          {sponsors.map((sponsor, index) => (
-            <div key={`partner-${index}`}>{sponsor.name}</div>
-          ))}
+          {sponsors.map((sponsor, index) =>
+            sponsor.slug?.current ? (
+              <Link
+                key={`partner-${index}`}
+                type="partner"
+                path={sponsor.slug.current}
+                className="hover:underline"
+              >
+                {sponsor.name}
+              </Link>
+            ) : (
+              <div key={`partner-${index}`}>{sponsor.name}</div>
+            )
+          )}
         </div>
         <Button href={page.slug.current} color="primary">
           {buttonText}

@@ -90,6 +90,56 @@ exports.handler = async (event, context) => {
       };
     }
 
+    if (type === 'company') {
+      const companyId = document._id.replace(/^drafts\./, '');
+      const [partnerAds, partnerArticles] = await Promise.all([
+        client.fetch(
+          `*[_type == "ad" && advertiser._ref == $companyId && !(_id in path("drafts.**"))] | order(startDate desc) {
+            ...,
+            slug,
+            packageType->,
+            advertiser->{
+              name,
+              logo
+            },
+            location[]->{
+              name
+            }
+          }`,
+          { companyId }
+        ),
+        client.fetch(
+          `*[_type == "article" && company._ref == $companyId && hideOnPartnerPage != true && !(_id in path("drafts.**"))] | order(publishedAt desc) {
+            _id,
+            title,
+            description,
+            publishedAt,
+            hideOnPartnerPage,
+            slug,
+            category->{ name },
+            mainImage {
+              alt,
+              image {
+                ...,
+                asset->
+              }
+            }
+          }`,
+          { companyId }
+        ),
+      ]);
+
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({
+          ...document,
+          partnerAds,
+          partnerArticles,
+        })
+      };
+    }
+
     return {
       statusCode: 200,
       headers,

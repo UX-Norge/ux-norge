@@ -7,7 +7,8 @@ import { ContactPerson } from '../features/ad/components/ContactPerson';
 import { CourseInfo } from '../features/course/CourseInfo';
 import { DocumentHeader } from '../features/document/DocumentHeader';
 import { AuthorPageHeader } from '../features/author';
-import { Article, Author, Ad, Course, Document } from '@Types';
+import { PartnerPageContent } from '../features/partner';
+import { Article, Author, Ad, Course, Document, Company } from '@Types';
 import { BlockContent } from '@Ui/Typography';
 import { PageWrapper } from '@Ui/Layout';
 
@@ -243,6 +244,23 @@ export default function LivePreviewPage() {
               <BlockContent blocks={safeDocument.bio} />
             </div>
           </div>
+        );
+
+      case 'company':
+        return (
+          <PartnerPageContent
+            company={{
+              ...safeDocument,
+              partnerBody: safeDocument.partnerBody || safeDocument.body || [],
+              partnerMainImage:
+                safeDocument.partnerMainImage || safeDocument.mainImage || null,
+              partnerTitle: safeDocument.partnerTitle || safeDocument.title,
+              partnerDescription:
+                safeDocument.partnerDescription || safeDocument.description,
+            } as Company}
+            ads={(document.partnerAds || []) as Ad[]}
+            articles={(document.partnerArticles || []) as Article[]}
+          />
         );
 
       default:

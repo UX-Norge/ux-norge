@@ -57,7 +57,8 @@ export default defineConfig({
       const type = doc._type;
       const { slug } = doc;
       if (slug) {
-        const path = getRoute(type as RouteTypes, (slug as any).current);
+        const routeType = type === "company" ? "partner" : type;
+        const path = getRoute(routeType as RouteTypes, (slug as any).current);
         return Promise.resolve('https://preview-uxnorge.netlify.app' + path);
       }
     },
