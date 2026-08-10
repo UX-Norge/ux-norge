@@ -165,6 +165,9 @@ export default function LivePreviewPage() {
     contactName: document.contactName || '',
     contactEmail: document.contactEmail || '',
     contactPhone: document.contactPhone || '',
+    contactName2: document.contactName2 || '',
+    contactEmail2: document.contactEmail2 || '',
+    contactPhone2: document.contactPhone2 || '',
     link: document.link || '',
     linkText: document.linkText || '',
     // Course fields

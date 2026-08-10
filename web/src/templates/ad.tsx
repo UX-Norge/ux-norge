@@ -65,6 +65,9 @@ export const query = graphql`
       contactName
       contactPhone
       contactEmail
+      contactName2
+      contactPhone2
+      contactEmail2
       startDate
       image {
         ...ImageWithPreview
