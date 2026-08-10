@@ -7,6 +7,9 @@ import * as React from "react";
 
 interface IProps {}
 
+const MAKE_NEWSLETTER_SIGNUP_URL =
+  "https://nyhetsbrev.uxnorge.no/p/s/MjY5MTA6Nzc4YmVmY2UtZGY4Ni00YzhjLThiMmItMzE5Mzc5ZDQ0NDVk";
+
 export const Newsletter: React.FC<IProps> = ({}) => {
   const [email, setEmail] = React.useState("");
   const {
@@ -25,10 +28,9 @@ export const Newsletter: React.FC<IProps> = ({}) => {
 
   return (
     <form
-      action="https://uxnorge.us1.list-manage.com/subscribe/post?u=d1a65b919a427cf7a70d46d26&amp;id=bd4c3e25bb"
+      action={MAKE_NEWSLETTER_SIGNUP_URL}
       method="post"
-      id="mc-embedded-subscribe-form"
-      name="mc-embedded-subscribe-form"
+      acceptCharset="utf-8"
       target="_blank"
       noValidate={false}
       className="mx-auto w-full gap-48 bg-primary-400"
@@ -48,7 +50,7 @@ export const Newsletter: React.FC<IProps> = ({}) => {
               value={email}
               required
               type="email"
-              name="EMAIL"
+              name="email"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setEmail(e.target.value)
               }
