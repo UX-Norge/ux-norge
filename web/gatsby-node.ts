@@ -31,6 +31,17 @@ type SanityData = {
 
 const printDivider = () => console.log("\n------------\n");
 
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
+  ({ actions }) => {
+    actions.createTypes(`
+    type SanityAd implements Node {
+      contactName2: String
+      contactPhone2: String
+      contactEmail2: String
+    }
+  `);
+  };
+
 const courseHasNotEnded = (course: Course) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
