@@ -157,6 +157,7 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
             { label: "Fulltid", value: "fulltid" },
             { label: "Deltid", value: "deltid" },
             { label: "Sommerjobb", value: "sommerjobb" },
+            { label: "Vikariat", value: "vikariat" },
           ]}
           onChange={onChange}
         />
