@@ -11,6 +11,7 @@ import {
 } from "@Types";
 
 import ShowAdDuration from "../../../components/inputs/showAdDuration";
+import { SlugWithUrl } from "../../../components/inputs/SlugWithUrl";
 
 export interface Ad extends SanityDocument {
   title: string;
@@ -58,6 +59,9 @@ export default {
         slugify: slugify_ad,
       },
       validation: (Rule: any) => Rule.required(),
+      components: {
+        input: SlugWithUrl,
+      },
     },
     {
       name: 'description',
