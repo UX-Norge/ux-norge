@@ -30,7 +30,12 @@ const CategoryPage: React.FC<PageProps<DataProps>> = ({
         <Overline>Kategori</Overline>
         <Heading1 className="mb-48">{name}</Heading1>
         <ArticleGrid articles={articles} />
-        <PaginationRow numPages={numPages} type="category" slug={slug} />
+        <PaginationRow
+          numPages={numPages}
+          currentPage={currentPage}
+          type="category"
+          slug={slug}
+        />
       </div>
     </PageWrapper>
   );

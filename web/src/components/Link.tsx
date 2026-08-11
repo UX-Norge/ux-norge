@@ -29,7 +29,13 @@ export const Link: React.FC<{
   }
 
   return type === "external" ? (
-    <a href={path} target="_blank" className={className} aria-label={ariaLabel}>
+    <a
+      href={path}
+      target="_blank"
+      className={className}
+      aria-label={ariaLabel}
+      title={ariaLabel}
+    >
       {children}
     </a>
   ) : (
@@ -39,6 +45,7 @@ export const Link: React.FC<{
       className={className}
       activeClassName={activeClassName}
       partiallyActive={partiallyActive}
+      aria-label={ariaLabel}
       title={ariaLabel}
     >
       {children}
