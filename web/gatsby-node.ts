@@ -5,6 +5,7 @@ import {
   Article,
   Author,
   Category,
+  Company,
   Course,
   Document,
   GraphqlEdges,
@@ -27,6 +28,7 @@ type SanityData = {
   allSanityCategory: GraphqlEdges;
   allSanityDoc: GraphqlEdges;
   allSanityCourse: GraphqlEdges;
+  allSanityCompany: GraphqlEdges;
 };
 
 const printDivider = () => console.log("\n------------\n");
@@ -146,6 +148,17 @@ export const createPages: GatsbyNode["createPages"] = async ({
             }
           }
         }
+        allSanityCompany {
+          edges {
+            node {
+              _id
+              isPartner
+              slug {
+                current
+              }
+            }
+          }
+        }
       }
   `);
   if (result.errors) {
@@ -159,6 +172,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     categories: Category[];
     documents: Document[];
     courses: Course[];
+    companies: Company[];
   } = {
     articles: cleanGraphqlArray(result.data?.allSanityArticle) as Article[],
     ads: cleanGraphqlArray(result.data?.allSanityAd) as Ad[],
@@ -166,6 +180,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     categories: cleanGraphqlArray(result.data?.allSanityCategory) as Category[],
     documents: cleanGraphqlArray(result.data?.allSanityDoc) as Document[],
     courses: cleanGraphqlArray(result.data?.allSanityCourse) as Course[],
+    companies: cleanGraphqlArray(result.data?.allSanityCompany) as Company[],
   };
 
   validateData(data);
@@ -284,6 +299,20 @@ export const createPages: GatsbyNode["createPages"] = async ({
         ownerNodeId: course._id,
         context: {
           slugSlug: course.slug.current,
+        },
+      });
+    });
+
+  data.companies
+    .filter((company) => company.isPartner && company.slug?.current)
+    .forEach((company) => {
+      createPage("Partner", {
+        path: getRoute("partner", company.slug!.current),
+        component: path.resolve(`./src/templates/partner.tsx`),
+        ownerNodeId: company._id,
+        context: {
+          slug: company.slug!.current,
+          companyId: company._id,
         },
       });
     });

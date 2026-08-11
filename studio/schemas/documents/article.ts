@@ -25,6 +25,7 @@ export interface Article extends SanityDocument {
   category: Category;
   isReadersLetter?: boolean;
   isSponsoredContent?: boolean;
+  hideOnPartnerPage?: boolean;
   slackMessageLink?: string;
 }
 
@@ -134,6 +135,13 @@ export default {
       name: 'isSponsoredContent',
       title: 'Annonsørinnhold',
       type: 'boolean',
+    },
+    {
+      name: 'hideOnPartnerPage',
+      title: 'Skjul artikkel',
+      type: 'boolean',
+      group: 'metadata',
+      initialValue: false,
     },
     {
       name: 'slackMessageLink',

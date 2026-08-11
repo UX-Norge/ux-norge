@@ -11,6 +11,7 @@ export const getRoute = (type: RouteTypes, path: string): string => {
       category: `/kategori/${path}/`,
       external: null,
       course: `/kurs/${path}/`,
+      partner: `/partner/${path}/`,
     }[type] ?? path
   );
 };
