@@ -29,6 +29,9 @@ export interface Ad extends SanityDocument {
   contactName: string;
   contactPhone: string;
   contactEmail: string;
+  contactName2?: string;
+  contactPhone2?: string;
+  contactEmail2?: string;
   packageType: AdPackageType;
   advertiser: Company;
 }
@@ -41,6 +44,7 @@ export default {
     { name: 'content', title: 'Annonseinnhold' },
     { name: 'settings', title: 'Annonseinnstillinger' },
     { name: 'contactPerson', title: 'Kontaktperson' },
+    { name: 'contactPerson2', title: 'Kontaktperson 2' },
   ],
   fields: [
     {
@@ -141,6 +145,24 @@ export default {
       title: 'E-post (kontaktperson)',
       type: 'string',
       group: 'contactPerson',
+    },
+    {
+      name: 'contactName2',
+      title: 'Navn (kontaktperson 2)',
+      type: 'string',
+      group: 'contactPerson2',
+    },
+    {
+      name: 'contactPhone2',
+      title: 'Mobil (kontaktperson 2)',
+      type: 'string',
+      group: 'contactPerson2',
+    },
+    {
+      name: 'contactEmail2',
+      title: 'E-post (kontaktperson 2)',
+      type: 'string',
+      group: 'contactPerson2',
     },
     {
       name: 'startDate',

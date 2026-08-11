@@ -33,6 +33,9 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
     contactName: "",
     contactPhone: "",
     contactEmail: "",
+    contactName2: "",
+    contactPhone2: "",
+    contactEmail2: "",
     location: "",
     packageType: "",
     advertiser: "",
@@ -195,6 +198,32 @@ const NewAd: React.FC<PageProps<DataProps>> = ({ data }) => {
           label="Mobilnummer"
           name="contactPhone"
           value={ad.contactPhone}
+          placeholder="Don Norman"
+          onChange={onChange}
+        />
+        <br />
+        <Heading4>Kontaktperson 2:</Heading4>
+        <Input
+          type="text"
+          label="Navn"
+          name="contactName2"
+          value={ad.contactName2}
+          placeholder="Don Norman"
+          onChange={onChange}
+        />
+        <Input
+          type="text"
+          label="E-post"
+          name="contactEmail2"
+          value={ad.contactEmail2}
+          placeholder="Don Norman"
+          onChange={onChange}
+        />
+        <Input
+          type="text"
+          label="Mobilnummer"
+          name="contactPhone2"
+          value={ad.contactPhone2}
           placeholder="Don Norman"
           onChange={onChange}
         />
