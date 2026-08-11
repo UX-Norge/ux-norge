@@ -141,7 +141,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
           edges {
             node {
               _id
-              isPartner
+              hasPartnerPage
               slug {
                 current
               }
@@ -293,7 +293,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     });
 
   data.companies
-    .filter((company) => company.isPartner && company.slug?.current)
+    .filter((company) => company.hasPartnerPage && company.slug?.current)
     .forEach((company) => {
       createPage("Partner", {
         path: getRoute("partner", company.slug!.current),

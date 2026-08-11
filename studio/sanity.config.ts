@@ -12,6 +12,7 @@ import { RouteTypes } from '@Types';
 interface DocumentContext {
   document: {
     _type: string;
+    hasPartnerPage?: boolean;
     slug?: {
       current: string;
     };
@@ -56,6 +57,9 @@ export default defineConfig({
       const doc = context.document;
       const type = doc._type;
       const { slug } = doc;
+      if (type === "company" && !doc.hasPartnerPage) {
+        return prev;
+      }
       if (slug) {
         const routeType = type === "company" ? "partner" : type;
         const path = getRoute(routeType as RouteTypes, (slug as any).current);

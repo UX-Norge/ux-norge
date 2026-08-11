@@ -12,6 +12,7 @@ export interface Company extends SanityDocument {
   name: string;
   logo?: SanityImage;
   isPartner?: boolean;
+  hasPartnerPage?: boolean;
   slug?: SanitySlug;
   partnerTitle?: string;
   partnerMainImage?: ArticleImage;
@@ -19,8 +20,8 @@ export interface Company extends SanityDocument {
   partnerBody?: PortableText;
 }
 
-const onlyWhenPartner = ({ document }: { document?: Company }) =>
-  !document?.isPartner;
+const onlyWhenNoPartnerPage = ({ document }: { document?: Company }) =>
+  !document?.hasPartnerPage;
 
 export default {
   name: "company",
@@ -57,6 +58,14 @@ export default {
     {
       name: "isPartner",
       title: "Er støttespiller",
+      description: "Vises i støttespiller-listen på forsiden",
+      type: "boolean",
+      group: "company",
+    },
+    {
+      name: "hasPartnerPage",
+      title: "Har partnerside",
+      description: "Oppretter en egen side på /partner/{slug}/",
       type: "boolean",
       group: "partnerPage",
     },
@@ -69,11 +78,11 @@ export default {
         source: "name",
         maxLength: 96,
       },
-      hidden: onlyWhenPartner,
+      hidden: onlyWhenNoPartnerPage,
       validation: (Rule: any) =>
         Rule.custom((slug: SanitySlug | undefined, context: any) => {
-          if (context.document?.isPartner && !slug?.current) {
-            return "Slug er påkrevd for støttespillere";
+          if (context.document?.hasPartnerPage && !slug?.current) {
+            return "Slug er påkrevd for bedrifter med partnerside";
           }
           return true;
         }),
@@ -83,28 +92,28 @@ export default {
       title: "Tittel",
       type: "string",
       group: "partnerPage",
-      hidden: onlyWhenPartner,
+      hidden: onlyWhenNoPartnerPage,
     },
     {
       name: "partnerMainImage",
       title: "Hovedbilde",
       type: "articleImage",
       group: "partnerPage",
-      hidden: onlyWhenPartner,
+      hidden: onlyWhenNoPartnerPage,
     },
     {
       name: "partnerDescription",
       title: "Ingress",
       type: "text",
       group: "partnerPage",
-      hidden: onlyWhenPartner,
+      hidden: onlyWhenNoPartnerPage,
     },
     {
       name: "partnerBody",
       title: "Brødtekst",
       type: "articleContent",
       group: "partnerPage",
-      hidden: onlyWhenPartner,
+      hidden: onlyWhenNoPartnerPage,
     },
     {
       name: "companyArticles",
@@ -115,23 +124,30 @@ export default {
       components: {
         input: CompanyArticlesInput,
       },
-      hidden: onlyWhenPartner,
+      hidden: onlyWhenNoPartnerPage,
     },
   ],
   initialValue: {
     isPartner: false,
+    hasPartnerPage: false,
   },
   preview: {
     select: {
       name: "name",
       media: "logo",
       isPartner: "isPartner",
+      hasPartnerPage: "hasPartnerPage",
     },
-    prepare({ name, media, isPartner }: any) {
+    prepare({ name, media, isPartner, hasPartnerPage }: any) {
+      const labels = [
+        isPartner && "Støttespiller",
+        hasPartnerPage && "Partnerside",
+      ].filter(Boolean);
+
       return {
         title: name,
         media,
-        subtitle: isPartner ? "Støttespiller" : "",
+        subtitle: labels.join(" · "),
       };
     },
   },

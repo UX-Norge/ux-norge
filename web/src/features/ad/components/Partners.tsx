@@ -33,6 +33,7 @@ export const Partners: React.FC<IProps> = ({}) => {
         edges {
           node {
             name
+            hasPartnerPage
             slug {
               current
             }
@@ -53,7 +54,7 @@ export const Partners: React.FC<IProps> = ({}) => {
         <Heading2>{title}</Heading2>
         <div className="my-48 flex flex-wrap justify-center gap-48">
           {sponsors.map((sponsor, index) =>
-            sponsor.slug?.current ? (
+            sponsor.hasPartnerPage && sponsor.slug?.current ? (
               <Link
                 key={`partner-${index}`}
                 type="partner"
