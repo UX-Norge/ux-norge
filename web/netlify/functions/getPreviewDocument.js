@@ -1,13 +1,34 @@
 const { createClient } = require('@sanity/client');
 const path = require('path');
 
-// Last miljøvariabler fra .env i utvikling
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+const loadLocalEnv = () => {
+  try {
+    const dotenv = require('dotenv');
+    const rootFromFile = path.resolve(__dirname, '../../');
+    const rootFromCwd = process.cwd();
+    const envFiles = ['.env', '.env.development'];
+
+    for (const root of [rootFromFile, rootFromCwd]) {
+      for (const file of envFiles) {
+        dotenv.config({ path: path.join(root, file) });
+      }
+    }
+  } catch {
+    // dotenv not available in production bundle
+  }
+};
+
+// Netlify Dev often runs with NODE_ENV=production; still need local .env files
+if (process.env.NETLIFY_DEV || process.env.NODE_ENV !== 'production') {
+  loadLocalEnv();
 }
 
 // Opprett Sanity-klient kun hvis alle påkrevde miljøvariabler er tilgjengelige
 const createSanityClient = () => {
+  if (!process.env.SANITY_PROJECT_ID || !process.env.SANITY_DATASET || !process.env.SANITY_TOKEN) {
+    loadLocalEnv();
+  }
+
   const config = {
     projectId: process.env.SANITY_PROJECT_ID,
     dataset: process.env.SANITY_DATASET,
@@ -27,6 +48,58 @@ const createSanityClient = () => {
 
   return createClient(config);
 };
+
+const SANITY_IMAGE = `
+  hotspot,
+  crop,
+  asset->{
+    _id,
+    url,
+    metadata {
+      dimensions { width, height }
+    }
+  }
+`;
+
+const ARTICLE_PREVIEW_QUERY = `
+  *[_type == $type && slug.current == $slug && (_id in path("drafts.**") || !defined(*[_id == "drafts." + ^._id][0]._id))][0]{
+    ...,
+    category->{ _id, name, slug },
+    company->{ _id, name, slug },
+    authors[]->{
+      _id,
+      name,
+      slug,
+      company->{ name },
+      image {
+        ${SANITY_IMAGE}
+      }
+    },
+    relatedArticles[]->{
+      _id,
+      title,
+      description,
+      publishedAt,
+      isSponsoredContent,
+      slug,
+      category->{ name },
+      company->{ name },
+      mainImage {
+        alt,
+        image {
+          ${SANITY_IMAGE}
+        }
+      }
+    },
+    mainImage {
+      alt,
+      caption,
+      image {
+        ${SANITY_IMAGE}
+      }
+    }
+  }
+`;
 
 exports.handler = async (event, context) => {
   // Tillatte origins basert på miljø
@@ -77,7 +150,7 @@ exports.handler = async (event, context) => {
     }
 
     // Hent både publisert og draft versjon, prioriter draft hvis den finnes
-    const query = `*[_type == $type && slug.current == $slug && (_id in path("drafts.**") || !defined(*[_id == "drafts." + ^._id][0]._id))][0]`;
+    const query = type === 'article' ? ARTICLE_PREVIEW_QUERY : `*[_type == $type && slug.current == $slug && (_id in path("drafts.**") || !defined(*[_id == "drafts." + ^._id][0]._id))][0]`;
     const params = { type, slug };
     
     const document = await client.fetch(query, params);

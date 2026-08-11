@@ -17,11 +17,20 @@ interface PreviewParams {
   slug: string | null;
 }
 
+const getPreviewDocumentBaseUrl = () => {
+  if (typeof window === 'undefined') return '';
+
+  // Studio opens preview on Gatsby (8000); Netlify Dev serves functions on 8888
+  if (window.location.port === '8000') {
+    return 'http://localhost:8888';
+  }
+
+  return '';
+};
+
 const getPreviewDocument = async (params: PreviewParams) => {
   try {
-    const baseUrl = typeof window !== 'undefined' && (window.location.port === '8000' || window.location.port === '8888')
-      ? 'http://localhost:9999'
-      : '';
+    const baseUrl = getPreviewDocumentBaseUrl();
 
     const response = await fetch(
       `${baseUrl}/.netlify/functions/getPreviewDocument?type=${params.type}&slug=${params.slug}&_t=${Date.now()}`,
@@ -137,25 +146,38 @@ export default function LivePreviewPage() {
   const safeDocument = {
     ...document,
     // Article fields
-    authors: (document.authors || []).map((author: Partial<Author>) => ({
-      _id: author?._id || '',
-      name: author?.name || '',
-      slug: { current: author?.slug?.current || '' },
-      company: author?.company || null
-    })),
+    authors: (document.authors || [])
+      .filter((author: Partial<Author>) => author?._id && author?.name)
+      .map((author: Partial<Author>) => ({
+        _id: author._id!,
+        name: author.name!,
+        slug: author.slug || { current: '' },
+        company: author.company || null,
+        image: author.image,
+      })),
     category: document.category || { name: '', slug: { current: '' } },
     company: document.company || { name: '', slug: { current: '' } },
     slug: document.slug || { current: '' },
     mainImage: document.mainImage || null,
     body: document.body || [],
     isSponsoredContent: document.isSponsoredContent || false,
-    publishedAt: document.publishedAt || new Date().toISOString(),
-    relatedArticles: (document.relatedArticles || []).map((article: Partial<Article>) => ({
-      _id: article?._id || '',
-      title: article?.title || '',
-      slug: { current: article?.slug?.current || '' },
-      mainImage: article?.mainImage || null
-    })),
+    publishedAt: document.publishedAt || null,
+    updatedAt: document.updatedAt || null,
+    relatedArticles: (document.relatedArticles || [])
+      .filter(
+        (article: Partial<Article>) =>
+          article?._id && article?.title && article?.slug?.current
+      )
+      .map((article: Partial<Article>) => ({
+        _id: article._id!,
+        title: article.title!,
+        description: article.description || '',
+        slug: article.slug!,
+        mainImage: article.mainImage || null,
+        category: article.category || { name: '' },
+        company: article.company || null,
+        isSponsoredContent: article.isSponsoredContent || false,
+      })),
     // Ad fields
     title: document.title || '',
     description: document.description || '',
@@ -186,7 +208,11 @@ export default function LivePreviewPage() {
         return (
           <article className="px-4 py-8">
             <ArticleHeader {...safeDocument} />
-            <ArticlePreviewBody body={safeDocument.body} />
+            <ArticlePreviewBody
+              body={safeDocument.body}
+              publishedAt={safeDocument.publishedAt}
+              updatedAt={safeDocument.updatedAt}
+            />
             <ArticleFooter {...safeDocument} />
           </article>
         );
