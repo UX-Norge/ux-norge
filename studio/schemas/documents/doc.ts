@@ -1,5 +1,6 @@
 import { PortableText, SanityDocument, SanitySlug, Link } from "@Types";
 import { FiFileText } from "react-icons/fi";
+import { SlugWithUrl } from "../../components/inputs/SlugWithUrl";
 
 export interface Document extends SanityDocument {
   _type: string;
@@ -43,6 +44,9 @@ export default {
       title: 'Slug*',
       type: 'slug',
       validation: (Rule: any) => Rule.required(),
+      components: {
+        input: SlugWithUrl,
+      },
     },
   ],
   preview: {

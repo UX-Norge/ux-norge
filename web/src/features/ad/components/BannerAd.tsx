@@ -4,7 +4,7 @@ import { Ad } from "@Types";
 import { Image } from "@Ui/Image";
 import { Body1, Heading3, Overline } from "@Ui/Typography";
 import * as React from "react";
-import { getDaysToDeadline } from "../lib/adHelpers";
+import { activeFilter, getDaysToDeadline } from "../lib/adHelpers";
 
 export const BannerAd: React.FC<
   Pick<
@@ -16,17 +16,21 @@ export const BannerAd: React.FC<
     | "advertiser"
     | "slug"
     | "deadline"
+    | "startDate"
+    | "packageType"
   > & { onHomepage: boolean }
-> = ({
-  title,
-  description,
-  deadline,
-  location,
-  advertiser,
-  slug,
-  onHomepage,
-}) => {
+> = (ad) => {
+  const {
+    title,
+    description,
+    deadline,
+    location,
+    advertiser,
+    slug,
+    onHomepage,
+  } = ad;
   if (!title || !description || !slug?.current || !advertiser) return null;
+  if (!activeFilter(ad as Ad)) return null;
   return (
     <div className="not-prose">
       <Link

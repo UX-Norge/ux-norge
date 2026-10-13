@@ -1,5 +1,6 @@
 import { PortableText, SanitySlug } from "../../../types/sanityTypes";
 import { AdLocation, Author } from "../schemaTypes";
+import { SlugWithUrl } from "../../components/inputs/SlugWithUrl";
 
 export type Course = {
   _id: string;
@@ -160,6 +161,9 @@ export default {
       },
       group: 'metadata',
       validation: (Rule: any) => Rule.required(),
+      components: {
+        input: SlugWithUrl,
+      },
     },
   ],
 };

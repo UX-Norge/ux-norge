@@ -30,6 +30,7 @@ const AuthorPage: React.FC<PageProps<DataProps>> = ({
         <ArticleGrid articles={articles} />
         <PaginationRow
           numPages={pageContext.numPages}
+          currentPage={pageContext.currentPage}
           type="author"
           slug={author.slug}
         />

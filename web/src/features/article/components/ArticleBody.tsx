@@ -5,6 +5,7 @@ import { printDate } from "@Lib/helpers";
 import { blockContentToPlainText } from "react-portable-text";
 import { ReadersLetterDisclaimer } from "./ReadersLetterDisclaimer";
 import { ListAd } from "@Features/ad/components/ListAd";
+import { activeFilter } from "@Features/ad/lib/adHelpers";
 import { DiscussArticle } from "./DiscussArticle";
 import { NominateSection } from "./NominateSection";
 import { SponsoredContentDisclaimer } from "./sponsoredContentDisclaimer";
@@ -87,9 +88,11 @@ export const ArticleBody: React.FC<
   const [bodyWithAds, setBodyWithAds] = React.useState<any[]>([]);
   React.useEffect(() => {
     if (!isSponsoredContent) {
-      setBodyWithAds(insertBannerAds(body, articleBannerAds));
+      setBodyWithAds(
+        insertBannerAds(body, articleBannerAds.filter(activeFilter))
+      );
     }
-  }, [body, articleBannerAds]);
+  }, [body, articleBannerAds, isSponsoredContent]);
 
   const readTime = Math.round(
     blockContentToPlainText(body).split(" ").length / 200
@@ -125,7 +128,7 @@ export const ArticleBody: React.FC<
             <ArrowLeftIcon />
           </div>
         </Link>
-        {articleListAds.map((ad) => (
+        {articleListAds.filter(activeFilter).map((ad) => (
           <ListAd {...ad} key={ad._id} />
         ))}
         <div className="block space-y-4 border-2 border-primary-500 py-16 px-16 rounded-sm">

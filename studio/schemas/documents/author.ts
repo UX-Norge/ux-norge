@@ -5,6 +5,7 @@ import {
   SanitySlug,
   Company,
 } from "@Types";
+import { SlugWithUrl } from "../../components/inputs/SlugWithUrl";
 
 export interface Author extends SanityDocument {
   name: string;
@@ -35,6 +36,9 @@ export default {
         maxLength: 96,
       },
       validation: (Rule: any) => Rule.required(),
+      components: {
+        input: SlugWithUrl,
+      },
     },
     {
       name: 'company',

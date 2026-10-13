@@ -1,4 +1,5 @@
 import { SanityDocument, SanitySlug } from "@Types";
+import { SlugWithUrl } from "../../components/inputs/SlugWithUrl";
 
 export interface Category extends SanityDocument {
   name: string;
@@ -24,6 +25,9 @@ export default {
         source: 'name',
       },
       validation: (Rule: any) => Rule.required(),
+      components: {
+        input: SlugWithUrl,
+      },
     },
   ],
 };

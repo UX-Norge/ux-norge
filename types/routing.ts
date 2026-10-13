@@ -6,4 +6,5 @@ export type RouteTypes =
   | "page"
   | "external"
   | "home"
-  | "course";
+  | "course"
+  | "partner";

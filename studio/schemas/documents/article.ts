@@ -7,6 +7,7 @@ import {
   Author,
   Company,
 } from "@Types";
+import { SlugWithUrl } from "../../components/inputs/SlugWithUrl";
 
 export interface Article extends SanityDocument {
   mainImage?: ArticleImage;
@@ -24,6 +25,7 @@ export interface Article extends SanityDocument {
   category: Category;
   isReadersLetter?: boolean;
   isSponsoredContent?: boolean;
+  hideOnPartnerPage?: boolean;
   slackMessageLink?: string;
 }
 
@@ -59,6 +61,9 @@ export default {
       },
       group: 'metadata',
       validation: (Rule: any) => Rule.required(),
+      components: {
+        input: SlugWithUrl,
+      },
     },
     {
       name: 'coverPageTitle',
@@ -132,6 +137,13 @@ export default {
       type: 'boolean',
     },
     {
+      name: 'hideOnPartnerPage',
+      title: 'Skjul artikkel',
+      type: 'boolean',
+      group: 'metadata',
+      initialValue: false,
+    },
+    {
       name: 'slackMessageLink',
       title: 'Link til Slackmeldingen',
       description:
@@ -174,7 +186,15 @@ export default {
       by: [{ field: 'publishedAt', direction: 'desc' }],
     },
   ],
-  initialValue: {
-    isReadersLetter: false,
+  initialValue: () => {
+    const publishedAt = new Date();
+    publishedAt.setHours(7, 0, 0, 0);
+    if (publishedAt <= new Date()) {
+      publishedAt.setDate(publishedAt.getDate() + 1);
+    }
+    return {
+      isReadersLetter: false,
+      publishedAt: publishedAt.toISOString(),
+    };
   },
 };

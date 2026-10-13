@@ -1,22 +1,31 @@
 import { Link } from "@Components/Link";
 import { Ad } from "@Types";
 import {
-  BlockContent,
   Body2,
   Heading2,
-  Heading4,
   Overline,
 } from "@Ui/Typography";
 import * as React from "react";
+import { activeFilter } from "../lib/adHelpers";
 
 export const ListAd: React.FC<
   Pick<
     Ad,
-    "title" | "description" | "jobType" | "advertiser" | "location" | "slug"
+    | "title"
+    | "description"
+    | "jobType"
+    | "advertiser"
+    | "location"
+    | "slug"
+    | "startDate"
+    | "deadline"
+    | "packageType"
   >
-> = ({ title, slug, description, advertiser, location }) => {
+> = (ad) => {
+  const { title, slug, description, advertiser, location } = ad;
   if (!advertiser || location.every((loc) => !loc.name) || !slug?.current)
     return null;
+  if (!activeFilter(ad as Ad)) return null;
   return (
     <Link type="ad" path={slug.current} className="block">
       <Heading2 className="text-h4">{title}</Heading2>

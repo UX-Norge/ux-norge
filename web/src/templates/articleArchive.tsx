@@ -14,7 +14,7 @@ interface DataProps {
 
 const ArticleArchive: React.FC<PageProps<DataProps>> = ({
   data: { allSanityArticle },
-  pageContext,
+  pageContext: { numPages, currentPage },
 }) => {
   const articles = cleanGraphqlArray(allSanityArticle) as Article[];
   return (
@@ -28,7 +28,8 @@ const ArticleArchive: React.FC<PageProps<DataProps>> = ({
         <ArticleGrid articles={articles} />
         <PaginationRow
           type="page"
-          numPages={pageContext.numPages}
+          numPages={numPages}
+          currentPage={currentPage}
           slug={{ _type: "slug", current: "arkiv" }}
         />
       </main>
